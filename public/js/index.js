@@ -51,7 +51,7 @@ $("#submit-form").on("click", async (e) => {
     window.localStorage.setItem("collection", compressedCollection);
 
     await setTimeout((_) => {
-      window.open(`${API_URL}/main`, "_self");
+      window.open(`${process.env.API_URL}/main`, "_self");
     }, 700);
   } else if (username == "") {
     // Reset Submit Button Text
