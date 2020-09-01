@@ -1,4 +1,4 @@
-const API_URL = "https://sn-bgg-server.herokuapp.com/";
+const API_URL = "https://sn-bgg-server.herokuapp.com";
 
 // COLORS ///////////////////////////
 
