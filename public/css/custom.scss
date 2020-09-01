@@ -1,0 +1,870 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+$base-color: #e5989b;
+$secondary-color: #ffb4a2;
+$light-color: #ffcdb2;
+$light-color-02: #ffcdb233;
+$dark-color: #b5838d;
+$neutral-color: #6d6875;
+$background-color: #eee;
+
+$theme-colors: (
+  "primary": $base-color,
+  "secondary": $secondary-color,
+  "info": $neutral-color,
+  "dark": $dark-color,
+  "light": $light-color,
+);
+
+// GENERAL
+body {
+  font-family: "Inter", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+  color: white;
+}
+
+h1 {
+  font-size: 4rem !important;
+  color: $neutral-color;
+}
+
+h2 {
+  font-size: 3rem;
+  color: $neutral-color;
+}
+
+p {
+  color: $neutral-color;
+}
+
+.btn-group-nav .btn {
+  border: 2px solid $light-color !important;
+  border-radius: 8px !important;
+}
+
+.modal {
+  .modal-body {
+    line-height: 2rem;
+  }
+  p {
+    line-height: 1.5rem;
+  }
+  h5 {
+    color: $neutral-color;
+  }
+  em {
+    color: $neutral-color;
+    font-weight: 600;
+  }
+  #ignored-boardgames-text {
+    font-size: 0.8rem;
+    line-height: 1.7rem;
+  }
+  .badge-pill {
+    color: white;
+  }
+}
+
+.description {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 3rem;
+  }
+  #hello-title {
+    font-size: 2rem;
+  }
+  .description {
+    font-size: 1rem;
+  }
+}
+
+.btn {
+  color: white !important;
+  .fas {
+    vertical-align: middle;
+    transform: translateY(12%);
+  }
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-show-all:hover {
+  border: $dark-color solid 0px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 0px 2px $dark-color inset;
+  cursor: pointer;
+}
+
+.btn-primary:focus {
+  background-color: $base-color !important;
+  border-color: $base-color !important;
+}
+.btn-secondary:focus {
+  background-color: $secondary-color !important;
+  border-color: $secondary-color !important;
+}
+.btn-info:focus {
+  background-color: $neutral-color !important;
+  border-color: $neutral-color !important;
+}
+.btn-dark:focus {
+  background-color: $dark-color !important;
+  border-color: $dark-color !important;
+}
+.btn-light:focus {
+  background-color: $light-color !important;
+  border-color: $light-color !important;
+}
+
+// LOGIN PAGE
+#showcase {
+  background: url("../img/bg-background-pink.png") bottom center / cover
+    no-repeat;
+  min-height: 750px;
+  position: relative;
+
+  #login-form-text {
+    font-size: 1rem;
+    color: $neutral-color;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  .btn {
+    font-weight: 600;
+  }
+
+  .lead {
+    color: white;
+  }
+
+  #header {
+    z-index: 2;
+  }
+
+  #overlay {
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  #book {
+    font-size: 1.5rem;
+    border-radius: 2rem;
+  }
+}
+
+#tools {
+  h3 {
+    color: $neutral-color;
+  }
+  background-color: $light-color;
+  .lead {
+    font-size: 1rem;
+    text-align: justify;
+  }
+  img {
+    border: 5px solid #6d6875;
+    margin: 10px 0;
+  }
+}
+
+.bmc-button {
+  background-color: $base-color;
+}
+
+.footer-copyright {
+  color: $primary-color !important;
+  a {
+    color: $base-color;
+  }
+}
+
+// COLLECTION OVERVIEW
+#bgg-explorer-bg {
+  background-color: $light-color;
+}
+
+#collection-overview {
+  #huge-collection-warning-wrapper {
+    background-color: white;
+    max-width: 600px !important;
+    margin: 0 auto;
+    border-radius: 8px;
+  }
+
+  #huge-collection-warning {
+    color: $neutral-color !important;
+    background-color: $light-color-02 !important;
+
+    max-width: 600px !important;
+    h5,
+    p {
+      color: $neutral-color !important;
+    }
+  }
+
+  #collection-overview-row {
+    background-color: $light-color;
+
+    #collection-overview-chart {
+      min-height: 400px;
+
+      svg {
+        display: block;
+        .node-circle {
+          stroke: $neutral-color;
+          stroke-width: 1px;
+        }
+        .node-rect {
+          stroke: white;
+          stroke-width: 3px;
+        }
+
+        .node-line {
+          stroke-width: 2px;
+          stroke: $secondary-color;
+        }
+        .clicked {
+          stroke: $neutral-color !important;
+          stroke-width: 5px;
+        }
+        .node-text {
+          fill: white;
+          font-size: 13px;
+          font-weight: 600;
+          text-anchor: middle;
+          dominant-baseline: middle;
+          pointer-events: none;
+          -webkit-user-select: none; /* Safari */
+          -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* IE10+/Edge */
+          user-select: none; /* Standard */
+        }
+      }
+    }
+  }
+  #collection-overview-sidepanel {
+    @media (max-width: 768px) {
+      .btn,
+      .btn-group {
+        border-radius: 0;
+        margin: 0;
+      }
+      #btnRating {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
+      #btnPrice {
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+      #btnSort {
+        border-radius: 4px;
+      }
+    }
+  }
+  // @media (max-width: 992px) {
+  //   .btn,
+  //     .btn-group {
+  //       font-size: 0.8rem;
+  //     }
+  // }
+}
+
+// BOARDGAME INFO
+#boardgame-info {
+  background-color: $light-color;
+  min-height: 400px;
+  h5 {
+    color: $neutral-color;
+  }
+  #boardgame-tooltip {
+    #boardgame-name {
+      font-size: 1.1rem;
+    }
+    #boardgame-image {
+      -webkit-transition: opacity 0.5s ease-in;
+      -moz-transition: opacity 0.5s ease-in;
+      -ms-transition: opacity 0.5s ease-in;
+      -o-transition: opacity 0.5s ease-in;
+      transition: opacity 0.5s ease-in;
+    }
+    .fa-money-bill-wave {
+      opacity: 0.7;
+    }
+    .card-body {
+      #tooltip-description {
+        color: $neutral-color;
+        font-size: 0.9rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 8; /* number of lines to show */
+        -webkit-box-orient: vertical;
+      }
+      .misc-stat-span {
+        font-size: 1rem;
+        background-color: $background-color; /* Changing background color */
+        font-weight: bold; /* Making font bold */
+        border: 1px solid $light-color !important;
+        border-radius: 20px; /* Making border radius */
+        // width: auto; /* Making auto-sizable width */
+        // height: auto; /* Making auto-sizable height */
+        padding: 5px 10px 5px 10px; /* Making space around letters */
+      }
+
+      .fa-stopwatch {
+        transform: translateY(-20%);
+      }
+
+      .fa {
+        margin: 0 auto;
+      }
+      #play-time-p {
+        svg {
+          text {
+            font-size: 1rem;
+            font-weight: bold;
+          }
+          .time-line {
+            stroke: #999;
+            stroke-width: 1px;
+            stroke-dasharray: 3;
+          }
+          rect {
+            stroke: $light-color;
+            stroke-width: 1px;
+            fill: #eee;
+            rx: 20px;
+            ry: 20px;
+          }
+        }
+      }
+      #player-count-p {
+        text {
+          font-size: 0.8rem;
+        }
+        .player-count-bg {
+          fill: #eee;
+          stroke: $light-color;
+          stroke-width: 1px;
+          rx: 20;
+          ry: 20;
+        }
+      }
+    }
+  }
+
+  .info-not-available {
+    background-color: #eee; /* Changing background color */
+    border-radius: 20px; /* Making border radius */
+    position: absolute;
+    padding: 10px 20px 10px 20px; /* Making space around letters */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    white-space: nowrap;
+    -webkit-transition: opacity 0.2s ease-in;
+    -moz-transition: opacity 0.2s ease-in;
+    -ms-transition: opacity 0.2s ease-in;
+    -o-transition: opacity 0.2s ease-in;
+    transition: opacity 0.2s ease-in;
+    pointer-events: none;
+    span {
+      color: #2b2d42;
+      font-size: 0.8rem;
+      font-weight: bold; /* Making font bold */
+      vertical-align: middle;
+    }
+    .fas {
+      vertical-align: middle;
+    }
+  }
+
+  #boardgame-plays {
+    #plays-not-available {
+      border: 1px solid $light-color;
+      span {
+        color: $neutral-color;
+      }
+    }
+    #plays-legend {
+      // #plays-legend-bg{
+      //   fill: #eee;
+      //   rx: 10px;
+      // }
+
+      text {
+        font-size: 0.8rem;
+        dominant-baseline: middle;
+      }
+    }
+
+    .line {
+      stroke: $base-color;
+      opacity: 0.3;
+      stroke-width: 5px;
+    }
+
+    .plays-circle {
+      fill-opacity: 0.2;
+    }
+
+    .grid line {
+      stroke: lightgrey;
+      stroke-opacity: 0.9;
+      shape-rendering: crispEdges;
+      stroke-dasharray: 3;
+    }
+
+    .grid path {
+      stroke-width: 0;
+    }
+
+    #x-axis path {
+      stroke-width: 0;
+    }
+
+    #x-axis text {
+      color: $neutral-color;
+      font-size: 0.7rem;
+    }
+
+    #y-axis text {
+      color: $neutral-color;
+      font-size: 0.8rem;
+    }
+
+    #y-axis path {
+      stroke-width: 0;
+    }
+  }
+
+  #boardgame-ratings-breakdown {
+    #ratings-breakdown-not-available {
+      border: 1px solid $light-color;
+      pointer-events: auto;
+      .fas {
+        opacity: 0.8;
+        vertical-align: middle;
+      }
+      span {
+        color: $neutral-color;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  #boardgame-ratings {
+    .btn {
+      color: $base-color !important;
+      background-color: $background-color;
+    }
+  }
+
+  #boardgame-categories {
+    .btn {
+      border: none !important;
+    }
+  }
+}
+
+.show {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  -o-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+
+.hide {
+  opacity: 0;
+  -webkit-transition: opacity 0.5s ease-in;
+  -moz-transition: opacity 0.5s ease-in;
+  -ms-transition: opacity 0.5s ease-in;
+  -o-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+
+.odometer.odometer-auto-theme {
+  background-color: #d2d2cf;
+  font-weight: 400;
+}
+
+.odometer-value,
+.odometer-radix-mark {
+  color: #fff;
+}
+
+.d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 0.6rem;
+  width: 100%;
+  line-height: 1;
+  color: #000000cc;
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+// INSIGHTS
+#insights-bg {
+  background-color: #ffcdb2;
+  opacity: 0;
+}
+
+.insights-title {
+  -webkit-transition: 1s ease-in-out;
+  -moz-transition: 1s ease-in-out;
+  -o-transition: 1s ease-in-out;
+  opacity: 0;
+}
+
+#insights-header {
+  opacity: 0;
+}
+.card-columns {
+  @include media-breakpoint-up(sm) {
+    column-count: 2 !important;
+  }
+  @include media-breakpoint-up(lg) {
+    column-count: 3 !important;
+  }
+  .badge,
+  .badge-pill {
+    color: white;
+  }
+  .badge-primary {
+    white-space: normal;
+    text-align: center;
+  }
+  .badge-pill {
+    font-weight: 500;
+  }
+  .card {
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    opacity: 0;
+    .card-title {
+      color: $neutral-color;
+    }
+    .card-body {
+      background-color: #ffcdb233;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 2.1rem;
+    }
+
+    .show-more-text {
+      font-size: 1rem;
+    }
+    .canvas-legend {
+      background-color: $background-color;
+      color: #6e6e6e;
+      display: inline-block;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 5px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    .data-selector {
+      .btn {
+        font-weight: 500;
+        border-radius: 8px !important;
+      }
+    }
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+  }
+}
+
+// GLOBAL STATS
+#global-stats-bg {
+  background-color: $light-color;
+  opacity: 0;
+}
+
+#global-stats-header {
+  opacity: 0;
+}
+#global-stats {
+  h1,
+  h3,
+  p {
+    color: $neutral-color;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version */
+  }
+  h2 {
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    opacity: 0;
+  }
+  #global-stats-method-modal-body {
+    line-height: 1.5rem;
+    text-align: justify;
+  }
+  .chart-block {
+    border-radius: 8px;
+  }
+  .chart-row {
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+  }
+  .row-wrapper {
+    -webkit-transition: 1s ease-in-out;
+    -moz-transition: 1s ease-in-out;
+    -o-transition: 1s ease-in-out;
+    opacity: 0;
+    border-radius: 8px;
+  }
+}
+
+// USER PROFILE
+#user-profile-bg {
+  background-color: $light-color;
+  .padding {
+    padding: 3rem !important;
+  }
+
+  #user #hello-title {
+    font-size: 3rem;
+  }
+  .card-block p {
+    color: $dark-color;
+  }
+  h5 {
+    color: $neutral-color;
+  }
+
+  h6 {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  #user-profile-username {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+  #user-profile-name {
+    font-weight: 600;
+    color: white;
+  }
+  #user-profile-image {
+    width: 80px;
+    height: 80px;
+    fill: white;
+  }
+
+  .user-card-full {
+    overflow: hidden;
+  }
+
+  .card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    border: none;
+    margin-bottom: 30px;
+  }
+
+  .m-r-0 {
+    margin-right: 0px;
+  }
+
+  .m-l-0 {
+    margin-left: 0px;
+  }
+
+  .user-card-full .user-profile {
+    border-radius: 5px 0 0 5px;
+  }
+
+  .bg-c-lite-green {
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from($base-color),
+      to($secondary-color)
+    );
+    background: linear-gradient(to right, $base-color, $light-color);
+  }
+
+  .user-profile {
+    padding: 20px 0;
+  }
+
+  .card-block {
+    padding: 1.25rem;
+  }
+
+  .m-b-25 {
+    margin-bottom: 25px;
+  }
+
+  .img-radius {
+    border-radius: 5px;
+  }
+
+  .card .card-block p {
+    line-height: 25px;
+  }
+
+  .card-block {
+    padding: 1.25rem;
+  }
+
+  .b-b-default {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .m-b-20 {
+    margin-bottom: 20px;
+  }
+
+  .p-b-5 {
+    padding-bottom: 5px !important;
+  }
+
+  .card .card-block p {
+    line-height: 25px;
+  }
+
+  .m-b-10 {
+    margin-bottom: 10px;
+  }
+
+  .text-muted {
+    color: $secondary-color !important;
+  }
+
+  .b-b-default {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .f-w-600 {
+    font-weight: 600;
+  }
+
+  .m-b-20 {
+    margin-bottom: 20px;
+  }
+
+  .m-t-40 {
+    margin-top: 20px;
+  }
+
+  .p-b-5 {
+    padding-bottom: 5px !important;
+  }
+
+  .m-b-10 {
+    margin-bottom: 10px;
+  }
+
+  .m-t-40 {
+    margin-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.5rem;
+    }
+    #hello-title {
+      font-size: 2rem;
+    }
+    #user-profile-btn-group {
+      a {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// ANIMATIONS
+.slide-top {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(200px);
+    transform: translateY(200px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(200px);
+    transform: translateY(200px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
