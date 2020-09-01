@@ -13,7 +13,7 @@ router.get("/statistics/:id", async (req, res) => {
     const id = req.params.id;
 
     const statistics = await Statistics.findOne({ id });
-    if (statistics == undefined) res.statu(404).send();
+    if (statistics == undefined) res.status(404).send();
 
     res.send(statistics);
     console.log(
