@@ -72,10 +72,10 @@ router.patch("/boardgames/ratings", async (req, res) => {
   }
 
   req.setTimeout(1000000);
-  let cancelRequest=false
-  req.on("close", function (err) {
-    cancelRequest = true;
-  });
+  // let cancelRequest=false
+  // req.on("close", function (err) {
+  //   cancelRequest = true;
+  // });
   try {
     let boardgameUpdatedN = 0;
     
@@ -83,9 +83,9 @@ router.patch("/boardgames/ratings", async (req, res) => {
       for (const boardgame of boardgames) {
 
         // TEMP: This needs to be done properly
-        if (cancelRequest) {
-          throw { type: "cancelledByClient" };
-        }
+        // if (cancelRequest) {
+        //   throw { type: "cancelledByClient" };
+        // }
         if (
           boardgame.ratingsBreakdown["1"] == undefined ||
           req.params.force == 1
