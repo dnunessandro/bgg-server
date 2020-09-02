@@ -1,4 +1,5 @@
-const API_URL = "https://sn-bgg-server.herokuapp.com";
+// const API_URL = "https://sn-bgg-server.herokuapp.com";
+const API_URL = "http://localhost:3000";
 
 // COLORS ///////////////////////////
 
@@ -25,6 +26,7 @@ const MAX_NODE_RADIUS_FACTOR = 0.1;
 const MAX_NODE_RADIUS_ABS = 60;
 const DEFAULT_NODE_RADIUS_FACTOR = 0.07;
 const MAX_NODE_LABEL_CHARACTERS = 30;
+const SVG_HEIGHT_MOBILE_FACTOR = 1.2;
 
 const NODE_SIZE_DEFAULT_FIELD = "userRating";
 const NODE_SORT_DEFAULT_FIELD = "name";
@@ -65,7 +67,7 @@ const NODE_SIZE_SCALE_DOMAIN_MAP = {
 };
 
 const NUM_NODES_BREAKPOINT_MAP = {
-  0: 30,
+  0: 40,
   576: 100,
   768: 100,
   992: 100,
@@ -117,6 +119,12 @@ const PLAY_TIME_MAP = {
   [GREEN_COLOR]: [0, 30],
   [YELLOW_COLOR]: [31, 120],
   [RED_COLOR]: [121, 10000],
+};
+
+const PLAYER_COUNT_MAP = {
+  [GREEN_COLOR]: [0, 2],
+  [YELLOW_COLOR]: [3, 6],
+  [RED_COLOR]: [7, 10000],
 };
 
 const CATEGORY_COLOR_MAP = {

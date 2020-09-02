@@ -1,7 +1,9 @@
 const drawCollectionOverview = (collectionItems) => {
   // Change Chart Dimensions
+  console.log(checkIfMobile())
   $("#collection-overview-chart").height(
-    collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2 ? 800 : 400
+    
+    (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2 ? 800 : 400) / (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)
   );
 
   // Get Chart Dimensions
@@ -255,14 +257,14 @@ const createSortSidepanelBtnEL = (collectionItems) => {
   });
 };
 
-const createWindowResizeEL = (collectionItems) => {
-  $(window).resize(
-    debounce((_) => {
-      nodeGroups = drawCollectionOverview(collectionItems);
-      updateNodesForce(collectionItems);
-    })
-  );
-};
+// const createWindowResizeEL = (collectionItems) => {
+//   $(window).resize(
+//     debounce((_) => {
+//       nodeGroups = drawCollectionOverview(collectionItems);
+//       updateNodesForce(collectionItems);
+//     })
+//   );
+// };
 
 const createOverviewSvgEL = () => {
   $("#collection-overview-svg").on("click", function (e) {
@@ -289,7 +291,7 @@ const createIncompleteCollectionWarning = (nItems) => {
     $("#bgg-explorer-btn-group")
       .after(`<div id="huge-collection-warning-wrapper"><div id="huge-collection-warning" class="slide-top alert alert-warning 
       alert-dismissible fade show my-2 mx-auto" style="border-width: 0" role="alert">
-        <h5 class="text-center my-3"><i class="fas fa-exclamation-circle"></i> <strong>Huge Collection</strong></h5><p class="text-justify">
+        <h5 class="text-center my-3"><i class="fas fa-exclamation-circle"></i> <strong>Limited Screen Size</strong></h5><p class="text-justify">
          Due to the limited screen size, only your <strong>${nodesLimit}</strong> top rated games are shown on the <em>Free
           Exploration</em> view. ${
       checkIfMobile()

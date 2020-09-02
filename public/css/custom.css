@@ -10805,6 +10805,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 900;
   color: white;
@@ -10824,9 +10829,19 @@ p {
   color: #6d6875;
 }
 
+.tooltip {
+  font-size: 1rem !important;
+}
+
 .btn-group-nav .btn {
   border: 2px solid #ffcdb2 !important;
   border-radius: 8px !important;
+}
+
+@media (max-width: 768px) {
+  .btn-group-nav .btn {
+    font-size: 0.8rem !important;
+  }
 }
 
 .modal .modal-body {
@@ -10929,6 +10944,18 @@ p {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  #showcase {
+    background: url("../img/bg-background-pink.jpg") bottom right/cover no-repeat;
+  }
+}
+
+@media (max-width: 768px) {
+  #showcase {
+    min-height: 500px;
+  }
+}
+
 #showcase #login-form-text {
   font-size: 1rem;
   color: #6d6875;
@@ -10936,6 +10963,22 @@ p {
 
 #showcase h1 {
   color: white;
+}
+
+#showcase .form-control {
+  text-align: center;
+}
+
+#showcase .form-control:focus,
+#showcase .form-control:active {
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important;
+  border: 2px solid #e5989b !important;
+}
+
+#showcase .invalid-feedback {
+  color: #ffcdb2 !important;
 }
 
 #showcase .btn {
@@ -10973,6 +11016,10 @@ p {
   color: #6d6875;
 }
 
+#tools .subtitle {
+  color: white !important;
+}
+
 #tools .lead {
   font-size: 1rem;
   text-align: justify;
@@ -10987,12 +11034,16 @@ p {
   background-color: #e5989b;
 }
 
+.page-footer {
+  background-color: #ffcdb2;
+}
+
 .footer-copyright {
   color: #b5838d !important;
 }
 
 .footer-copyright a {
-  color: #e5989b;
+  color: #6d6875;
 }
 
 #bgg-explorer-bg {
@@ -11067,10 +11118,17 @@ p {
 }
 
 @media (max-width: 768px) {
+  #collection-overview #collection-overview-row #collection-overview-chart svg .node-text {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 768px) {
   #collection-overview #collection-overview-sidepanel .btn,
   #collection-overview #collection-overview-sidepanel .btn-group {
     border-radius: 0;
     margin: 0;
+    width: 200px;
   }
   #collection-overview #collection-overview-sidepanel #btnRating {
     border-top-left-radius: 4px;
@@ -11112,10 +11170,15 @@ p {
   font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 8;
   /* number of lines to show */
   -webkit-box-orient: vertical;
+}
+
+@media (min-width: 768px) {
+  #boardgame-info #boardgame-tooltip .card-body #tooltip-description {
+    display: -webkit-box !important;
+  }
 }
 
 #boardgame-info #boardgame-tooltip .card-body .misc-stat-span {
@@ -11155,12 +11218,31 @@ p {
   stroke: #ffcdb2;
   stroke-width: 1px;
   fill: #eee;
-  rx: 20px;
+  rx: 15px;
   ry: 20px;
 }
 
 #boardgame-info #boardgame-tooltip .card-body #player-count-p text {
   font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  #boardgame-info #boardgame-tooltip .card-body #player-count-p svg text {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  #boardgame-info #boardgame-tooltip .card-body #player-count-p svg .time-line {
+    stroke: #999;
+    stroke-width: 1px;
+    stroke-dasharray: 3;
+  }
+  #boardgame-info #boardgame-tooltip .card-body #player-count-p svg rect {
+    stroke: #ffcdb2;
+    stroke-width: 1px;
+    fill: #eee;
+    rx: 15px;
+    ry: 20px;
+  }
 }
 
 #boardgame-info #boardgame-tooltip .card-body #player-count-p .player-count-bg {
@@ -11169,6 +11251,10 @@ p {
   stroke-width: 1px;
   rx: 20;
   ry: 20;
+}
+
+#boardgame-info #general-stats-container .fas {
+  width: 30px;
 }
 
 #boardgame-info .info-not-available {
@@ -11266,12 +11352,19 @@ p {
 
 #boardgame-info #boardgame-ratings-breakdown #ratings-breakdown-not-available span {
   color: #6d6875;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 #boardgame-info #boardgame-ratings .btn {
+  pointer-events: none;
   color: #e5989b !important;
   background-color: #eee;
+}
+
+@media (max-width: 768px) {
+  #boardgame-info #boardgame-ratings .btn {
+    font-size: 0.8rem !important;
+  }
 }
 
 #boardgame-info #boardgame-categories .btn {
@@ -11408,6 +11501,8 @@ p {
   padding: 3px 5px;
   margin-bottom: 10px;
   border-radius: 8px;
+  width: 90%;
+  max-width: 300px;
 }
 
 .card-columns .card .data-selector .btn {
@@ -11447,6 +11542,12 @@ p {
   /* Non-prefixed version */
 }
 
+@media (max-width: 768px) {
+  #global-stats p {
+    font-size: 0.8rem;
+  }
+}
+
 #global-stats h2 {
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
@@ -11482,7 +11583,7 @@ p {
 }
 
 #user-profile-bg .padding {
-  padding: 3rem !important;
+  padding: 1rem !important;
 }
 
 #user-profile-bg #user #hello-title {

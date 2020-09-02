@@ -23,6 +23,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -47,9 +52,16 @@ p {
   color: $neutral-color;
 }
 
+.tooltip {
+  font-size: 1rem !important;
+}
+
 .btn-group-nav .btn {
   border: 2px solid $light-color !important;
   border-radius: 8px !important;
+  @media(max-width: 768px){
+    font-size: 0.8rem !important;
+  }
 }
 
 .modal {
@@ -139,7 +151,14 @@ p {
 #showcase {
   background: url("../img/bg-background-pink.jpg") bottom center / cover
     no-repeat;
+  @media (max-width: 768px) {
+    background: url("../img/bg-background-pink.jpg") bottom right / cover
+      no-repeat;
+  }
   min-height: 750px;
+  @media (max-width: 768px) {
+    min-height: 500px;
+  }
   position: relative;
 
   #login-form-text {
@@ -149,6 +168,21 @@ p {
 
   h1 {
     color: white;
+  }
+
+  .form-control {
+    text-align: center;
+  }
+
+  .form-control:focus,
+  .form-control:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 2px solid $base-color !important;
+  }
+
+  .invalid-feedback {
+    color: $light-color !important;
   }
 
   .btn {
@@ -182,6 +216,9 @@ p {
   h3 {
     color: $neutral-color;
   }
+  .subtitle {
+    color: white !important;
+  }
   background-color: $light-color;
   .lead {
     font-size: 1rem;
@@ -197,10 +234,14 @@ p {
   background-color: $base-color;
 }
 
+.page-footer {
+  background-color: $light-color;
+}
+
 .footer-copyright {
-  color: $primary-color !important;
+  color: $dark-color !important;
   a {
-    color: $base-color;
+    color: $neutral-color;
   }
 }
 
@@ -256,6 +297,9 @@ p {
         .node-text {
           fill: white;
           font-size: 13px;
+          @media (max-width: 768px) {
+            font-size: 10px;
+          }
           font-weight: 600;
           text-anchor: middle;
           dominant-baseline: middle;
@@ -274,6 +318,7 @@ p {
       .btn-group {
         border-radius: 0;
         margin: 0;
+        width: 200px;
       }
       #btnRating {
         border-top-left-radius: 4px;
@@ -323,7 +368,10 @@ p {
         font-size: 0.9rem;
         overflow: hidden;
         text-overflow: ellipsis;
-        display: -webkit-box;
+        @media (min-width: 768px) {
+          display: -webkit-box !important;
+        } 
+        
         -webkit-line-clamp: 8; /* number of lines to show */
         -webkit-box-orient: vertical;
       }
@@ -360,7 +408,7 @@ p {
             stroke: $light-color;
             stroke-width: 1px;
             fill: #eee;
-            rx: 20px;
+            rx: 15px;
             ry: 20px;
           }
         }
@@ -369,6 +417,26 @@ p {
         text {
           font-size: 0.8rem;
         }
+        @media (max-width: 768px) {
+          svg {
+            text {
+              font-size: 1rem;
+              font-weight: bold;
+            }
+            .time-line {
+              stroke: #999;
+              stroke-width: 1px;
+              stroke-dasharray: 3;
+            }
+            rect {
+              stroke: $light-color;
+              stroke-width: 1px;
+              fill: #eee;
+              rx: 15px;
+              ry: 20px;
+            }
+          }
+        }
         .player-count-bg {
           fill: #eee;
           stroke: $light-color;
@@ -376,7 +444,14 @@ p {
           rx: 20;
           ry: 20;
         }
+        
       }
+    }
+  }
+
+  #general-stats-container{
+    .fas{
+      width: 30px;
     }
   }
 
@@ -467,6 +542,7 @@ p {
   }
 
   #boardgame-ratings-breakdown {
+
     #ratings-breakdown-not-available {
       border: 1px solid $light-color;
       pointer-events: auto;
@@ -476,15 +552,19 @@ p {
       }
       span {
         color: $neutral-color;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
       }
     }
   }
 
   #boardgame-ratings {
     .btn {
+      pointer-events: none;
       color: $base-color !important;
       background-color: $background-color;
+      @media (max-width: 768px) {
+          font-size: 0.8rem !important;
+      }
     }
   }
 
@@ -615,6 +695,8 @@ p {
       padding: 3px 5px;
       margin-bottom: 10px;
       border-radius: 8px;
+      width: 90%;
+      max-width: 300px;
     }
     .data-selector {
       .btn {
@@ -651,6 +733,13 @@ p {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version */
   }
+
+  p{
+    @media (max-width: 768px){
+      font-size: 0.8rem;
+    }
+  }
+  
   h2 {
     -webkit-transition: 1s ease-in-out;
     -moz-transition: 1s ease-in-out;
@@ -682,7 +771,7 @@ p {
 #user-profile-bg {
   background-color: $light-color;
   .padding {
-    padding: 3rem !important;
+    padding: 1rem !important;
   }
 
   #user #hello-title {

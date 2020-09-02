@@ -10,9 +10,12 @@ const getCollection = (response, options) => {
   collection.items = response.items.item
     .map((e) => getCollectionItemFields(e, options))
     .filter((e) => e.numOwned >= process.env.NUM_OWNED_THRESH);
+    
+  if (collection.items.length == 0) return { error: "empty" };
+
   collection.ignoredItems = response.items.item
-  .map((e) => getCollectionItemFields(e, options))
-  .filter((e) => e.numOwned < process.env.NUM_OWNED_THRESH);
+    .map((e) => getCollectionItemFields(e, options))
+    .filter((e) => e.numOwned < process.env.NUM_OWNED_THRESH);
 
   return collection;
 };

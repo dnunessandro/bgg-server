@@ -6,15 +6,15 @@ const createRadiusScale = (domain, range) => {
 };
 
 // Create X-Axis Scale
-const createNodeAxisScale = (nNodes, chartDim) => {
-  const chartWidth = $("#collection-overview-chart").width();
+const createNodeAxisScale = (nNodes, chartWidth) => {
+  
   const chartHeight = $("#collection-overview-chart").height();
   const scale = d3
     .scaleLinear()
     .domain([0, nNodes - 1])
     .range([
-      DEFAULT_NODE_RADIUS_FACTOR * chartHeight,
-      chartDim - DEFAULT_NODE_RADIUS_FACTOR * chartHeight,
+      DEFAULT_NODE_RADIUS_FACTOR * chartWidth /2 ,
+      chartWidth - DEFAULT_NODE_RADIUS_FACTOR * chartWidth /2 ,
     ])
     .clamp(true);
 

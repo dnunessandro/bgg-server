@@ -26,7 +26,7 @@ $("#submit-form").on("click", async (e) => {
         <span aria-hidden="true">&times;</span>
       </button>
     </div>`);
-    }, 20000);
+    }, 30000);
 
     $(".alert-warning").css("border-width", "0px");
 
@@ -45,6 +45,7 @@ $("#submit-form").on("click", async (e) => {
       outputEncoding: "StorageBinaryString",
     });
 
+    
     $(".spinner-border").remove();
     $("#submit-form").text("All Done!").css("background-color", LIGHT_COLOR);
     window.localStorage.clear();

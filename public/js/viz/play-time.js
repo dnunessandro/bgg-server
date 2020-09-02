@@ -117,6 +117,7 @@ const drawPlayTimeChart = (collectionItem) => {
     .ease(d3.easePoly)
     .attr("transform", `translate(${xAxisScale(0) + xPad},${svgHeight / 2})`)
     .style("opacity", (d) => (minMaxTimeFlag != d.playTime ? 1 : 0));
+    
 
   maxTimeGroup
     .transition()

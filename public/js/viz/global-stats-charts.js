@@ -71,7 +71,7 @@ const drawGlobalStatsHistChart = (
               maxRotation: 0,
               min: xMin,
               max: xMax,
-              maxTicksLimit: 10,
+              maxTicksLimit: 6,
             },
             scaleLabel: {
               display: true,
@@ -222,6 +222,8 @@ const drawGlobalStatsCorrChart = (
             type: "linear",
             position: "bottom",
             ticks: {
+              maxTicksLimit: 6,
+              fontSize: 14,
               min:
                 "xMin" in options
                   ? options.xMin
@@ -340,7 +342,7 @@ const drawGlobalStatsTrendChart = (
               maxRotation: 0,
               min: xMin,
               max: xMax,
-              maxTicksLimit: 10,
+              maxTicksLimit: 6,
             },
             scaleLabel: {
               display: true,
@@ -458,18 +460,18 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
 
 const createTextBlock = (rowId, title, p) => {
   $(`#global-stats #${rowId}`).append(
-    `<div id="${rowId}-text-block" class="col-6 text-center my-auto text-block"></div>`
+    `<div id="${rowId}-text-block" class="col-12 col-md-6 text-center my-auto block text-block"></div>`
   );
 
   $(`#global-stats #${rowId} .text-block`).append(
     `<h3 class="mb-3">${title}</h3>`
   );
-  $(`#global-stats #${rowId} .text-block`).append(`<p>${p}</p>`);
+  $(`#global-stats #${rowId} .text-block`).append(`<p class="text-justify">${p}</p>`);
 };
 
 const createPlotBlock = (rowId) => {
   $(`#global-stats #${rowId}`).append(
-    `<div class="col-6 chart-block p-3 my-3"><canvas id="${rowId}-canvas"></canvas></div>`
+    `<div class="col-12 col-md-6 block chart-block p-3 my-3"><canvas id="${rowId}-canvas"></canvas></div>`
   );
 };
 
@@ -480,7 +482,7 @@ const createGlobalStatsRow = (rowId, title, p) => {
 
   if (
     $("#global-stats .row").children().get().length == 0 ||
-    $("#global-stats .row .col-6")
+    $("#global-stats .row .block") || checkIfMobile()
       .slice(-1)
       .attr("class")
       .includes("text-block")

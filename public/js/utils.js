@@ -18,7 +18,7 @@ const getNodeTextHeightArray = (nodeTextSelection) => {
 
 const getNodeRadius = (value, radiusScale, defaultValue) => {
   return (typeof value == "number") & !isNaN(value)
-    ? radiusScale(value)
+    ? (checkIfMobile()? radiusScale(value)/2 : radiusScale(value))
     : defaultValue;
 };
 

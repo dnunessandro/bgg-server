@@ -33,7 +33,7 @@ const run = async () => {
   // Create Forces
   NODE_FORCE = createNodesForce(collectionItems, nodeGroups);
 
-  createWindowResizeEL(collectionItems);
+  // createWindowResizeEL(collectionItems);
   createSidepanelELs(collectionItems);
   createSortSidepanelBtnEL(collectionItems);
   createNodeGroupELs();
@@ -58,7 +58,7 @@ const run = async () => {
   );
 
   createMiscStats(collectionItems[0]);
-  drawPlayerCountChart(getPlayerCountData(collectionItems[0]));
+  checkIfMobile()? drawPlayerCountChartMobile(collectionItems[0]) : drawPlayerCountChart(getPlayerCountData(collectionItems[0]));
   drawPlayTimeChart(collectionItems[0]);
   createWordCloud(getItemCategories(collectionItems[0]));
   createWordCloud(getItemCategories(collectionItems[0]));
@@ -91,6 +91,7 @@ const run = async () => {
 
   // Turn on tooltips
   $('[data-toggle="tooltip"]').tooltip();
+
 };
 
 run();

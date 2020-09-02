@@ -10,14 +10,16 @@ const {
 
 const updateCollectionStatistics = async (statistics) => {
   let collectionArray = await Collection.find({});
-  collectionArray = collectionArray.filter((c) => "insights" in c);
+  collectionArray = collectionArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
 
   // Get Total Collections
   statistics.stats.set("nCollections", getNCollections(collectionArray));
 
   // Get Total Items
   statistics.stats.set("nItems", getNItems(collectionArray));
-  getNItems
+  getNItems;
 
   // Get Average Collection Items
   statistics.stats.set(
@@ -1050,7 +1052,8 @@ const getCollectionMostCommonYearHist = (collectionsArray) => {
     .filter((c) => c.insights.get("mostCommonYears") != undefined)
     .map((c) => c.insights.get("mostCommonYears").mostCommonYears);
 
-  return getHistogram(mostCommonYears, [1500,
+  return getHistogram(mostCommonYears, [
+    1500,
     1900,
     1950,
     1975,
@@ -1063,7 +1066,8 @@ const getCollectionMostCommonYearHist = (collectionsArray) => {
     2014,
     2016,
     2018,
-    2020]);
+    2020,
+  ]);
 };
 
 const getCollectionAvgRecommendedPlayersHist = (collectionsArray) => {
@@ -1203,9 +1207,9 @@ const getYearRegisteredHist = (collectionsArray) => {
 
 const getStatHist = (collectionsArray, stat) => {
   const statCapitalized = stat.charAt(0).toUpperCase() + stat.slice(1);
-  const statArray = collectionsArray.map(
-    (e) => e.insights.get("mostCommon" + statCapitalized)[stat + "Hist"]
-  );
+  const statArray = collectionsArray
+    .filter((e) => e.insights.get("mostCommon" + statCapitalized) != undefined)
+    .map((e) => e.insights.get("mostCommon" + statCapitalized)[stat + "Hist"]);
   return mergeDicts(statArray);
 };
 

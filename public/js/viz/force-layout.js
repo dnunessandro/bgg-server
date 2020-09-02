@@ -61,6 +61,7 @@ const createNodesForce = (collectionItems, nodeGroups) => {
   NODE_FORCE.on("tick", (_) => {
     nodeTickUpdate(nodeGroups);
   });
+
   nodeGroups.call(
     d3
       .drag()

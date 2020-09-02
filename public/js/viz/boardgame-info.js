@@ -28,7 +28,7 @@ const createNodeGroupELs = () => {
     );
 
     // Create Player Count Chart
-    drawPlayerCountChart(getPlayerCountData(d));
+    checkIfMobile()? drawPlayerCountChartMobile(d) : drawPlayerCountChart(getPlayerCountData(d));
 
     // Create Misc Stats
     createMiscStats(d);

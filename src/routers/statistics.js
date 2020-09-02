@@ -13,7 +13,7 @@ router.get("/statistics/:id", async (req, res) => {
     const id = req.params.id;
 
     const statistics = await Statistics.findOne({ id });
-    if (statistics == undefined) res.status(404).send();
+    if (statistics == undefined) return res.status(404).send();
 
     res.send(statistics);
     console.log(
@@ -23,8 +23,9 @@ router.get("/statistics/:id", async (req, res) => {
         chalk.green(" retrieved.")
     );
   } catch (error) {
-    res.status(500).send(error);
     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
+    return res.status(500).send(error);
+    
   }
 });
 

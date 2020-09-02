@@ -45,6 +45,10 @@ const drawRatingsBreakdown = (ratingsBreakdown) => {
       ],
     },
     options: {
+      tooltips: {
+        titleFontSize: 16,
+        bodyFontSize: 14,
+      },
       legend: {
         display: false,
       },
