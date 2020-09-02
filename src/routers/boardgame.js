@@ -90,7 +90,7 @@ router.patch("/boardgames/ratings", async (req, res) => {
           boardgame.ratingsBreakdown["1"] == undefined ||
           req.params.force == 1
         ) {
-          const browser = await puppeteer.launch();
+          const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
           const page = await browser.newPage();
           boardgame.ratingsBreakdown = await getBoardgameRatingsBreakdown(
             boardgame.id,
