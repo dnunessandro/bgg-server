@@ -6,6 +6,7 @@ const collectionSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
+  createdAt: { type: Date, expires: 3600, default: Date.now },
   yearRegistered: Number,
   avatar: String,
   firstName: String,

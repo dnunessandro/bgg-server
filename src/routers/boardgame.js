@@ -2,8 +2,9 @@ const express = require("express");
 const chalk = require("chalk");
 const puppeteer = require("puppeteer");
 const { getQueryUrl, getResponse } = require("../bgg-api-parse/get-item");
-const Boardgame = require("../models/boardgame");
+const { Boardgame } = require("../models/boardgame");
 const { getBoardgameRatingsBreakdown } = require("../bgg-scraping/boardgame");
+const { getRandomInt } = require("../utils/math");
 
 const router = new express.Router();
 
@@ -17,7 +18,16 @@ router.get("/boardgames/:id", async (req, res) => {
     const diffDays =
       (today - (boardgame ? boardgame.lastUpdated : 0)) / (1000 * 60 * 60 * 24);
 
-    if (boardgame == null || diffDays > process.env.BOARDGAME_UPDATE_PERIOD) {
+    if (
+      boardgame == null ||
+      diffDays >
+        getRandomInt(
+          process.env.BOARDGAME_UPDATE_PERIOD -
+            process.env.BOARDGAME_UPDATE_PERIOD_VAR,
+          process.env.BOARDGAME_UPDATE_PERIOD +
+            process.env.BOARDGAME_UPDATE_PERIOD_VAR
+        )
+    ) {
       const queryUrl = getQueryUrl(id, "boardgame", {
         stats: 1,
         marketplace: 1,
@@ -78,10 +88,9 @@ router.patch("/boardgames/ratings", async (req, res) => {
   // });
   try {
     let boardgameUpdatedN = 0;
-    
+
     await Boardgame.find({}, async (_, boardgames) => {
       for (const boardgame of boardgames) {
-
         // TEMP: This needs to be done properly
         // if (cancelRequest) {
         //   throw { type: "cancelledByClient" };
@@ -90,7 +99,7 @@ router.patch("/boardgames/ratings", async (req, res) => {
           boardgame.ratingsBreakdown["1"] == undefined ||
           req.params.force == 1
         ) {
-          const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+          const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
           const page = await browser.newPage();
           boardgame.ratingsBreakdown = await getBoardgameRatingsBreakdown(
             boardgame.id,

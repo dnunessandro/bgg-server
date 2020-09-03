@@ -1031,10 +1031,6 @@ const getCollectionAvgYearHist = (collectionsArray) => {
 
   return getHistogram(avgYears, [
     1500,
-    1900,
-    1950,
-    1975,
-    1990,
     1995,
     2000,
     2005,
@@ -1054,10 +1050,6 @@ const getCollectionMostCommonYearHist = (collectionsArray) => {
 
   return getHistogram(mostCommonYears, [
     1500,
-    1900,
-    1950,
-    1975,
-    1990,
     1995,
     2000,
     2005,

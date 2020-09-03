@@ -1,6 +1,5 @@
 const drawCollectionOverview = (collectionItems) => {
   // Change Chart Dimensions
-  console.log(checkIfMobile())
   $("#collection-overview-chart").height(
     
     (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2 ? 800 : 400) / (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)

@@ -263,7 +263,7 @@ function sortIndex(toSort) {
   for (var i = 0; i < toSort.length; i++) {
     toSort[i] = [toSort[i], i];
   }
-  toSort.sort(function(left, right) {
+  toSort.sort(function (left, right) {
     return left[0] < right[0] ? -1 : 1;
   });
   toSort.sortIndices = [];
@@ -272,6 +272,12 @@ function sortIndex(toSort) {
     toSort[j] = toSort[j][0];
   }
   return toSort.sortIndices;
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 module.exports = {
@@ -286,5 +292,6 @@ module.exports = {
   convertCurrency,
   largestTriangleThreeBuckets,
   linearRegression,
-  sortIndex
+  sortIndex,
+  getRandomInt,
 };

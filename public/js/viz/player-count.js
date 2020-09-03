@@ -107,7 +107,6 @@ const drawPlayerCountChart = (playerCountData) => {
 // Inputs
 
 const drawPlayerCountChartMobile = (collectionItem) => {
-  console.log(collectionItem)
   const minPlayers = collectionItem.minPlayers;
   const maxPlayers = collectionItem.maxPlayers;
   const avgTime = collectionItem.maxPlayers;

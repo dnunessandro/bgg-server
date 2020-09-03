@@ -2,6 +2,7 @@ const express = require("express");
 const chalk = require("chalk");
 const { getQueryUrl, getResponse } = require("../bgg-api-parse/get-item");
 const Collection = require("../models/collection");
+const EnrichedCollection = require("../models/enriched-collection");
 const {
   enrichCollectionWithBoardgames,
   enrichCollectionWithPlays,
@@ -42,7 +43,7 @@ router.get("/collections/:username", async (req, res) => {
       // Get User from BGG
       const rawUser = await getResponse(userQueryUrl);
 
-      // If not found, send 404 and break
+      // If collection not found, send 404 and break
       if (rawCollection == undefined || "error" in rawCollection) {
         console.log(
           chalk.red.bgWhite("404") +
@@ -53,6 +54,7 @@ router.get("/collections/:username", async (req, res) => {
         return res.status(404).send();
       }
 
+      // If ser not found, send 404 and break
       if (rawUser == undefined || "error" in rawCollection) {
         console.log(
           chalk.red.bgWhite("404") +
@@ -110,7 +112,7 @@ router.get("/collections/:username", async (req, res) => {
 });
 
 // Enriches Collection
-router.get("/collections/:username/enrich", async (req, res) => {
+router.post("/collections/:username/enrich", async (req, res) => {
   try {
     const username = req.params.username.toLowerCase();
     const collection = await Collection.findOne({
@@ -118,8 +120,17 @@ router.get("/collections/:username/enrich", async (req, res) => {
     });
     if (collection == null) return res.status(404).send();
 
+    res.status(200).send();
+    console.log(
+      chalk.green.bgWhite("200") +
+        chalk.green(" Collection for user ") +
+        chalk.yellow(collection.username) +
+        chalk.green(" will be enriched shortly.")
+    );
+
     let collectionObj = collection.toObject();
 
+    // Check filter parameter to determine what to enrich
     const filter =
       "filter" in req.query
         ? req.query.filter.split(",").map((d) => d.trim().toLowerCase())
@@ -147,26 +158,48 @@ router.get("/collections/:username/enrich", async (req, res) => {
       }
     );
 
-    console.log(
-      chalk.green.bgWhite("200") +
-        chalk.green(" Collection for user ") +
-        chalk.yellow(collection.username) +
-        chalk.green(" enriched successfully.")
-    );
-    res.send(collectionObj);
+    // Create enriched collection object
+    const insights = collectionObj.insights;
+    delete collectionObj["insights"];
+    const enrichedCollection = new EnrichedCollection(collectionObj);
+
+    // console.log(enrichedCollection.get("insights")[0]);
+
+    // Save enriched collection to temporary DB
+    await EnrichedCollection.findOne({ username }).deleteOne();
+    await enrichedCollection.save();
+    await EnrichedCollection.updateOne({ username }, { insights });
   } catch (error) {
-    res.status(500).send(error);
+    // res.status(500).send(error);
     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
     console.log(error);
   }
 });
 
-// router.patch("/collections/:username", async (req, res) => {
-//   try {
-//   } catch (error) {
-//     res.status(500).send(error);
-//     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
-//   }
-// });
+// Retrieves Enriched Collection
+router.get("/collections/:username/enrich", async (req, res) => {
+  try {
+    const username = req.params.username.toLowerCase();
+
+    let collection = await EnrichedCollection.findOne({
+      username,
+    });
+
+    // If not in DB send 102
+    if (collection == null) {
+      console.log(
+        chalk.red.bgWhite("102") +
+          chalk.magenta(" Collection ") +
+          chalk.yellow(username) +
+          chalk.magenta(" still processing.")
+      );
+      return res.status(202).send();
+    }
+    return res.status(200).send(collection)
+  } catch (error) {
+    console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
+    return res.status(500).send(error);
+  }
+});
 
 module.exports = router;

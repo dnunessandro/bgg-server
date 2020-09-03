@@ -120,4 +120,4 @@ const boardgameSchema = new mongoose.Schema({
 });
 
 const Boardgame = mongoose.model("Boardgame", boardgameSchema);
-module.exports = Boardgame;
+module.exports = {Boardgame, playerCountChildSchema}

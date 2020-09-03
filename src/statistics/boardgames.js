@@ -1,11 +1,10 @@
 const axios = require("axios");
-const Boardgame = require("../models/boardgame");
+const {Boardgame} = require("../models/boardgame");
 const { getBoardgameTop100 } = require("../bgg-scraping/boardgame");
 const {
   average,
   getPearsonCorrelation,
-  getElementsFrequency,
-  sortIndex,
+  getElementsFrequency
 } = require("../utils/math");
 const Spearman = require("spearman-rho");
 
