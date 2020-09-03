@@ -54,7 +54,7 @@ router.get("/collections/:username", async (req, res) => {
         return res.status(404).send();
       }
 
-      // If ser not found, send 404 and break
+      // If user not found, send 404 and break
       if (rawUser == undefined || "error" in rawCollection) {
         console.log(
           chalk.red.bgWhite("404") +
@@ -86,8 +86,18 @@ router.get("/collections/:username", async (req, res) => {
       });
 
       // Update record
-      await Collection.findOne({ username }).deleteOne();
-      await collection.save();
+      const existsFlag = await Collection.exists({ username });
+      if (existsFlag) {
+        await Collection.updateOne(
+          { username },
+          {
+            ...rawCollection,
+            lastUpdated: date.getTime(),
+          }
+        );
+      } else {
+        await collection.save();
+      }
 
       console.log(
         chalk.green.bgWhite("201") +
@@ -163,8 +173,6 @@ router.post("/collections/:username/enrich", async (req, res) => {
     delete collectionObj["insights"];
     const enrichedCollection = new EnrichedCollection(collectionObj);
 
-    // console.log(enrichedCollection.get("insights")[0]);
-
     // Save enriched collection to temporary DB
     await EnrichedCollection.findOne({ username }).deleteOne();
     await enrichedCollection.save();
@@ -195,7 +203,7 @@ router.get("/collections/:username/enrich", async (req, res) => {
       );
       return res.status(202).send();
     }
-    return res.status(200).send(collection)
+    return res.status(200).send(collection);
   } catch (error) {
     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
     return res.status(500).send(error);

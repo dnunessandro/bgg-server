@@ -29,15 +29,14 @@ $("#submit-form").on("click", async (e) => {
     </div>`);
     }, 45000);
     $(".alert-warning").css("border-width", "0px");
+
     // Add Loading Screen
     $("#submit-form").text("")
       .append(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Processing Collection...`);
 
     // Enrich collection
-    let response = await axios.get(
-      `${API_URL}/collections/${username}/enrich`
-    );
+    let response = await axios.get(`${API_URL}/collections/${username}/enrich`);
     response.status == 200
       ? undefined
       : await axios.post(`${API_URL}/collections/${username}/enrich`);
@@ -45,6 +44,7 @@ $("#submit-form").on("click", async (e) => {
     // Periodically check if collection was enriched
     const intervalID = setInterval(async function () {
       response = await axios.get(`${API_URL}/collections/${username}/enrich`);
+
       if (response.status == 200) {
         await clearInterval(intervalID);
         const collection = response.data;
