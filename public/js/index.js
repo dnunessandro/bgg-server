@@ -35,7 +35,7 @@ $("#submit-form").on("click", async (e) => {
     Processing Collection...`);
 
     // Enrich collection
-    const response = await axios.get(
+    let response = await axios.get(
       `${API_URL}/collections/${username}/enrich`
     );
     response.status == 200
