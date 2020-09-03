@@ -34,14 +34,17 @@ $("#submit-form").on("click", async (e) => {
       .append(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Processing Collection...`);
 
-    // Rnrich collection
-    await axios.post(`${API_URL}/collections/${username}/enrich`);
+    // Enrich collection
+    const response = await axios.get(
+      `${API_URL}/collections/${username}/enrich`
+    );
+    response.status == 200
+      ? undefined
+      : await axios.post(`${API_URL}/collections/${username}/enrich`);
 
     // Periodically check if collection was enriched
     const intervalID = setInterval(async function () {
-      const response = await axios.get(
-        `${API_URL}/collections/${username}/enrich`
-      );
+      response = await axios.get(`${API_URL}/collections/${username}/enrich`);
       if (response.status == 200) {
         await clearInterval(intervalID);
         const collection = response.data;
