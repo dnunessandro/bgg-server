@@ -81,13 +81,14 @@ router.patch("/boardgames/ratings", async (req, res) => {
     return res.status(500).send();
   }
 
-  req.setTimeout(1000000);
   // let cancelRequest=false
   // req.on("close", function (err) {
   //   cancelRequest = true;
   // });
   try {
     let boardgameUpdatedN = 0;
+
+    res.status(202).send();
 
     await Boardgame.find({}, async (_, boardgames) => {
       for (const boardgame of boardgames) {
@@ -130,9 +131,6 @@ router.patch("/boardgames/ratings", async (req, res) => {
       }
 
       console.log(chalk.bgWhite.green("UPDATE FINISHED."));
-      res.send({
-        message: `Updated Finished: ${boardgameUpdatedN} boardgames were updated.`,
-      });
     });
   } catch (error) {
     res.status(500).send(error);
