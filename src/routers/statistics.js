@@ -52,6 +52,8 @@ router.patch("/statistics/:id", async (req, res) => {
       return res.status(500).send();
     }
 
+    res.send(202);
+
     let statistics = (await Statistics.findOne({ id }))
       ? await Statistics.findOne({ id })
       : await initializeStatistics(id);
@@ -62,7 +64,7 @@ router.patch("/statistics/:id", async (req, res) => {
 
     await Statistics.updateOne({ id }, { stats: statistics.stats });
 
-    res.send(statistics);
+    
     console.log(
       chalk.green.bgWhite("200") +
         chalk.green(" Statistics for ") +

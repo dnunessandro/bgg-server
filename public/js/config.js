@@ -16,7 +16,12 @@ const RED_COLOR = "#e07a5f";
 const GRAY_COLOR = "#c7ccdb";
 const DEFAULT_COLOR = "#118ab2";
 
-const COLLECTION_OVERVIEW_PALETTE = ["#9c89b8","#f0a6ca","#efc3e6","#b8bedd"]
+const COLLECTION_OVERVIEW_PALETTE = [
+  "#9c89b8",
+  "#f0a6ca",
+  "#efc3e6",
+  "#b8bedd",
+];
 
 const CONTAINER_FLUID_BREAKPOINT = 992;
 
@@ -73,7 +78,7 @@ const NUM_NODES_BREAKPOINT_MAP = {
   992: 100,
   1200: 100,
   1800: 150,
-  2400: 200
+  2400: 200,
 };
 
 const RATING_CLASSES_MAP = {
@@ -129,7 +134,7 @@ const PLAYER_COUNT_MAP = {
 
 const CATEGORY_COLOR_MAP = {
   category: DARK_COLOR,
-  family: LIGHT_COLOR ,
+  family: LIGHT_COLOR,
   mechanic: SECONDARY_COLOR,
 };
 
