@@ -26,17 +26,19 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // User Rating Fit & Correlations ///////////////////////////////////////////////////////////////////////////
 
-  // // Get User Rating and Weight Corr
-  // statistics.stats.set(
-  //   "userRatingWeightCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "averageWeight",
-  //     "averageRating",
-  //     FIELD_FIT_LIMITS_MAP["averageWeight"][0],
-  //     FIELD_FIT_LIMITS_MAP["averageWeight"][1]
-  //   )
-  // );
+  // Get User Rating and Weight Corr
+  let statsArrayX = await Boardgame.find({}).select('averageWeight -_id');
+  console.log(statsArrayX)
+  let statsArrayY = await Boardgame.find({}).select('averageRating -_id');
+  statistics.stats.set(
+    "userRatingWeightCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.averageWeight),
+      statsArrayY.map(e=>e.averageRating),
+      FIELD_FIT_LIMITS_MAP["averageWeight"][0],
+      FIELD_FIT_LIMITS_MAP["averageWeight"][1]
+    )
+  );
 
   // // Get User Rating and Recommended Players Corr
   // statistics.stats.set(
@@ -885,16 +887,15 @@ const updateBoardgameStatistics = async (statistics) => {
 };
 
 const getBoardgameStatPairwiseFit = async (
-  boardgameArray,
-  xField,
-  yField,
+  statsArrayX,
+  statsArrayY,
   xMin,
   xMax,
   polyParams
 ) => {
   try {
-    const xRawArray = boardgameArray.map((b) => b[xField]);
-    const yRawArray = boardgameArray.map((b) => b[yField]);
+    const xRawArray = statsArrayX
+    const yRawArray = statsArrayY
 
     let xArray = [];
     let yArray = [];
