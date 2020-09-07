@@ -69,7 +69,7 @@ router.get("/boardgames/:id", async (req, res) => {
 });
 
 // Updates Boardgames with Ratings Breakdown
-router.patch("/boardgames/ratings", async (req, res) => {
+router.post("/boardgames/ratings", async (req, res) => {
   // Check if API key was provided
   if (
     req.query.api_key == undefined ||

@@ -30,7 +30,7 @@ router.get("/statistics/:id", async (req, res) => {
 });
 
 // Update Global Collection Statistics (TO DO: Auth)
-router.patch("/statistics/:id", async (req, res) => {
+router.post("/statistics/:id", async (req, res) => {
   try {
     const allowedIds = ["collections", "boardgames"];
     const id = req.params.id;
