@@ -27,7 +27,7 @@ $("#submit-form").on("click", async (e) => {
         <span aria-hidden="true">&times;</span>
       </button>
     </div>`);
-    }, 45000);
+    }, 120000);
     $(".alert-warning").css("border-width", "0px");
 
     // Add Loading Screen

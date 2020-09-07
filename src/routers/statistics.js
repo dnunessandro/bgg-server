@@ -1,9 +1,11 @@
 const express = require("express");
 const chalk = require("chalk");
+const date = new Date();
 const Statistics = require("../models/statistics");
 const { updateCollectionStatistics } = require("../statistics/collections");
 const { updateBoardgameStatistics } = require("../statistics/boardgames");
 const { initializeStatistics } = require("../utils/statistics");
+
 
 const router = new express.Router();
 
@@ -25,7 +27,6 @@ router.get("/statistics/:id", async (req, res) => {
   } catch (error) {
     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
     return res.status(500).send(error);
-    
   }
 });
 
@@ -47,12 +48,14 @@ router.post("/statistics/:id", async (req, res) => {
       req.query.api_key != process.env.API_KEY
     ) {
       console.log(
-        chalk.red.bgWhite("500") + " " + chalk.red("Invalid or missing API Key.")
+        chalk.red.bgWhite("500") +
+          " " +
+          chalk.red("Invalid or missing API Key.")
       );
       return res.status(500).send();
     }
 
-    res.send(202);
+    res.status(202).send();
 
     let statistics = (await Statistics.findOne({ id }))
       ? await Statistics.findOne({ id })
@@ -62,9 +65,9 @@ router.post("/statistics/:id", async (req, res) => {
       ? updateBoardgameStatistics(statistics)
       : updateCollectionStatistics(statistics));
 
-    await Statistics.updateOne({ id }, { stats: statistics.stats });
 
-    
+    await Statistics.updateOne({ id }, { stats: statistics.stats, lastUpdated: date.getTime()});
+
     console.log(
       chalk.green.bgWhite("200") +
         chalk.green(" Statistics for ") +

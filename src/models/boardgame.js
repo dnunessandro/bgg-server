@@ -116,7 +116,7 @@ const boardgameSchema = new mongoose.Schema({
   minPriceUsed: Number,
   stdPriceNew: Number,
   stdPriceUsed: Number,
-  lastUpdated: Date,
+  lastUpdated: { type: Date, expires: process.env.BOARDGAME_TTL * 3600 * 24, default: Date.now },
 });
 
 const Boardgame = mongoose.model("Boardgame", boardgameSchema);

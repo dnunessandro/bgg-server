@@ -3256,6 +3256,7 @@ const removeUnusedInsightsTitles = (prefixList) => {
     if ($(`#${e}-insights-grid`).is(":empty")) {
       $(`#${e}-insights-grid`).remove();
       $(`#${e}-insights-grid-title`).remove();
+      $(`#${e}-insights-btn-group`).remove();
     }
   });
 };

@@ -86,7 +86,7 @@ const drawInsightsBarChart = (canvasId, stat, hist, title, xLabel, options) => {
         mode: "single",
         intersect: true,
         titleFontSize: 18,
-        bodyFontSize: 18,
+        bodyFontSize: 16,
       },
       title: {
         display: true,

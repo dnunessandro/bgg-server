@@ -6,7 +6,6 @@ const collectionSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  createdAt: { type: Date, expires: 3600, default: Date.now },
   yearRegistered: Number,
   avatar: String,
   firstName: String,
@@ -48,7 +47,7 @@ const collectionSchema = mongoose.Schema({
   ],
 
   insights: Map,
-  lastUpdated: Date,
+  lastUpdated: { type: Date, expires: process.env.COLLECTION_TTL * 3600 * 24, default: Date.now },
 });
 
 const Collection = mongoose.model("Collection", collectionSchema);

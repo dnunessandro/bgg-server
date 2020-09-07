@@ -43,9 +43,13 @@ const playsSchema = mongoose.Schema({
   lastLoggedPlay: Date,
   items: {
     type: Map,
-    of: [playSchema]
+    of: [playSchema],
   },
-  lastUpdated: Date,
+  lastUpdated: {
+    type: Date,
+    expires: process.env.PLAYS_TTL * 3600 * 24,
+    default: Date.now,
+  },
 });
 
 const Plays = mongoose.model("Plays", playsSchema);
