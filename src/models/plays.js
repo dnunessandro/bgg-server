@@ -47,7 +47,7 @@ const playsSchema = mongoose.Schema({
   },
   lastUpdated: {
     type: Date,
-    expires: process.env.PLAYS_TTL * 3600 * 24,
+    expires: process.env.PLAYS_TTL + "d",
     default: Date.now,
   },
 });

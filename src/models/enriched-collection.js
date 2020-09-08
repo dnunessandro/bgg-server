@@ -7,7 +7,7 @@ const enrichedCollectionSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  createdAt: { type: Date, expires: process.env.ENRICHED_COLLECTION_TTL  * 3600 * 24, default: Date.now },
+  createdAt: { type: Date, expires: process.env.ENRICHED_COLLECTION_TTL  + "d", default: Date.now },
   yearRegistered: Number,
   avatar: String,
   firstName: String,

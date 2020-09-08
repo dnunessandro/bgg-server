@@ -47,7 +47,7 @@ const collectionSchema = mongoose.Schema({
   ],
 
   insights: Map,
-  lastUpdated: { type: Date, expires: process.env.COLLECTION_TTL * 3600 * 24, default: Date.now },
+  lastUpdated: { type: Date, expires: process.env.COLLECTION_TTL + "d", default: Date.now },
 });
 
 const Collection = mongoose.model("Collection", collectionSchema);

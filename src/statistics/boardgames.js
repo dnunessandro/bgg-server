@@ -319,82 +319,88 @@ const updateBoardgameStatistics = async (statistics) => {
     )
   );
 
-  // // Get Max Players and Year Published Corr
-  // statistics.stats.set(
-  //   "maxPlayersYearCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "yearPublished",
-  //     "maxPlayers",
-  //     FIELD_FIT_LIMITS_MAP["yearPublished"][0],
-  //     FIELD_FIT_LIMITS_MAP["yearPublished"][1]
-  //   )
-  // );
+  // Get Max Players and Year Published Corr
+  statsArrayX = await Boardgame.find({}).select('yearPublished -_id');
+  statsArrayY = await Boardgame.find({}).select('maxPlayers -_id');
+  statistics.stats.set(
+    "maxPlayersYearCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.yearPublished),
+      statsArrayY.map(e=>e.maxPlayers),
+      FIELD_FIT_LIMITS_MAP["yearPublished"][0],
+      FIELD_FIT_LIMITS_MAP["yearPublished"][1]
+    )
+  );
 
-  // // Get Max Players and Owners Corr
-  // statistics.stats.set(
-  //   "maxPlayersOwnersCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "owned",
-  //     "maxPlayers",
-  //     FIELD_FIT_LIMITS_MAP["owned"][0],
-  //     FIELD_FIT_LIMITS_MAP["owned"][1]
-  //   )
-  // );
+  // Get Max Players and Owners Corr
+  statsArrayX = await Boardgame.find({}).select('owned -_id');
+  statsArrayY = await Boardgame.find({}).select('maxPlayers -_id');
+  statistics.stats.set(
+    "maxPlayersOwnersCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.owned),
+      statsArrayY.map(e=>e.maxPlayers),
+      FIELD_FIT_LIMITS_MAP["owned"][0],
+      FIELD_FIT_LIMITS_MAP["owned"][1]
+    )
+  );
 
   // // Play Time Fit & Correlations ///////////////////////////////////////////////////////////////////////////
 
-  // // Get Play Time and User Rating Corr
-  // statistics.stats.set(
-  //   "playTimeUserRatingCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "averageRating",
-  //     "playTime",
-  //     FIELD_FIT_LIMITS_MAP["averageRating"][0],
-  //     FIELD_FIT_LIMITS_MAP["averageRating"][1],
-  //     (1, 1, 1, 0, 0)
-  //   )
-  // );
+  // Get Play Time and User Rating Corr
+  statsArrayX = await Boardgame.find({}).select('averageRating -_id');
+  statsArrayY = await Boardgame.find({}).select('playTime -_id');
+  statistics.stats.set(
+    "playTimeUserRatingCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.ownaverageRatinged),
+      statsArrayY.map(e=>e.playTime),
+      FIELD_FIT_LIMITS_MAP["averageRating"][0],
+      FIELD_FIT_LIMITS_MAP["averageRating"][1],
+      (1, 1, 1, 0, 0)
+    )
+  );
 
-  // // Get Play Time and Weight Corr
-  // statistics.stats.set(
-  //   "playTimeWeightCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "averageWeight",
-  //     "playTime",
-  //     FIELD_FIT_LIMITS_MAP["averageWeight"][0],
-  //     FIELD_FIT_LIMITS_MAP["averageWeight"][1],
-  //     (1, 1, 1, 0, 0)
-  //   )
-  // );
+  // Get Play Time and Weight Corr
+  statsArrayX = await Boardgame.find({}).select('averageRating -_id');
+  statsArrayY = await Boardgame.find({}).select('playTime -_id');
+  statistics.stats.set(
+    "playTimeWeightCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.averageRating),
+      statsArrayY.map(e=>e.playTime),
+      FIELD_FIT_LIMITS_MAP["averageWeight"][0],
+      FIELD_FIT_LIMITS_MAP["averageWeight"][1],
+      (1, 1, 1, 0, 0)
+    )
+  );
 
-  // // Get Play Time and Recommended Players Corr
-  // statistics.stats.set(
-  //   "playTimeRecommendedPlayersCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "recommendedPlayers",
-  //     "playTime",
-  //     FIELD_FIT_LIMITS_MAP["recommendedPlayers"][0],
-  //     FIELD_FIT_LIMITS_MAP["recommendedPlayers"][1]
-  //   )
-  // );
+  // Get Play Time and Recommended Players Corr
+  statsArrayX = await Boardgame.find({}).select('recommendedPlayers -_id');
+  statsArrayY = await Boardgame.find({}).select('playTime -_id');
+  statistics.stats.set(
+    "playTimeRecommendedPlayersCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.recommendedPlayers),
+      statsArrayY.map(e=>e.playTime),
+      FIELD_FIT_LIMITS_MAP["recommendedPlayers"][0],
+      FIELD_FIT_LIMITS_MAP["recommendedPlayers"][1]
+    )
+  );
 
-  // // Get Play Time and Max Players Corr
-  // statistics.stats.set(
-  //   "playTimeMaxPlayersCorr",
-  //   await getBoardgameStatPairwiseFit(
-  //     boardgameArray,
-  //     "maxPlayers",
-  //     "playTime",
-  //     FIELD_FIT_LIMITS_MAP["maxPlayers"][0],
-  //     FIELD_FIT_LIMITS_MAP["maxPlayers"][1],
-  //     (1, 1, 1, 0, 0)
-  //   )
-  // );
+  // Get Play Time and Max Players Corr
+  statsArrayX = await Boardgame.find({}).select('maxPlayers -_id');
+  statsArrayY = await Boardgame.find({}).select('playTime -_id');
+  statistics.stats.set(
+    "playTimeMaxPlayersCorr",
+    await getBoardgameStatPairwiseFit(
+      statsArrayX.map(e=>e.maxPlayers),
+      statsArrayY.map(e=>e.playTime),
+      FIELD_FIT_LIMITS_MAP["maxPlayers"][0],
+      FIELD_FIT_LIMITS_MAP["maxPlayers"][1],
+      (1, 1, 1, 0, 0)
+    )
+  );
 
   // // Get Play Time and Min Players Corr
   // statistics.stats.set(
