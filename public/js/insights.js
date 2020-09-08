@@ -918,7 +918,7 @@ const genWorstValueInsightCard = (insight) => {
           insight.items,
           "badge-pill badge-secondary py-1"
         )} is your worst value boardgame as it is the most expensive - ${genStatHtml(
-          insight.items[0].price + "&nbsp;USD",
+          insight.items[0].price.toFixed(2) + "&nbsp;USD",
           "badge-pill badge-dark py-1"
         )} - among your unplayed boardgames.`;
   cardData.note =
