@@ -1,5 +1,4 @@
-// const API_URL = "https://sn-bgg-server.herokuapp.com";
-const API_URL = "http://localhost:3000";
+const API_URL = "http://" + window.location.host
 
 // COLORS ///////////////////////////
 
