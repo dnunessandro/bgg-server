@@ -1,4 +1,4 @@
-const API_URL = "https://" + window.location.host
+const API_URL = (window.location.hostname == "localhost" ? "http://" : "https://") + window.location.host
 
 // COLORS ///////////////////////////
 

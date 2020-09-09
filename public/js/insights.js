@@ -2659,7 +2659,7 @@ const createInsightCard = (
           insightCardData.rawCommunityStat,
           {
             numEntries: SPIDER_CHART_ENTRIES,
-            title: `Your Top 10 Game ${FIELD_TITLE_MAP[field]}`,
+            title: `Your Top 10 Game ${FIELD_TITLE_MAP[field]} (%)`,
             tooltipSuffix: FIELD_TOOLTIP_SUFFIX_MAP[field],
             replaceLabels: FIELD_LABEL_REPLACE_MAP[field],
           }

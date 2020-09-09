@@ -9,8 +9,6 @@ const {
 const Spearman = require("spearman-rho");
 
 const updateBoardgameStatistics = async (statistics) => {
-  // const boardgameArray = await Boardgame.find({});
-  const boardgameArray = await Boardgame.find({}).select('yearPublished -_id');
 
   const FIELD_FIT_LIMITS_MAP = {
     averageWeight: [1, 4.5],
@@ -797,7 +795,8 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get Year Distribution
-  statistics.stats.set("yearHist", getYearHist(boardgameArray));
+  statsArray = await Boardgame.find({}).select('yearPublished -_id');
+  statistics.stats.set("yearHist", getElementsFrequency(statsArray.map(e=>e.yearPublished)));
 
   // Get Top 100
   const top100 = await getBoardgameTop100();
@@ -1000,9 +999,6 @@ const getBoardgameStatPairwiseFit = async (
   }
 };
 
-const getYearHist = (statsArray) => {
-  return getElementsFrequency(statsArray);
-};
 
 const getAvgUserBggRatingDiff = (stat) => {
   return stat.averageRating - stat.bayesAverageRating;
