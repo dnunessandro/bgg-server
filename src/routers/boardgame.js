@@ -90,12 +90,9 @@ router.post("/boardgames/ratings", async (req, res) => {
 
     res.status(202).send();
 
-    await Boardgame.find({}, async (_, boardgames) => {
-      for (const boardgame of boardgames) {
-        // TEMP: This needs to be done properly
-        // if (cancelRequest) {
-        //   throw { type: "cancelledByClient" };
-        // }
+    await Boardgame.find({})
+      .cursor()
+      .eachAsync(async (boardgame) => {
         if (
           boardgame.ratingsBreakdown["1"] == undefined ||
           req.params.force == 1
@@ -128,10 +125,50 @@ router.post("/boardgames/ratings", async (req, res) => {
               chalk.green(" already updated.")
           );
         }
-      }
+      });
 
-      console.log(chalk.bgWhite.green("UPDATE FINISHED."));
-    });
+    // cursor.on('data', async boardgames => {
+    //   for (const boardgame of boardgames) {
+    //     // TEMP: This needs to be done properly
+    //     // if (cancelRequest) {
+    //     //   throw { type: "cancelledByClient" };
+    //     // }
+    //     if (
+    //       boardgame.ratingsBreakdown["1"] == undefined ||
+    //       req.params.force == 1
+    //     ) {
+    //       const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+    //       const page = await browser.newPage();
+    //       boardgame.ratingsBreakdown = await getBoardgameRatingsBreakdown(
+    //         boardgame.id,
+    //         300,
+    //         browser,
+    //         page
+    //       );
+    //       await boardgame.save();
+    //       boardgameUpdatedN++;
+    //       console.log(
+    //         chalk.bgWhite.green("UPDATED:") +
+    //           chalk.green(" Boardgame ") +
+    //           chalk.yellow(boardgame.name) +
+    //           chalk.green(" with ID ") +
+    //           chalk.yellow(boardgame.id) +
+    //           chalk.green(" updated with success.")
+    //       );
+    //     } else {
+    //       console.log(
+    //         chalk.yellow("SKIPPING: ") +
+    //           chalk.green("Boardgame ") +
+    //           chalk.yellow(boardgame.name) +
+    //           chalk.green(" with ID ") +
+    //           chalk.yellow(boardgame.id) +
+    //           chalk.green(" already updated.")
+    //       );
+    //     }
+    //   }
+
+    //   console.log(chalk.bgWhite.green("UPDATE FINISHED."));
+    // });
   } catch (error) {
     res.status(500).send(error);
     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));

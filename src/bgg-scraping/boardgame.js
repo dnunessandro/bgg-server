@@ -79,20 +79,17 @@ const getBoardgameTop100 = async () => {
     const page = await browser.newPage();
     await page.goto("https://boardgamegeek.com/browse/boardgame");
     const pageText = await page.evaluate(() => document.body.innerHTML);
-    console.log("pageText", pageText)
 
     const matches = [
       ...pageText.matchAll(
         /<a href="\/boardgame\/([0-9]+)\/[a-z0-9-]+?">([a-zA-Z0-9& .!?'ñçé():;-]+?)<\/a>/g
       ),
     ];
-    console.log("matches", matches)
     const topTenList = [];
     matches.forEach((d, i) => {
       d[2] = d[2].replace("&amp;", "&");
       topTenList.push({ rank: i + 1, id: d[1], name: d[2] });
     });
-    console.log("top 10 list", topTenList)
     await browser.close();
     return topTenList;
   } catch (error) {
