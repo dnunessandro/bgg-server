@@ -144,7 +144,7 @@ const enrichedCollectionSchema = mongoose.Schema({
       stdPriceNew: Number,
       stdPriceUsed: Number,
       lastUpdated: Date,
-      plays: {
+      plays: [{
         id: String,
         date: Date,
         quantity: Number,
@@ -174,7 +174,7 @@ const enrichedCollectionSchema = mongoose.Schema({
             win: Number,
           },
         ],
-      },
+      }],
     },
   ],
   ignoredItems: [
