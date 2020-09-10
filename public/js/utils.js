@@ -465,7 +465,7 @@ const genBoardgameNamesHtml = (items, classes) => {
 const showIgnoredBoardgamesModal = (ignoredItems) => {
   const newHtml = `<p class="text-justify">In order to avoid extensive computation times and 
   preserve the statistical accuracy of the data presented, boardgames with less than 
-  <em>${BOARDAGME_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered. This includes <em>${ignoredItems.length}</em>
+  <em>${BOARDGAME_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered. This includes <em>${ignoredItems.length}</em>
   boargames in your collection.</p>`;
 
   $("#ignored-boardgames-modal-body").prepend(newHtml);
@@ -494,9 +494,6 @@ const getBucketedBoardgameSample = async (n, splits, field) => {
   for (let i = 0; i < splits.length - 1; i++) {
     const gte = splits[i];
     const lte = splits[i + 1];
-
-
-    console.log(`${baseUrl}${field}=${gte},${lte}`)
 
     const response = await axios(`${baseUrl}${field}=${gte},${lte}`);
     response.data.forEach((d) => sample.push(d));

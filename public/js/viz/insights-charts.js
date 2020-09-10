@@ -501,6 +501,6 @@ const transformLabelInThousands = (label) => {
   const rangeMin = parseFloat(label.split("|")[0].replace("[", ""));
   const rangeMax = parseFloat(label.split("|")[1].replace("[", ""));
   return `[${
-    rangeMin == 0 ? 0 : Math.round(rangeMin / 1000) + "k"
-  }, ${Math.round(rangeMax / 1000)}k[`;
+    rangeMin == 0 ? 0 : (rangeMin >= 1000 ? Math.round(rangeMin / 1000) + "k" : rangeMin )
+  }, ${rangeMax >= 1000 ? Math.round(rangeMax / 1000) + "k" : rangeMax}[`;
 };
