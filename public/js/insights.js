@@ -2629,7 +2629,7 @@ const createInsightCard = (
     !("dataSelectionButtonTitles" in insightCardData)
   ) {
     card.append(
-      `<div id="${insightCardData.image}-legend" class="canvas-legend text-center" style="border: 1px solid ${LIGHT_COLOR}" data-toggle="tooltip" data-placement="top" title="Due to API limitations, the Community Trend Line can not be computed for this relationship."></div>`
+      `<div id="${insightCardData.image}-legend" class="canvas-legend text-center" data-toggle="tooltip" data-placement="top" title="Due to API limitations, the Community Trend Line can not be computed for this relationship."></div>`
     );
     // card.append(`<div class="clearfix"></div>`);
   }

@@ -3,8 +3,6 @@ const drawPlaysChart = (plays) => {
   const timeParse = d3.timeParse("%Y-%m-%d");
   const timeFormat = d3.timeFormat("%-d %b %y");
 
-  console.log(plays)
-
   // Get Total Plays
   const nPlays = plays
     .map((e) => e.quantity)
@@ -441,7 +439,6 @@ function animatelines() {
 }
 
 const createPlaysChartIfAvailable = (plays) => {
-  console.log(plays)
   if ("quantity" in plays) {
     drawPlaysChart(plays);
     $("#plays-not-available").css("opacity", 0);

@@ -18,7 +18,9 @@ const getNodeTextHeightArray = (nodeTextSelection) => {
 
 const getNodeRadius = (value, radiusScale, defaultValue) => {
   return (typeof value == "number") & !isNaN(value)
-    ? (checkIfMobile()? radiusScale(value)/2 : radiusScale(value))
+    ? checkIfMobile()
+      ? radiusScale(value) / 2
+      : radiusScale(value)
     : defaultValue;
 };
 
@@ -290,10 +292,10 @@ const addWaypoint = (elementId) => {
 
 const getWaypointList = (waypointList) => {
   $("#insights")
-  .children()
-  .each(function () {
-    waypointList.push("#" + $(this).attr("id"));
-  });
+    .children()
+    .each(function () {
+      waypointList.push("#" + $(this).attr("id"));
+    });
   $(".card-columns")
     .children()
     .each(function () {
@@ -305,8 +307,6 @@ const getWaypointList = (waypointList) => {
     .each(function () {
       waypointList.push("#" + $(this).attr("id"));
     });
-
-
 
   return waypointList;
 };
@@ -465,7 +465,7 @@ const genBoardgameNamesHtml = (items, classes) => {
 const showIgnoredBoardgamesModal = (ignoredItems) => {
   const newHtml = `<p class="text-justify">In order to avoid extensive computation times and 
   preserve the statistical accuracy of the data presented, boardgames with less than 
-  <em>${BOARDAGEM_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered. This includes <em>${ignoredItems.length}</em>
+  <em>${BOARDAGME_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered. This includes <em>${ignoredItems.length}</em>
   boargames in your collection.</p>`;
 
   $("#ignored-boardgames-modal-body").prepend(newHtml);
@@ -475,9 +475,7 @@ const showIgnoredBoardgamesModal = (ignoredItems) => {
   );
 
   $(`#ignored-boardgames-button`).on("click", function () {
-    
     if ($(this).attr("class").includes("collapsed")) {
-
       $(this).html($(this).html().replace("Show", "Hide"));
     } else {
       $(this).html($(this).html().replace("Hide", "Show"));
@@ -488,6 +486,24 @@ const showIgnoredBoardgamesModal = (ignoredItems) => {
   $("#ignored-boardgames-modal").modal("show");
 };
 
+const getBucketedBoardgameSample = async (n, splits, field) => {
+  let sample = [];
+  const splitN = Math.round(n / (splits.length - 1));
+  const baseUrl = `${API_URL}/boardgames/sample/${splitN}?`;
+
+  for (let i = 0; i < splits.length - 1; i++) {
+    const gte = splits[i];
+    const lte = splits[i + 1];
+
+
+    console.log(`${baseUrl}${field}=${gte},${lte}`)
+
+    const response = await axios(`${baseUrl}${field}=${gte},${lte}`);
+    response.data.forEach((d) => sample.push(d));
+  }
+
+  return sample;
+};
 
 // const storeCollectionItemsToLocalStorage = (items, splitSize) => {
 //   if (items.length < 100)

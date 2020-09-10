@@ -181,7 +181,10 @@ router.get("/boardgames/sample/:n", async (req, res) => {
     filter = {};
     if (Object.keys(req.query).length != 0) {
       Object.keys(req.query).forEach((k) => {
-        filter[k] = { $gte: parseInt(req.query[k]) };
+        const gte = parseInt(req.query[k].trim().split(",")[0]);
+        const lte = parseInt(req.query[k].trim().split(",")[1]);
+        filter[k] = lte ? { $gte: gte, $lte: lte } : { $gte: gte };
+        console.log(filter[k]);
       });
     }
     const sample = await Boardgame.aggregate([

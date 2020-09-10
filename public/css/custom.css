@@ -11288,10 +11288,6 @@ p {
   vertical-align: middle;
 }
 
-#boardgame-info #boardgame-plays #plays-not-available {
-  border: 1px solid #ffcdb2;
-}
-
 #boardgame-info #boardgame-plays #plays-not-available span {
   color: #6d6875;
 }
@@ -11341,7 +11337,6 @@ p {
 }
 
 #boardgame-info #boardgame-ratings-breakdown #ratings-breakdown-not-available {
-  border: 1px solid #ffcdb2;
   pointer-events: auto;
 }
 

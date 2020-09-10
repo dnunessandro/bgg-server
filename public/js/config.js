@@ -1,4 +1,6 @@
-const API_URL = (window.location.hostname == "localhost" ? "http://" : "https://") + window.location.host
+const API_URL =
+  (window.location.hostname == "localhost" ? "http://" : "https://") +
+  window.location.host;
 
 // COLORS ///////////////////////////
 
@@ -149,7 +151,14 @@ window.odometerOptions = {
 
 // GLOBAL STATS
 const BOARDGAME_SAMPLE_SIZE = 300;
-const BOARDAGEM_SAMPLE_OWNED_THRESHOLD = 200;
+const BOARDGAME_SAMPLE_OWNED_THRESHOLD = 200;
+const BOARDGAME_SAMPLE_YEARS_SPLITS = [
+  1980,
+  1990,
+  2000,
+  2010,
+  new Date().getFullYear(),
+];
 const STAT_REF_YEAR = 2010;
 
 const FIELD_LABEL_MAP = {
@@ -199,6 +208,8 @@ const STAT_COLOR_MAP = {
   kickstarter: BASE_COLOR,
   solitaire: GREEN_COLOR,
   miniatures: RED_COLOR,
+  boardgamesReleased: BASE_COLOR,
+  usersRegistered: BASE_COLOR,
 };
 
 const STAT_UNIQUE_MAP = {

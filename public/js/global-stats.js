@@ -8,10 +8,14 @@ const runGlobalStats = async () => {
   const boardgameStats = response.data.stats;
 
   // Get Boardgame Sample
-  response = await axios(
-    `${API_URL}/boardgames/sample/${BOARDGAME_SAMPLE_SIZE}?owned=${BOARDAGEM_SAMPLE_OWNED_THRESHOLD}`
+  // response = await axios(
+  //   `${API_URL}/boardgames/sample/${BOARDGAME_SAMPLE_SIZE}?owned=${BOARDAGEM_SAMPLE_OWNED_THRESHOLD}`
+  // );
+  let boardgameSample = await getBucketedBoardgameSample(
+    BOARDGAME_SAMPLE_OWNED_THRESHOLD,
+    BOARDGAME_SAMPLE_YEARS_SPLITS,
+    "yearPublished"
   );
-  let boardgameSample = response.data;
 
   // Add Boardgame Growth Subtitle
   $("#global-stats").append(
@@ -24,12 +28,19 @@ const runGlobalStats = async () => {
   let p = `Looking at the data, it's undeniable how much the hobby has grown in the last few decades. The growth has been exponential and it shows 
   no signs of slowing down as the number of boardgames released each year is still on the rise.`;
   createGlobalStatsRow(rowId, title, p);
-  drawGlobalStatsHistChart(
+  // drawGlobalStatsHistChart(
+  //   rowId + "-canvas",
+  //   processYearHist(boardgameStats.yearHist),
+  //   "Year",
+  //   "Released Boardgames",
+  //   { color: BASE_COLOR, xMin: 1950, xMax: new Date().getFullYear() - 1 }
+  // );
+  drawGlobalStatsTrendChart(
     rowId + "-canvas",
-    processYearHist(boardgameStats.yearHist),
+    { boardgamesReleased: processYearHist(boardgameStats.yearHist) },
     "Year",
-    "Released Boardgames",
-    { color: BASE_COLOR, xMin: 1950, xMax: 2019 }
+    "Boardgames Released",
+    { xMin: 1950, xMax: new Date().getFullYear() - 1, legendFlag: false }
   );
 
   // Draw Year Registered Histogram
@@ -38,12 +49,19 @@ const runGlobalStats = async () => {
   p = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit laudantium voluptatem minus accusantium odit maiores 
   labore cumque rerum eum temporibus?`;
   createGlobalStatsRow(rowId, title, p);
-  drawGlobalStatsHistChart(
+  // drawGlobalStatsHistChart(
+  //   rowId + "-canvas",
+  //   processYearHist(collectionStats.yearRegisterdHist),
+  //   "Year",
+  //   "Users Registered",
+  //   { color: BASE_COLOR, xMin: 2000, xMax: 2019 }
+  // );
+  drawGlobalStatsTrendChart(
     rowId + "-canvas",
-    processYearHist(collectionStats.yearRegisterdHist),
+    { usersRegistered: processYearHist(collectionStats.yearRegisterdHist) },
     "Year",
     "Users Registered",
-    { color: BASE_COLOR, xMin: 2000, xMax: 2019 }
+    { xMin: 2000, xMax: 2019, legendFlag: false }
   );
 
   // Draw Artists, Designers and Publishers Trend

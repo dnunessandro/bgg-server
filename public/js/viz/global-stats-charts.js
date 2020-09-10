@@ -311,7 +311,7 @@ const drawGlobalStatsTrendChart = (
   const ctx = canvas.getContext("2d");
 
   const trendChart = new Chart(ctx, {
-    type: "line",
+  
     data: {
       labels: yearLabels,
       datasets: [],
@@ -372,15 +372,29 @@ const drawGlobalStatsTrendChart = (
     const color = hexToRgb(STAT_COLOR_MAP[s]);
 
     const datasetConfig = {
+      type: "line",
       data: Object.values(filtStatsSeries[s]),
       borderColor: `rgb(${color.r},${color.g},${color.b}, 1)`,
       backgroundColor: `rgb(${color.r},${color.g},${color.b}, 0.2)`,
       borderWidth: 1,
-      pointBackgroundColor: `rgb(${color.r},${color.g},${color.b}, 0.6)`,
+      pointBackgroundColor: `rgb(0,0,0,0)`,
       pointBorderColor: `rgb(0,0,0,0)`,
-      pointRadius: 0,
+      pointRadius: 2,
       borderWidth: 2,
       label: FIELD_LABEL_MAP[s],
+
+      // type: "scatter",
+      // data: Object.values(filtStatsSeries[s]),
+      // showLine: true,
+      // borderColor: `rgb(${color.r},${color.g},${color.b}, 1)`,
+      // borderWidth: 2,
+      // fill: "-1",
+      // pointBackgroundColor: `rgb(0,0,0,0)`,
+      // pointBorderColor: `rgb(0,0,0,0)`,
+      // pointRadius: 8,
+      // pointBorderWidth: 1,
+      // pointStyle: "line",
+      // label: FIELD_LABEL_MAP[s],
     };
     trendChart.data.datasets.push(datasetConfig);
   });
@@ -424,7 +438,7 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
         display: true,
         labels: {
           fontSize: 14,
-        }
+        },
       },
       scale: {
         pointLabels: {
@@ -466,7 +480,9 @@ const createTextBlock = (rowId, title, p) => {
   $(`#global-stats #${rowId} .text-block`).append(
     `<h3 class="mb-3">${title}</h3>`
   );
-  $(`#global-stats #${rowId} .text-block`).append(`<p class="text-justify">${p}</p>`);
+  $(`#global-stats #${rowId} .text-block`).append(
+    `<p class="text-justify">${p}</p>`
+  );
 };
 
 const createPlotBlock = (rowId) => {
@@ -482,10 +498,8 @@ const createGlobalStatsRow = (rowId, title, p) => {
 
   if (
     $("#global-stats .row").children().get().length == 0 ||
-    $("#global-stats .row .block") || checkIfMobile()
-      .slice(-1)
-      .attr("class")
-      .includes("text-block")
+    $("#global-stats .row .block") ||
+    checkIfMobile().slice(-1).attr("class").includes("text-block")
   ) {
     createTextBlock(rowId, title, p);
     createPlotBlock(rowId);
