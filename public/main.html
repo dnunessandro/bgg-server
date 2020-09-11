@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <script src="js/utils.js"></script>
         <script src="js/config.js"></script>
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
@@ -44,8 +45,9 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-xl-8 col-md-8">
-                            <h2 id="hello-title" class="text-center my-5"></h2>
-                            <div id="user-profile-card" class="card user-card-full m-0">
+                            <h2 id="hello-title" class="text-center mt-10"></h2>
+                            <h2 id="welcome-title" class="text-center mt-2 mb-5">Welcome to the BGG Explorer</h2>
+                            <div id="user-profile-card" class="card user-card-full my-5">
                                 <div class="row m-l-0 m-r-0">
                                     <div class="col-sm-4 bg-c-lite-green user-profile">
                                         <div class="card-block text-center text-white py-0 my-3">
@@ -84,30 +86,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <h2 class="text-center my-5">Welcome to the BGG Explorer</h2>
                             <div class="text-center">
                                 <p id="user-profile-description" class="description">
-                                    If you unsure where to begin, just keep scrolling down to start exploring your collection! Alternatively, jump
+                                    If you are unsure where to begin, keep scrolling down to start exploring your collection! Alternatively, jump
                                     to the content you are looking for:
                                 </p>
-                                <div id="user-profile-btn-group" class="btn-group btn-group-md btn-group-nav" role="group">
+                                <div id="user-profile-btn-group" class="btn-group btn-group-lg btn-group-nav mt-2 mb-10" role="group">
                                     <a
                                         id="linkFreeExploration"
                                         type="button"
                                         href="#bgg-explorer-bg"
-                                        class="btn btn-secondary"
+                                        class="btn btn-secondary mx-1 shadow-sm"
                                     >Free Exploration</a>
                                     <a
                                         id="linkAutomatedInsights"
                                         type="button"
                                         href="#insights-bg"
-                                        class="btn btn-secondary"
+                                        class="btn btn-secondary mx-1 shadow-sm"
                                     >Automated Insights</a>
                                     <a
                                         id="linkCommunityStats"
                                         type="button"
                                         href="#global-stats-bg"
-                                        class="btn btn-secondary"
+                                        class="btn btn-secondary mx-1 shadow-sm"
                                     >Community Trends</a>
                                 </div>
                             </div>
@@ -116,33 +117,33 @@
                 </div>
             </div>
         </div>
-        <div id="bgg-explorer-bg" class="pt-5">
+        <div id="bgg-explorer-bg">
             <div id="collection-overview" class="container-fluid">
                 <div id="collection-overview-row" class="row justify-content-center">
                     <div id="collection-overview-header" class="col-12 text-white text-center header">
-                        <h1 class="mb-1">Free Exploration</h1>
+                        <h1 class="mb-3 mt-10">Free Exploration</h1>
                         <div id="bgg-explorer-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
                             <a
                                 id="linkFreeExploration"
                                 type="button"
                                 href="#bgg-explorer-bg"
-                                class="btn btn-primary"
+                                class="btn btn-primary mx-1"
                             >Free Exploration</a>
                             <a
                                 id="linkAutomatedInsights"
                                 type="button"
                                 href="#insights-bg"
-                                class="btn btn-secondary"
+                                class="btn btn-secondary mx-1"
                             >Automated Insights</a>
                             <a
                                 id="linkCommunityStats"
                                 type="button"
                                 href="#global-stats-bg"
-                                class="btn btn-secondary"
+                                class="btn btn-secondary mx-1"
                             >Community Trends</a>
                         </div>
                         <p class="description">
-                            Explore your collection at a glance by pressing one of the parameters below.
+                            Explore your collection at a glance by pressing one of the parameters below:
                         </p>
                     </div>
                     <div id="collection-overview-sidepanel" class="col-12 col-lg-10 col-xl-8 p-0 d-flex justify-content-center">
@@ -206,7 +207,7 @@
                             <button id="btnSort" type="button" class="btn btn-primary ml-md-2 mt-2 mt-md-0">Sort</button>
                         </div>
                     </div>
-                    <div id="collection-overview-chart" class="col-12 p-0 m-1">
+                    <div id="collection-overview-chart" class="col-12 px-2 px-md-3 mt-3 mb-2">
                         <svg id="collection-overview-svg"></svg>
                     </div>
                 </div>
@@ -343,19 +344,19 @@
                                                 id="btnCategory"
                                                 type="button"
                                                 data-category="category"
-                                                class="btn btnCategory"
+                                                class="btn btnCategory mx-1"
                                             >Category</button>
                                             <button
                                                 id="btnMechanic"
                                                 type="button"
                                                 data-category="mechanic"
-                                                class="btn btnCategory"
+                                                class="btn btnCategory mx-1"
                                             >Mechanic</button>
                                             <button
                                                 id="btnFamily"
                                                 type="button"
                                                 data-category="family"
-                                                class="btn btnCategory"
+                                                class="btn btnCategory mx-1"
                                             >Family</button>
                                         </div>
                                     </div>
@@ -383,29 +384,29 @@
         <div id="insights-bg" class="py-5">
             <div id="insights" class="container-fluid px-2">
                 <div id="insights-header" class="container text-center header">
-                    <h1 class="mb-1">Automated Insights</h1>
+                    <h1 class="mb-3 mt-5">Automated Insights</h1>
                     <div id="insights-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
                         <a
                             id="linkFreeExploration"
                             type="button"
                             href="#bgg-explorer-bg"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Free Exploration</a>
                         <a
                             id="linkAutomatedInsights"
                             type="button"
                             href="#insights-bg"
-                            class="btn btn-primary"
+                            class="btn btn-primary mx-1"
                         >Automated Insights</a>
                         <a
                             id="linkCommunityStats"
                             type="button"
                             href="#global-stats-bg"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Community Trends</a>
                     </div>
                     <p class="description">
-                        Go throught some of the trends that have shaped the industry over the years.
+                        Go through some of the trends that have shaped the industry over the years.
                     </p>
                 </div>
                 <h2 id="ratings-insights-grid-title" class="insights-title text-center my-3">Ratings</h2>
@@ -415,25 +416,25 @@
                             id="linkInsightsRatings"
                             type="button"
                             href="#ratings-insights-grid-title"
-                            class="btn btn-primary"
+                            class="btn btn-primary mx-1"
                         >Ratings</a>
                         <a
                             id="linkInsightsPlays"
                             type="button"
                             href="#plays-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Play History</a>
                         <a
                             id="linkInsightsAttributes"
                             type="button"
                             href="#attributes-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Attributes</a>
                         <a
                             id="linkInsightsRelationships"
                             type="button"
                             href="#relationships-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Relationships</a>
                     </div>
                 </div>
@@ -445,25 +446,25 @@
                             id="linkInsightsRatings"
                             type="button"
                             href="#ratings-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Ratings</a>
                         <a
                             id="linkInsightsPlays"
                             type="button"
                             href="#plays-insights-grid-title"
-                            class="btn btn-primary"
+                            class="btn btn-primary mx-1"
                         >Play History</a>
                         <a
                             id="linkInsightsAttributes"
                             type="button"
                             href="#attributes-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Attributes</a>
                         <a
                             id="linkInsightsRelationships"
                             type="button"
                             href="#relationships-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Relationships</a>
                     </div>
                 </div>
@@ -475,25 +476,25 @@
                             id="linkInsightsRatings"
                             type="button"
                             href="#ratings-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Ratings</a>
                         <a
                             id="linkInsightsPlays"
                             type="button"
                             href="#plays-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Play History</a>
                         <a
                             id="linkInsightsAttributes"
                             type="button"
                             href="#attributes-insights-grid-title"
-                            class="btn btn-primary"
+                            class="btn btn-primary mx-1"
                         >Attributes</a>
                         <a
                             id="linkInsightsRelationships"
                             type="button"
                             href="#relationships-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Relationships</a>
                     </div>
                 </div>
@@ -505,25 +506,25 @@
                             id="linkInsightsRatings"
                             type="button"
                             href="#ratings-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Ratings</a>
                         <a
                             id="linkInsightsPlays"
                             type="button"
                             href="#plays-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Play History</a>
                         <a
                             id="linkInsightsAttributes"
                             type="button"
                             href="#attributes-insights-grid-title"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Attributes</a>
                         <a
                             id="linkInsightsRelationships"
                             type="button"
                             href="#relationships-insights-grid-title"
-                            class="btn btn-primary"
+                            class="btn btn-primary mx-1"
                         >Relationships</a>
                     </div>
                 </div>
@@ -533,29 +534,29 @@
         <div id="global-stats-bg" class="py-5">
             <div id="global-stats" class="container">
                 <div id="global-stats-header" class="container text-white text-center header">
-                    <h1 class="mb-1">Community Trends</h1>
+                    <h1 class="mb-3 mt-5">Community Trends</h1>
                     <div id="global-stats-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
                         <a
                             id="linkFreeExploration"
                             type="button"
                             href="#insights-bg"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Free Exploration</a>
                         <a
                             id="linkAutomatedInsights"
                             type="button"
                             href="#insights-bg"
-                            class="btn btn-secondary"
+                            class="btn btn-secondary mx-1"
                         >Automated Insights</a>
                         <a
                             id="linkCommunityStats"
                             type="button"
                             href="#global-stats-bg"
-                            class="btn btn-primary"
+                            class="btn btn-primary mx-1"
                         >Community Trends</a>
                     </div>
                     <p class="description">
-                        Go throught some of the trends that have shaped the industry over the years.
+                        Go through some of the trends that have shaped the industry over the years.
                     </p>
                 </div>
             </div>
@@ -575,7 +576,7 @@
             <span aria-hidden="true">&times;</span>
           </button> -->
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Ignored Boardgames</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Excluded Boardgames</h5>
                         <button
                             type="button"
                             class="close"
@@ -592,7 +593,7 @@
                             data-toggle="collapse"
                             href="#ignored-boardgames-text"
                             role="button"
-                        >Show Ignored Boardgames</a>
+                        >Show Excluded Boardgames</a>
                         <p class="collapse card-text show-more-text text-center" id="ignored-boardgames-text"></p>
                     </div>
                     <div class="modal-footer">
@@ -603,7 +604,6 @@
         </div>
     </div>
 </body>
-<script src="js/utils.js"></script>
 <script src="js/init.js"></script>
 <script src="js/viz/force-layout.js"></script>
 <script src="js/viz/scales.js"></script>

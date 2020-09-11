@@ -32,7 +32,7 @@ $("#submit-form").on("click", async (e) => {
 
     // Add Loading Screen
     $("#submit-form").text("")
-      .append(`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      .append(`<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
     Processing Collection...`);
 
     // Enrich collection

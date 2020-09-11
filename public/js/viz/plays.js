@@ -439,7 +439,7 @@ function animatelines() {
 }
 
 const createPlaysChartIfAvailable = (plays) => {
-  if ("quantity" in plays) {
+  if (plays && "quantity" in plays) {
     drawPlaysChart(plays);
     $("#plays-not-available").css("opacity", 0);
   } else {

@@ -10801,7 +10801,6 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   font-family: "Inter", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -10829,18 +10828,34 @@ p {
   color: #6d6875;
 }
 
+a {
+  font-weight: 600 !important;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.8rem;
+}
+
+@media (max-width: 768px) {
+  .description {
+    font-size: 1rem;
+  }
+}
+
 .tooltip {
   font-size: 1rem !important;
 }
 
 .btn-group-nav .btn {
-  border: 2px solid #ffcdb2 !important;
+  border: 0px;
   border-radius: 8px !important;
 }
 
 @media (max-width: 768px) {
   .btn-group-nav .btn {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
   }
 }
 
@@ -10885,6 +10900,38 @@ p {
   }
   .description {
     font-size: 1rem;
+  }
+}
+
+.my-10 {
+  margin-top: 150px !important;
+  margin-bottom: 150px !important;
+}
+
+@media (max-width: 768px) {
+  .my-10 {
+    margin-top: 75px !important;
+    margin-bottom: 75px !important;
+  }
+}
+
+.mt-10 {
+  margin-top: 150px !important;
+}
+
+@media (max-width: 768px) {
+  .mt-10 {
+    margin-top: 75px !important;
+  }
+}
+
+.mb-10 {
+  margin-bottom: 150px !important;
+}
+
+@media (max-width: 768px) {
+  .mb-10 {
+    margin-bottom: 75px !important;
   }
 }
 
@@ -11047,7 +11094,7 @@ p {
 }
 
 #bgg-explorer-bg {
-  background-color: #ffcdb2;
+  background-color: #fcd5ce;
 }
 
 #collection-overview #huge-collection-warning-wrapper {
@@ -11069,7 +11116,7 @@ p {
 }
 
 #collection-overview #collection-overview-row {
-  background-color: #ffcdb2;
+  background-color: #fcd5ce;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart {
@@ -11077,6 +11124,8 @@ p {
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg {
+  background-color: #f8edeb;
+  opacity: 1;
   display: block;
 }
 
@@ -11093,6 +11142,7 @@ p {
 #collection-overview #collection-overview-row #collection-overview-chart svg .node-line {
   stroke-width: 2px;
   stroke: #ffb4a2;
+  opacity: 0.3;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg .clicked {
@@ -11144,7 +11194,7 @@ p {
 }
 
 #boardgame-info {
-  background-color: #ffcdb2;
+  background-color: #fcd5ce;
   min-height: 400px;
 }
 
@@ -11418,7 +11468,7 @@ p {
 }
 
 #insights-bg {
-  background-color: #ffcdb2;
+  background-color: #f8edeb;
   opacity: 0;
 }
 
@@ -11512,7 +11562,7 @@ p {
 }
 
 #global-stats-bg {
-  background-color: #ffcdb2;
+  background-color: #fcd5ce;
   opacity: 0;
 }
 
@@ -11574,37 +11624,42 @@ p {
 }
 
 #user-profile-bg {
-  background-color: #ffcdb2;
+  background-color: #f8edeb;
 }
 
 #user-profile-bg .padding {
   padding: 1rem !important;
 }
 
-#user-profile-bg #user #hello-title {
-  font-size: 3rem;
-}
-
 #user-profile-bg .card-block p {
-  color: #b5838d;
-}
-
-#user-profile-bg h5 {
   color: #6d6875;
 }
 
-#user-profile-bg h6 {
-  font-size: 1.3rem;
-  font-weight: 600;
+#user-profile-bg h5 {
+  color: #b5838d;
 }
 
-#user-profile-bg #user-profile-username {
-  font-size: 1.2rem;
+#user-profile-bg h6 {
+  font-size: 1.6rem;
   font-weight: 700;
 }
 
-#user-profile-bg #user-profile-name {
+#user-profile-bg #hello-title {
+  font-size: 5rem;
+}
+
+#user-profile-bg #welcome-title {
+  font-size: 2rem;
+}
+
+#user-profile-bg #user-profile-username {
+  font-size: 1.6rem;
   font-weight: 600;
+}
+
+#user-profile-bg #user-profile-name {
+  font-weight: 500;
+  font-size: 1.1rem;
   color: white;
 }
 
@@ -11639,8 +11694,8 @@ p {
 }
 
 #user-profile-bg .bg-c-lite-green {
-  background: -webkit-gradient(linear, left top, right top, from(#e5989b), to(#ffcdb2));
-  background: linear-gradient(to right, #e5989b, #ffcdb2);
+  background: -webkit-gradient(linear, left top, right top, from(#e5989b), to(#ffb4a2));
+  background: linear-gradient(to right, #e5989b, #ffb4a2);
 }
 
 #user-profile-bg .user-profile {
@@ -11720,11 +11775,11 @@ p {
 }
 
 @media (max-width: 768px) {
-  #user-profile-bg h2 {
-    font-size: 1.5rem;
-  }
   #user-profile-bg #hello-title {
     font-size: 2rem;
+  }
+  #user-profile-bg #welcome-title {
+    font-size: 1.5rem;
   }
   #user-profile-bg #user-profile-btn-group a {
     font-size: 0.9rem;

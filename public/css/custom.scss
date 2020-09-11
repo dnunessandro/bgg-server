@@ -1,5 +1,7 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+$bootstrap-class-change-breakpoint: 768px;
+
 $base-color: #e5989b;
 $secondary-color: #ffb4a2;
 $light-color: #ffcdb2;
@@ -7,6 +9,8 @@ $light-color-02: #ffcdb233;
 $dark-color: #b5838d;
 $neutral-color: #6d6875;
 $background-color: #eee;
+$background-color-pink: #fcd5ce;
+$background-color-light-pink: #f8edeb;
 
 $theme-colors: (
   "primary": $base-color,
@@ -19,7 +23,6 @@ $theme-colors: (
 // GENERAL
 body {
   font-family: "Inter", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -52,15 +55,29 @@ p {
   color: $neutral-color;
 }
 
+a {
+  font-weight: 600 !important;
+}
+
+.description {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.8rem;
+  @media(max-width: $bootstrap-class-change-breakpoint){
+    font-size: 1rem;
+  }
+}
+
 .tooltip {
   font-size: 1rem !important;
 }
 
 .btn-group-nav .btn {
-  border: 2px solid $light-color !important;
+  // border: 2px solid $light-color !important;
+  border: 0px;
   border-radius: 8px !important;
-  @media (max-width: 768px) {
-    font-size: 0.8rem !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    font-size: 0.7rem !important;
   }
 }
 
@@ -93,7 +110,7 @@ p {
   line-height: 1.4;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $bootstrap-class-change-breakpoint) {
   h2 {
     font-size: 3rem;
   }
@@ -102,6 +119,27 @@ p {
   }
   .description {
     font-size: 1rem;
+  }
+}
+
+.my-10 {
+  margin-top: 150px !important;
+  margin-bottom: 150px !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-top: 75px !important;
+    margin-bottom: 75px !important;
+  }
+}
+.mt-10 {
+  margin-top: 150px !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-top: 75px !important;
+  }
+}
+.mb-10 {
+  margin-bottom: 150px !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-bottom: 75px !important;
   }
 }
 
@@ -151,12 +189,12 @@ p {
 #showcase {
   background: url("../img/bg-background-pink.jpg") bottom center / cover
     no-repeat;
-  @media (max-width: 768px) {
+  @media (max-width: $bootstrap-class-change-breakpoint) {
     background: url("../img/bg-background-pink.jpg") bottom right / cover
       no-repeat;
   }
   min-height: 750px;
-  @media (max-width: 768px) {
+  @media (max-width: $bootstrap-class-change-breakpoint) {
     min-height: 500px;
   }
   position: relative;
@@ -247,7 +285,7 @@ p {
 
 // COLLECTION OVERVIEW
 #bgg-explorer-bg {
-  background-color: $light-color;
+  background-color: $background-color-pink;
 }
 
 #collection-overview {
@@ -270,12 +308,14 @@ p {
   }
 
   #collection-overview-row {
-    background-color: $light-color;
+    background-color: $background-color-pink;
 
     #collection-overview-chart {
       min-height: 400px;
 
       svg {
+        background-color: $background-color-light-pink;
+        opacity: 1;
         display: block;
         .node-circle {
           stroke: $neutral-color;
@@ -289,6 +329,7 @@ p {
         .node-line {
           stroke-width: 2px;
           stroke: $secondary-color;
+          opacity: 0.3;
         }
         .clicked {
           stroke: $neutral-color !important;
@@ -297,7 +338,7 @@ p {
         .node-text {
           fill: white;
           font-size: 13px;
-          @media (max-width: 768px) {
+          @media (max-width: $bootstrap-class-change-breakpoint) {
             font-size: 10px;
           }
           font-weight: 600;
@@ -313,7 +354,7 @@ p {
     }
   }
   #collection-overview-sidepanel {
-    @media (max-width: 768px) {
+    @media (max-width: $bootstrap-class-change-breakpoint) {
       .btn,
       .btn-group {
         border-radius: 0;
@@ -343,7 +384,7 @@ p {
 
 // BOARDGAME INFO
 #boardgame-info {
-  background-color: $light-color;
+  background-color: $background-color-pink;
   min-height: 400px;
   h5 {
     color: $neutral-color;
@@ -368,7 +409,7 @@ p {
         font-size: 0.9rem;
         overflow: hidden;
         text-overflow: ellipsis;
-        @media (min-width: 768px) {
+        @media (min-width: $bootstrap-class-change-breakpoint) {
           display: -webkit-box !important;
         }
 
@@ -417,7 +458,7 @@ p {
         text {
           font-size: 0.8rem;
         }
-        @media (max-width: 768px) {
+        @media (max-width: $bootstrap-class-change-breakpoint) {
           svg {
             text {
               font-size: 1rem;
@@ -560,7 +601,7 @@ p {
       pointer-events: none;
       color: $base-color !important;
       background-color: $background-color;
-      @media (max-width: 768px) {
+      @media (max-width: $bootstrap-class-change-breakpoint) {
         font-size: 0.8rem !important;
       }
     }
@@ -631,7 +672,7 @@ p {
 
 // INSIGHTS
 #insights-bg {
-  background-color: #ffcdb2;
+  background-color: $background-color-light-pink;
   opacity: 0;
 }
 
@@ -713,7 +754,7 @@ p {
 
 // GLOBAL STATS
 #global-stats-bg {
-  background-color: $light-color;
+  background-color: $background-color-pink;
   opacity: 0;
 }
 
@@ -734,7 +775,7 @@ p {
   }
 
   p {
-    @media (max-width: 768px) {
+    @media (max-width: $bootstrap-class-change-breakpoint) {
       font-size: 0.8rem;
     }
   }
@@ -768,32 +809,40 @@ p {
 
 // USER PROFILE
 #user-profile-bg {
-  background-color: $light-color;
+  background-color: $background-color-light-pink;
   .padding {
     padding: 1rem !important;
   }
 
-  #user #hello-title {
-    font-size: 3rem;
-  }
   .card-block p {
-    color: $dark-color;
-  }
-  h5 {
     color: $neutral-color;
   }
 
+  h5 {
+    color: $dark-color;
+  }
+
   h6 {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+
+  #hello-title {
+    font-size: 5rem;
+  }
+
+  #welcome-title {
+    font-size: 2rem;
   }
 
   #user-profile-username {
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 600;
   }
   #user-profile-name {
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 1.1rem;
     color: white;
   }
   #user-profile-image {
@@ -834,7 +883,7 @@ p {
       from($base-color),
       to($secondary-color)
     );
-    background: linear-gradient(to right, $base-color, $light-color);
+    background: linear-gradient(to right, $base-color, $secondary-color);
   }
 
   .user-profile {
@@ -913,12 +962,12 @@ p {
     margin-top: 20px;
   }
 
-  @media (max-width: 768px) {
-    h2 {
-      font-size: 1.5rem;
-    }
+  @media (max-width: $bootstrap-class-change-breakpoint) {
     #hello-title {
       font-size: 2rem;
+    }
+    #welcome-title {
+      font-size: 1.5rem;
     }
     #user-profile-btn-group {
       a {

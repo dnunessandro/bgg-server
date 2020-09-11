@@ -97,7 +97,7 @@ const computeNodeLabelsPositions = (collectionItems) => {
   const chartHeight = $("#collection-overview-chart").height();
 
   const offsetArray = [0, 0, 1 / 3, 1 / 3, 2 / 3, 2 / 3, 1, 1];
-  const replicatedOffsetArray = replicateArray(offsetArray, 30);
+  const replicatedOffsetArray = replicateArray(offsetArray, 50);
 
   const altArray = createAltArray(collectionItems.length);
   let labelsPositions = [];
@@ -262,7 +262,7 @@ const populateUserCard = (collection) => {
   const countryId = "#user-profile-country";
 
   $(helloId).html(
-    `Hey ${collection.firstName ? collection.firstName : collection.username}!`
+    `Hey ${collection.firstName ? collection.firstName : collection.username}`
   );
   $(usernameId).text(collection.username);
   $(nameId).text(collection.firstName + " " + collection.lastName);
@@ -270,10 +270,11 @@ const populateUserCard = (collection) => {
     "src",
     collection.avatar == "N/A" ? "img/user-solid.png" : collection.avatar
   );
+
   $(yearId).text(collection.yearRegistered);
-  $(countryId).text(collection.country);
+  $(countryId).text(collection.country ? collection.country : "N/A");
   $(itemsId).text(collection.totalItems);
-  $(playsId).text(collection.totalPlays);
+  $(playsId).text(collection.totalPlays ? collection.totalPlays : "N/A");
 };
 
 // WAYPOINTS
@@ -465,7 +466,7 @@ const genBoardgameNamesHtml = (items, classes) => {
 const showIgnoredBoardgamesModal = (ignoredItems) => {
   const newHtml = `<p class="text-justify">In order to avoid extensive computation times and 
   preserve the statistical accuracy of the data presented, boardgames with less than 
-  <em>${BOARDGAME_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered. This includes <em>${ignoredItems.length}</em>
+  <em>${BOARDGAME_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered in the data presented here. This includes <em>${ignoredItems.length}</em>
   boargames in your collection.</p>`;
 
   $("#ignored-boardgames-modal-body").prepend(newHtml);
@@ -500,6 +501,17 @@ const getBucketedBoardgameSample = async (n, splits, field) => {
   }
 
   return sample;
+};
+
+const changeBootstrapClasses = () => {
+
+  if (checkIfMobile()) {
+    $("#user-profile-btn-group").removeClass("btn-group-lg");
+    $("#user-profile-btn-group").addClass("btn-group-md");
+    $(".btn-group-sm .btn").removeClass("mx-1")
+    $(".btn-group-sm .btn").css("margin-left", "2px")
+    $(".btn-group-sm .btn").css("margin-right", "2px")
+  }
 };
 
 // const storeCollectionItemsToLocalStorage = (items, splitSize) => {

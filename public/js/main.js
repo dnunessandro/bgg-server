@@ -6,7 +6,7 @@ const run = async () => {
     })
   );
 
-  // Show Ignored Boardgames Modal
+  // Show Excluded Boardgames Modal
   collection.ignoredItems.length != 0
     ? showIgnoredBoardgamesModal(collection.ignoredItems)
     : undefined;
@@ -88,6 +88,9 @@ const run = async () => {
   $(document).ready(function () {
     $(".btn-group").localScroll({ duration: 800 });
   });
+
+  // Change Bootstrap Classes based on screen size
+  changeBootstrapClasses()
 
   // Turn on tooltips
   $('[data-toggle="tooltip"]').tooltip();
