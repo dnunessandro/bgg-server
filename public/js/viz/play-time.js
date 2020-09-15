@@ -102,13 +102,18 @@ const drawPlayTimeChart = (collectionItem) => {
   minTimeGroup
     .select("rect")
     .attr("width", minTextWidth + xPad * 2)
-    .attr("height", svgHeight-2)
-    .attr("transform", `translate(${-xPad+1},${-(svgHeight-2) / 2})`);
+    .attr("height", svgHeight - 2)
+    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`)
+    .attr("rx", "15px")
+    .attr("ry", "20px");
+    
   maxTimeGroup
     .select("rect")
     .attr("width", maxTextWidth + xPad * 2)
-    .attr("height", svgHeight-2)
-    .attr("transform", `translate(${-xPad+1},${-(svgHeight-2) / 2})`);
+    .attr("height", svgHeight - 2)
+    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`)
+    .attr("rx", "15px")
+    .attr("ry", "20px");
 
   // Translate Groups
   minTimeGroup
@@ -117,7 +122,6 @@ const drawPlayTimeChart = (collectionItem) => {
     .ease(d3.easePoly)
     .attr("transform", `translate(${xAxisScale(0) + xPad},${svgHeight / 2})`)
     .style("opacity", (d) => (minMaxTimeFlag != d.playTime ? 1 : 0));
-    
 
   maxTimeGroup
     .transition()
@@ -129,16 +133,16 @@ const drawPlayTimeChart = (collectionItem) => {
         `translate(${
           d.minPlayTime == d.maxPlayTime
             ? xAxisScale(0) + xPad
-            : xAxisScale(1) - maxTextWidth - xPad -1
+            : xAxisScale(1) - maxTextWidth - xPad - 1
         },${svgHeight / 2})`
     );
 
   // Add Tooltips
   if (minMaxTimeFlag) {
     $("#play-time-p svg g")
-    .removeAttr("data-toggle")
-    .removeAttr("data-placement")
-    .removeAttr("data-original-title");
+      .removeAttr("data-toggle")
+      .removeAttr("data-placement")
+      .removeAttr("data-original-title");
     $(".min-time-group")
       .attr("data-toggle", "tooltip")
       .attr("data-placement", "top")

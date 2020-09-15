@@ -165,7 +165,7 @@ const createSidepanelBtnEL = (btnId, collectionItems, nodeField) => {
     ACTIVE_NODE_SIZE_FIELD = nodeField;
 
     // Change Linear Configuration Bool
-    NODE_LINEAR_BOOL = $("#" + btnId).hasClass("btn-dark") ? false : true;
+    NODE_LINEAR_BOOL = $("#" + btnId).hasClass("btn-primary") ? false : true;
 
     // Filter Collection Items
     let filtererdCollectionItems = sortCollectionItems(
@@ -200,12 +200,12 @@ const enableDisableSidepanelButtons = (btnId) => {
     $("#collection-overview-sidepanel " + ":button")
       .not("#" + btnId)
       .not("#" + "btnSort")
-      .removeClass("btn-dark")
-      .addClass("btn-primary");
+      .removeClass("btn-primary")
+      .addClass("btn-dark");
 
     $("#" + btnId)
-      .toggleClass("btn-primary")
-      .toggleClass("btn-dark");
+      .toggleClass("btn-dark")
+      .toggleClass("btn-primary");
   }
 
   if ($("#" + btnId).hasClass("dropdown-item")) {
@@ -217,21 +217,21 @@ const enableDisableSidepanelButtons = (btnId) => {
     $("#collection-overview-sidepanel " + ":button")
       .not("#" + btnId)
       .not("#" + "btnSort")
-      .removeClass("btn-dark")
-      .addClass("btn-primary");
+      .removeClass("btn-primary")
+      .addClass("btn-dark");
 
     $("#" + btnId)
-      .toggleClass("btn-primary")
-      .toggleClass("btn-dark");
+      .toggleClass("btn-dark")
+      .toggleClass("btn-primary");
 
-    if ($("." + btnClass + ".btn-dark")[0]) {
-      $("#" + btnClass)
-        .removeClass("btn-primary")
-        .addClass("btn-dark");
-    } else {
+    if ($("." + btnClass + ".btn-primary")[0]) {
       $("#" + btnClass)
         .removeClass("btn-dark")
         .addClass("btn-primary");
+    } else {
+      $("#" + btnClass)
+        .removeClass("btn-primary")
+        .addClass("btn-dark");
     }
   }
 };
@@ -246,7 +246,7 @@ const createSortSidepanelBtnEL = (collectionItems) => {
       collectionItems,
       NODE_SORT_BOOL ? ACTIVE_NODE_SIZE_FIELD : "name"
     );
-    $("#btnSort").toggleClass("btn-primary").toggleClass("btn-dark");
+    $("#btnSort").toggleClass("btn-dark").toggleClass("btn-primary");
 
     d3.selectAll(".node-group").remove();
     const nodeGroups = drawCollectionOverview(filtererdCollectionItems);

@@ -10816,16 +10816,16 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 4rem !important;
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 h2 {
   font-size: 3rem;
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 p {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 a {
@@ -10833,7 +10833,7 @@ a {
 }
 
 .description {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.8rem;
 }
@@ -10868,11 +10868,11 @@ a {
 }
 
 .modal h5 {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 .modal em {
-  color: #6d6875;
+  color: #4c4e4d;
   font-weight: 600;
 }
 
@@ -11005,7 +11005,7 @@ a {
 
 #showcase #login-form-text {
   font-size: 1rem;
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 #showcase h1 {
@@ -11060,7 +11060,7 @@ a {
 }
 
 #tools h3 {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 #tools .subtitle {
@@ -11094,7 +11094,7 @@ a {
 }
 
 #bgg-explorer-bg {
-  background-color: #fcd5ce;
+  background-color: #fadde1;
 }
 
 #collection-overview #huge-collection-warning-wrapper {
@@ -11105,18 +11105,18 @@ a {
 }
 
 #collection-overview #huge-collection-warning {
-  color: #6d6875 !important;
+  color: #4c4e4d !important;
   background-color: #ffcdb233 !important;
   max-width: 600px !important;
 }
 
 #collection-overview #huge-collection-warning h5,
 #collection-overview #huge-collection-warning p {
-  color: #6d6875 !important;
+  color: #4c4e4d !important;
 }
 
 #collection-overview #collection-overview-row {
-  background-color: #fcd5ce;
+  background-color: #fadde1;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart {
@@ -11124,7 +11124,6 @@ a {
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg {
-  background-color: #f8edeb;
   opacity: 1;
   display: block;
 }
@@ -11135,8 +11134,8 @@ a {
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg .node-rect {
-  stroke: white;
-  stroke-width: 3px;
+  stroke: #6d6875;
+  stroke-width: 1px;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg .node-line {
@@ -11194,12 +11193,12 @@ a {
 }
 
 #boardgame-info {
-  background-color: #fcd5ce;
+  background-color: #fadde1;
   min-height: 400px;
 }
 
 #boardgame-info h5 {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 #boardgame-info #boardgame-tooltip #boardgame-name {
@@ -11216,7 +11215,7 @@ a {
 }
 
 #boardgame-info #boardgame-tooltip .card-body #tooltip-description {
-  color: #6d6875;
+  color: #4c4e4d;
   font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -11268,8 +11267,6 @@ a {
   stroke: #ffcdb2;
   stroke-width: 1px;
   fill: #eee;
-  rx: 15px;
-  ry: 20px;
 }
 
 #boardgame-info #boardgame-tooltip .card-body #player-count-p text {
@@ -11339,7 +11336,7 @@ a {
 }
 
 #boardgame-info #boardgame-plays #plays-not-available span {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 #boardgame-info #boardgame-plays #plays-legend text {
@@ -11373,12 +11370,12 @@ a {
 }
 
 #boardgame-info #boardgame-plays #x-axis text {
-  color: #6d6875;
+  color: #4c4e4d;
   font-size: 0.7rem;
 }
 
 #boardgame-info #boardgame-plays #y-axis text {
-  color: #6d6875;
+  color: #4c4e4d;
   font-size: 0.8rem;
 }
 
@@ -11467,11 +11464,6 @@ a {
   left: 0;
 }
 
-#insights-bg {
-  background-color: #f8edeb;
-  opacity: 0;
-}
-
 .insights-title {
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
@@ -11481,6 +11473,17 @@ a {
 
 #insights-header {
   opacity: 0;
+}
+
+#insights-bg {
+  background-color: #ffd5c2;
+}
+
+@media (max-width: 768px) {
+  .card-columns {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 }
 
 @media (min-width: 576px) {
@@ -11494,6 +11497,17 @@ a {
   .card-columns {
     -webkit-column-count: 3 !important;
             column-count: 3 !important;
+  }
+}
+
+.card-columns p {
+  font-size: 1.1rem;
+  line-height: 2.1rem;
+}
+
+@media (max-width: 768px) {
+  .card-columns h2 {
+    font-size: 1.6rem;
   }
 }
 
@@ -11518,21 +11532,38 @@ a {
   opacity: 0;
 }
 
+.card-columns .card canvas {
+  height: 500px !important;
+}
+
+@media (max-width: 768px) {
+  .card-columns .card canvas {
+    height: 400px !important;
+  }
+}
+
 .card-columns .card .card-title {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 .card-columns .card .card-body {
   background-color: #ffcdb233;
 }
 
-.card-columns .card p {
-  font-size: 1.1rem;
-  line-height: 2.1rem;
+.card-columns .card .card-img-top {
+  opacity: 0.9 !important;
 }
 
 .card-columns .card .show-more-text {
   font-size: 1rem;
+}
+
+.card-columns .card .show-note-btn {
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  text-align: justify;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .card-columns .card .canvas-legend {
@@ -11562,7 +11593,7 @@ a {
 }
 
 #global-stats-bg {
-  background-color: #fcd5ce;
+  background-color: #fadde1;
   opacity: 0;
 }
 
@@ -11573,7 +11604,7 @@ a {
 #global-stats h1,
 #global-stats h3,
 #global-stats p {
-  color: #6d6875;
+  color: #4c4e4d;
   -webkit-touch-callout: none;
   /* iOS Safari */
   -webkit-user-select: none;
@@ -11632,11 +11663,11 @@ a {
 }
 
 #user-profile-bg .card-block p {
-  color: #6d6875;
+  color: #4c4e4d;
 }
 
 #user-profile-bg h5 {
-  color: #b5838d;
+  color: #6d6875;
 }
 
 #user-profile-bg h6 {

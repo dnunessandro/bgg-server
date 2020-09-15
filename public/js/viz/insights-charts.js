@@ -4,22 +4,10 @@ const drawInsightsBarChart = (canvasId, stat, hist, title, xLabel, options) => {
   const hexHighlightColor = "#e5989b";
 
   // Fix Canvas Resolution
-  const dpi = window.devicePixelRatio;
-
   const canvas = $(`#${canvasId}`).get(0);
-  canvas.height = 400;
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
   const ctx = canvas.getContext("2d");
-
-  const style_height = +getComputedStyle(canvas)
-    .getPropertyValue("height")
-    .slice(0, -2);
-
-  const style_width = +getComputedStyle(canvas)
-    .getPropertyValue("width")
-    .slice(0, -2);
-
-  canvas.setAttribute("height", style_height * dpi);
-  canvas.setAttribute("width", style_width * dpi);
 
   let labels = [];
   if ("labelsInThousands" in options) {
@@ -147,18 +135,10 @@ const drawInsightsCorrChart = (
   const hexUserColor = "#e5989b";
 
   // Fix Canvas Resolution
-  const dpi = window.devicePixelRatio;
   const canvas = $(`#${canvasId}`).get(0);
-  canvas.height = 400;
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
   const ctx = canvas.getContext("2d");
-  const style_height = +getComputedStyle(canvas)
-    .getPropertyValue("height")
-    .slice(0, -2);
-  const style_width = +getComputedStyle(canvas)
-    .getPropertyValue("width")
-    .slice(0, -2);
-  canvas.setAttribute("height", style_height * dpi);
-  canvas.setAttribute("width", style_width * dpi);
 
   const userColor =
     "userColor" in options
@@ -357,19 +337,10 @@ const drawInsightsSpiderChart = (
   const hexUserColor = "#e5989b";
 
   // Fix Canvas Resolution
-  const dpi = window.devicePixelRatio;
   const canvas = $(`#${canvasId}`).get(0);
-  canvas.height = 400;
-  canvas.width = 400;
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
   const ctx = canvas.getContext("2d");
-  const style_height = +getComputedStyle(canvas)
-    .getPropertyValue("height")
-    .slice(0, -2);
-  const style_width = +getComputedStyle(canvas)
-    .getPropertyValue("width")
-    .slice(0, -2);
-  canvas.setAttribute("height", style_height * dpi);
-  canvas.setAttribute("width", style_width * dpi);
 
   // Get Colors
   const userColor =
@@ -501,6 +472,10 @@ const transformLabelInThousands = (label) => {
   const rangeMin = parseFloat(label.split("|")[0].replace("[", ""));
   const rangeMax = parseFloat(label.split("|")[1].replace("[", ""));
   return `[${
-    rangeMin == 0 ? 0 : (rangeMin >= 1000 ? Math.round(rangeMin / 1000) + "k" : rangeMin )
+    rangeMin == 0
+      ? 0
+      : rangeMin >= 1000
+      ? Math.round(rangeMin / 1000) + "k"
+      : rangeMin
   }, ${rangeMax >= 1000 ? Math.round(rangeMax / 1000) + "k" : rangeMax}[`;
 };

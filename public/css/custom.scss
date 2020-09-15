@@ -9,8 +9,12 @@ $light-color-02: #ffcdb233;
 $dark-color: #b5838d;
 $neutral-color: #6d6875;
 $background-color: #eee;
-$background-color-pink: #fcd5ce;
+// $background-color-pink: #fcd5ce;
+$background-color-pink: #fadde1;
+$background-color-pink-2: #ffd5c2;
 $background-color-light-pink: #f8edeb;
+$svg-background-color: #f8edeb;
+$text-color: #4c4e4d;
 
 $theme-colors: (
   "primary": $base-color,
@@ -43,16 +47,16 @@ h6 {
 
 h1 {
   font-size: 4rem !important;
-  color: $neutral-color;
+  color: $text-color;
 }
 
 h2 {
   font-size: 3rem;
-  color: $neutral-color;
+  color: $text-color;
 }
 
 p {
-  color: $neutral-color;
+  color: $text-color;
 }
 
 a {
@@ -60,10 +64,10 @@ a {
 }
 
 .description {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.8rem;
-  @media(max-width: $bootstrap-class-change-breakpoint){
+  @media (max-width: $bootstrap-class-change-breakpoint) {
     font-size: 1rem;
   }
 }
@@ -89,10 +93,10 @@ a {
     line-height: 1.5rem;
   }
   h5 {
-    color: $neutral-color;
+    color: $text-color;
   }
   em {
-    color: $neutral-color;
+    color: $text-color;
     font-weight: 600;
   }
   #ignored-boardgames-text {
@@ -201,7 +205,7 @@ a {
 
   #login-form-text {
     font-size: 1rem;
-    color: $neutral-color;
+    color: $text-color;
   }
 
   h1 {
@@ -252,7 +256,7 @@ a {
 
 #tools {
   h3 {
-    color: $neutral-color;
+    color: $text-color;
   }
   .subtitle {
     color: white !important;
@@ -297,13 +301,13 @@ a {
   }
 
   #huge-collection-warning {
-    color: $neutral-color !important;
+    color: $text-color !important;
     background-color: $light-color-02 !important;
 
     max-width: 600px !important;
     h5,
     p {
-      color: $neutral-color !important;
+      color: $text-color !important;
     }
   }
 
@@ -314,7 +318,7 @@ a {
       min-height: 400px;
 
       svg {
-        background-color: $background-color-light-pink;
+        // background-color: $svg-background-color;
         opacity: 1;
         display: block;
         .node-circle {
@@ -322,8 +326,8 @@ a {
           stroke-width: 1px;
         }
         .node-rect {
-          stroke: white;
-          stroke-width: 3px;
+          stroke: $neutral-color;
+          stroke-width: 1px;
         }
 
         .node-line {
@@ -387,7 +391,7 @@ a {
   background-color: $background-color-pink;
   min-height: 400px;
   h5 {
-    color: $neutral-color;
+    color: $text-color;
   }
   #boardgame-tooltip {
     #boardgame-name {
@@ -405,7 +409,7 @@ a {
     }
     .card-body {
       #tooltip-description {
-        color: $neutral-color;
+        color: $text-color;
         font-size: 0.9rem;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -449,8 +453,6 @@ a {
             stroke: $light-color;
             stroke-width: 1px;
             fill: #eee;
-            rx: 15px;
-            ry: 20px;
           }
         }
       }
@@ -526,7 +528,7 @@ a {
     #plays-not-available {
       // border: 1px solid $light-color;
       span {
-        color: $neutral-color;
+        color: $text-color;
       }
     }
     #plays-legend {
@@ -567,12 +569,12 @@ a {
     }
 
     #x-axis text {
-      color: $neutral-color;
+      color: $text-color;
       font-size: 0.7rem;
     }
 
     #y-axis text {
-      color: $neutral-color;
+      color: $text-color;
       font-size: 0.8rem;
     }
 
@@ -671,11 +673,6 @@ a {
 }
 
 // INSIGHTS
-#insights-bg {
-  background-color: $background-color-light-pink;
-  opacity: 0;
-}
-
 .insights-title {
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
@@ -686,12 +683,30 @@ a {
 #insights-header {
   opacity: 0;
 }
+
+#insights-bg {
+  background-color: $background-color-pink-2;
+}
+
 .card-columns {
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
   @include media-breakpoint-up(sm) {
     column-count: 2 !important;
   }
   @include media-breakpoint-up(lg) {
     column-count: 3 !important;
+  }
+  p {
+    font-size: 1.1rem;
+    line-height: 2.1rem;
+  }
+  h2 {
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 1.6rem;
+    }
   }
   .badge,
   .badge-pill {
@@ -709,20 +724,34 @@ a {
     -moz-transition: 1s ease-in-out;
     -o-transition: 1s ease-in-out;
     opacity: 0;
+
+    canvas {
+      height: 500px !important;
+      @media (max-width: $bootstrap-class-change-breakpoint) {
+        height: 400px !important;
+      }
+    }
+
     .card-title {
-      color: $neutral-color;
+      color: $text-color;
     }
     .card-body {
       background-color: #ffcdb233;
     }
 
-    p {
-      font-size: 1.1rem;
-      line-height: 2.1rem;
+    .card-img-top {
+      opacity: 0.9 !important;
     }
 
     .show-more-text {
       font-size: 1rem;
+    }
+    .show-note-btn {
+      font-size: 0.9rem;
+      line-height: 1.5rem;
+      text-align: justify;
+      background-color: white;
+      border-radius: 8px;
     }
     .canvas-legend {
       background-color: $background-color;
@@ -765,7 +794,7 @@ a {
   h1,
   h3,
   p {
-    color: $neutral-color;
+    color: $text-color;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -815,18 +844,17 @@ a {
   }
 
   .card-block p {
-    color: $neutral-color;
+    color: $text-color;
   }
 
   h5 {
-    color: $dark-color;
+    color: $neutral-color;
   }
 
   h6 {
     font-size: 1.6rem;
     font-weight: 700;
   }
-
 
   #hello-title {
     font-size: 5rem;

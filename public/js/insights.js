@@ -2562,7 +2562,7 @@ const createInsightCard = (
 ) => {
   const card = $(`<div id="${insightCardData.id}" class="card shadow"></div>`);
 
-  card.append('<div class="card-body"></div>');
+  card.append('<div class="card-body pt-2"></div>');
   card
     .find(".card-body")
     .append(`<h2 class="card-title">${insightCardData.title}</h2>`);
@@ -2590,7 +2590,7 @@ const createInsightCard = (
     card
       .find(".card-body")
       .append(
-        `<p class="collapse card-text text-muted p-2 show-note-btn" style='font-size: 0.9rem; line-height: 1.5rem; text-align: justify; background-color: white; border-radius: 8px;' id="${insightCardData.id}-note">${insightCardData.note}</p>`
+        `<p class="collapse card-text text-muted p-2 show-note-btn"' id="${insightCardData.id}-note">${insightCardData.note}</p>`
       );
   }
 
@@ -2621,7 +2621,7 @@ const createInsightCard = (
         `<img class="card-img-top p-2" src=${insightCardData.image}>`
       )
     : card.append(
-        `<canvas id="${insightCardData.image}" class="card-img-top p-2"></canvas>`
+        `<canvas id="${insightCardData.image}" class="card-img-top"></canvas>`
       );
 
   if (

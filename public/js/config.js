@@ -137,8 +137,8 @@ const PLAYER_COUNT_MAP = {
 
 const CATEGORY_COLOR_MAP = {
   category: DARK_COLOR,
-  family: LIGHT_COLOR,
-  mechanic: SECONDARY_COLOR,
+  family: SECONDARY_COLOR,
+  mechanic: BASE_COLOR,
 };
 
 const PLAYS_COLOR_MAP = {

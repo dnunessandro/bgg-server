@@ -4,16 +4,18 @@ const drawPlayerCountChart = (playerCountData) => {
   nCircles = 8;
   svgId = "#boardgame-player-count-svg";
   // Get SVG Dimensions
-  const svgWidth = $(svgId).width() -4 ;
+  const svgWidth = $(svgId).width() - 4;
 
   const svgXPad = 8;
   const svgTopYPad = 7;
   const svgBottomYPad = 7;
-  const circleRadius = Math.min(13,
-    (svgWidth - (nCircles - 1) * 2 - svgXPad * 2) / nCircles / 2);
+  const circleRadius = Math.min(
+    13,
+    (svgWidth - (nCircles - 1) * 2 - svgXPad * 2) / nCircles / 2
+  );
 
   // const svgHeight = svgTopYPad + svgBottomYPad + circleRadius * 2;
-  const svgHeight = $("#price-p").height()
+  const svgHeight = $("#price-p").height();
 
   // Get SVG Element
   const svg = d3
@@ -28,7 +30,9 @@ const drawPlayerCountChart = (playerCountData) => {
       .append("rect")
       .classed("player-count-bg", true)
       .attr("width", svg.attr("width"))
-      .attr("height", svgHeight);
+      .attr("height", svgHeight)
+      .attr("rx", "15px")
+      .attr("ry", "20px");
   }
 
   // Get Circle Coords Scale =
@@ -76,7 +80,7 @@ const drawPlayerCountChart = (playerCountData) => {
     .style("fill", (d) => PLAYER_COUNT_COLOR_MAP[d.recommendation])
     .style("text-anchor", "middle")
     .style("alignment-baseline", "middle")
-    .style("cursor", "default")
+    .style("cursor", "default");
 
   // Translate Groups
   playerCountGroups.attr(
@@ -85,7 +89,7 @@ const drawPlayerCountChart = (playerCountData) => {
       "translate(" +
       circleCoordsScale(i) +
       "," +
-      (svgTopYPad-2 + circleRadius) +
+      (svgTopYPad - 2 + circleRadius) +
       ")"
   );
 
@@ -101,7 +105,10 @@ const drawPlayerCountChart = (playerCountData) => {
   // svg.call(tip);
   // playerCountGroups.on("mouseover", tip.show).on("mouseout", tip.hide);
 
-  d3.selectAll(".player-count-group").attr("data-toggle", "tooltip").attr("data-placement", "bottom").attr("data-original-title", d=>d.recommendation);
+  d3.selectAll(".player-count-group")
+    .attr("data-toggle", "tooltip")
+    .attr("data-placement", "bottom")
+    .attr("data-original-title", (d) => d.recommendation);
 };
 
 // Inputs
@@ -116,7 +123,7 @@ const drawPlayerCountChartMobile = (collectionItem) => {
 
   svgId = "#boardgame-player-count-svg";
 
-  const svgWidth = parseInt($("#boardgame-player-count-svg").css("width"))-2;
+  const svgWidth = parseInt($("#boardgame-player-count-svg").css("width")) - 2;
   const svgHeight = parseInt($("#weight-p").css("height"));
 
   // Create X Axis Scale
@@ -127,15 +134,21 @@ const drawPlayerCountChartMobile = (collectionItem) => {
 
   let lineGroup = svg
     .selectAll(".time-line")
-    .data([{ minPlayers: minPlayers, maxPlayers: maxPlayers, maxPlayers: avgTime }]);
+    .data([
+      { minPlayers: minPlayers, maxPlayers: maxPlayers, maxPlayers: avgTime },
+    ]);
 
   let minPlayersGroup = svg
     .selectAll("g.min-players-group")
-    .data([{ minPlayers: minPlayers, maxPlayers: maxPlayers, maxPlayers: avgTime }]);
+    .data([
+      { minPlayers: minPlayers, maxPlayers: maxPlayers, maxPlayers: avgTime },
+    ]);
 
   let maxPlayersGroup = svg
     .selectAll("g.max-players-group")
-    .data([{ minPlayers: minPlayers, maxPlayers: maxPlayers, maxPlayers: avgTime }]);
+    .data([
+      { minPlayers: minPlayers, maxPlayers: maxPlayers, maxPlayers: avgTime },
+    ]);
 
   minPlayersGroup.exit().remove();
   maxPlayersGroup.exit().remove();
@@ -208,13 +221,13 @@ const drawPlayerCountChartMobile = (collectionItem) => {
   minPlayersGroup
     .select("rect")
     .attr("width", minTextWidth + xPad * 2)
-    .attr("height", svgHeight-2)
-    .attr("transform", `translate(${-xPad+1},${-(svgHeight-2) / 2})`);
+    .attr("height", svgHeight - 2)
+    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`);
   maxPlayersGroup
     .select("rect")
     .attr("width", maxTextWidth + xPad * 2)
-    .attr("height", svgHeight-2)
-    .attr("transform", `translate(${-xPad+1},${-(svgHeight-2) / 2})`);
+    .attr("height", svgHeight - 2)
+    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`);
 
   // Translate Groups
   minPlayersGroup
@@ -234,16 +247,16 @@ const drawPlayerCountChartMobile = (collectionItem) => {
         `translate(${
           d.minPlayers == d.maxPlayers
             ? xAxisScale(0) + xPad
-            : xAxisScale(1) - maxTextWidth - xPad -1
+            : xAxisScale(1) - maxTextWidth - xPad - 1
         },${svgHeight / 2})`
     );
 
   // Add Tooltips
   if (minMaxTimeFlag) {
     $("#player-count-p svg g")
-    .removeAttr("data-toggle")
-    .removeAttr("data-placement")
-    .removeAttr("data-original-title");
+      .removeAttr("data-toggle")
+      .removeAttr("data-placement")
+      .removeAttr("data-original-title");
     $(".min-players-group")
       .attr("data-toggle", "tooltip")
       .attr("data-placement", "top")
@@ -278,4 +291,3 @@ const drawPlayerCountChartMobile = (collectionItem) => {
     $('[data-toggle="tooltip"]').tooltip();
   }
 };
-
