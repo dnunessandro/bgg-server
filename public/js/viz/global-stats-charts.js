@@ -311,7 +311,6 @@ const drawGlobalStatsTrendChart = (
   const ctx = canvas.getContext("2d");
 
   const trendChart = new Chart(ctx, {
-  
     data: {
       labels: yearLabels,
       datasets: [],
@@ -493,13 +492,16 @@ const createPlotBlock = (rowId) => {
 
 const createGlobalStatsRow = (rowId, title, p) => {
   $(`#global-stats`).append(
-    `<div id="${rowId}-wrapper" class="row-wrapper" style="background-color: white"><div id="${rowId}" class="row chart-row my-3 px-3" style="background-color: #ffcdb233"></div></div>`
+    `<div id="${rowId}-wrapper" class="row-wrapper"><div id="${rowId}" class="row chart-row my-4 px-3"></div></div>`
   );
 
   if (
-    $("#global-stats .row").children().get().length == 0 ||
-    $("#global-stats .row .block") ||
-    checkIfMobile().slice(-1).attr("class").includes("text-block")
+    $("#global-stats .row-wrapper .row").children().get().length == 0 ||
+    $("#global-stats .row-wrapper .row .block")
+      .slice(-1)
+      .attr("class")
+      .includes("text-block") ||
+    checkIfMobile()
   ) {
     createTextBlock(rowId, title, p);
     createPlotBlock(rowId);
@@ -510,7 +512,7 @@ const createGlobalStatsRow = (rowId, title, p) => {
 };
 
 const createModalButton = (buttonId, modalBodyId) => {
-  $(`#global-stats-btn-group`)
+  $(`#global-stats-description`)
     .after(`<div class="row"><div class="col d-flex justify-content-center"><button
   id="${buttonId}"
   type="button"
@@ -543,17 +545,16 @@ role="dialog"
         </div>
         <div id="global-stats-method-modal-body" class="modal-body"></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
         </div>
     </div>
 </div>
 </div>`
   );
   $(`#${modalBodyId}`)
-    .html(`The numbers shown on these charts are based on the collections of TEMP!!! users only, thus 
-they do not reflect the entire reality of the boardgame community - or even that of the BGG community since only a fraction of BGG 
-users is also a user of TEMP!!!. A large number of more casual boardgamers who make up a significant part of the community 
-are not registered on BGG and, as a result, can not be represented here.`);
+    .html(`The numbers shown on these charts are based on the <strong>BBG Explorer</strong> users only, thus 
+they do not reflect the entire reality of the boardgame community or even that of the BGG community. If a boardgame
+is not owned by any <strong>BGG Explorer</strong> user, it will not `);
 };
 
 const processYearHist = (histogram, yearMin, yearMax) => {

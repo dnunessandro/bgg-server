@@ -10935,6 +10935,38 @@ a {
   }
 }
 
+.my-8 {
+  margin-top: 120px !important;
+  margin-bottom: 120px !important;
+}
+
+@media (max-width: 768px) {
+  .my-8 {
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+  }
+}
+
+.mt-8 {
+  margin-top: 120px !important;
+}
+
+@media (max-width: 768px) {
+  .mt-8 {
+    margin-top: 60px !important;
+  }
+}
+
+.mb-8 {
+  margin-bottom: 120px !important;
+}
+
+@media (max-width: 768px) {
+  .mb-8 {
+    margin-bottom: 60px !important;
+  }
+}
+
 .btn {
   color: white !important;
 }
@@ -11094,17 +11126,18 @@ a {
 }
 
 #bgg-explorer-bg {
-  background-color: #fadde1;
+  background-color: #f8edeb;
 }
 
 #collection-overview #huge-collection-warning-wrapper {
-  background-color: white;
   max-width: 600px !important;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 8px;
 }
 
 #collection-overview #huge-collection-warning {
+  border: 2px solid white !important;
   color: #4c4e4d !important;
   background-color: #ffcdb233 !important;
   max-width: 600px !important;
@@ -11116,7 +11149,7 @@ a {
 }
 
 #collection-overview #collection-overview-row {
-  background-color: #fadde1;
+  background-color: #f8edeb;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart {
@@ -11193,7 +11226,7 @@ a {
 }
 
 #boardgame-info {
-  background-color: #fadde1;
+  background-color: #f8edeb;
   min-height: 400px;
 }
 
@@ -11476,7 +11509,7 @@ a {
 }
 
 #insights-bg {
-  background-color: #ffd5c2;
+  background-color: #fadde1;
 }
 
 @media (max-width: 768px) {
@@ -11533,12 +11566,12 @@ a {
 }
 
 .card-columns .card canvas {
-  height: 500px !important;
+  height: 400px !important;
 }
 
 @media (max-width: 768px) {
   .card-columns .card canvas {
-    height: 400px !important;
+    height: 350px !important;
   }
 }
 
@@ -11593,7 +11626,7 @@ a {
 }
 
 #global-stats-bg {
-  background-color: #fadde1;
+  background-color: #f8edeb;
   opacity: 0;
 }
 
@@ -11605,17 +11638,6 @@ a {
 #global-stats h3,
 #global-stats p {
   color: #4c4e4d;
-  -webkit-touch-callout: none;
-  /* iOS Safari */
-  -webkit-user-select: none;
-  /* Safari */
-  /* Konqueror HTML */
-  -moz-user-select: none;
-  /* Old versions of Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
-  user-select: none;
-  /* Non-prefixed version */
 }
 
 @media (max-width: 768px) {
@@ -11641,9 +11663,12 @@ a {
 }
 
 #global-stats .chart-row {
+  background-color: #f8edeb;
   -webkit-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   -o-transition: 1s ease-in-out;
+  background-color: white !important;
+  border-radius: 10px;
 }
 
 #global-stats .row-wrapper {
@@ -11655,7 +11680,7 @@ a {
 }
 
 #user-profile-bg {
-  background-color: #f8edeb;
+  background-color: #fadde1;
 }
 
 #user-profile-bg .padding {

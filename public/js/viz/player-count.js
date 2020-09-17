@@ -222,12 +222,16 @@ const drawPlayerCountChartMobile = (collectionItem) => {
     .select("rect")
     .attr("width", minTextWidth + xPad * 2)
     .attr("height", svgHeight - 2)
-    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`);
+    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`)
+    .attr("rx", "15px")
+    .attr("ry", "20px");
   maxPlayersGroup
     .select("rect")
     .attr("width", maxTextWidth + xPad * 2)
     .attr("height", svgHeight - 2)
-    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`);
+    .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`)
+    .attr("rx", "15px")
+    .attr("ry", "20px");
 
   // Translate Groups
   minPlayersGroup

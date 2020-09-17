@@ -159,12 +159,14 @@ router.post("/collections/:username/enrich", async (req, res) => {
       : collectionObj;
 
     // Save Insights to original collection
+    const date = new Date();
     await Collection.updateOne(
       { username },
       {
         insights: collectionObj.insights,
         totalPlays: collectionObj.totalPlays,
         lastLoggedPlay: collectionObj.lastLoggedPlay,
+        lastUpdated: date.getTime(),
       }
     );
 

@@ -10,6 +10,7 @@ const Spearman = require("spearman-rho");
 
 const updateBoardgameStatistics = async (statistics) => {
 
+  // User Rating Fit & Correlations ///////////////////////////////////////////////////////////////////////////
   const FIELD_FIT_LIMITS_MAP = {
     averageWeight: [1, 4.5],
     recommendedPlayers: [1, 7],
@@ -17,12 +18,10 @@ const updateBoardgameStatistics = async (statistics) => {
     maxPlayers: [1, 7],
     minPlayers: [1, 7],
     medianPriceNew: [10, 300],
-    yearPublished: [1980, 2020],
+    yearPublished: [1900, 2020],
     owned: [500, 100000],
     averageRating: [3, 9],
   };
-
-  // User Rating Fit & Correlations ///////////////////////////////////////////////////////////////////////////
 
   // Get User Rating and Weight Corr
   let statsArrayX = await Boardgame.find({}).select('averageWeight -_id');
@@ -140,7 +139,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.averageWeight),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -247,7 +246,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.maxPlayers),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -261,7 +260,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.maxPlayers),
       FIELD_FIT_LIMITS_MAP["averageWeight"][0],
       FIELD_FIT_LIMITS_MAP["averageWeight"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -355,7 +354,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.playTime),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -369,7 +368,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.playTime),
       FIELD_FIT_LIMITS_MAP["averageWeight"][0],
       FIELD_FIT_LIMITS_MAP["averageWeight"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -396,7 +395,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.playTime),
       FIELD_FIT_LIMITS_MAP["maxPlayers"][0],
       FIELD_FIT_LIMITS_MAP["maxPlayers"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -464,7 +463,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.medianPriceNew),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -478,7 +477,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.medianPriceNew),
       FIELD_FIT_LIMITS_MAP["averageWeight"][0],
       FIELD_FIT_LIMITS_MAP["averageWeight"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -492,7 +491,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.medianPriceNew),
       FIELD_FIT_LIMITS_MAP["recommendedPlayers"][0],
       FIELD_FIT_LIMITS_MAP["recommendedPlayers"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -519,7 +518,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.medianPriceNew),
       FIELD_FIT_LIMITS_MAP["maxPlayers"][0],
       FIELD_FIT_LIMITS_MAP["maxPlayers"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -575,7 +574,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.yearPublished),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -589,7 +588,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.yearPublished),
       FIELD_FIT_LIMITS_MAP["averageWeight"][0],
       FIELD_FIT_LIMITS_MAP["averageWeight"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -616,7 +615,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.yearPublished),
       FIELD_FIT_LIMITS_MAP["maxPlayers"][0],
       FIELD_FIT_LIMITS_MAP["maxPlayers"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -643,7 +642,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.yearPublished),
       FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
       FIELD_FIT_LIMITS_MAP["medianPriceNew"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -657,7 +656,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.yearPublished),
       FIELD_FIT_LIMITS_MAP["playTime"][0],
       FIELD_FIT_LIMITS_MAP["playTime"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -671,7 +670,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.yearPublished),
       FIELD_FIT_LIMITS_MAP["owned"][0],
       FIELD_FIT_LIMITS_MAP["owned"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 
@@ -687,7 +686,7 @@ const updateBoardgameStatistics = async (statistics) => {
       statsArrayY.map(e=>e.owned),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1],
-      (1, 1, 1, 0, 0)
+      // (1, 1, 1, 0, 0)
     )
   );
 

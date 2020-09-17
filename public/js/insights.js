@@ -156,7 +156,7 @@ const runInsights = async (collection) => {
       minWeightInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -169,7 +169,7 @@ const runInsights = async (collection) => {
       avgWeightInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -329,7 +329,7 @@ const runInsights = async (collection) => {
       avgYearInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -342,7 +342,7 @@ const runInsights = async (collection) => {
       mostCommonYearsInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -355,7 +355,7 @@ const runInsights = async (collection) => {
       avgRecommendedPlayersInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -368,7 +368,7 @@ const runInsights = async (collection) => {
   //     avgMaxPlayersInsightCardData,
   //     communityStats,
   //     undefined,
-  //     "#attributes-insights-grid"
+  //     "#features-insights-grid"
   //   );
   // }
 
@@ -381,7 +381,7 @@ const runInsights = async (collection) => {
       medianMaxPlayersInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -394,7 +394,7 @@ const runInsights = async (collection) => {
       avgMinPlayersInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -407,7 +407,7 @@ const runInsights = async (collection) => {
       avgPriceInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -420,7 +420,7 @@ const runInsights = async (collection) => {
       totalPriceInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -446,7 +446,7 @@ const runInsights = async (collection) => {
       kickstarterInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -459,7 +459,7 @@ const runInsights = async (collection) => {
       mostCommonCategoryInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -472,7 +472,7 @@ const runInsights = async (collection) => {
       mostCommonMechanicInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -485,7 +485,7 @@ const runInsights = async (collection) => {
       mostCommonPublisherInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -498,7 +498,7 @@ const runInsights = async (collection) => {
       mostCommonDesignerInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -511,7 +511,7 @@ const runInsights = async (collection) => {
       mostCommonArtistInsightCardData,
       communityStats,
       undefined,
-      "#attributes-insights-grid"
+      "#features-insights-grid"
     );
   }
 
@@ -689,7 +689,7 @@ const runInsights = async (collection) => {
     "plays",
     "ratings",
     "relationships",
-    "attributes",
+    "features",
   ]);
 
   // Enable Bootstrap Tooltips
@@ -2565,7 +2565,7 @@ const createInsightCard = (
   card.append('<div class="card-body pt-2"></div>');
   card
     .find(".card-body")
-    .append(`<h2 class="card-title">${insightCardData.title}</h2>`);
+    .append(`<h2 class="card-title mb-3">${insightCardData.title}</h2>`);
   card
     .find(".card-body h2")
     .append(

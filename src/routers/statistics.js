@@ -1,11 +1,9 @@
 const express = require("express");
 const chalk = require("chalk");
-const date = new Date();
 const Statistics = require("../models/statistics");
 const { updateCollectionStatistics } = require("../statistics/collections");
 const { updateBoardgameStatistics } = require("../statistics/boardgames");
 const { initializeStatistics } = require("../utils/statistics");
-
 
 const router = new express.Router();
 
@@ -55,6 +53,11 @@ router.post("/statistics/:id", async (req, res) => {
       return res.status(500).send();
     }
 
+    console.log(
+      chalk.green.bgWhite("201") +
+        chalk.yellow(` ${id}`) +
+        chalk.green(" statistics will be updated shortly.")
+    );
     res.status(202).send();
 
     let statistics = (await Statistics.findOne({ id }))
@@ -65,8 +68,11 @@ router.post("/statistics/:id", async (req, res) => {
       ? updateBoardgameStatistics(statistics)
       : updateCollectionStatistics(statistics));
 
-
-    await Statistics.updateOne({ id }, { stats: statistics.stats, lastUpdated: date.getTime()});
+    const date = new Date();
+    await Statistics.updateOne(
+      { id },
+      { stats: statistics.stats, lastUpdated: date.getTime() }
+    );
 
     console.log(
       chalk.green.bgWhite("200") +

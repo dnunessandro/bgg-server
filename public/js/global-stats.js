@@ -12,8 +12,9 @@ const runGlobalStats = async () => {
   //   `${API_URL}/boardgames/sample/${BOARDGAME_SAMPLE_SIZE}?owned=${BOARDAGEM_SAMPLE_OWNED_THRESHOLD}`
   // );
   let boardgameSample = await getBucketedBoardgameSample(
-    BOARDGAME_SAMPLE_OWNED_THRESHOLD,
-    BOARDGAME_SAMPLE_YEARS_SPLITS,
+    BOARDGAME_SAMPLE_SIZE,
+     BOARDGAME_SAMPLE_YEARS_SPLITS,
+     BOARDGAME_SAMPLE_OWNED_THRESHOLD,
     "yearPublished"
   );
 
@@ -116,7 +117,7 @@ const runGlobalStats = async () => {
     boardgameStats.userRatingYearCorr.trend,
     "yearPublished",
     "averageRating",
-    { xMin: 1980, xMax: 2020, yMin: 6, yMax: 8, color: BASE_COLOR }
+    { xMin: 1950, xMax: 2020, yMin: 2, yMax: 10, color: BASE_COLOR }
   );
 
   // Draw Category Trend

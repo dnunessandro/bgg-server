@@ -3,7 +3,6 @@ const API_URL =
   window.location.host;
 
 // COLORS ///////////////////////////
-
 const BASE_COLOR = "#e5989b";
 const SECONDARY_COLOR = "#ffb4a2";
 const LIGHT_COLOR = "#ffcdb2";
@@ -25,6 +24,15 @@ const COLLECTION_OVERVIEW_PALETTE = [
 ];
 
 const CONTAINER_FLUID_BREAKPOINT = 992;
+
+// LOGIN ///////////////
+const LOAD_TIME_MAP = {
+  0: [1, 2],
+  100: [1, 3],
+  200: [2, 4],
+  300: [3, 5],
+  500: [5, 7],
+};
 
 // COLLECTION OVERVIEW ///////////////
 const MIN_NODE_RADIUS_FACTOR = 0.03;
@@ -74,11 +82,11 @@ const NODE_SIZE_SCALE_DOMAIN_MAP = {
 
 const NUM_NODES_BREAKPOINT_MAP = {
   0: 40,
-  576: 60,
-  768: 70,
-  992: 80,
-  1200: 100,
-  1600: 120,
+  576: 50,
+  768: 60,
+  992: 70,
+  1200: 80,
+  1600: 100,
   2000: 180,
   2400: 200,
   3000: 250,
@@ -152,9 +160,11 @@ window.odometerOptions = {
 };
 
 // GLOBAL STATS
-const BOARDGAME_SAMPLE_SIZE = 300;
-const BOARDGAME_SAMPLE_OWNED_THRESHOLD = 200;
+const BOARDGAME_SAMPLE_SIZE = 200;
+const BOARDGAME_SAMPLE_OWNED_THRESHOLD = 5000;
 const BOARDGAME_SAMPLE_YEARS_SPLITS = [
+  1950,
+  1975,
   1980,
   1990,
   2000,
@@ -186,18 +196,6 @@ const FIELD_LABEL_MAP = {
   families: "Families",
   mechanics: "Mechanics",
   categories: "Categories",
-};
-
-const FIELD_FIT_LIMITS_MAP = {
-  averageWeight: [1, 4.5],
-  recommendedPlayers: [1, 7],
-  playTime: [10, 300],
-  maxPlayers: [1, 7],
-  minPlayers: [1, 7],
-  medianPriceNew: [10, 300],
-  yearPublished: [1980, 2020],
-  owned: [500, 100000],
-  averageRating: [3, 9],
 };
 
 const STAT_COLOR_MAP = {
@@ -354,7 +352,7 @@ const FIELD_LABEL_REPLACE_MAP = {
     "Winning Moves International Ltd": "Winning Moves International",
     "CEFA (Celulosa Fabril S. A.)": "Celulosa Fabril",
   },
-  designer: {},
+  designer: {"(Uncredited)": "Uncredited"},
   artist: {},
 };
 

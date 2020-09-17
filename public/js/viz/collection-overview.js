@@ -289,7 +289,7 @@ const createIncompleteCollectionWarning = (nItems) => {
   if (nItems > nodesLimit) {
     $("#bgg-explorer-btn-group")
       .after(`<div id="huge-collection-warning-wrapper"><div id="huge-collection-warning" class="slide-top alert alert-warning 
-      alert-dismissible fade show my-2 mx-auto" style="border-width: 0" role="alert">
+      alert-dismissible fade show mx-auto mt-3 mb-5" style="border: 2px solid ${DARK_COLOR}" role="alert">
         <h5 class="text-center my-3"><i class="fas fa-exclamation-circle"></i> <strong>Limited Screen Size</strong></h5><p class="text-justify">
          Due to the limited screen size, only your <strong>${nodesLimit}</strong> top rated games are shown on the <em>Free
           Exploration</em> view. ${

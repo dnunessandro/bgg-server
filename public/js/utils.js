@@ -39,6 +39,14 @@ const getOverviewNumNodes = () => {
   }
 };
 
+const getLoadTimes = (n) => {
+  const mapKeys = Object.keys(LOAD_TIME_MAP).reverse();
+  for (let i = 0; i < mapKeys.length; i++) {
+    if (n > parseInt(mapKeys[i]))
+      return LOAD_TIME_MAP[mapKeys[i]];
+  }
+}
+
 const getNodeYPosition = (index, numItems) => {
   if (numItems <= COLLECTION_OVERVIEW_NUM_NODES / 2) {
     return $("#collection-overview-chart").height() / 2;
@@ -262,7 +270,7 @@ const populateUserCard = (collection) => {
   const countryId = "#user-profile-country";
 
   $(helloId).html(
-    `Hey ${collection.firstName ? collection.firstName : collection.username}`
+    `Hey ${collection.firstName ? jsUcfirst(collection.firstName) : jsUcfirst(collection.username)}`
   );
   $(usernameId).text(collection.username);
   $(nameId).text(collection.firstName + " " + collection.lastName);
@@ -487,7 +495,7 @@ const showIgnoredBoardgamesModal = (ignoredItems) => {
   $("#ignored-boardgames-modal").modal("show");
 };
 
-const getBucketedBoardgameSample = async (n, splits, field) => {
+const getBucketedBoardgameSample = async (n, splits, ownersTresh, field) => {
   let sample = [];
   const splitN = Math.round(n / (splits.length - 1));
   const baseUrl = `${API_URL}/boardgames/sample/${splitN}?`;
@@ -496,7 +504,7 @@ const getBucketedBoardgameSample = async (n, splits, field) => {
     const gte = splits[i];
     const lte = splits[i + 1];
 
-    const response = await axios(`${baseUrl}${field}=${gte},${lte}`);
+    const response = await axios(`${baseUrl}${field}=${gte},${lte}&owned=${ownersTresh}`);
     response.data.forEach((d) => sample.push(d));
   }
 
@@ -513,6 +521,12 @@ const changeBootstrapClasses = () => {
     $(".btn-group-sm .btn").css("margin-right", "2px")
   }
 };
+
+
+function jsUcfirst(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 // const storeCollectionItemsToLocalStorage = (items, splitSize) => {
 //   if (items.length < 100)

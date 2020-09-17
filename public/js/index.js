@@ -22,12 +22,13 @@ $("#submit-form").on("click", async (e) => {
     await setTimeout((_) => {
       $("form")
         .append(`<div class="slide-top alert alert-warning alert-dismissible fade show mt-3" role="alert">
-      <strong>Still waiting?</strong> The server might be overloaded, try refreshig the page and submiting again.
+      <strong>Still waiting?</strong> The server might be overloaded, try refreshig the page and submiting again. 
+      If the problem persists, contact <em><strong>contact@nunessandro.com</strong></em> mentioning your BGG username.
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>`);
-    }, 120000);
+    }, 300000);
     $(".alert-warning").css("border-width", "0px");
 
     // Add Loading Screen
@@ -37,15 +38,25 @@ $("#submit-form").on("click", async (e) => {
 
     // Enrich collection
     let response = await axios.get(`${API_URL}/collections/${username}/enrich`);
-    response.status == 200
-      ? undefined
-      : await axios.post(`${API_URL}/collections/${username}/enrich`);
+    if (response.status != 200) {
+      await axios.post(`${API_URL}/collections/${username}/enrich`);
+      const loadTimes = getLoadTimes(data.data.totalItems);
+      $("form")
+        .append(`<div class="slide-top alert alert-warning alert-dismissible fade show mt-3" role="alert">
+      <strong>Looks like you are visiting for the first time or haven't been here for a while.</strong><br> We 
+      have some stuff to compute behind the scenes, this usually takes around <strong>${loadTimes[0]}</strong> 
+      to <strong>${loadTimes[1]}</strong> minutes for your collection size.
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>`);
+    }
 
     // Periodically check if collection was enriched
     const intervalID = setInterval(async function () {
       response = await axios.get(`${API_URL}/collections/${username}/enrich`);
 
-      if (response.status == 200) {
+      if (response.status == 200 && "insights" in response.data) {
         await clearInterval(intervalID);
         const collection = response.data;
         const compressedCollection = LZUTF8.compress(
@@ -58,15 +69,15 @@ $("#submit-form").on("click", async (e) => {
         $(".spinner-border").remove();
         $("#submit-form")
           .text("All Done!")
-          .css("background-color", LIGHT_COLOR);
+          .css("background-color", SECONDARY_COLOR);
         window.localStorage.clear();
         window.localStorage.setItem("collection", compressedCollection);
 
         await setTimeout((_) => {
           window.open(`${API_URL}/main`, "_self");
-        }, 700);
+        }, 500);
       }
-    }, 5000);
+    }, 10000);
   } else if (username == "") {
     // Reset Submit Button Text
     $("#submit-form").empty().text("Let's Start!");

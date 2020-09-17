@@ -281,6 +281,7 @@ const getMarketplaceData = async (response) => {
       stdPriceNew: null,
       stdPriceUsed: null,
     };
+    
   marketplaceData.listings = await Promise.all(
     response.items.item[0].marketplacelistings[0].listing.map((e) =>
       getMarketplaceListingData(e)

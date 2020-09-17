@@ -10,9 +10,9 @@ $dark-color: #b5838d;
 $neutral-color: #6d6875;
 $background-color: #eee;
 // $background-color-pink: #fcd5ce;
-$background-color-pink: #fadde1;
+$background-color-pink: #f8edeb;
 $background-color-pink-2: #ffd5c2;
-$background-color-light-pink: #f8edeb;
+$background-color-light-pink: #fadde1;
 $svg-background-color: #f8edeb;
 $text-color: #4c4e4d;
 
@@ -144,6 +144,27 @@ a {
   margin-bottom: 150px !important;
   @media (max-width: $bootstrap-class-change-breakpoint) {
     margin-bottom: 75px !important;
+  }
+}
+
+.my-8 {
+  margin-top: 120px !important;
+  margin-bottom: 120px !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+  }
+}
+.mt-8 {
+  margin-top: 120px !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-top: 60px !important;
+  }
+}
+.mb-8 {
+  margin-bottom: 120px !important;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    margin-bottom: 60px !important;
   }
 }
 
@@ -294,13 +315,14 @@ a {
 
 #collection-overview {
   #huge-collection-warning-wrapper {
-    background-color: white;
     max-width: 600px !important;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 8px;
   }
 
   #huge-collection-warning {
+    border: 2px solid white !important;
     color: $text-color !important;
     background-color: $light-color-02 !important;
 
@@ -685,7 +707,7 @@ a {
 }
 
 #insights-bg {
-  background-color: $background-color-pink-2;
+  background-color: $background-color-light-pink;
 }
 
 .card-columns {
@@ -726,9 +748,9 @@ a {
     opacity: 0;
 
     canvas {
-      height: 500px !important;
+      height: 400px !important;
       @media (max-width: $bootstrap-class-change-breakpoint) {
-        height: 400px !important;
+        height: 350px !important;
       }
     }
 
@@ -795,12 +817,7 @@ a {
   h3,
   p {
     color: $text-color;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version */
+   
   }
 
   p {
@@ -823,9 +840,12 @@ a {
     border-radius: 8px;
   }
   .chart-row {
+    background-color: $background-color-pink;
     -webkit-transition: 1s ease-in-out;
     -moz-transition: 1s ease-in-out;
     -o-transition: 1s ease-in-out;
+    background-color: white !important;
+    border-radius: 10px;
   }
   .row-wrapper {
     -webkit-transition: 1s ease-in-out;
