@@ -524,7 +524,7 @@ const runInsights = async (collection) => {
       ratingWeightCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -537,7 +537,7 @@ const runInsights = async (collection) => {
       ratingPlayTimeCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -550,7 +550,7 @@ const runInsights = async (collection) => {
       ratingRecommendedPlayersCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -563,7 +563,7 @@ const runInsights = async (collection) => {
       ratingMaxPlayersCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -576,7 +576,7 @@ const runInsights = async (collection) => {
       ratingPlaysCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -589,7 +589,7 @@ const runInsights = async (collection) => {
       ratingTimePlayedCorrInsightCardData,
       communityStats,
       undefined,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -602,7 +602,7 @@ const runInsights = async (collection) => {
       ratingPriceCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -615,7 +615,7 @@ const runInsights = async (collection) => {
       ratingYearCorrInsightCardData,
       communityStats,
       boardgameStats,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -628,7 +628,7 @@ const runInsights = async (collection) => {
       playsWeightCorrInsightCardData,
       communityStats,
       undefined,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -641,7 +641,7 @@ const runInsights = async (collection) => {
       playsPlayTimeCorrInsightCardData,
       communityStats,
       undefined,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -654,7 +654,7 @@ const runInsights = async (collection) => {
       playsRecommendedPlayersCorrInsightCardData,
       communityStats,
       undefined,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -667,7 +667,7 @@ const runInsights = async (collection) => {
       playsMaxPlayersCorrInsightCardData,
       communityStats,
       undefined,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -680,7 +680,7 @@ const runInsights = async (collection) => {
       playsPriceCorrInsightCardData,
       communityStats,
       undefined,
-      "#relationships-insights-grid"
+      "#trends-insights-grid"
     );
   }
 
@@ -688,7 +688,7 @@ const runInsights = async (collection) => {
   removeUnusedInsightsTitles([
     "plays",
     "ratings",
-    "relationships",
+    "trends",
     "features",
   ]);
 

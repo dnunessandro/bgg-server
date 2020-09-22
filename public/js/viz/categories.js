@@ -24,14 +24,17 @@ function createWordCloud(itemCategories) {
   // Add Random Size
   let words = [];
   itemCategories.forEach((e) => {
-    e["size"] =
-      20 +
-      Math.random() *
-        getPyth(
-          parseInt($(svgId).css("width")),
-          parseInt($(svgId).css("height"))
-        ) *
-        0.03;
+
+    const size = 20 +
+    Math.random() *
+      getPyth(
+        parseInt($(svgId).css("width")),
+        parseInt($(svgId).css("height"))
+      ) *
+      0.03
+
+    e["size"] = checkIfMobile() ? size / 1.5 : size
+      ;
     e["text"] = e.value;
     words.push(e);
   });

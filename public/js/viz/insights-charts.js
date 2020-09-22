@@ -426,7 +426,7 @@ const drawInsightsSpiderChart = (
       },
       scale: {
         pointLabels: {
-          fontSize: 12,
+          fontSize: 14,
         },
         ticks: {
           min: 0,

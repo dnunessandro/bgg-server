@@ -1,8 +1,8 @@
 const drawCollectionOverview = (collectionItems) => {
   // Change Chart Dimensions
   $("#collection-overview-chart").height(
-    
-    (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2 ? 800 : 400) / (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)
+    (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2 ? 800 : 400) /
+      (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)
   );
 
   // Get Chart Dimensions
@@ -23,6 +23,12 @@ const drawCollectionOverview = (collectionItems) => {
       MIN_NODE_RADIUS_FACTOR * chartHeight,
       Math.min(MAX_NODE_RADIUS_FACTOR * chartHeight, MAX_NODE_RADIUS_ABS),
     ]
+  );
+  const nodeXAxisScale = createNodeAxisScale(
+    collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2
+      ? collectionItems.length / 2 + 1
+      : collectionItems.length,
+    chartWidth
   );
 
   // Create Random Color Array
@@ -118,11 +124,32 @@ const drawCollectionOverview = (collectionItems) => {
         ? d.name
         : d.name.slice(0, MAX_NODE_LABEL_CHARACTERS - 3) + "..."
     )
-    .attr(
-      "transform",
-      (_, i) =>
-        "translate(0," + (NODE_LINEAR_BOOL ? labelsPositions[i].y : 0) + ")"
-    );
+    .attr("transform", function (d, i) {
+      const rect = d3.select(this.parentNode).select("rect").nodes()[0];
+
+      // Adjust labels going outside bounds because of label size
+      // Get node position
+      const nodeX =
+        i <= collectionItems.length / 2
+          ? nodeXAxisScale(i)
+          : nodeXAxisScale(i - collectionItems.length / 2);
+
+      // Get translation values
+      let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
+        ? rect.getBBox().width / 2 > nodeX
+          ? (rect.getBBox().width / 2 - nodeX) * 1.5
+          : 0
+        : 0;
+      let rightEdgeLabelTranslation = NODE_LINEAR_BOOL
+        ? rect.getBBox().width / 2 > chartWidth - nodeX
+          ? (rect.getBBox().width / 2 - (chartWidth - nodeX)) * 1.5
+          : 0
+        : 0;
+
+      return `translate(${
+        leftEdgeLabelTranslation - rightEdgeLabelTranslation
+      },${NODE_LINEAR_BOOL ? labelsPositions[i].y : 0})`;
+    });
 
   // Adjust Rect Width and Height
   const textWidthArray = getNodeTextWidthArray(d3.selectAll(".node-text"));
@@ -133,16 +160,37 @@ const drawCollectionOverview = (collectionItems) => {
     .attr("width", (_, i) => textWidthArray[i] + 12)
     .attr("height", (_, i) => textHeightArray[i] + 4)
     .attr("rx", 4)
-    .attr(
-      "transform",
-      (d, i) =>
+    .attr("transform", function (d, i) {
+      // Adjust labels going outside bounds because of label size
+      // Get node position
+      const nodeX =
+        i <= collectionItems.length / 2
+          ? nodeXAxisScale(i)
+          : nodeXAxisScale(i - collectionItems.length / 2);
+
+      // Get translation values
+      let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
+        ? this.getBBox().width / 2 > nodeX
+          ? (this.getBBox().width / 2 - nodeX) * 1.5
+          : 0
+        : 0;
+      let rightEdgeLabelTranslation = NODE_LINEAR_BOOL
+        ? this.getBBox().width / 2 > chartWidth - nodeX
+          ? (this.getBBox().width / 2 - (chartWidth - nodeX)) * 1.5
+          : 0
+        : 0;
+
+      return (
         "translate(" +
-        (-textWidthArray[i] - 12) / 2 +
+        ((-textWidthArray[i] - 12) / 2 +
+          leftEdgeLabelTranslation -
+          rightEdgeLabelTranslation) +
         "," +
         ((-textHeightArray[i] - 6) / 2 +
           (NODE_LINEAR_BOOL ? labelsPositions[i].y : 0)) +
         ")"
-    )
+      );
+    })
     .style("fill", (_, i) => colorsArray[i]);
 
   return nodeGroups;
@@ -291,12 +339,12 @@ const createIncompleteCollectionWarning = (nItems) => {
       .after(`<div id="huge-collection-warning-wrapper"><div id="huge-collection-warning" class="slide-top alert alert-warning 
       alert-dismissible fade show mx-auto mt-3 mb-5" style="border: 2px solid ${DARK_COLOR}" role="alert">
         <h5 class="text-center my-3"><i class="fas fa-exclamation-circle"></i> <strong>Limited Screen Size</strong></h5><p class="text-justify">
-         Due to the limited screen size, only your <strong>${nodesLimit}</strong> top rated games are shown on the <em>Free
+         Due to the limited screen size, only the <strong>${nodesLimit}</strong> games you rated the highest are shown in the <em>Free
           Exploration</em> view. ${
-      checkIfMobile()
-        ? "Try accessing through a desktop device to view your entire collection."
-        : ""
-    }</p>
+            checkIfMobile()
+              ? "Try accessing through a desktop device to view your entire collection."
+              : ""
+          }</p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

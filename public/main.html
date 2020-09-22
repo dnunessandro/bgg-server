@@ -44,42 +44,52 @@
             <div class="padding">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-xl-8 col-md-8">
+                        <div class="col-md-10">
                             <h2 id="hello-title" class="text-center mt-10"></h2>
                             <h2 id="welcome-title" class="text-center mt-2 mb-5">Welcome to the BGG Explorer</h2>
                             <div id="user-profile-card" class="card user-card-full my-5">
                                 <div class="row m-l-0 m-r-0">
                                     <div class="col-sm-4 bg-c-lite-green user-profile">
                                         <div class="card-block text-center text-white py-0 my-3">
-                                            <div class="m-b-25">
+                                            <div class="mt-sm-5 m-b-25">
                                                 <img id="user-profile-image" class="img-radius" alt="User-Profile-Image">
                                             </div>
-                                            <h6 id="user-profile-username" class="f-w-600"></h6>
+                                            <h4 id="user-profile-username" class="f-w-600"></h4>
                                             <p id="user-profile-name" class="mb-0"></p>
                                             <i class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                         </div>
                                     </div>
                                     <div class="col-sm-8">
-                                        <div class="card-block">
+                                        <div class="card-block pb-0">
                                             <h5 class="m-b-20 p-b-5 b-b-default f-w-600">User Profile</h5>
-                                            <div class="row mb-2">
+                                            <div class="row mb-sm-3">
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600">Year Registered</p>
-                                                    <h6 id="user-profile-year" class="text-muted f-w-400"></h6>
+                                                    <h6 id="user-profile-year" class="text-muted f-w-400 mb-2"></h6>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600">Country</p>
-                                                    <h6 id="user-profile-country" class="text-muted f-w-400"></h6>
+                                                    <h6 id="user-profile-country" class="text-muted f-w-400 mb-2"></h6>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                            <div class="row mb-sm-3">
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600">Games in Collection</p>
-                                                    <h6 id="user-profile-items" class="text-muted f-w-400"></h6>
+                                                    <h6 id="user-profile-items" class="text-muted f-w-400 mb-2"></h6>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <p class="m-b-10 f-w-600">Recorded Plays</p>
-                                                    <h6 id="user-profile-plays" class="text-muted f-w-400"></h6>
+                                                    <h6 id="user-profile-plays" class="text-muted f-w-400 mb-2"></h6>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-sm-3">
+                                                <div class="col-sm-6">
+                                                    <p class="m-b-10 f-w-600">Last Login</p>
+                                                    <h6 id="user-profile-login" class="text-muted f-w-400 mb-2"></h6>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <p class="mb-1 f-w-600">Last Updated</p>
+                                                    <h6 id="user-profile-updated" class="text-muted f-w-400 mb-2"></h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,14 +97,14 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <p id="user-profile-description" class="description">
+                                <p id="user-profile-description" class="description my-4">
                                     If you are unsure where to begin, keep scrolling down to start exploring your collection! Alternatively, jump
                                     to the content you are most interested in:
                                 </p>
                                 <div id="user-profile-btn-group" class="btn-group btn-group-lg btn-group-nav mt-2 mb-10" role="group">
-                                    <a id="linkFreeExploration" href="#bgg-explorer-bg" class="btn btn-dark mx-1 shadow-sm">Free Exploration</a>
-                                    <a id="linkAutomatedInsights" href="#insights-bg" class="btn btn-dark mx-1 shadow-sm">Insights</a>
-                                    <a id="linkCommunityStats" href="#global-stats-bg" class="btn btn-dark mx-1 shadow-sm">Community Trends</a>
+                                    <a href="#bgg-explorer-bg" class="btn btn-dark mx-1 shadow-sm link-free-exploration">Free Exploration</a>
+                                    <a href="#insights-bg" class="btn btn-dark mx-1 shadow-sm link-automated-insights">Insights</a>
+                                    <a href="#global-stats-bg" class="btn btn-dark mx-1 shadow-sm link-community-stats">Community Trends</a>
                                 </div>
                             </div>
                         </div>
@@ -108,9 +118,9 @@
                     <div id="collection-overview-header" class="col-12 text-white text-center header">
                         <h1 class="mb-3 mt-10">Free Exploration</h1>
                         <div id="bgg-explorer-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
-                            <a id="linkFreeExploration" href="#bgg-explorer-bg" class="btn btn-primary mx-1">Free Exploration</a>
-                            <a id="linkAutomatedInsights" href="#insights-bg" class="btn btn-dark mx-1">Insights</a>
-                            <a id="linkCommunityStats" href="#global-stats-bg" class="btn btn-dark mx-1">Community Trends</a>
+                            <a href="#bgg-explorer-bg" class="btn btn-primary mx-1 ml-3 link-free-exploration">Free Exploration</a>
+                            <a href="#insights-bg" class="btn btn-dark mx-1 link-automated-insights">Insights</a>
+                            <a href="#global-stats-bg" class="btn btn-dark mx-1 mr-3 link-community-stats">Community Trends</a>
                         </div>
                         <p class="description">
                             Explore your collection at a glance by pressing one of the parameters below:
@@ -338,9 +348,9 @@
                 <div id="insights-header" class="container text-center header">
                     <h1 class="mb-3 mt-8">Insights</h1>
                     <div id="insights-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
-                        <a id="linkFreeExploration" href="#bgg-explorer-bg" class="btn btn-dark mx-1">Free Exploration</a>
-                        <a id="linkAutomatedInsights" href="#insights-bg" class="btn btn-primary mx-1">Insights</a>
-                        <a id="linkCommunityStats" href="#global-stats-bg" class="btn btn-dark mx-1">Community Trends</a>
+                        <a href="#bgg-explorer-bg" class="btn btn-dark mx-1 link-free-exploration">Free Exploration</a>
+                        <a href="#insights-bg" class="btn btn-primary mx-1 link-automated-insights">Insights</a>
+                        <a  href="#global-stats-bg" class="btn btn-dark mx-1 link-community-stats">Community Trends</a>
                     </div>
                     <p class="description">
                         Find interesting insights about your collection and compare it to the rest of the community.
@@ -352,7 +362,7 @@
                         <a id="linkInsightsRatings" href="#ratings-insights-grid-title" class="btn btn-primary mx-1">Ratings</a>
                         <a id="linkInsightsPlays" href="#plays-insights-grid-title" class="btn btn-dark mx-1">Play History</a>
                         <a id="linkInsightsFeatures" href="#features-insights-grid-title" class="btn btn-dark mx-1">Game Features</a>
-                        <a id="linkInsightsRelationships" href="#relationships-insights-grid-title" class="btn btn-dark mx-1">Relationships</a>
+                        <a id="linkInsightsTrends" href="#trends-insights-grid-title" class="btn btn-dark mx-1">Your Trends</a>
                     </div>
                 </div>
                 <div id="ratings-insights-grid" class="card-columns"></div>
@@ -362,7 +372,7 @@
                         <a id="linkInsightsRatings" href="#ratings-insights-grid-title" class="btn btn-dark mx-1">Ratings</a>
                         <a id="linkInsightsPlays" href="#plays-insights-grid-title" class="btn btn-primary mx-1">Play History</a>
                         <a id="linkInsightsFeatures" href="#features-insights-grid-title" class="btn btn-dark mx-1">Game Features</a>
-                        <a id="linkInsightsRelationships" href="#relationships-insights-grid-title" class="btn btn-dark mx-1">Relationships</a>
+                        <a id="linkInsightsTrends" href="#trends-insights-grid-title" class="btn btn-dark mx-1">Your Trends</a>
                     </div>
                 </div>
                 <div id="plays-insights-grid" class="card-columns"></div>
@@ -372,20 +382,20 @@
                         <a id="linkInsightsRatings" href="#ratings-insights-grid-title" class="btn btn-dark mx-1">Ratings</a>
                         <a id="linkInsightsPlays" href="#plays-insights-grid-title" class="btn btn-dark mx-1">Play History</a>
                         <a id="linkInsightsFeatures" href="#features-insights-grid-title" class="btn btn-primary mx-1">Game Features</a>
-                        <a id="linkInsightsRelationships" href="#relationships-insights-grid-title" class="btn btn-dark mx-1">Relationships</a>
+                        <a id="linkInsightsTrends" href="#trends-insights-grid-title" class="btn btn-dark mx-1">Your Trends</a>
                     </div>
                 </div>
                 <div id="features-insights-grid" class="card-columns"></div>
-                <h2 id="relationships-insights-grid-title" class="insights-title text-center my-3">Relationships</h2>
+                <h2 id="trends-insights-grid-title" class="insights-title text-center my-3">Your Trends</h2>
                 <div class="text-center">
-                    <div id="relationships-insights-btn-group" class="btn-group btn-group-sm btn-group-nav mb-5" role="group">
+                    <div id="trends-insights-btn-group" class="btn-group btn-group-sm btn-group-nav mb-5" role="group">
                         <a id="linkInsightsRatings" href="#ratings-insights-grid-title" class="btn btn-dark mx-1">Ratings</a>
                         <a id="linkInsightsPlays" href="#plays-insights-grid-title" class="btn btn-dark mx-1">Play History</a>
                         <a id="linkInsightsFeatures" href="#features-insights-grid-title" class="btn btn-dark mx-1">Game Features</a>
-                        <a id="linkInsightsRelationships" href="#relationships-insights-grid-title" class="btn btn-primary mx-1">Relationships</a>
+                        <a id="linkInsightsTrends" href="#trends-insights-grid-title" class="btn btn-primary mx-1">Your Trends</a>
                     </div>
                 </div>
-                <div id="relationships-insights-grid" class="card-columns"></div>
+                <div id="trends-insights-grid" class="card-columns"></div>
             </div>
         </div>
         <div id="global-stats-bg" class="py-5">
@@ -393,9 +403,9 @@
                 <div id="global-stats-header" class="container text-white text-center header">
                     <h1 class="mb-3 mt-8">Community Trends</h1>
                     <div id="global-stats-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
-                        <a id="linkFreeExploration" href="#bgg-explorer-bg" class="btn btn-dark mx-1">Free Exploration</a>
-                        <a id="linkAutomatedInsights" href="#insights-bg" class="btn btn-dark mx-1">Insights</a>
-                        <a id="linkCommunityStats" href="#global-stats-bg" class="btn btn-primary mx-1">Community Trends</a>
+                        <a href="#bgg-explorer-bg" class="btn btn-dark mx-1 link-free-exploration">Free Exploration</a>
+                        <a href="#insights-bg" class="btn btn-dark mx-1 link-automated-insights">Insights</a>
+                        <a href="#global-stats-bg" class="btn btn-primary mx-1 link-community-stats">Community Trends</a>
                     </div>
                     <p id="global-stats-description" class="description">
                         Go through some of the trends that have shaped the industry over the years.

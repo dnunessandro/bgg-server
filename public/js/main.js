@@ -1,4 +1,5 @@
 const run = async () => {
+
   // Get Collection from Local Storage
   const collection = JSON.parse(
     LZUTF8.decompress(window.localStorage.getItem("collection"), {
@@ -89,11 +90,9 @@ const run = async () => {
     $(".btn-group").localScroll({ duration: 800 });
   });
 
-  // Change Bootstrap Classes based on screen size
-  changeBootstrapClasses()
-
   // Turn on tooltips
   $('[data-toggle="tooltip"]').tooltip();
+
 
 };
 

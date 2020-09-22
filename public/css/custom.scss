@@ -61,6 +61,7 @@ p {
 
 a {
   font-weight: 600 !important;
+  vertical-align: middle !important;
 }
 
 .description {
@@ -76,8 +77,10 @@ a {
   font-size: 1rem !important;
 }
 
+
 .btn-group-nav .btn {
   // border: 2px solid $light-color !important;
+  font-weight: 600 !important;
   border: 0px;
   border-radius: 8px !important;
   @media (max-width: $bootstrap-class-change-breakpoint) {
@@ -115,8 +118,9 @@ a {
 }
 
 @media (max-width: $bootstrap-class-change-breakpoint) {
-  h2 {
-    font-size: 3rem;
+  h1,
+  h3 {
+    font-size: 2.5rem !important;
   }
   #hello-title {
     font-size: 2rem;
@@ -324,7 +328,7 @@ a {
   #huge-collection-warning {
     border: 2px solid white !important;
     color: $text-color !important;
-    background-color: $light-color-02 !important;
+    background-color: $background-color-pink-2 !important;
 
     max-width: 600px !important;
     h5,
@@ -380,6 +384,10 @@ a {
     }
   }
   #collection-overview-sidepanel {
+    .btn{
+      font-weight: 600 !important;
+    }
+    
     @media (max-width: $bootstrap-class-change-breakpoint) {
       .btn,
       .btn-group {
@@ -712,8 +720,8 @@ a {
 
 .card-columns {
   @media (max-width: $bootstrap-class-change-breakpoint) {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
   @include media-breakpoint-up(sm) {
     column-count: 2 !important;
@@ -817,7 +825,10 @@ a {
   h3,
   p {
     color: $text-color;
-   
+  }
+
+  a {
+    color: inherit;
   }
 
   p {
@@ -832,6 +843,16 @@ a {
     -o-transition: 1s ease-in-out;
     opacity: 0;
   }
+
+  h3{
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 1.5rem !important;
+    }
+  }
+
+  #global-stats-method-button {
+    font-weight: 600;
+  }
   #global-stats-method-modal-body {
     line-height: 1.5rem;
     text-align: justify;
@@ -845,7 +866,7 @@ a {
     -moz-transition: 1s ease-in-out;
     -o-transition: 1s ease-in-out;
     background-color: white !important;
-    border-radius: 10px;
+    border-radius: 8px;
   }
   .row-wrapper {
     -webkit-transition: 1s ease-in-out;
@@ -874,6 +895,10 @@ a {
   h6 {
     font-size: 1.6rem;
     font-weight: 700;
+
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 1rem;
+    }
   }
 
   #hello-title {
@@ -885,17 +910,25 @@ a {
   }
 
   #user-profile-username {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 600;
+
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 1.4rem;
+    }
   }
   #user-profile-name {
     font-weight: 500;
     font-size: 1.1rem;
     color: white;
+
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 0.9rem;
+    }
   }
   #user-profile-image {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     fill: white;
   }
 
@@ -980,6 +1013,22 @@ a {
 
   .text-muted {
     color: $secondary-color !important;
+    #updated-icon{
+      background-color: $background-color-pink;
+      color: $secondary-color;
+      border-radius: 8px;
+      cursor: pointer;
+      
+    }
+    #updated-icon:hover{
+      background-color: $secondary-color;
+      color: $background-color-pink;
+      -webkit-transition: background-color 0.2s linear;
+      -moz-transition: background-color 0.2s linear;
+      -ms-transition: background-color 0.2s linear;
+      -o-transition: background-color 0.2s linear;
+      transition: background-color 0.2s linear;
+    }
   }
 
   .b-b-default {

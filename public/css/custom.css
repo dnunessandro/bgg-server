@@ -10830,6 +10830,7 @@ p {
 
 a {
   font-weight: 600 !important;
+  vertical-align: middle !important;
 }
 
 .description {
@@ -10849,6 +10850,7 @@ a {
 }
 
 .btn-group-nav .btn {
+  font-weight: 600 !important;
   border: 0px;
   border-radius: 8px !important;
 }
@@ -10892,8 +10894,9 @@ a {
 }
 
 @media (max-width: 768px) {
-  h2 {
-    font-size: 3rem;
+  h1,
+  h3 {
+    font-size: 2.5rem !important;
   }
   #hello-title {
     font-size: 2rem;
@@ -11139,7 +11142,7 @@ a {
 #collection-overview #huge-collection-warning {
   border: 2px solid white !important;
   color: #4c4e4d !important;
-  background-color: #ffcdb233 !important;
+  background-color: #ffd5c2 !important;
   max-width: 600px !important;
 }
 
@@ -11203,6 +11206,10 @@ a {
   #collection-overview #collection-overview-row #collection-overview-chart svg .node-text {
     font-size: 10px;
   }
+}
+
+#collection-overview #collection-overview-sidepanel .btn {
+  font-weight: 600 !important;
 }
 
 @media (max-width: 768px) {
@@ -11514,8 +11521,8 @@ a {
 
 @media (max-width: 768px) {
   .card-columns {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }
 
@@ -11640,6 +11647,10 @@ a {
   color: #4c4e4d;
 }
 
+#global-stats a {
+  color: inherit;
+}
+
 @media (max-width: 768px) {
   #global-stats p {
     font-size: 0.8rem;
@@ -11651,6 +11662,16 @@ a {
   -moz-transition: 1s ease-in-out;
   -o-transition: 1s ease-in-out;
   opacity: 0;
+}
+
+@media (max-width: 768px) {
+  #global-stats h3 {
+    font-size: 1.5rem !important;
+  }
+}
+
+#global-stats #global-stats-method-button {
+  font-weight: 600;
 }
 
 #global-stats #global-stats-method-modal-body {
@@ -11668,7 +11689,7 @@ a {
   -moz-transition: 1s ease-in-out;
   -o-transition: 1s ease-in-out;
   background-color: white !important;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 #global-stats .row-wrapper {
@@ -11700,6 +11721,12 @@ a {
   font-weight: 700;
 }
 
+@media (max-width: 768px) {
+  #user-profile-bg h6 {
+    font-size: 1rem;
+  }
+}
+
 #user-profile-bg #hello-title {
   font-size: 5rem;
 }
@@ -11709,8 +11736,14 @@ a {
 }
 
 #user-profile-bg #user-profile-username {
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  #user-profile-bg #user-profile-username {
+    font-size: 1.4rem;
+  }
 }
 
 #user-profile-bg #user-profile-name {
@@ -11719,9 +11752,15 @@ a {
   color: white;
 }
 
+@media (max-width: 768px) {
+  #user-profile-bg #user-profile-name {
+    font-size: 0.9rem;
+  }
+}
+
 #user-profile-bg #user-profile-image {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   fill: white;
 }
 
@@ -11800,6 +11839,20 @@ a {
 
 #user-profile-bg .text-muted {
   color: #ffb4a2 !important;
+}
+
+#user-profile-bg .text-muted #updated-icon {
+  background-color: #f8edeb;
+  color: #ffb4a2;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#user-profile-bg .text-muted #updated-icon:hover {
+  background-color: #ffb4a2;
+  color: #f8edeb;
+  -webkit-transition: background-color 0.2s linear;
+  transition: background-color 0.2s linear;
 }
 
 #user-profile-bg .b-b-default {

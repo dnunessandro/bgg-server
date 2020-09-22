@@ -44,7 +44,7 @@ $("#submit-form").on("click", async (e) => {
       $("form")
         .append(`<div class="slide-top alert alert-warning alert-dismissible fade show mt-3" role="alert">
       <strong>Looks like you are visiting for the first time or haven't been here for a while.</strong><br> We 
-      have some stuff to compute behind the scenes, this usually takes around <strong>${loadTimes[0]}</strong> 
+      have some stuff to compute behind the scenes. This usually takes around <strong>${loadTimes[0]}</strong> 
       to <strong>${loadTimes[1]}</strong> minutes for your collection size.
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>

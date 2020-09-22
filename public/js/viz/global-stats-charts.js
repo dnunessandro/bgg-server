@@ -52,7 +52,7 @@ const drawGlobalStatsHistChart = (
       legend: {
         display: false,
         labels: {
-          fontSize: 14,
+          fontSize: 16,
         },
       },
       title: {
@@ -174,9 +174,7 @@ const drawGlobalStatsCorrChart = (
     options: {
       legend: {
         labels: {
-          labels: {
-            fontSize: 14,
-          },
+          fontSize: 16,
           usePointStyle: true,
           filter: function (label) {
             if (label.text === "None") {
@@ -187,7 +185,6 @@ const drawGlobalStatsCorrChart = (
           },
         },
       },
-
       tooltips: {
         displayColors: false,
         callbacks: {
@@ -240,9 +237,9 @@ const drawGlobalStatsCorrChart = (
             scaleLabel: {
               display: true,
               labelString: FIELD_LABEL_MAP[yField],
-              fontSize: 18,
             },
             ticks: {
+              fontSize: 14,
               min:
                 "yMin" in options
                   ? options.yMin
@@ -319,7 +316,7 @@ const drawGlobalStatsTrendChart = (
       legend: {
         display: legendFlag,
         labels: {
-          fontSize: 14,
+          fontSize: 16,
         },
       },
       tooltips: {
@@ -403,14 +400,22 @@ const drawGlobalStatsTrendChart = (
 };
 
 const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
+  
   // Get Years
   const years = Object.keys(statsSeries);
 
-  // Get Stats
-  const stats = Object.keys(statsSeries[years[0]]);
-
   // Get Options
   options = options ? options : {};
+
+  // Replace Labels
+  if ("replaceLabels" in options) {
+    years.forEach((y) => {
+      statsSeries[y] = replaceKeys(statsSeries[y], options.replaceLabels);
+    });
+  }
+
+  // Get Stats
+  const stats = Object.keys(statsSeries[years[0]]);
 
   // stats.forEach((e) => {
   //   console.log(e, statsSeries[2020][e] / statsSeries[2010][e]);
@@ -436,7 +441,7 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
       legend: {
         display: true,
         labels: {
-          fontSize: 14,
+          fontSize: 16,
         },
       },
       scale: {
@@ -471,28 +476,28 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
   return spiderChart;
 };
 
-const createTextBlock = (rowId, title, p) => {
+const createTextBlock = (rowId, title, p, classes) => {
   $(`#global-stats #${rowId}`).append(
-    `<div id="${rowId}-text-block" class="col-12 col-md-6 text-center my-auto block text-block"></div>`
+    `<div id="${rowId}-text-block" class="col-12 col-md-6 text-center my-auto block text-block ${classes}"></div>`
   );
 
   $(`#global-stats #${rowId} .text-block`).append(
-    `<h3 class="mb-3">${title}</h3>`
+    `<h3 class="mt-3 mb-4">${title}</h3>`
   );
   $(`#global-stats #${rowId} .text-block`).append(
     `<p class="text-justify">${p}</p>`
   );
 };
 
-const createPlotBlock = (rowId) => {
+const createPlotBlock = (rowId, classes) => {
   $(`#global-stats #${rowId}`).append(
-    `<div class="col-12 col-md-6 block chart-block p-3 my-3"><canvas id="${rowId}-canvas"></canvas></div>`
+    `<div class="col-12 col-md-6 block chart-block ${classes}"><canvas id="${rowId}-canvas" class="mt-3 mb-2"></canvas></div>`
   );
 };
 
 const createGlobalStatsRow = (rowId, title, p) => {
   $(`#global-stats`).append(
-    `<div id="${rowId}-wrapper" class="row-wrapper"><div id="${rowId}" class="row chart-row my-4 px-3"></div></div>`
+    `<div id="${rowId}-wrapper" class="row-wrapper my-4"><div id="${rowId}" class="row chart-row mx-0 py-2"></div></div>`
   );
 
   if (
@@ -504,9 +509,9 @@ const createGlobalStatsRow = (rowId, title, p) => {
     checkIfMobile()
   ) {
     createTextBlock(rowId, title, p);
-    createPlotBlock(rowId);
+    createPlotBlock(rowId, "pr-2");
   } else {
-    createPlotBlock(rowId);
+    createPlotBlock(rowId, "pl-2");
     createTextBlock(rowId, title, p);
   }
 };
@@ -516,7 +521,7 @@ const createModalButton = (buttonId, modalBodyId) => {
     .after(`<div class="row"><div class="col d-flex justify-content-center"><button
   id="${buttonId}"
   type="button"
-  class="btn btn-primary"
+  class="btn btn-sm btn-info"
   data-toggle="modal"
   data-target="#global-stats-method-modal"
 >
@@ -543,7 +548,7 @@ role="dialog"
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <div id="global-stats-method-modal-body" class="modal-body"></div>
+        <div id="global-stats-method-modal-body" class="modal-body mr-3"></div>
         <div class="modal-footer">
             <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
         </div>
@@ -551,10 +556,13 @@ role="dialog"
 </div>
 </div>`
   );
-  $(`#${modalBodyId}`)
-    .html(`The numbers shown on these charts are based on the <strong>BBG Explorer</strong> users only, thus 
-they do not reflect the entire reality of the boardgame community or even that of the BGG community. If a boardgame
-is not owned by any <strong>BGG Explorer</strong> user, it will not `);
+  $(`#${modalBodyId}`).html(`<ol>
+    <li class="text-justify">The numbers shown on these charts are based on the <em>BBG Explorer</em> users only, thus 
+they do not reflect the entire reality of the boardgame community or even that of the BGG community.</li>
+<li class="text-justify">If a boardgame is not owned by any <em>BGG Explorer</em> user, it will not be accounted for in these statistics.</li>
+<li class="text-justify">A sample of boardgames is presented in some of the charts in this section to serve as examples of the trend depicted, however the 
+trend line presented is still computed using the entire boardgame database available.</li>
+</ol>`);
 };
 
 const processYearHist = (histogram, yearMin, yearMax) => {

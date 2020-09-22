@@ -42,10 +42,9 @@ const getOverviewNumNodes = () => {
 const getLoadTimes = (n) => {
   const mapKeys = Object.keys(LOAD_TIME_MAP).reverse();
   for (let i = 0; i < mapKeys.length; i++) {
-    if (n > parseInt(mapKeys[i]))
-      return LOAD_TIME_MAP[mapKeys[i]];
+    if (n > parseInt(mapKeys[i])) return LOAD_TIME_MAP[mapKeys[i]];
   }
-}
+};
 
 const getNodeYPosition = (index, numItems) => {
   if (numItems <= COLLECTION_OVERVIEW_NUM_NODES / 2) {
@@ -268,9 +267,15 @@ const populateUserCard = (collection) => {
   const playsId = "#user-profile-plays";
   const yearId = "#user-profile-year";
   const countryId = "#user-profile-country";
+  const loginId = "#user-profile-login";
+  const updatedId = "#user-profile-updated";
 
   $(helloId).html(
-    `Hey ${collection.firstName ? jsUcfirst(collection.firstName) : jsUcfirst(collection.username)}`
+    `Hey ${
+      collection.firstName
+        ? jsUcfirst(collection.firstName)
+        : jsUcfirst(collection.username)
+    }`
   );
   $(usernameId).text(collection.username);
   $(nameId).text(collection.firstName + " " + collection.lastName);
@@ -283,6 +288,17 @@ const populateUserCard = (collection) => {
   $(countryId).text(collection.country ? collection.country : "N/A");
   $(itemsId).text(collection.totalItems);
   $(playsId).text(collection.totalPlays ? collection.totalPlays : "N/A");
+  $(loginId).text(
+    collection.lastLogin ? collection.lastLogin.split("T")[0] : "N/A"
+  );
+  $(updatedId).text(
+    collection.lastUpdated ? collection.lastUpdated.split("T")[0] : "N/A"
+  );
+  $(updatedId).append(
+    `<span id="updated-icon" class="fas fa-sync-alt p-2 ml-2"></span>`
+  );
+
+  createUpdateBtnEL(collection);
 };
 
 // WAYPOINTS
@@ -474,7 +490,7 @@ const genBoardgameNamesHtml = (items, classes) => {
 const showIgnoredBoardgamesModal = (ignoredItems) => {
   const newHtml = `<p class="text-justify">In order to avoid extensive computation times and 
   preserve the statistical accuracy of the data presented, boardgames with less than 
-  <em>${BOARDGAME_SAMPLE_OWNED_THRESHOLD}</em> owners are not considered in the data presented here. This includes <em>${ignoredItems.length}</em>
+  <em>200</em> owners are not considered in the data presented here. This includes <em>${ignoredItems.length}</em>
   boargames in your collection.</p>`;
 
   $("#ignored-boardgames-modal-body").prepend(newHtml);
@@ -504,29 +520,90 @@ const getBucketedBoardgameSample = async (n, splits, ownersTresh, field) => {
     const gte = splits[i];
     const lte = splits[i + 1];
 
-    const response = await axios(`${baseUrl}${field}=${gte},${lte}&owned=${ownersTresh}`);
+    const response = await axios(
+      `${baseUrl}${field}=${gte},${lte}&owned=${ownersTresh}`
+    );
     response.data.forEach((d) => sample.push(d));
   }
 
   return sample;
 };
 
-const changeBootstrapClasses = () => {
 
-  if (checkIfMobile()) {
-    $("#user-profile-btn-group").removeClass("btn-group-lg");
-    $("#user-profile-btn-group").addClass("btn-group-md");
-    $(".btn-group-sm .btn").removeClass("mx-1")
-    $(".btn-group-sm .btn").css("margin-left", "2px")
-    $(".btn-group-sm .btn").css("margin-right", "2px")
-  }
+function jsUcfirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+const getBoardgameUniquePeople = async (id, peopleType) => {
+  const boardgameResponse = await axios.get(`${API_URL}/boardgames/${id}`);
+  return boardgameResponse.data[peopleType].length;
 };
 
+const getDateDiffInHours = (date) => {
+  const currentDate = new Date();
 
-function jsUcfirst(string) 
-{
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  const inputDate = new Date(date);
+
+  const dateDiff = currentDate - inputDate;
+
+  return dateDiff / 1000 / 60 / 60;
+};
+
+const createUpdateBtnEL = (collection) => {
+  if (
+    getDateDiffInHours(collection.lastUpdated) < COLLECTION_MANUAL_UPDATE_TRESH
+  ) {
+    $("#updated-icon").css("color", BACKGROUND_COLOR);
+    $("#updated-icon").css("background-color", "transparent");
+    $("#updated-icon").css("cursor", "default");
+    $("#updated-icon").attr("data-toggle", "tooltip");
+    $("#updated-icon").attr(
+      "title",
+      `Collections can only be updated once every ${COLLECTION_MANUAL_UPDATE_TRESH} hours.`
+    );
+  } else {
+    $("#updated-icon").on("click", async function () {
+      $(
+        "#user-profile-updated"
+      ).html(`<div><span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+      Updating</div>`);
+      $("#user-profile-updated").attr("data-toggle", "tooltip");
+      $("#user-profile-updated").attr(
+        "title",
+        "This page will automatically be refreshed once the update is finished."
+      );
+
+      await axios.post(`${API_URL}/collections/${collection.username}/enrich`);
+
+      // Periodically check if collection was enriched
+      const intervalID = setInterval(async function () {
+        response = await axios.get(
+          `${API_URL}/collections/${collection.username}/enrich`
+        );
+
+        if (
+          response.status == 200 &&
+          getDateDiffInHours(response.data.lastUpdated) <
+            COLLECTION_MANUAL_UPDATE_TRESH
+        ) {
+          await clearInterval(intervalID);
+          const collection = response.data;
+          const compressedCollection = LZUTF8.compress(
+            JSON.stringify(collection),
+            {
+              outputEncoding: "StorageBinaryString",
+            }
+          );
+
+          window.localStorage.clear();
+          window.localStorage.setItem("collection", compressedCollection);
+
+          location.reload();
+        }
+      }, 10000);
+    });
+  }
+};
 
 // const storeCollectionItemsToLocalStorage = (items, splitSize) => {
 //   if (items.length < 100)

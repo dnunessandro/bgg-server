@@ -124,6 +124,7 @@ router.get("/collections/:username", async (req, res) => {
 // Enriches Collection
 router.post("/collections/:username/enrich", async (req, res) => {
   try {
+    const date = new Date()
     const username = req.params.username.toLowerCase();
     const collection = await Collection.findOne({
       username,
@@ -157,9 +158,10 @@ router.post("/collections/:username/enrich", async (req, res) => {
     collectionObj = filter.includes("plays")
       ? await enrichCollectionWithPlays(collectionObj)
       : collectionObj;
+    
+    collectionObj.lastUpdated = date.getTime()
 
     // Save Insights to original collection
-    const date = new Date();
     await Collection.updateOne(
       { username },
       {

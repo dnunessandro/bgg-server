@@ -9,6 +9,7 @@ const LIGHT_COLOR = "#ffcdb2";
 const LIGHT_COLOR_02 = "#ffcdb233";
 const DARK_COLOR = "#b5838d";
 const NEUTRAL_COLOR = "#6d6875";
+const BACKGROUND_COLOR = "#eee"
 
 const GREEN_COLOR = "#81b29a";
 const YELLOW_COLOR = "#f2cc8f";
@@ -28,10 +29,9 @@ const CONTAINER_FLUID_BREAKPOINT = 992;
 // LOGIN ///////////////
 const LOAD_TIME_MAP = {
   0: [1, 2],
-  100: [1, 3],
-  200: [2, 4],
-  300: [3, 5],
-  500: [5, 7],
+  300: [2, 3],
+  500: [3, 5],
+  700: [5, 8],
 };
 
 // COLLECTION OVERVIEW ///////////////
@@ -40,9 +40,10 @@ const MAX_NODE_RADIUS_FACTOR = checkIfMobile() ? 0.07 : 0.1;
 const MAX_NODE_RADIUS_ABS = 50;
 const DEFAULT_NODE_RADIUS_FACTOR = 0.07;
 const MAX_NODE_LABEL_CHARACTERS = 30;
-const SVG_HEIGHT_MOBILE_FACTOR = 1.2;
+const SVG_HEIGHT_MOBILE_FACTOR = 1.3;
+const LABEL_X_PAD_FACTOR = 0.05
 
-const NODE_SIZE_DEFAULT_FIELD = "userRating";
+const NODE_SIZE_DEFAULT_FIELD = "averageRating";
 const NODE_SORT_DEFAULT_FIELD = "name";
 
 const OVERVIEW_SP_BTN_TO_FIELD_MAP = {
@@ -366,3 +367,6 @@ const FIELD_TOOLTIP_SUFFIX_MAP = {
 
 const SPIDER_CHART_ENTRIES = 10;
 const INSIGHTS_HIGHLIGHT_COLOR = YELLOW_COLOR;
+
+// USER INFO
+const COLLECTION_MANUAL_UPDATE_TRESH = 3
