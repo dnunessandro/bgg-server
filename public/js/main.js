@@ -93,7 +93,6 @@ const run = async () => {
   // Turn on tooltips
   $('[data-toggle="tooltip"]').tooltip();
 
-
 };
 
 run();

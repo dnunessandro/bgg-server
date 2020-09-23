@@ -82,8 +82,8 @@ const NODE_SIZE_SCALE_DOMAIN_MAP = {
 };
 
 const NUM_NODES_BREAKPOINT_MAP = {
-  0: 40,
-  576: 50,
+  0: 25,
+  576: 40,
   768: 60,
   992: 70,
   1200: 80,

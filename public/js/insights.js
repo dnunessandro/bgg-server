@@ -685,12 +685,7 @@ const runInsights = async (collection) => {
   }
 
   // Remove Unused Titles
-  removeUnusedInsightsTitles([
-    "plays",
-    "ratings",
-    "trends",
-    "features",
-  ]);
+  removeUnusedInsightsTitles(["plays", "ratings", "trends", "features"]);
 
   // Enable Bootstrap Tooltips
   $(function () {
@@ -2585,12 +2580,16 @@ const createInsightCard = (
     card
       .find(".card-body")
       .append(
-        `<a class="btn btn-primary mb-2 mx-5 d-flex justify-content-center" data-toggle="collapse" href="#${insightCardData.id}-note" role="button"><span class="fas fa-exclamation-circle pr-1"></span>Note</a>`
+        `<a class="btn btn-primary mb-2 mx-5 d-flex justify-content-center ${
+          checkIfMobile() ? "btn-sm" : ""
+        }" data-toggle="collapse" href="#${
+          insightCardData.id
+        }-note" role="button"><span class="fas fa-exclamation-circle pr-1"></span>Note</a>`
       );
     card
       .find(".card-body")
       .append(
-        `<p class="collapse card-text text-muted p-2 show-note-btn"' id="${insightCardData.id}-note">${insightCardData.note}</p>`
+        `<p class="collapse card-text text-muted p-2 show-note-btn" id="${insightCardData.id}-note">${insightCardData.note}</p>`
       );
   }
 
@@ -2598,7 +2597,15 @@ const createInsightCard = (
     card
       .find(".card-body")
       .append(
-        `<a id=${insightCardData.id}-show-more-button class="btn btn-primary d-flex justify-content-center mx-5 mb-2 collapsed show-more-btn" data-toggle="collapse" href="#${insightCardData.id}-show-more-text" role="button">${insightCardData.showMoreButtonTitle}</a>`
+        `<a id=${
+          insightCardData.id
+        }-show-more-button class="btn btn-primary d-flex justify-content-center mx-5 mb-2 collapsed show-more-btn ${
+          checkIfMobile() ? "btn-sm" : ""
+        }" data-toggle="collapse" href="#${
+          insightCardData.id
+        }-show-more-text" role="button">${
+          insightCardData.showMoreButtonTitle
+        }</a>`
       );
     card
       .find(".card-body")
@@ -2621,7 +2628,7 @@ const createInsightCard = (
         `<img class="card-img-top p-2" src=${insightCardData.image}>`
       )
     : card.append(
-        `<canvas id="${insightCardData.image}" class="card-img-top"></canvas>`
+        `<canvas class="card-img-top" id="${insightCardData.image}"></canvas>`
       );
 
   if (
@@ -3257,6 +3264,10 @@ const removeUnusedInsightsTitles = (prefixList) => {
       $(`#${e}-insights-grid`).remove();
       $(`#${e}-insights-grid-title`).remove();
       $(`#${e}-insights-btn-group`).remove();
+      $(`.${e}-insights-link`).css("opacity", 0.5);
+      $(`.${e}-insights-link`).attr("data-toggle", "tooltip");
+      $(`.${e}-insights-link`).attr("title", `Insights could not be generated for this category due to
+      absent or insufficient data.`);
     }
   });
 };

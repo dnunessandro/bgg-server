@@ -400,7 +400,7 @@ const drawGlobalStatsTrendChart = (
 };
 
 const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
-  
+
   // Get Years
   const years = Object.keys(statsSeries);
 
@@ -454,6 +454,7 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
       },
     },
   });
+
 
   years.forEach((y, i) => {
     const color = hexToRgb(SPIDER_CHART_COLORS[i]);

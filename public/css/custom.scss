@@ -730,8 +730,12 @@ a {
     column-count: 3 !important;
   }
   p {
-    font-size: 1.1rem;
-    line-height: 2.1rem;
+    font-size: 1rem;
+    line-height: 1.8rem;
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 0.9rem;
+      line-height: 1.7rem;
+    }
   }
   h2 {
     @media (max-width: $bootstrap-class-change-breakpoint) {

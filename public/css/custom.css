@@ -11541,8 +11541,15 @@ a {
 }
 
 .card-columns p {
-  font-size: 1.1rem;
-  line-height: 2.1rem;
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+@media (max-width: 768px) {
+  .card-columns p {
+    font-size: 0.9rem;
+    line-height: 1.7rem;
+  }
 }
 
 @media (max-width: 768px) {
