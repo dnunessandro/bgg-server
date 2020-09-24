@@ -9,7 +9,6 @@ const {
 } = require("../utils/math");
 
 const updateCollectionStatistics = async (statistics) => {
-
   // Get Total Collections
   statistics.stats.set("nCollections", await getNCollections());
 
@@ -1315,10 +1314,7 @@ const getCollectionPrctKickstarterHist = async () => {
 
 const getYearRegisteredHist = async () => {
   let statArray = await Collection.find({}).select(
-    "insights.yearRegistered -_id"
-  );
-  statArray = statArray.filter((c) =>
-    Object.keys(c.toObject()).includes("insights")
+    "yearRegistered -_id"
   );
 
   const yearRegisteredArray = statArray.map((b) => b.yearRegistered);
