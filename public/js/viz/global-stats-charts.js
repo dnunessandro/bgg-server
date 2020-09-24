@@ -9,7 +9,7 @@ const drawGlobalStatsHistChart = (
   const canvas = $(`#${canvasId}`).get(0);
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "400px";
+    "canvasHeight" in options ? options.canvasHeight : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -115,7 +115,7 @@ const drawGlobalStatsCorrChart = (
 
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "400px";
+    "canvasHeight" in options ? options.canvasHeight : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -285,7 +285,7 @@ const drawGlobalStatsTrendChart = (
   const canvas = $(`#${canvasId}`).get(0);
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "400px";
+    "canvasHeight" in options ? options.canvasHeight : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -425,7 +425,7 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
   const canvas = $(`#${canvasId}`).get(0);
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "400px";
+    "canvasHeight" in options ? options.canvasHeight : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -509,11 +509,11 @@ const createGlobalStatsRow = (rowId, title, p) => {
       .includes("text-block") ||
     checkIfMobile()
   ) {
-    createTextBlock(rowId, title, p);
+    createTextBlock(rowId, title, p, "pl-4");
     createPlotBlock(rowId, "pr-2");
   } else {
     createPlotBlock(rowId, "pl-2");
-    createTextBlock(rowId, title, p);
+    createTextBlock(rowId, title, p, "pr-4");
   }
 };
 
@@ -637,7 +637,7 @@ const getStatDistAtYear = (statDist, year) => {
 //     // canvas.height = '200px'
 //     canvas.style.width = "100%";
 //     canvas.style.height =
-//       "canvasHeight" in options ? options.canvasHeight : "400px";
+//       "canvasHeight" in options ? options.canvasHeight : "500px";
 //     canvas.width = canvas.offsetWidth;
 //     canvas.height = canvas.offsetHeight;
 

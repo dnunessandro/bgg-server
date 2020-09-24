@@ -2628,7 +2628,7 @@ const createInsightCard = (
         `<img class="card-img-top p-2" src=${insightCardData.image}>`
       )
     : card.append(
-        `<canvas class="card-img-top" id="${insightCardData.image}"></canvas>`
+        `<canvas class="card-img-top p-2" id="${insightCardData.image}"></canvas>`
       );
 
   if (

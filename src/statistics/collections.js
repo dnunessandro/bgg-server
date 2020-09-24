@@ -9,218 +9,156 @@ const {
 } = require("../utils/math");
 
 const updateCollectionStatistics = async (statistics) => {
-  let collectionArray = await Collection.find({});
-  collectionArray = collectionArray.filter((c) =>
-    Object.keys(c.toObject()).includes("insights")
-  );
 
   // Get Total Collections
-  statistics.stats.set("nCollections", getNCollections(collectionArray));
+  statistics.stats.set("nCollections", await getNCollections());
 
   // Get Total Items
-  statistics.stats.set("nItems", getNItems(collectionArray));
-  getNItems;
+  statistics.stats.set("nItems", await getNItems());
 
   // Get Average Collection Items
-  statistics.stats.set(
-    "avgTotalItems",
-    getCollectionAvgTotalItems(collectionArray)
-  );
+  statistics.stats.set("avgTotalItems", await getCollectionAvgTotalItems());
 
   // Get Average Total Plays
-  statistics.stats.set("avgPlays", getCollectionAvgPlays(collectionArray));
+  statistics.stats.set("avgPlays", await getCollectionAvgPlays());
 
   // Get Average Played Time
-  statistics.stats.set(
-    "avgTimePlayed",
-    parseFloat(getCollectionAvgTimePlayed(collectionArray).toFixed(2))
-  );
+  statistics.stats.set("avgTimePlayed", await getCollectionAvgTimePlayed());
 
   // Get Average Played Time
-  statistics.stats.set(
-    "avgNotPlayed",
-    getCollectionAvgNotPlayed(collectionArray)[0]
-  );
-  statistics.stats.set(
-    "avgPrctNotPlayed",
-    getCollectionAvgNotPlayed(collectionArray)[1]
-  );
+  const avgNotPlayedArray = await getCollectionAvgNotPlayed();
+  statistics.stats.set("avgNotPlayed", avgNotPlayedArray[0]);
+  statistics.stats.set("avgPrctNotPlayed", avgNotPlayedArray[1]);
 
   // Get Average Value
-  statistics.stats.set("avgValue", getCollectionAvgValue(collectionArray));
+  statistics.stats.set("avgValue", await getCollectionAvgValue());
 
   // Get Average Weight
-  statistics.stats.set("avgWeight", getCollectionAvgWeight(collectionArray));
+  statistics.stats.set("avgWeight", await getCollectionAvgWeight());
 
   // Get Average Rating
-  statistics.stats.set("avgRating", getCollectionAvgRating(collectionArray));
+  statistics.stats.set("avgRating", await getCollectionAvgRating());
 
   // Get Average BGG Rating
-  statistics.stats.set(
-    "avgBggRating",
-    getCollectionAvgBggRating(collectionArray)
-  );
+  statistics.stats.set("avgBggRating", await getCollectionAvgBggRating());
 
   // Get Average Avg Rating
-  statistics.stats.set(
-    "avgAvgRating",
-    getCollectionAvgAvgRating(collectionArray)
-  );
+  statistics.stats.set("avgAvgRating", await getCollectionAvgAvgRating());
 
   // Get Average Rating Diff
-  statistics.stats.set(
-    "avgRatingDiff",
-    getCollectionAvgRatingDiff(collectionArray)
-  );
+  statistics.stats.set("avgRatingDiff", await getCollectionAvgRatingDiff());
 
   // Get Rating Average Rating Corr
   statistics.stats.set(
     "ratingAvgRatingCorr",
-    getCollectionRatingAvgRatingCorr(collectionArray)
+    await getCollectionRatingAvgRatingCorr()
   );
 
   // Get Rating Weight Corr
   statistics.stats.set(
     "ratingWeightCorr",
-    getCollectionRatingWeightCorr(collectionArray)
+    await getCollectionRatingWeightCorr()
   );
 
   // Get Rating Recommended Players Corr
   statistics.stats.set(
     "ratingRecommendedPlayersCorr",
-    getCollectionRatingRecommendedPlayersCorr(collectionArray)
+    await getCollectionRatingRecommendedPlayersCorr()
   );
 
   // Get Rating Play Time Corr
   statistics.stats.set(
     "ratingPlayTimeCorr",
-    getCollectionRatingPlayTimeCorr(collectionArray)
+    await getCollectionRatingPlayTimeCorr()
   );
 
   // Get Rating Max Players Corr
   statistics.stats.set(
     "ratingMaxPlayersCorr",
-    getCollectionRatingMaxPlayersCorr(collectionArray)
+    await getCollectionRatingMaxPlayersCorr()
   );
 
   // Get Rating Plays Corr
-  statistics.stats.set(
-    "ratingPlaysCorr",
-    getCollectionRatingPlaysCorr(collectionArray)
-  );
+  statistics.stats.set("ratingPlaysCorr", await getCollectionRatingPlaysCorr());
 
   // Get Rating Time Played Corr
   statistics.stats.set(
     "ratingTimePlayedCorr",
-    getCollectionRatingTimePlayedCorr(collectionArray)
+    await getCollectionRatingTimePlayedCorr()
   );
 
   // Get Rating Price Corr
-  statistics.stats.set(
-    "ratingPriceCorr",
-    getCollectionRatingPriceCorr(collectionArray)
-  );
+  statistics.stats.set("ratingPriceCorr", await getCollectionRatingPriceCorr());
 
   // Get Rating Year Published Corr
-  statistics.stats.set(
-    "ratingYearCorr",
-    getCollectionRatingYearCorr(collectionArray)
-  );
+  statistics.stats.set("ratingYearCorr", await getCollectionRatingYearCorr());
 
   // Get Plays Weight Corr
-  statistics.stats.set(
-    "playsWeightCorr",
-    getCollectionPlaysWeightCorr(collectionArray)
-  );
+  statistics.stats.set("playsWeightCorr", await getCollectionPlaysWeightCorr());
 
   // Get Plays Play Time Corr
   statistics.stats.set(
     "playsPlayTimeCorr",
-    getCollectionPlaysPlayTimeCorr(collectionArray)
+    await getCollectionPlaysPlayTimeCorr()
   );
 
   // Get Plays Recommended Players Corr
   statistics.stats.set(
     "playsRecommendedPlayersCorr",
-    getCollectionPlaysRecommendedPlayersCorr(collectionArray)
+    await getCollectionPlaysRecommendedPlayersCorr()
   );
 
   // Get Plays Max Players Corr
   statistics.stats.set(
     "playsMaxPlayersCorr",
-    getCollectionPlaysMaxPlayersCorr(collectionArray)
+    await getCollectionPlaysMaxPlayersCorr()
   );
 
   // Get Plays Price Corr
-  statistics.stats.set(
-    "playsPriceCorr",
-    getCollectionPlaysPriceCorr(collectionArray)
-  );
+  statistics.stats.set("playsPriceCorr", await getCollectionPlaysPriceCorr());
 
   // Get Avg Publish Year
-  statistics.stats.set("avgYear", getCollectionAvgYear(collectionArray));
+  statistics.stats.set("avgYear", await getCollectionAvgYear());
 
   // Get Most Common Publish Year
-  statistics.stats.set(
-    "mostCommonYear",
-    getCollectionMostCommonYear(collectionArray)
-  );
+  statistics.stats.set("mostCommonYear", await getCollectionMostCommonYear());
 
   // Get Avg Recommended Players
   statistics.stats.set(
     "avgRecommendedPlayers",
-    getCollectionAvgRecommendedPlayers(collectionArray)
+    await getCollectionAvgRecommendedPlayers()
   );
 
   // Get Avg Max Players
-  statistics.stats.set(
-    "avgMaxPlayers",
-    getCollectionAvgMaxPlayers(collectionArray)
-  );
+  statistics.stats.set("avgMaxPlayers", await getCollectionAvgMaxPlayers());
 
   // Get Median Max Players
   statistics.stats.set(
     "medianMaxPlayers",
-    getCollectionMedianMaxPlayers(collectionArray)
+    await getCollectionMedianMaxPlayers()
   );
 
   // Get Avg Min Players
-  statistics.stats.set(
-    "avgMinPlayers",
-    getCollectionAvgMinPlayers(collectionArray)
-  );
+  statistics.stats.set("avgMinPlayers", await getCollectionAvgMinPlayers());
 
   // Get Avg Price
-  statistics.stats.set("avgPrice", getCollectionAvgPrice(collectionArray));
+  statistics.stats.set("avgPrice", await getCollectionAvgPrice());
 
   // Get Median Price
-  statistics.stats.set(
-    "medianPrice",
-    getCollectionMedianPrice(collectionArray)
-  );
+  statistics.stats.set("medianPrice", await getCollectionMedianPrice());
 
   // Get Average Total Price
-  statistics.stats.set(
-    "avgTotalPrice",
-    getCollectionAvgTotalPrice(collectionArray)
-  );
+  statistics.stats.set("avgTotalPrice", await getCollectionAvgTotalPrice());
 
   // Get Average Top 100
-  statistics.stats.set("avgTop100", getCollectionAvgTop100(collectionArray)[0]);
-  statistics.stats.set(
-    "avgPrctTop100",
-    getCollectionAvgTop100(collectionArray)[1]
-  );
+  const top100Array = await getCollectionAvgTop100();
+  statistics.stats.set("avgTop100", top100Array[0]);
+  statistics.stats.set("avgPrctTop100", top100Array[1]);
 
   // Get Average Kickstrater
-  statistics.stats.set(
-    "avgKickstarter",
-    getCollectionAvgKickstarter(collectionArray)[0]
-  );
-  statistics.stats.set(
-    "avgPrctKickstarter",
-    getCollectionAvgKickstarter(collectionArray)[1]
-  );
+  const kickstarterArray = await getCollectionAvgKickstarter();
+  statistics.stats.set("avgKickstarter", kickstarterArray[0]);
+  statistics.stats.set("avgPrctKickstarter", kickstarterArray[1]);
 
   // // Get Most Played Histogram
   // statistics.stats.set(
@@ -247,612 +185,699 @@ const updateCollectionStatistics = async (statistics) => {
   // );
 
   // Get Avg Plays Histogram
-  statistics.stats.set(
-    "avgPlaysHist",
-    getCollectionAvgPlaysHist(collectionArray)
-  );
+  statistics.stats.set("avgPlaysHist", await getCollectionAvgPlaysHist());
 
   // Get Avg Time Played Histogram
   statistics.stats.set(
     "avgTimePlayedHist",
-    getCollectionAvgTimePlayedHist(collectionArray)
+    await getCollectionAvgTimePlayedHist()
   );
 
   // Get Prct Not Played Histogram
   statistics.stats.set(
     "prctNotPlayedHist",
-    getCollectionPrctNotPlayedHist(collectionArray)
+    await getCollectionPrctNotPlayedHist()
   );
 
   // Get Average Value Histogram
-  statistics.stats.set(
-    "avgValueHist",
-    getCollectionAvgValueHist(collectionArray)
-  );
+  statistics.stats.set("avgValueHist", await getCollectionAvgValueHist());
 
   // Get Average Weight Histogram
-  statistics.stats.set(
-    "avgWeightHist",
-    getCollectionAvgWeightHist(collectionArray)
-  );
+  statistics.stats.set("avgWeightHist", await getCollectionAvgWeightHist());
 
   // Get Average User Rating Histogram
-  statistics.stats.set(
-    "avgRatingHist",
-    getCollectionAvgRatingHist(collectionArray)
-  );
+  statistics.stats.set("avgRatingHist", await getCollectionAvgRatingHist());
 
   // Get Average Average Rating Histogram
   statistics.stats.set(
     "avgAvgRatingHist",
-    getCollectionAvgAvgRatingHist(collectionArray)
+    await getCollectionAvgAvgRatingHist()
   );
 
   // Get Average Bgg Rating Histogram
   statistics.stats.set(
     "avgBggRatingHist",
-    getCollectionAvgBggRatingHist(collectionArray)
+    await getCollectionAvgBggRatingHist()
   );
 
   // Get Rating Diff Histogram
   statistics.stats.set(
     "avgRatingDiffHist",
-    getCollectionAvgRatingDiffHist(collectionArray)
+    await getCollectionAvgRatingDiffHist()
   );
 
   // Get Average Publish Year Histogram
-  statistics.stats.set(
-    "avgYearHist",
-    getCollectionAvgYearHist(collectionArray)
-  );
+  statistics.stats.set("avgYearHist", await getCollectionAvgYearHist());
 
   // Get Average Most Common Year Histogram
   statistics.stats.set(
     "mostCommonYearHist",
-    getCollectionMostCommonYearHist(collectionArray)
+    await getCollectionMostCommonYearHist()
   );
 
   // Get Average Recommended Players Histogram
   statistics.stats.set(
     "avgRecommendedPlayersHist",
-    getCollectionAvgRecommendedPlayersHist(collectionArray)
+    await getCollectionAvgRecommendedPlayersHist()
   );
 
   // Get Average Max Players Histogram
   statistics.stats.set(
     "avgMaxPlayersHist",
-    getCollectionAvgMaxPlayersHist(collectionArray)
+    await getCollectionAvgMaxPlayersHist()
   );
 
   // Get Median Max Players Histogram
   statistics.stats.set(
     "medianMaxPlayersHist",
-    getCollectionMedianMaxPlayersHist(collectionArray)
+    await getCollectionMedianMaxPlayersHist()
   );
 
   // Get Average Min Players Histogram
   statistics.stats.set(
     "avgMinPlayersHist",
-    getCollectionAvgMinPlayersHist(collectionArray)
+    await getCollectionAvgMinPlayersHist()
   );
 
   // Get Average Price Histogram
-  statistics.stats.set(
-    "avgPriceHist",
-    getCollectionAvgPriceHist(collectionArray)
-  );
+  statistics.stats.set("avgPriceHist", await getCollectionAvgPriceHist());
 
   // Get Median Price Histogram
-  statistics.stats.set(
-    "medianPriceHist",
-    getCollectionMedianPriceHist(collectionArray)
-  );
+  statistics.stats.set("medianPriceHist", await getCollectionMedianPriceHist());
 
   // Get Total Price Histogram
-  statistics.stats.set(
-    "totalPriceHist",
-    getCollectionTotalPriceHist(collectionArray)
-  );
+  statistics.stats.set("totalPriceHist", await getCollectionTotalPriceHist());
 
   // Get Top 100 Histogram
-  statistics.stats.set(
-    "top100Hist",
-    getCollectionPrctTop100Hist(collectionArray)
-  );
+  statistics.stats.set("top100Hist", await getCollectionPrctTop100Hist());
 
   // Get Kickstarter Histogram
   statistics.stats.set(
     "kickstarterHist",
-    getCollectionPrctKickstarterHist(collectionArray)
+    await getCollectionPrctKickstarterHist()
   );
 
   // Get Year Registered Histogram
-  statistics.stats.set(
-    "yearRegisterdHist",
-    getYearRegisteredHist(collectionArray)
-  );
+  statistics.stats.set("yearRegisterdHist", await getYearRegisteredHist());
 
   // Get Category Histogram
-  statistics.stats.set(
-    "categoryHist",
-    getStatHist(collectionArray, "category")
-  );
+  statistics.stats.set("categoryHist", await getStatHist("category"));
 
   // Get Mechanic Histogram
-  statistics.stats.set(
-    "mechanicHist",
-    getStatHist(collectionArray, "mechanic")
-  );
+  statistics.stats.set("mechanicHist", await getStatHist("mechanic"));
 
   // Get Family Histogram
-  statistics.stats.set("familyHist", getStatHist(collectionArray, "family"));
+  statistics.stats.set("familyHist", await getStatHist("family"));
 
   // Get Publisher Histogram
-  statistics.stats.set(
-    "publisherHist",
-    getStatHist(collectionArray, "publisher")
-  );
+  statistics.stats.set("publisherHist", await getStatHist("publisher"));
 
   // Get Designer Histogram
-  statistics.stats.set(
-    "designerHist",
-    getStatHist(collectionArray, "designer")
-  );
+  statistics.stats.set("designerHist", await getStatHist("designer"));
 
   // Get Artist Histogram
-  statistics.stats.set("artistHist", getStatHist(collectionArray, "artist"));
+  statistics.stats.set("artistHist", await getStatHist("artist"));
 
   return statistics;
 };
 
-const getNCollections = (collectionArray) => {
-  return collectionArray.length;
+const getNCollections = async () => {
+  const nCollections = await Collection.countDocuments({});
+  return nCollections;
 };
 
-const getNItems = (collectionArray) => {
-  return sum(collectionArray.map((c) => c.totalItems));
+const getNItems = async () => {
+  const statArray = await Collection.find({}).select("totalItems -_id");
+  return sum(statArray.map((c) => c.totalItems));
 };
 
-const getCollectionAvgTotalItems = (collectionsArray) => {
-  return parseInt(average(collectionsArray.map((c) => c.totalItems)));
+const getCollectionAvgTotalItems = async () => {
+  const statArray = await Collection.find({}).select("totalItems -_id");
+  return parseInt(average(statArray.map((c) => c.totalItems)));
 };
 
-const getCollectionAvgPlays = (collectionsArray) => {
+const getCollectionAvgPlays = async () => {
+  let statArray = await Collection.find({}).select("insights.avgPlays -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return parseInt(
     average(
-      collectionsArray
+      statArray
         .filter((c) => c.insights.get("avgPlays") != undefined)
         .map((c) => c.insights.get("avgPlays").avgPlays)
     )
   );
 };
 
-const getCollectionAvgTimePlayed = (collectionsArray) => {
+const getCollectionAvgTimePlayed = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgTimePlayed -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return parseInt(
     average(
-      collectionsArray
+      statArray
         .filter((c) => c.insights.get("avgTimePlayed") != undefined)
         .map((c) => c.insights.get("avgTimePlayed").avgTimePlayed)
     )
   );
 };
 
-const getCollectionAvgNotPlayed = (collectionsArray) => {
+const getCollectionAvgNotPlayed = async () => {
+  let statArray = await Collection.find({}).select("insights.notPlayed -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   avgNotPlayed = parseInt(
     average(
-      collectionsArray
+      statArray
         .filter((c) => c.insights.get("notPlayed") != undefined)
         .map((c) => c.insights.get("notPlayed").nNotPlayed)
     )
   );
   avgPrctNotPlayed = average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("notPlayed") != undefined)
       .map((c) => c.insights.get("notPlayed").prctNotPlayed)
   );
   return [avgNotPlayed, avgPrctNotPlayed];
 };
 
-const getCollectionAvgValue = (collectionsArray) => {
+const getCollectionAvgValue = async () => {
+  let statArray = await Collection.find({}).select("insights.avgValue -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgValue") != undefined)
       .map((c) => c.insights.get("avgValue").avgValue)
   );
 };
 
-const getCollectionAvgWeight = (collectionsArray) => {
+const getCollectionAvgWeight = async () => {
+  let statArray = await Collection.find({}).select("insights.avgWeight -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgWeight") != undefined)
       .map((c) => c.insights.get("avgWeight").avgWeight)
   );
 };
 
-const getCollectionAvgRating = (collectionsArray) => {
+const getCollectionAvgRating = async () => {
+  let statArray = await Collection.find({}).select("insights.avgRating -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgRating") != undefined)
       .map((c) => c.insights.get("avgRating").avgUserRating)
   );
 };
 
-const getCollectionAvgBggRating = (collectionsArray) => {
+const getCollectionAvgBggRating = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgBggRating -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgBggRating") != undefined)
       .map((c) => c.insights.get("avgBggRating").avgBggRating)
   );
 };
 
-const getCollectionAvgAvgRating = (collectionsArray) => {
+const getCollectionAvgAvgRating = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgAvgRating -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgAvgRating") != undefined)
       .map((c) => c.insights.get("avgAvgRating").avgAvgRating)
   );
 };
 
-const getCollectionAvgRatingDiff = (collectionsArray) => {
+const getCollectionAvgRatingDiff = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgRatingDiff -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgRatingDiff") != undefined)
       .map((c) => c.insights.get("avgRatingDiff").avgRatingDiff)
   );
 };
 
-const getCollectionRatingAvgRatingCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingAvgRatingCorr") != undefined
+const getCollectionRatingAvgRatingCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingAvgRatingCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingAvgRatingCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingAvgRatingCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingAvgRatingCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingAvgRatingCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingAvgRatingCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingWeightCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingWeightCorr") != undefined
+const getCollectionRatingWeightCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingWeightCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingWeightCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingWeightCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingWeightCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingWeightCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingWeightCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingRecommendedPlayersCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingRecommendedPlayersCorr") != undefined
+const getCollectionRatingRecommendedPlayersCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingRecommendedPlayersCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingRecommendedPlayersCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
+      statArray.map(
         (c) => c.insights.get("ratingRecommendedPlayersCorr").pearsonr
       )
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
+      statArray.map(
         (c) => c.insights.get("ratingRecommendedPlayersCorr").spearmanr
       )
     ),
   };
 };
 
-const getCollectionRatingPlayTimeCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingPlayTimeCorr") != undefined
+const getCollectionRatingPlayTimeCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingPlayTimeCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingPlayTimeCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingPlayTimeCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingPlayTimeCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingPlayTimeCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingPlayTimeCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingMaxPlayersCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingMaxPlayersCorr") != undefined
+const getCollectionRatingMaxPlayersCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingMaxPlayersCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingMaxPlayersCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingMaxPlayersCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingMaxPlayersCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingMaxPlayersCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingMaxPlayersCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingPlaysCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingPlaysCorr") != undefined
+const getCollectionRatingPlaysCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingPlaysCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingPlaysCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingPlaysCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingPlaysCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingPlaysCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingPlaysCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingTimePlayedCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingTimePlayedCorr") != undefined
+const getCollectionRatingTimePlayedCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingTimePlayedCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingTimePlayedCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingTimePlayedCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingTimePlayedCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingTimePlayedCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingTimePlayedCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingPriceCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingPriceCorr") != undefined
+const getCollectionRatingPriceCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingPriceCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingPriceCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingPriceCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingPriceCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingPriceCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingPriceCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionRatingYearCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("ratingYearCorr") != undefined
+const getCollectionRatingYearCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.ratingYearCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("ratingYearCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingYearCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("ratingYearCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("ratingYearCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("ratingYearCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionPlaysWeightCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("playsWeightCorr") != undefined
+const getCollectionPlaysWeightCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.playsWeightCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("playsWeightCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsWeightCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("playsWeightCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsWeightCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("playsWeightCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionPlaysPlayTimeCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("playsPlayTimeCorr") != undefined
+const getCollectionPlaysPlayTimeCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.playsPlayTimeCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("playsPlayTimeCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsPlayTimeCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("playsPlayTimeCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsPlayTimeCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("playsPlayTimeCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionPlaysRecommendedPlayersCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("playsRecommendedPlayersCorr") != undefined
+const getCollectionPlaysRecommendedPlayersCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.playsRecommendedPlayersCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("playsRecommendedPlayersCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
+      statArray.map(
         (c) => c.insights.get("playsRecommendedPlayersCorr").pearsonr
       )
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
+      statArray.map(
         (c) => c.insights.get("playsRecommendedPlayersCorr").spearmanr
       )
     ),
   };
 };
 
-const getCollectionPlaysMaxPlayersCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("playsMaxPlayersCorr") != undefined
+const getCollectionPlaysMaxPlayersCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.playsMaxPlayersCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("playsMaxPlayersCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsMaxPlayersCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("playsMaxPlayersCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsMaxPlayersCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("playsMaxPlayersCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionPlaysPriceCorr = (collectionsArray) => {
-  const filteredCollectionsArray = collectionsArray.filter(
-    (c) => c.insights.get("playsPriceCorr") != undefined
+const getCollectionPlaysPriceCorr = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.playsPriceCorr -_id"
   );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
+    .filter((c) => c.insights.get("playsPriceCorr") != undefined);
+
   return {
     pearsonr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsPriceCorr").pearsonr
-      )
+      statArray.map((c) => c.insights.get("playsPriceCorr").pearsonr)
     ),
     spearmanr: average(
-      filteredCollectionsArray.map(
-        (c) => c.insights.get("playsPriceCorr").spearmanr
-      )
+      statArray.map((c) => c.insights.get("playsPriceCorr").spearmanr)
     ),
   };
 };
 
-const getCollectionAvgYear = (collectionsArray) => {
+const getCollectionAvgYear = async () => {
+  let statArray = await Collection.find({}).select("insights.avgYear -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return parseInt(
     average(
-      collectionsArray
+      statArray
         .filter((c) => c.insights.get("avgYear") != undefined)
         .map((c) => c.insights.get("avgYear").avgYear)
     )
   );
 };
 
-const getCollectionMostCommonYear = (collectionsArray) => {
+const getCollectionMostCommonYear = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.mostCommonYears -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return mode(
-    ...collectionsArray
+    ...statArray
       .filter((c) => c.insights.get("mostCommonYears") != undefined)
       .map((c) => c.insights.get("mostCommonYears").mostCommonYears)
   );
 };
 
-const getCollectionAvgRecommendedPlayers = (collectionsArray) => {
+const getCollectionAvgRecommendedPlayers = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgRecommendedPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgRecommendedPlayers") != undefined)
       .map((c) => c.insights.get("avgRecommendedPlayers").avgRecommendedPlayers)
   );
 };
 
-const getCollectionAvgMaxPlayers = (collectionsArray) => {
+const getCollectionAvgMaxPlayers = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgMaxPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgMaxPlayers") != undefined)
       .map((c) => c.insights.get("avgMaxPlayers").avgMaxPlayers)
   );
 };
 
-const getCollectionMedianMaxPlayers = (collectionsArray) => {
+const getCollectionMedianMaxPlayers = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.medianMaxPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("medianMaxPlayers") != undefined)
       .map((c) => c.insights.get("medianMaxPlayers").medianMaxPlayers)
   );
 };
 
-const getCollectionAvgMinPlayers = (collectionsArray) => {
+const getCollectionAvgMinPlayers = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgMinPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgMinPlayers") != undefined)
       .map((c) => c.insights.get("avgMinPlayers").avgMinPlayers)
   );
 };
 
-const getCollectionAvgPrice = (collectionsArray) => {
+const getCollectionAvgPrice = async () => {
+  let statArray = await Collection.find({}).select("insights.avgPrice -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("avgPrice") != undefined)
       .map((c) => c.insights.get("avgPrice").avgPrice)
   );
 };
 
-const getCollectionMedianPrice = (collectionsArray) => {
+const getCollectionMedianPrice = async () => {
+  let statArray = await Collection.find({}).select("insights.medianPrice -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("medianPrice") != undefined)
       .map((c) => c.insights.get("medianPrice").medianPrice)
   );
 };
 
-const getCollectionAvgTotalPrice = (collectionsArray) => {
+const getCollectionAvgTotalPrice = async () => {
+  let statArray = await Collection.find({}).select("insights.totalPrice -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   return average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("totalPrice") != undefined)
       .map((c) => c.insights.get("totalPrice").totalPrice)
   );
 };
 
-const getCollectionAvgTop100 = (collectionsArray) => {
+const getCollectionAvgTop100 = async () => {
+  let statArray = await Collection.find({}).select("insights.top100 -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   const avgTop100 = parseInt(
     average(
-      collectionsArray
+      statArray
         .filter((c) => c.insights.get("top100") != undefined)
         .map((c) => c.insights.get("top100").nTop100)
     )
   );
   const avgPrctTop100 = average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("top100") != undefined)
       .map((c) => c.insights.get("top100").prctTop100)
   );
   return [avgTop100, avgPrctTop100];
 };
 
-const getCollectionAvgKickstarter = (collectionsArray) => {
+const getCollectionAvgKickstarter = async () => {
+  let statArray = await Collection.find({}).select("insights.kickstarter -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
   const avgKickstarter = parseInt(
     average(
-      collectionsArray
+      statArray
         .filter((c) => c.insights.get("kickstarter") != undefined)
         .map((c) => c.insights.get("kickstarter").nKickstarter)
     )
   );
   const avgPrctKickstarter = average(
-    collectionsArray
+    statArray
       .filter((c) => c.insights.get("kickstarter") != undefined)
       .map((c) => c.insights.get("kickstarter").prctKickstarter)
   );
@@ -907,38 +932,28 @@ const getCollectionLeastTimePlayedHist = (collectionsArray) => {
   return getElementsFrequency(leastPlayedItems);
 };
 
-const getCollectionAvgPlaysHist = (collectionsArray) => {
-  const avgPlays = collectionsArray
+const getCollectionAvgPlaysHist = async () => {
+  let statArray = await Collection.find({}).select("insights.avgPlays -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgPlays = statArray
     .filter((c) => c.insights.get("avgPlays") != undefined)
     .map((c) => c.insights.get("avgPlays").avgPlays);
 
-  return getHistogram(avgPlays, [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
-    19,
-    20,
-  ]);
+  return getHistogram(avgPlays, [0, 2, 4, 6, 8, 10, 15, 20, 100]);
 };
 
-const getCollectionAvgTimePlayedHist = (collectionsArray) => {
-  const avgTimePlayed = collectionsArray
+const getCollectionAvgTimePlayedHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgTimePlayed -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgTimePlayed = statArray
     .filter((c) => c.insights.get("avgTimePlayed") != undefined)
     .map((c) => c.insights.get("avgTimePlayed").avgTimePlayed);
 
@@ -968,64 +983,110 @@ const getCollectionAvgTimePlayedHist = (collectionsArray) => {
   // ]);
 };
 
-const getCollectionPrctNotPlayedHist = (collectionsArray) => {
-  const prctNotPlayed = collectionsArray
+const getCollectionPrctNotPlayedHist = async () => {
+  let statArray = await Collection.find({}).select("insights.notPlayed -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const prctNotPlayed = statArray
     .filter((c) => c.insights.get("notPlayed") != undefined)
     .map((c) => c.insights.get("notPlayed").prctNotPlayed * 100);
 
   return getHistogram(prctNotPlayed, [0, 20, 40, 60, 80, 100]);
 };
 
-const getCollectionAvgValueHist = (collectionsArray) => {
-  const avgValues = collectionsArray
+const getCollectionAvgValueHist = async () => {
+  let statArray = await Collection.find({}).select("insights.avgValue -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgValues = statArray
     .filter((c) => c.insights.get("avgValue") != undefined)
     .map((c) => 1 / c.insights.get("avgValue").avgValue);
 
   return getHistogram(avgValues, [0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50]);
 };
 
-const getCollectionAvgWeightHist = (collectionsArray) => {
-  const avgWeights = collectionsArray
+const getCollectionAvgWeightHist = async () => {
+  let statArray = await Collection.find({}).select("insights.avgWeight -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgWeights = statArray
     .filter((c) => c.insights.get("avgWeight") != undefined)
     .map((c) => c.insights.get("avgWeight").avgWeight);
 
   return getHistogram(avgWeights, [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5]);
 };
 
-const getCollectionAvgRatingHist = (collectionsArray) => {
-  const avgRatings = collectionsArray
+const getCollectionAvgRatingHist = async () => {
+  let statArray = await Collection.find({}).select("insights.avgRating -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgRatings = statArray
     .filter((c) => c.insights.get("avgRating") != undefined)
     .map((c) => c.insights.get("avgRating").avgUserRating);
 
   return getHistogram(avgRatings, [0, 5, 6, 7, 8, 9, 10]);
 };
 
-const getCollectionAvgAvgRatingHist = (collectionsArray) => {
-  const avgAvgRatings = collectionsArray
+const getCollectionAvgAvgRatingHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgAvgRating -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgAvgRatings = statArray
     .filter((c) => c.insights.get("avgAvgRating") != undefined)
     .map((c) => c.insights.get("avgAvgRating").avgAvgRating);
 
   return getHistogram(avgAvgRatings, [0, 5, 6, 7, 8, 9, 10]);
 };
 
-const getCollectionAvgBggRatingHist = (collectionsArray) => {
-  const avgBggRatings = collectionsArray
+const getCollectionAvgBggRatingHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgBggRating -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgBggRatings = statArray
     .filter((c) => c.insights.get("avgBggRating") != undefined)
     .map((c) => c.insights.get("avgBggRating").avgBggRating);
 
   return getHistogram(avgBggRatings, [0, 5, 6, 7, 8, 9, 10]);
 };
 
-const getCollectionAvgRatingDiffHist = (collectionsArray) => {
-  const avgRatingsDiffs = collectionsArray
+const getCollectionAvgRatingDiffHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgRatingDiff -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgRatingsDiffs = statArray
     .filter((c) => c.insights.get("avgRatingDiff") != undefined)
     .map((c) => c.insights.get("avgRatingDiff").avgRatingDiff);
 
   return getHistogram(avgRatingsDiffs, [-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2]);
 };
 
-const getCollectionAvgYearHist = (collectionsArray) => {
-  const avgYears = collectionsArray
+const getCollectionAvgYearHist = async () => {
+  let statArray = await Collection.find({}).select("insights.avgYear -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgYears = statArray
     .filter((c) => c.insights.get("avgYear") != undefined)
     .map((c) => c.insights.get("avgYear").avgYear);
 
@@ -1043,8 +1104,15 @@ const getCollectionAvgYearHist = (collectionsArray) => {
   ]);
 };
 
-const getCollectionMostCommonYearHist = (collectionsArray) => {
-  const mostCommonYears = collectionsArray
+const getCollectionMostCommonYearHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.mostCommonYears -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const mostCommonYears = statArray
     .filter((c) => c.insights.get("mostCommonYears") != undefined)
     .map((c) => c.insights.get("mostCommonYears").mostCommonYears);
 
@@ -1062,40 +1130,73 @@ const getCollectionMostCommonYearHist = (collectionsArray) => {
   ]);
 };
 
-const getCollectionAvgRecommendedPlayersHist = (collectionsArray) => {
-  const recommendedPlayers = collectionsArray
+const getCollectionAvgRecommendedPlayersHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgRecommendedPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const recommendedPlayers = statArray
     .filter((c) => c.insights.get("avgRecommendedPlayers") != undefined)
     .map((c) => c.insights.get("avgRecommendedPlayers").avgRecommendedPlayers);
 
   return getHistogram(recommendedPlayers, [1, 2, 3, 4, 5, 6, 7, 20]);
 };
 
-const getCollectionAvgMaxPlayersHist = (collectionsArray) => {
-  const maxPlayers = collectionsArray
+const getCollectionAvgMaxPlayersHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgMaxPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const maxPlayers = statArray
     .filter((c) => c.insights.get("avgMaxPlayers") != undefined)
     .map((c) => c.insights.get("avgMaxPlayers").avgMaxPlayers);
 
   return getHistogram(maxPlayers, [1, 2, 3, 4, 5, 6, 7, 20]);
 };
 
-const getCollectionMedianMaxPlayersHist = (collectionsArray) => {
-  const maxPlayers = collectionsArray
+const getCollectionMedianMaxPlayersHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.medianMaxPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const maxPlayers = statArray
     .filter((c) => c.insights.get("medianMaxPlayers") != undefined)
     .map((c) => c.insights.get("medianMaxPlayers").medianMaxPlayers);
 
   return getHistogram(maxPlayers, [1, 2, 3, 4, 5, 6, 7, 20]);
 };
 
-const getCollectionAvgMinPlayersHist = (collectionsArray) => {
-  const minPlayers = collectionsArray
+const getCollectionAvgMinPlayersHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.avgMinPlayers -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const minPlayers = statArray
     .filter((c) => c.insights.get("avgMinPlayers") != undefined)
     .map((c) => c.insights.get("avgMinPlayers").avgMinPlayers);
 
   return getHistogram(minPlayers, [1, 1.5, 2, 2.5, 3, 3.5, 4]);
 };
 
-const getCollectionAvgPriceHist = (collectionsArray) => {
-  const avgPrices = collectionsArray
+const getCollectionAvgPriceHist = async () => {
+  let statArray = await Collection.find({}).select("insights.avgPrice -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const avgPrices = statArray
     .filter((c) => c.insights.get("avgPrice") != undefined)
     .map((c) => c.insights.get("avgPrice").avgPrice);
 
@@ -1119,8 +1220,13 @@ const getCollectionAvgPriceHist = (collectionsArray) => {
   ]);
 };
 
-const getCollectionMedianPriceHist = (collectionsArray) => {
-  const medianPrices = collectionsArray
+const getCollectionMedianPriceHist = async () => {
+  let statArray = await Collection.find({}).select("insights.medianPrice -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const medianPrices = statArray
     .filter((c) => c.insights.get("medianPrice") != undefined)
     .map((c) => c.insights.get("medianPrice").medianPrice);
 
@@ -1144,8 +1250,13 @@ const getCollectionMedianPriceHist = (collectionsArray) => {
   ]);
 };
 
-const getCollectionTotalPriceHist = (collectionsArray) => {
-  const totalPrices = collectionsArray
+const getCollectionTotalPriceHist = async () => {
+  let statArray = await Collection.find({}).select("insights.totalPrice -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const totalPrices = statArray
     .filter((c) => c.insights.get("totalPrice") != undefined)
     .map((c) => c.insights.get("totalPrice").totalPrice);
 
@@ -1164,16 +1275,26 @@ const getCollectionTotalPriceHist = (collectionsArray) => {
   ]);
 };
 
-const getCollectionPrctTop100Hist = (collectionsArray) => {
-  const prctTop100 = collectionsArray
+const getCollectionPrctTop100Hist = async () => {
+  let statArray = await Collection.find({}).select("insights.top100 -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const prctTop100 = statArray
     .filter((c) => c.insights.get("top100") != undefined)
     .map((c) => c.insights.get("top100").prctTop100 * 100);
 
   return getHistogram(prctTop100, [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]);
 };
 
-const getCollectionPrctKickstarterHist = (collectionsArray) => {
-  const prctKickstarter = collectionsArray
+const getCollectionPrctKickstarterHist = async () => {
+  let statArray = await Collection.find({}).select("insights.kickstarter -_id");
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const prctKickstarter = statArray
     .filter((c) => c.insights.get("kickstarter") != undefined)
     .map((c) => c.insights.get("kickstarter").prctKickstarter * 100);
 
@@ -1192,16 +1313,29 @@ const getCollectionPrctKickstarterHist = (collectionsArray) => {
   ]);
 };
 
-const getYearRegisteredHist = (collectionsArray) => {
-  const yearRegisteredArray = collectionsArray.map((b) => b.yearRegistered);
+const getYearRegisteredHist = async () => {
+  let statArray = await Collection.find({}).select(
+    "insights.yearRegistered -_id"
+  );
+  statArray = statArray.filter((c) =>
+    Object.keys(c.toObject()).includes("insights")
+  );
+
+  const yearRegisteredArray = statArray.map((b) => b.yearRegistered);
   return getElementsFrequency(yearRegisteredArray);
 };
 
-const getStatHist = (collectionsArray, stat) => {
+const getStatHist = async (stat) => {
   const statCapitalized = stat.charAt(0).toUpperCase() + stat.slice(1);
-  const statArray = collectionsArray
+
+  let statArray = await Collection.find({}).select(
+    `insights.mostCommon${statCapitalized} -_id`
+  );
+  statArray = statArray
+    .filter((c) => Object.keys(c.toObject()).includes("insights"))
     .filter((e) => e.insights.get("mostCommon" + statCapitalized) != undefined)
     .map((e) => e.insights.get("mostCommon" + statCapitalized)[stat + "Hist"]);
+
   return mergeDicts(statArray);
 };
 

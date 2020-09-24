@@ -19,11 +19,23 @@ const runGlobalStats = async () => {
   );
 
   // Draw Release Year Histogram
+  const allBoardgames = getStatAtYear(
+    processYearHist(boardgameStats.yearHist),
+    10000
+  );
+  const oldBoardgames = getStatAtYear(
+    processYearHist(boardgameStats.yearHist),
+    STAT_REF_YEAR
+  );
+  const newBoardgames = allBoardgames - oldBoardgames;
+  const proportion = Math.round(newBoardgames / oldBoardgames)
   let rowId = "release-year-hist";
-  let title = "Boardgames Popularity over the Years";
+  let title = "Rise in Popularity";
   let p = `Looking at the release year of the boardgames owned by the <em>BGG Explorer</em> users, 
   it's easy to see how much the hobby has grown in the last few decades. The growth has been exponential and 
-  it shows no signs of slowing down as the number of boardgames released each year is still on the rise.`;
+  it shows no signs of slowing down as the number of boardgames released each year is still on the rise.<br><br>
+  In fact, in the last 10 years alone, the number of released boardgames is approximately 
+  <strong>${proportion}</strong> times larger than in the entire period before that!`;
   createGlobalStatsRow(rowId, title, p);
   // drawGlobalStatsHistChart(
   //   rowId + "-canvas",
@@ -41,10 +53,28 @@ const runGlobalStats = async () => {
   );
 
   // Draw Year Registered Histogram
+  const allBoardgamers = getStatAtYear(
+    processYearHist(collectionStats.yearRegisterdHist),
+    10000
+  );
+  const oldBoardgamers = getStatAtYear(
+    processYearHist(collectionStats.yearRegisterdHist),
+    STAT_REF_YEAR
+  );
+  const newBoardgamers = allBoardgamers - oldBoardgamers;
+  const oldBoardgamersPrct = Math.round(
+    (oldBoardgamers / allBoardgamers) * 100
+  );
+  const newBoardgamersPrct = Math.round(
+    (newBoardgamers / allBoardgamers) * 100
+  );
+
   rowId = "year-registered-hist";
-  title = "Users Registered over the Years";
+  title = "New Players";
   p = `More and more boardgamers have been joining the community as suggested by the registration year of the 
-  BGG users: while a good chunk of the <em>BGG Explorer</em> users
+  <em>BGG</em> users: while a good chunk of the community is made of old guard boardgamers, a signficant fraction 
+  of new boardgamers is now also part of it (<strong>${newBoardgamersPrct}%</strong> of the <em>BGG Explorer</em> 
+  users registered their account on <em>BGG</em> after ${STAT_REF_YEAR}).
   `;
   createGlobalStatsRow(rowId, title, p);
   // drawGlobalStatsHistChart(
@@ -63,10 +93,10 @@ const runGlobalStats = async () => {
   );
 
   // Draw Artists, Designers and Publishers Trend
+  const uniqueMagicArtists = await getBoardgameUniquePeople(463, "artists");
 
   rowId = "people-involved-trend";
-  title = "Growing Community";
-  const uniqueMagicArtists = await getBoardgameUniquePeople(463, "artists");
+  title = "Growing Industry";
   p = `This growth is equally apparent by the increasing number of people involved in this industry: 
   this chart shows the number of people involved in the publishing, design and illustration of boardgames 
   released each year since 1950. <br><br>Oh, wondering what is that artistic spike in 1993? 
@@ -89,21 +119,25 @@ const runGlobalStats = async () => {
 
   // Draw Relevant Familues Trends
   rowId = "families-trend";
-  title = "Families Trends";
-  p = `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit laudantium voluptatem minus accusantium odit maiores 
-    labore cumque rerum eum temporibus?`;
+  title = "The Arrival of Kickstarter";
+  p = `Love it or hate it, <a href="https://www.kickstarter.com/">Kickstarter</a> has played a pivotal role in the
+  boardgame industry, with an increasing number of games being released through this platform, either as a means of
+  funding independent new designers or as a way of gauging interest and marketing by already established publishers.<br><br>
+  Kickstarter releases have been closely associated with high production values and lots of miniatures. Looking at both
+  curves, a correlation between the two is indisputable, however it seems that this association has been a bit overblown
+  as the total number of Kickstarter releases still far exceeds the relases of boardgames with miniatures.`;
   createGlobalStatsRow(rowId, title, p);
   drawGlobalStatsTrendChart(
     rowId + "-canvas",
     processStatUniqueDist(
       boardgameStats["familyDistPerYear"],
-      ["kickstarter"],
+      ["kickstarter", "miniatures"],
       2000,
       2019
     ),
     "Year",
     "Kickstarter Releases",
-    { xMin: 2000, xMax: new Date().getFullYear() - 1, legendFlag: false }
+    { xMin: 2000, xMax: new Date().getFullYear() - 1 }
   );
 
   // Draw User Rating vs Year Published
@@ -129,7 +163,7 @@ const runGlobalStats = async () => {
     {
       xMin: 1950,
       xMax: new Date().getFullYear() - 1,
-      yMin: 2,
+      yMin: 0,
       yMax: 10,
       color: BASE_COLOR,
     }
@@ -150,7 +184,9 @@ const runGlobalStats = async () => {
     boardgameStats["categoryDistPerYear"],
     new Date().getFullYear()
   );
-  drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {replaceLabels: FIELD_LABEL_REPLACE_MAP['category']});
+  drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {
+    replaceLabels: FIELD_LABEL_REPLACE_MAP["category"],
+  });
 
   // Draw Mechanic Trend
   rowId = "mechanic-spider";
@@ -167,7 +203,9 @@ const runGlobalStats = async () => {
     boardgameStats["mechanicDistPerYear"],
     new Date().getFullYear()
   );
-  drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {replaceLabels: FIELD_LABEL_REPLACE_MAP['mechanic']});
+  drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {
+    replaceLabels: FIELD_LABEL_REPLACE_MAP["mechanic"],
+  });
 
   // Add User Trends Subtitle
   $("#global-stats").append(

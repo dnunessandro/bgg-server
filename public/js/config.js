@@ -197,6 +197,8 @@ const FIELD_LABEL_MAP = {
   families: "Families",
   mechanics: "Mechanics",
   categories: "Categories",
+  kickstarter: "Kickstarter",
+  miniatures: "Games with Miniatures"
 };
 
 const STAT_COLOR_MAP = {
@@ -206,9 +208,9 @@ const STAT_COLOR_MAP = {
   families: DARK_COLOR,
   mechanics: BASE_COLOR,
   categories: LIGHT_COLOR,
-  kickstarter: BASE_COLOR,
+  kickstarter:  DARK_COLOR,
   solitaire: GREEN_COLOR,
-  miniatures: RED_COLOR,
+  miniatures: BASE_COLOR,
   boardgamesReleased: BASE_COLOR,
   usersRegistered: BASE_COLOR,
 };
