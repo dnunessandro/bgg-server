@@ -164,7 +164,8 @@ const drawGlobalStatsCorrChart = (
             label: e.name,
           })),
           label: "Boardgames",
-          borderColor: `rgb(${color.r},${color.g},${color.b}, 1)`,
+          borderColor: `rgb(${color.r},${color.g},${color.b}, 0.8)`,
+          backgroundColor: `rgb(${color.r},${color.g},${color.b}, 0.4)`,
           pointRadius: 4,
           pointHoverRadius: 10,
           pointStyle: "circle",
@@ -206,6 +207,7 @@ const drawGlobalStatsCorrChart = (
         },
         mode: "single",
         intersect: true,
+        titleFontSize: 16,
         bodyFontSize: 16,
       },
       scales: {
@@ -237,6 +239,7 @@ const drawGlobalStatsCorrChart = (
             scaleLabel: {
               display: true,
               labelString: FIELD_LABEL_MAP[yField],
+              fontSize: 18,
             },
             ticks: {
               fontSize: 14,
@@ -289,21 +292,41 @@ const drawGlobalStatsTrendChart = (
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
-  // Filter Datasets
-  let filtStatsSeries = {};
-  stats.forEach((s) => {
-    filtStatsSeries[s] = Object.fromEntries(
-      Object.entries(statsSeries[s]).filter(
-        ([k, _]) => parseInt(k) >= xMin && parseInt(k) <= xMax
-      )
-    );
-  });
-
   // Create Years Labels
   let yearLabels = [];
   for (var i = xMin; i <= xMax; i++) {
     yearLabels.push(String(i));
   }
+
+  // Filter Datasets
+  let filtStatsSeries = {};
+  stats.forEach((s) => {
+    filtStatsSeries[s] = {};
+    const yearsInSeries = Object.keys(statsSeries[s]);
+
+    yearLabels.forEach((y) => {
+      if (
+        parseInt(y) >= xMin &&
+        parseInt(y) <= xMax &&
+        yearsInSeries.includes(y)
+      ) {
+        filtStatsSeries[s][y] = statsSeries[s][y];
+      } else if (
+        parseInt(y) >= xMin &&
+        parseInt(y) <= xMax &&
+        !yearsInSeries.includes(y)
+      )
+        filtStatsSeries[s][y] = 0;
+    });
+  });
+
+  // stats.forEach((s) => {
+  //   filtStatsSeries[s] = Object.fromEntries(
+  //     Object.entries(statsSeries[s]).filter(
+  //       ([k, _]) => parseInt(k) >= xMin && parseInt(k) <= xMax
+  //     )
+  //   );
+  // });
 
   const ctx = canvas.getContext("2d");
 
@@ -320,7 +343,10 @@ const drawGlobalStatsTrendChart = (
         },
       },
       tooltips: {
+        displayColors: false,
         mode: "x",
+        titleFontSize: 16,
+        bodyFontSize: 16,
       },
       title: {
         display: false,
@@ -372,11 +398,10 @@ const drawGlobalStatsTrendChart = (
       data: Object.values(filtStatsSeries[s]),
       borderColor: `rgb(${color.r},${color.g},${color.b}, 1)`,
       backgroundColor: `rgb(${color.r},${color.g},${color.b}, 0.2)`,
-      borderWidth: 1,
+      borderWidth: 2,
       pointBackgroundColor: `rgb(0,0,0,0)`,
       pointBorderColor: `rgb(0,0,0,0)`,
-      pointRadius: 2,
-      borderWidth: 2,
+      pointRadius: 1,
       label: FIELD_LABEL_MAP[s],
 
       // type: "scatter",
@@ -400,7 +425,6 @@ const drawGlobalStatsTrendChart = (
 };
 
 const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
-
   // Get Years
   const years = Object.keys(statsSeries);
 
@@ -444,6 +468,13 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
           fontSize: 16,
         },
       },
+      tooltips: {
+        titleFontSize: 16,
+        bodyFontSize: 16,
+        callbacks: {
+          title: function () {},
+        },
+      },
       scale: {
         pointLabels: {
           fontSize: 14,
@@ -455,7 +486,6 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
     },
   });
 
-
   years.forEach((y, i) => {
     const color = hexToRgb(SPIDER_CHART_COLORS[i]);
 
@@ -463,11 +493,10 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
       data: stats.map((s) => statsSeries[y][s]),
       borderColor: `rgb(${color.r},${color.g},${color.b}, 1)`,
       backgroundColor: `rgb(${color.r},${color.g},${color.b}, 0.1)`,
-      borderWidth: 1,
+      borderWidth: 2,
       pointBackgroundColor: `rgb(${color.r},${color.g},${color.b}, 0.7)`,
       pointBorderColor: `rgb(${color.r},${color.g},${color.b}, 0.7)`,
-      pointRadius: 2,
-      borderWidth: 2,
+      pointRadius: 3,
       label: y,
     };
     spiderChart.data.datasets.push(datasetConfig);
@@ -558,11 +587,20 @@ role="dialog"
 </div>`
   );
   $(`#${modalBodyId}`).html(`<ol>
-    <li class="text-justify">The numbers shown on these charts are based on the <em>BBG Explorer</em> users only, thus 
-they do not reflect the entire reality of the boardgame community or even that of the BGG community.</li>
-<li class="text-justify">If a boardgame is not owned by any <em>BGG Explorer</em> user, it will not be accounted for in these statistics.</li>
-<li class="text-justify">A sample of boardgames is presented in some of the charts in this section to serve as examples of the trend depicted, however the 
-trend line presented is still computed using the entire boardgame database available.</li>
+    <li class="text-justify">The numbers shown on these charts are based on the <em>BGG Explorer</em> users only, thus 
+they do not reflect the entire reality of the boardgame community or even that of the BoardGameGeek community.</li>
+<li class="text-justify">If a boardgame is not owned by any <em>BGG Explorer</em> user, it will not 
+be accounted for in these statistics.</li>
+<li class="text-justify">A sample of boardgames is presented in <em>Quality, Not Just Quantity</em> chart 
+to serve as an example of the trend depicted, however the trend line presented is still computed using the 
+entire boardgame database available.</li>
+<li><em>BoardGameGeek</em> classifies games into genres and categories based on the most proeminet (and not all) 
+traits of a game. This means that for, example 
+<a class="badge-pill badge-secondary py-1" href="https://boardgamegeek.com/boardgame/84876/castles-burgundy" target="_blank">Castles&nbspof&nbspBurgundy</a> is considered a 
+<em>Dice Game</em> since dice are a core component of the game, however 
+<a class="badge-pill badge-secondary py-1" href="https://boardgamegeek.com/boardgame/150376/dead-winter-crossroads-game target="_blank">Dead&nbspof&nbspWinter</a> is not, since,
+while it does use dice, they do not play a key role in its mechanics. This is important aspect to have in mind 
+when looking at the <em>An Assymetrical Growth</em> and <em>Boom in Cooperative Games</em> charts.
 </ol>`);
 };
 

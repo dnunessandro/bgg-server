@@ -11091,7 +11091,7 @@ a {
 }
 
 #tools {
-  background-color: #ffcdb2;
+  background-color: #f8edeb;
 }
 
 #tools h3 {
@@ -11117,7 +11117,7 @@ a {
 }
 
 .page-footer {
-  background-color: #ffcdb2;
+  background-color: #fadde1;
 }
 
 .footer-copyright {
@@ -11655,13 +11655,19 @@ a {
 }
 
 #global-stats a {
-  color: inherit;
+  color: white;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
   #global-stats p {
     font-size: 0.8rem;
   }
+}
+
+#global-stats span {
+  font-weight: 500;
+  color: white !important;
 }
 
 #global-stats h2 {

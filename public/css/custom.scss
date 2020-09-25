@@ -77,7 +77,6 @@ a {
   font-size: 1rem !important;
 }
 
-
 .btn-group-nav .btn {
   // border: 2px solid $light-color !important;
   font-weight: 600 !important;
@@ -286,7 +285,7 @@ a {
   .subtitle {
     color: white !important;
   }
-  background-color: $light-color;
+  background-color: $background-color-pink;
   .lead {
     font-size: 1rem;
     text-align: justify;
@@ -302,7 +301,7 @@ a {
 }
 
 .page-footer {
-  background-color: $light-color;
+  background-color: $background-color-light-pink;
 }
 
 .footer-copyright {
@@ -384,10 +383,10 @@ a {
     }
   }
   #collection-overview-sidepanel {
-    .btn{
+    .btn {
       font-weight: 600 !important;
     }
-    
+
     @media (max-width: $bootstrap-class-change-breakpoint) {
       .btn,
       .btn-group {
@@ -832,13 +831,19 @@ a {
   }
 
   a {
-    color: inherit;
+    color: white;
+    font-weight: 500;
   }
 
   p {
     @media (max-width: $bootstrap-class-change-breakpoint) {
       font-size: 0.8rem;
     }
+  }
+
+  span {
+    font-weight: 500;
+    color: white !important;
   }
 
   h2 {
@@ -848,7 +853,7 @@ a {
     opacity: 0;
   }
 
-  h3{
+  h3 {
     @media (max-width: $bootstrap-class-change-breakpoint) {
       font-size: 1.5rem !important;
     }
@@ -1017,14 +1022,13 @@ a {
 
   .text-muted {
     color: $secondary-color !important;
-    #updated-icon{
+    #updated-icon {
       background-color: $background-color-pink;
       color: $secondary-color;
       border-radius: 8px;
       cursor: pointer;
-      
     }
-    #updated-icon:hover{
+    #updated-icon:hover {
       background-color: $secondary-color;
       color: $background-color-pink;
       -webkit-transition: background-color 0.2s linear;

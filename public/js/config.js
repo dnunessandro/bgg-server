@@ -9,7 +9,7 @@ const LIGHT_COLOR = "#ffcdb2";
 const LIGHT_COLOR_02 = "#ffcdb233";
 const DARK_COLOR = "#b5838d";
 const NEUTRAL_COLOR = "#6d6875";
-const BACKGROUND_COLOR = "#eee"
+const BACKGROUND_COLOR = "#eee";
 
 const GREEN_COLOR = "#81b29a";
 const YELLOW_COLOR = "#f2cc8f";
@@ -41,7 +41,7 @@ const MAX_NODE_RADIUS_ABS = 50;
 const DEFAULT_NODE_RADIUS_FACTOR = 0.07;
 const MAX_NODE_LABEL_CHARACTERS = 30;
 const SVG_HEIGHT_MOBILE_FACTOR = 1.3;
-const LABEL_X_PAD_FACTOR = 0.05
+const LABEL_X_PAD_FACTOR = 0.05;
 
 const NODE_SIZE_DEFAULT_FIELD = "averageRating";
 const NODE_SORT_DEFAULT_FIELD = "name";
@@ -162,7 +162,7 @@ window.odometerOptions = {
 
 // GLOBAL STATS
 const BOARDGAME_SAMPLE_SIZE = 200;
-const BOARDGAME_SAMPLE_OWNED_THRESHOLD = 5000;
+const BOARDGAME_SAMPLE_OWNED_THRESHOLD = 10000;
 const BOARDGAME_SAMPLE_YEARS_SPLITS = [
   1950,
   1975,
@@ -198,7 +198,7 @@ const FIELD_LABEL_MAP = {
   mechanics: "Mechanics",
   categories: "Categories",
   kickstarter: "Kickstarter",
-  miniatures: "Games with Miniatures"
+  miniatures: "Games with Miniatures",
 };
 
 const STAT_COLOR_MAP = {
@@ -208,7 +208,7 @@ const STAT_COLOR_MAP = {
   families: DARK_COLOR,
   mechanics: BASE_COLOR,
   categories: LIGHT_COLOR,
-  kickstarter:  DARK_COLOR,
+  kickstarter: DARK_COLOR,
   solitaire: GREEN_COLOR,
   miniatures: BASE_COLOR,
   boardgamesReleased: BASE_COLOR,
@@ -332,7 +332,7 @@ const FIELD_TITLE_MAP = {
 };
 
 const FIELD_LABEL_REPLACE_MAP = {
-  category: { "Expansion for Base-game": "Expansion" },
+  category: { "Expansion for Base-game": "Expansion", "Dice": "Dice Game"},
   mechanic: {
     "Area Majority / Influence": "Area Majority",
     "Simultaneous Action Selection": "Simultaneous Action",
@@ -355,7 +355,7 @@ const FIELD_LABEL_REPLACE_MAP = {
     "Winning Moves International Ltd": "Winning Moves International",
     "CEFA (Celulosa Fabril S. A.)": "Celulosa Fabril",
   },
-  designer: {"(Uncredited)": "Uncredited"},
+  designer: { "(Uncredited)": "Uncredited" },
   artist: {},
 };
 
@@ -371,4 +371,4 @@ const SPIDER_CHART_ENTRIES = 10;
 const INSIGHTS_HIGHLIGHT_COLOR = YELLOW_COLOR;
 
 // USER INFO
-const COLLECTION_MANUAL_UPDATE_TRESH = 3
+const COLLECTION_MANUAL_UPDATE_TRESH = 3;

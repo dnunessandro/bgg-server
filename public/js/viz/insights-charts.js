@@ -166,8 +166,8 @@ const drawInsightsCorrChart = (
           label: "Your Boardgames",
           borderColor: `rgb(${userColor.r},${userColor.g},${userColor.b}, 0.8)`,
           backgroundColor: `rgb(${userColor.r},${userColor.g},${userColor.b}, 0.4)`,
-          pointRadius: 6,
-          pointHoverRadius: 12,
+          pointRadius: 4,
+          pointHoverRadius: 10,
           pointStyle: "circle",
         },
         {

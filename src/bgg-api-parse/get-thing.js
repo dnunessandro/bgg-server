@@ -298,19 +298,19 @@ const getMarketplaceData = async (response) => {
 
   marketplaceData.averagePriceNew =
     marketplaceData.numListingsNew > 0
-      ? average(
+      ? parseFloat(average(
           marketplaceData.listings
             .filter((e) => e.condition == "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.medianPriceNew =
     marketplaceData.numListingsNew > 0
-      ? median(
+      ? parseFloat(median(
           marketplaceData.listings
             .filter((e) => e.condition == "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.maxPriceNew =
     marketplaceData.numListingsNew > 0
@@ -322,11 +322,11 @@ const getMarketplaceData = async (response) => {
       : null;
   marketplaceData.minPriceNew =
     marketplaceData.numListingsNew > 0
-      ? Math.min(
+      ? parseFloat(Math.min(
           ...marketplaceData.listings
             .filter((e) => e.condition == "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.averagePriceUsed =
     marketplaceData.numListingsUsed > 0
@@ -338,43 +338,43 @@ const getMarketplaceData = async (response) => {
       : null;
   marketplaceData.medianPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? median(
+      ? parseFloat(median(
           marketplaceData.listings
             .filter((e) => e.condition != "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.maxPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? Math.max(
+      ? parseFloat(Math.max(
           ...marketplaceData.listings
             .filter((e) => e.condition != "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.minPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? Math.min(
+      ? parseFloat(Math.min(
           ...marketplaceData.listings
             .filter((e) => e.condition != "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.stdPriceNew =
     marketplaceData.numListingsNew > 0
-      ? standardDeviation(
+      ? parseFloat(standardDeviation(
           marketplaceData.listings
             .filter((e) => e.condition == "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
   marketplaceData.stdPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? standardDeviation(
+      ? parseFloat(standardDeviation(
           marketplaceData.listings
             .filter((e) => e.condition != "new")
             .map((e) => e.priceUsd)
-        )
+        ).toFixed(2))
       : null;
 
   return marketplaceData;

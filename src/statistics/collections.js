@@ -1091,7 +1091,6 @@ const getCollectionAvgYearHist = async () => {
 
   return getHistogram(avgYears, [
     1500,
-    1995,
     2000,
     2005,
     2010,
@@ -1100,6 +1099,7 @@ const getCollectionAvgYearHist = async () => {
     2016,
     2018,
     2020,
+    new Date().getFullYear() + 1
   ]);
 };
 
@@ -1117,7 +1117,6 @@ const getCollectionMostCommonYearHist = async () => {
 
   return getHistogram(mostCommonYears, [
     1500,
-    1995,
     2000,
     2005,
     2010,
@@ -1186,7 +1185,7 @@ const getCollectionAvgMinPlayersHist = async () => {
     .filter((c) => c.insights.get("avgMinPlayers") != undefined)
     .map((c) => c.insights.get("avgMinPlayers").avgMinPlayers);
 
-  return getHistogram(minPlayers, [1, 1.5, 2, 2.5, 3, 3.5, 4]);
+  return getHistogram(minPlayers, [1, 2, 3, 4, 5, 10]);
 };
 
 const getCollectionAvgPriceHist = async () => {
@@ -1201,20 +1200,12 @@ const getCollectionAvgPriceHist = async () => {
 
   return getHistogram(avgPrices, [
     0,
-    10,
     20,
-    30,
     40,
-    50,
     60,
-    70,
     80,
-    90,
     100,
-    150,
     200,
-    300,
-    400,
     500,
   ]);
 };
@@ -1262,12 +1253,8 @@ const getCollectionTotalPriceHist = async () => {
   return getHistogram(totalPrices, [
     0,
     100,
-    200,
-    300,
-    400,
     500,
     1000,
-    2000,
     5000,
     10000,
     100000,
