@@ -151,7 +151,7 @@ const CATEGORY_COLOR_MAP = {
 };
 
 const PLAYS_COLOR_MAP = {
-  0: LIGHT_COLOR,
+  0: NEUTRAL_COLOR,
   1: DARK_COLOR,
 };
 

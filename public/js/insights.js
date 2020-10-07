@@ -2698,6 +2698,11 @@ const createInsightCard = (
     drawInsightCanvas(insightCardData, communityStats, boardgameStats);
   }
 
+  // Make images square if mobile
+  if(checkIfMobile()){
+    card.find("img").css("height", card.find("img").width());
+  }
+
   return card;
 };
 

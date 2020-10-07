@@ -53,4 +53,5 @@ if (checkIfMobile()) {
   $("#global-stats-method-button").addClass("btn-sm");
   $("#ignored-boardgames-button").addClass("btn-sm");
   $(".modal-footer .btn").addClass("btn-sm")
+  $("#bgg-page-btn").addClass("btn-sm")
 }
