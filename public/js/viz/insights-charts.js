@@ -475,7 +475,7 @@ const transformLabelInThousands = (label) => {
     rangeMin == 0
       ? 0
       : rangeMin >= 1000
-      ? Math.round(rangeMin / 1000) + "k"
+      ? Math.round(rangeMin / 1000) + "K"
       : rangeMin
-  }, ${rangeMax >= 1000 ? Math.round(rangeMax / 1000) + "k" : rangeMax}[`;
+  }, ${rangeMax >= 1000 ? Math.round(rangeMax / 1000) + "K" : rangeMax}[`;
 };

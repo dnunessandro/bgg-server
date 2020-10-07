@@ -26,7 +26,7 @@ const drawCollectionOverview = (collectionItems) => {
   );
   const nodeXAxisScale = createNodeAxisScale(
     collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2
-      ? collectionItems.length / 2 + 1
+      ? Math.ceil(collectionItems.length / 2)
       : collectionItems.length,
     chartWidth
   );
@@ -117,39 +117,14 @@ const drawCollectionOverview = (collectionItems) => {
         radiusScale(NODE_SIZE_SCALE_DOMAIN_MAP[ACTIVE_NODE_SIZE_FIELD][0])
       )
     );
+
   nodeGroups
     .select("text")
     .text((d) =>
       d.name.length < MAX_NODE_LABEL_CHARACTERS
         ? d.name
         : d.name.slice(0, MAX_NODE_LABEL_CHARACTERS - 3) + "..."
-    )
-    .attr("transform", function (d, i) {
-      const rect = d3.select(this.parentNode).select("rect").nodes()[0];
-
-      // Adjust labels going outside bounds because of label size
-      // Get node position
-      const nodeX =
-        i <= collectionItems.length / 2
-          ? nodeXAxisScale(i)
-          : nodeXAxisScale(i - collectionItems.length / 2);
-
-      // Get translation values
-      let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
-        ? rect.getBBox().width / 2 > nodeX
-          ? (rect.getBBox().width / 2 - nodeX) * 1.5
-          : 0
-        : 0;
-      let rightEdgeLabelTranslation = NODE_LINEAR_BOOL
-        ? rect.getBBox().width / 2 > chartWidth - nodeX
-          ? (rect.getBBox().width / 2 - (chartWidth - nodeX)) * 1.5
-          : 0
-        : 0;
-
-      return `translate(${
-        leftEdgeLabelTranslation - rightEdgeLabelTranslation
-      },${NODE_LINEAR_BOOL ? labelsPositions[i].y : 0})`;
-    });
+    );
 
   // Adjust Rect Width and Height
   const textWidthArray = getNodeTextWidthArray(d3.selectAll(".node-text"));
@@ -164,19 +139,20 @@ const drawCollectionOverview = (collectionItems) => {
       // Adjust labels going outside bounds because of label size
       // Get node position
       const nodeX =
-        i <= collectionItems.length / 2
+        i < collectionItems.length / 2
           ? nodeXAxisScale(i)
           : nodeXAxisScale(i - collectionItems.length / 2);
 
       // Get translation values
       let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
         ? this.getBBox().width / 2 > nodeX
-          ? (this.getBBox().width / 2 - nodeX) * 1.5
+          ? this.getBBox().width / 2 - nodeX
           : 0
         : 0;
+
       let rightEdgeLabelTranslation = NODE_LINEAR_BOOL
         ? this.getBBox().width / 2 > chartWidth - nodeX
-          ? (this.getBBox().width / 2 - (chartWidth - nodeX)) * 1.5
+          ? this.getBBox().width / 2 - (chartWidth - nodeX)
           : 0
         : 0;
 
@@ -192,6 +168,34 @@ const drawCollectionOverview = (collectionItems) => {
       );
     })
     .style("fill", (_, i) => colorsArray[i]);
+
+  nodeGroups.select("text").attr("transform", function (d, i) {
+    const rect = d3.select(this.parentNode).select("rect").nodes()[0];
+
+    // Adjust labels going outside bounds because of label size
+    // Get node position
+    const nodeX =
+      i < collectionItems.length / 2
+        ? nodeXAxisScale(i)
+        : nodeXAxisScale(i - collectionItems.length / 2);
+
+    // Get translation values
+    let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
+      ? rect.getBBox().width / 2 > nodeX
+        ? rect.getBBox().width / 2 - nodeX
+        : 0
+      : 0;
+
+    let rightEdgeLabelTranslation = NODE_LINEAR_BOOL
+      ? rect.getBBox().width / 2 > chartWidth - nodeX
+        ? rect.getBBox().width / 2 - (chartWidth - nodeX)
+        : 0
+      : 0;
+
+    return `translate(${
+      leftEdgeLabelTranslation - rightEdgeLabelTranslation
+    },${NODE_LINEAR_BOOL ? labelsPositions[i].y : 0})`;
+  });
 
   return nodeGroups;
 };
@@ -319,6 +323,7 @@ const createOverviewSvgEL = () => {
       NODE_CLICKED_BOOL = false;
       d3.selectAll(".node-circle").classed("clicked", false);
       d3.selectAll(".node-rect").classed("clicked", false);
+      d3.selectAll(".node-line").classed("clicked", false);
       $("#boardgame-info").removeClass("show").addClass("hide");
       BOARDGAME_INFO_VAR =
         $("#boardgame-info").length == 0

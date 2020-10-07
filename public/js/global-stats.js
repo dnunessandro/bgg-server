@@ -257,7 +257,7 @@ const runGlobalStats = async () => {
   <span class="badge-pill badge-primary py-1">${setGamesRatio}x</span> respectively, a significantly more modest increase.`;
   createGlobalStatsRow(rowId, title, p);
   drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {
-    replaceLabels: FIELD_LABEL_REPLACE_MAP["mechanic"],
+    replaceLabels: FIELD_LABEL_REPLACE_MAP["mechanic"], 
   });
 
   // // Add User Trends Subtitle

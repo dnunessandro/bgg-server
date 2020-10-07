@@ -79,7 +79,7 @@ const updateNodesForce = (collectionItems) => {
 
   const nodeXAxisScale = createNodeAxisScale(
     collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2
-      ? collectionItems.length / 2 + 1
+      ? Math.ceil(collectionItems.length / 2)
       : collectionItems.length,
     chartWidth
   );
@@ -90,9 +90,9 @@ const updateNodesForce = (collectionItems) => {
     d3
       .forceX((_, i) => {
         if (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2) {
-          return i <= collectionItems.length / 2
+          return i < collectionItems.length / 2
             ? nodeXAxisScale(i)
-            : nodeXAxisScale(i - collectionItems.length / 2);
+            : nodeXAxisScale(i - collectionItems.length / 2 );
         } else {
           return nodeXAxisScale(i);
         }

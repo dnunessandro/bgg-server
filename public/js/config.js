@@ -39,8 +39,8 @@ const MIN_NODE_RADIUS_FACTOR = 0.03;
 const MAX_NODE_RADIUS_FACTOR = checkIfMobile() ? 0.07 : 0.1;
 const MAX_NODE_RADIUS_ABS = 50;
 const DEFAULT_NODE_RADIUS_FACTOR = 0.07;
-const MAX_NODE_LABEL_CHARACTERS = 30;
-const SVG_HEIGHT_MOBILE_FACTOR = 1.3;
+const MAX_NODE_LABEL_CHARACTERS = checkIfMobile() ? 20 : 30;
+const SVG_HEIGHT_MOBILE_FACTOR = 1.75;
 const LABEL_X_PAD_FACTOR = 0.05;
 
 const NODE_SIZE_DEFAULT_FIELD = "averageRating";
@@ -82,7 +82,7 @@ const NODE_SIZE_SCALE_DOMAIN_MAP = {
 };
 
 const NUM_NODES_BREAKPOINT_MAP = {
-  0: 25,
+  0: 40,
   576: 40,
   768: 60,
   992: 70,
@@ -208,9 +208,9 @@ const STAT_COLOR_MAP = {
   families: DARK_COLOR,
   mechanics: BASE_COLOR,
   categories: LIGHT_COLOR,
-  kickstarter: DARK_COLOR,
+  kickstarter: BASE_COLOR,
   solitaire: GREEN_COLOR,
-  miniatures: BASE_COLOR,
+  miniatures: DARK_COLOR,
   boardgamesReleased: BASE_COLOR,
   usersRegistered: BASE_COLOR,
 };
@@ -332,7 +332,7 @@ const FIELD_TITLE_MAP = {
 };
 
 const FIELD_LABEL_REPLACE_MAP = {
-  category: { "Expansion for Base-game": "Expansion", "Dice": "Dice Game"},
+  category: { "Expansion for Base-game": "Expansion", Dice: "Dice Game" },
   mechanic: {
     "Area Majority / Influence": "Area Majority",
     "Simultaneous Action Selection": "Simultaneous Action",

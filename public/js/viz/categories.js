@@ -47,7 +47,7 @@ function createWordCloud(itemCategories) {
     cloud
       .enter()
       .append("text")
-      .style("font-family", "Impact")
+      .style("font-family", "Anton")
       .style("fill", (d) => CATEGORY_COLOR_MAP[d.type])
       .attr("text-anchor", "middle")
       .attr("font-size", 1)
@@ -83,7 +83,7 @@ function createWordCloud(itemCategories) {
     .rotate(function () {
       return ~~(Math.random() * 2) * 90;
     })
-    .font("Impact")
+    .font("Anton")
     .fontSize(function (d) {
       return d.size;
     })

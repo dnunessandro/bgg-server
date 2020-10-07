@@ -5,8 +5,10 @@ const createNodeGroupELs = () => {
     // Change Circle and Rect Class
     d3.selectAll(".node-circle").classed("clicked", false);
     d3.selectAll(".node-rect").classed("clicked", false);
+    d3.selectAll(".node-line").classed("clicked", false);
     d3.select(this).select(".node-circle").classed("clicked", true);
     d3.select(this).select(".node-rect").classed("clicked", true);
+    d3.select(this).select(".node-line").classed("clicked", true);
 
     // Show Tooltip
     BOARDGAME_INFO_VAR.insertAfter("#collection-overview");

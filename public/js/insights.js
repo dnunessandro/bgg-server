@@ -934,7 +934,7 @@ const genAvgValueInsightCard = (insight, communityStats) => {
   cardData.rawStat = 1 / rawStat;
   cardData.mainStat = stat.toFixed(2) + "&nbsp;USD";
   cardData.description = `On average, you have spent an estimated ${genStatHtml(
-    stat.toFixed(2) + "USD",
+    stat.toFixed(2) + "&nbsp;USD",
     "badge-pill badge-dark py-1"
   )} per play, which is ${compareUserVsCommunityStat(
     stat,
@@ -1323,7 +1323,7 @@ const genAvgRecommendedPlayersInsightCard = (insight, communityStats) => {
   cardData.rawStat = rawStat;
   cardData.mainStat = Math.round(rawStat);
   cardData.description = `On average, your boardgames are best played with ${genStatHtml(
-    rawStat.toFixed(0),
+    Math.round(rawStat),
     "badge-pill badge-dark py-1"
   )} players, which is ${compareUserVsCommunityStat(
     Math.round(rawStat),
@@ -1574,7 +1574,7 @@ const genMostCommonCategoryInsightCard = (insight, communityStats) => {
     insight.categoryHist[insight.mostCommonCategory[0]],
     "badge-pill badge-dark py-1"
   )} boardgames - ${genStatHtml(
-    (insight.prctMostCommonCategory * 100).toFixed(1) + "%",
+    Math.round(insight.prctMostCommonCategory * 100) + "%",
     "badge-pill badge-dark py-1"
   )} of your collection. This value is ${compareUserVsCommunityStat(
     insight.prctMostCommonCategory * 100,
@@ -1584,11 +1584,11 @@ const genMostCommonCategoryInsightCard = (insight, communityStats) => {
     3,
     10
   )} the community average - ${genStatHtml(
-    (
+    Math.round(
       (communityStats.categoryHist[insight.mostCommonCategory[0]] /
         communityStats.nItems) *
       100
-    ).toFixed(1) + "%",
+    ) + "%",
     "badge-pill badge-info py-1"
   )}.`;
   cardData.showMoreButtonTitle = "Show Boardgames";
@@ -1632,7 +1632,7 @@ const genMostCommonMechanicInsightCard = (insight, communityStats) => {
     insight.mechanicHist[insight.mostCommonMechanic[0]],
     "badge-pill badge-dark py-1"
   )} boardgames - ${genStatHtml(
-    (insight.prctMostCommonMechanic * 100).toFixed(1) + "%",
+    Math.round(insight.prctMostCommonMechanic * 100) + "%",
     "badge-pill badge-dark py-1"
   )} of your collection. This value is ${compareUserVsCommunityStat(
     insight.prctMostCommonMechanic * 100,
@@ -1642,11 +1642,11 @@ const genMostCommonMechanicInsightCard = (insight, communityStats) => {
     3,
     10
   )} the community average - ${genStatHtml(
-    (
+    Math.round(
       (communityStats.mechanicHist[insight.mostCommonMechanic[0]] /
         communityStats.nItems) *
       100
-    ).toFixed(1) + "%",
+    ) + "%",
     "badge-pill badge-info py-1"
   )}.`;
   cardData.showMoreButtonTitle = "Show Boardgames";
@@ -1692,7 +1692,7 @@ const genMostCommonPublisherInsightCard = (insight, communityStats) => {
     insight.publisherHist[insight.mostCommonPublisher[0]],
     "badge-pill badge-dark py-1"
   )} boardgames - ${genStatHtml(
-    (insight.prctMostCommonPublisher * 100).toFixed(1) + "%",
+    Math.round(insight.prctMostCommonPublisher * 100) + "%",
     "badge-pill badge-dark py-1"
   )} of your collection. This value is ${compareUserVsCommunityStat(
     insight.prctMostCommonPublisher * 100,
@@ -1702,11 +1702,11 @@ const genMostCommonPublisherInsightCard = (insight, communityStats) => {
     3,
     10
   )} the community average - ${genStatHtml(
-    (
+    Math.round(
       (communityStats.publisherHist[insight.mostCommonPublisher[0]] /
         communityStats.nItems) *
       100
-    ).toFixed(1) + "%",
+    ) + "%",
     "badge-pill badge-info py-1"
   )}.`;
   cardData.dataSelectionButtonTitles = ["Your Top 10", "Community Top 10"];

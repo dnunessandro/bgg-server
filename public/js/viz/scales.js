@@ -13,8 +13,8 @@ const createNodeAxisScale = (nNodes, chartWidth) => {
     .scaleLinear()
     .domain([0, nNodes - 1])
     .range([
-      DEFAULT_NODE_RADIUS_FACTOR * chartWidth /2 ,
-      chartWidth - DEFAULT_NODE_RADIUS_FACTOR * chartWidth /2 ,
+      DEFAULT_NODE_RADIUS_FACTOR * chartWidth /2 + 5,
+      chartWidth - DEFAULT_NODE_RADIUS_FACTOR * chartWidth /2 - 5,
     ])
     .clamp(true);
 

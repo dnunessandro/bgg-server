@@ -49,7 +49,7 @@ const getLoadTimes = (n) => {
 const getNodeYPosition = (index, numItems) => {
   if (numItems <= COLLECTION_OVERVIEW_NUM_NODES / 2) {
     return $("#collection-overview-chart").height() / 2;
-  } else if (index <= numItems / 2) {
+  } else if (index <= numItems / 2 - 1) {
     return $("#collection-overview-chart").height() * 0.25;
   } else {
     return $("#collection-overview-chart").height() * 0.75;
@@ -113,7 +113,11 @@ const computeNodeLabelsPositions = (collectionItems) => {
     labelsPositions.push({
       nameLength: d.name.length,
       x: 0,
-      y: (maxRadius + 15 + replicatedOffsetArray[i] * 100) * altArray[i],
+      y:
+        (maxRadius +
+          15 +
+          replicatedOffsetArray[i] * (checkIfMobile() ? 70 : 100)) *
+        altArray[i],
       // y:
       //   ((maxRadius + chartHeight / 2) / 2 +
       //     (replicatedOffsetArray[i] * (chartHeight / 2 - d.radius - 20)) / 2) *
@@ -202,7 +206,7 @@ const checkMapRange = (ratio, map) => {
 };
 
 const formatRatingsThousands = (tick) => {
-  const formattedTick = tick >= 1000 ? Math.round(tick / 1000) + "k" : tick;
+  const formattedTick = tick >= 1000 ? Math.round(tick / 1000) + "K" : tick;
   return formattedTick;
 };
 
@@ -528,7 +532,6 @@ const getBucketedBoardgameSample = async (n, splits, ownersTresh, field) => {
 
   return sample;
 };
-
 
 function jsUcfirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

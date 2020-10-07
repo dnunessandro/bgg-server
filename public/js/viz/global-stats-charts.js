@@ -9,7 +9,11 @@ const drawGlobalStatsHistChart = (
   const canvas = $(`#${canvasId}`).get(0);
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "500px";
+    "canvasHeight" in options
+      ? options.canvasHeight
+      : checkIfMobile()
+      ? "400px"
+      : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -52,7 +56,7 @@ const drawGlobalStatsHistChart = (
       legend: {
         display: false,
         labels: {
-          fontSize: 16,
+          fontSize: 14,
         },
       },
       title: {
@@ -76,7 +80,7 @@ const drawGlobalStatsHistChart = (
             scaleLabel: {
               display: true,
               labelString: xLabel,
-              fontSize: 18,
+              fontSize: 16,
             },
           },
         ],
@@ -89,7 +93,7 @@ const drawGlobalStatsHistChart = (
             scaleLabel: {
               display: true,
               labelString: yLabel,
-              fontSize: 18,
+              fontSize: 16,
             },
           },
         ],
@@ -115,7 +119,11 @@ const drawGlobalStatsCorrChart = (
 
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "500px";
+    "canvasHeight" in options
+      ? options.canvasHeight
+      : (checkIfMobile()
+      ? "400px"
+      : "500px");
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -175,7 +183,7 @@ const drawGlobalStatsCorrChart = (
     options: {
       legend: {
         labels: {
-          fontSize: 16,
+          fontSize: 14,
           usePointStyle: true,
           filter: function (label) {
             if (label.text === "None") {
@@ -216,7 +224,7 @@ const drawGlobalStatsCorrChart = (
             scaleLabel: {
               display: true,
               labelString: FIELD_LABEL_MAP[xField],
-              fontSize: 18,
+              fontSize: 16,
             },
             type: "linear",
             position: "bottom",
@@ -239,7 +247,7 @@ const drawGlobalStatsCorrChart = (
             scaleLabel: {
               display: true,
               labelString: FIELD_LABEL_MAP[yField],
-              fontSize: 18,
+              fontSize: 16,
             },
             ticks: {
               fontSize: 14,
@@ -288,7 +296,11 @@ const drawGlobalStatsTrendChart = (
   const canvas = $(`#${canvasId}`).get(0);
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "500px";
+    "canvasHeight" in options
+      ? options.canvasHeight
+      : checkIfMobile()
+      ? "400px"
+      : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -339,7 +351,7 @@ const drawGlobalStatsTrendChart = (
       legend: {
         display: legendFlag,
         labels: {
-          fontSize: 16,
+          fontSize: 14,
         },
       },
       tooltips: {
@@ -369,7 +381,7 @@ const drawGlobalStatsTrendChart = (
             scaleLabel: {
               display: true,
               labelString: xLabel,
-              fontSize: 18,
+              fontSize: 16,
             },
           },
         ],
@@ -382,7 +394,7 @@ const drawGlobalStatsTrendChart = (
             scaleLabel: {
               display: true,
               labelString: yLabel,
-              fontSize: 18,
+              fontSize: 16,
             },
           },
         ],
@@ -449,7 +461,11 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
   const canvas = $(`#${canvasId}`).get(0);
   canvas.style.width = "100%";
   canvas.style.height =
-    "canvasHeight" in options ? options.canvasHeight : "500px";
+    "canvasHeight" in options
+      ? options.canvasHeight
+      : checkIfMobile()
+      ? "400px"
+      : "500px";
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -465,7 +481,7 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
       legend: {
         display: true,
         labels: {
-          fontSize: 16,
+          fontSize: 14,
         },
       },
       tooltips: {
@@ -600,7 +616,7 @@ traits of a game. This means that for, example
 <em>Dice Game</em> since dice are a core component of the game, however 
 <a class="badge-pill badge-secondary py-1" href="https://boardgamegeek.com/boardgame/150376/dead-winter-crossroads-game target="_blank">Dead&nbspof&nbspWinter</a> is not, since,
 while it does use dice, they do not play a key role in its mechanics. This is important aspect to have in mind 
-when looking at the <em>An Assymetrical Growth</em> and <em>Boom in Cooperative Games</em> charts.
+when interpreting the <em>An Assymetrical Growth</em> and <em>Boom in Cooperative Games</em> charts.
 </ol>`);
 };
 
@@ -675,7 +691,7 @@ const getStatDistAtYear = (statDist, year) => {
 //     // canvas.height = '200px'
 //     canvas.style.width = "100%";
 //     canvas.style.height =
-//       "canvasHeight" in options ? options.canvasHeight : "500px";
+//       "canvasHeight" in options ? options.canvasHeight : (checkIfMobile() ? "400px" : "500px");
 //     canvas.width = canvas.offsetWidth;
 //     canvas.height = canvas.offsetHeight;
 

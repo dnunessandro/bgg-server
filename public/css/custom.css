@@ -11124,7 +11124,7 @@ a {
   color: #b5838d !important;
 }
 
-.footer-copyright a {
+.footer-copyright p {
   color: #6d6875;
 }
 
@@ -11177,12 +11177,13 @@ a {
 #collection-overview #collection-overview-row #collection-overview-chart svg .node-line {
   stroke-width: 2px;
   stroke: #ffb4a2;
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg .clicked {
   stroke: #6d6875 !important;
   stroke-width: 5px;
+  opacity: 1 !important;
 }
 
 #collection-overview #collection-overview-row #collection-overview-chart svg .node-text {
@@ -11476,6 +11477,7 @@ a {
 }
 
 .d3-tip {
+  max-width: 300px;
   line-height: 1;
   font-weight: bold;
   padding: 12px;

@@ -306,7 +306,7 @@ a {
 
 .footer-copyright {
   color: $dark-color !important;
-  a {
+  p {
     color: $neutral-color;
   }
 }
@@ -358,11 +358,12 @@ a {
         .node-line {
           stroke-width: 2px;
           stroke: $secondary-color;
-          opacity: 0.3;
+          opacity: 0.4;
         }
         .clicked {
           stroke: $neutral-color !important;
           stroke-width: 5px;
+          opacity: 1 !important;
         }
         .node-text {
           fill: white;
@@ -674,6 +675,7 @@ a {
 }
 
 .d3-tip {
+  max-width: 300px;
   line-height: 1;
   font-weight: bold;
   padding: 12px;
