@@ -49,7 +49,7 @@ const getLoadTimes = (n) => {
 const getNodeYPosition = (index, numItems) => {
   if (numItems <= COLLECTION_OVERVIEW_NUM_NODES / 2) {
     return $("#collection-overview-chart").height() / 2;
-  } else if (index <= numItems / 2 - 1) {
+  } else if (index < numItems / 2) {
     return $("#collection-overview-chart").height() * 0.25;
   } else {
     return $("#collection-overview-chart").height() * 0.75;
@@ -376,6 +376,20 @@ const replaceKeys = (dict, keysToReplace) => {
   });
 
   return dict;
+};
+
+const replaceEntries = (array, entriesToReplace) => {
+  let newArray = [];
+  const oldEntries = Object.keys(entriesToReplace);
+  array.forEach((e) => {
+    if (!oldEntries.includes(e)) {
+      newArray.push(e);
+    } else {
+      newArray.push(entriesToReplace[e]);
+    }
+  });
+
+  return newArray;
 };
 
 const limitStrSize = (string, size) => {

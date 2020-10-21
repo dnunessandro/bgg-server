@@ -30,12 +30,11 @@ const drawPlaysChart = (plays) => {
   const svgLeftXPad = 30;
   const svgRightXPad = 20;
   const svgTopYPad = 10;
-  const svgBottomYPad = 20;
+  const svgBottomYPad = 25;
   const svg = d3
     .select(svgId)
     .attr("width", "100%")
-    .attr("height", "100%")
-    .style("min-height", "300px")
+    .attr("height", parseInt($("#boardgame-categories").css("height"))*0.83)
     .style("opacity", 1);
   const svgWidth = parseInt($(svgId).css("width"));
   const svgHeight = parseInt($(svgId).css("height"));
@@ -52,7 +51,7 @@ const drawPlaysChart = (plays) => {
 
   const yScale = d3
     .scaleLinear()
-    .domain([0, nPlays])
+    .domain([1, nPlays])
     .range([svgHeight - svgBottomYPad, svgTopYPad]);
 
   // Create Radius Scale
@@ -66,7 +65,7 @@ const drawPlaysChart = (plays) => {
     .clamp(true);
 
   // Create Axes
-  const xNTicks = 4;
+  const xNTicks = 3;
   const xAxis = d3
     .axisBottom(xScale)
     .ticks(xNTicks)
@@ -224,7 +223,7 @@ const drawPlaysChart = (plays) => {
     .attr("id", "plays-legend-size-circle-size-1")
     .classed("plays-legend-size-circle", true)
     .attr("r", getPyth(svgWidth, svgHeight) * 0.02)
-    .style("fill", LIGHT_COLOR)
+    .style("fill", SECONDARY_COLOR)
     .style("opacity", 0.7)
     .style("stroke", "#2b2d42");
 
@@ -234,7 +233,7 @@ const drawPlaysChart = (plays) => {
     .classed("plays-legend-size-circle", true)
     .attr("r", getPyth(svgWidth, svgHeight) * 0.015)
     .attr("transform", `translate(${getPyth(svgWidth, svgHeight) * 0.01},0)`)
-    .style("fill", LIGHT_COLOR)
+    .style("fill", SECONDARY_COLOR)
     .style("opacity", 0.5)
     .style("stroke", "#2b2d42");
 
@@ -247,7 +246,7 @@ const drawPlaysChart = (plays) => {
       "transform",
       `translate(${getPyth(svgWidth, svgHeight) * (0.01 + 0.007)},0)`
     )
-    .style("fill", LIGHT_COLOR)
+    .style("fill", SECONDARY_COLOR)
     .style("opacity", 0.5)
     .style("stroke", "#2b2d42");
 
@@ -446,7 +445,8 @@ const createPlaysChartIfAvailable = (plays) => {
     d3.select("#boardgame-plays-svg")
       .transition()
       .duration(200)
-      .style("opacity", 0);
+      .style("opacity", 0)
+      .attr("height", parseInt($("#boardgame-categories").css("height"))*0.82);
     $("#plays-not-available").css("opacity", 1);
   }
 };

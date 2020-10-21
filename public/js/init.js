@@ -8,17 +8,20 @@ let NODE_FORCE = null;
 let NODE_LABEL_FORCE = null;
 let NODE_CLICKED_BOOL = false;
 let RATINGS_BREAKDOWN = null;
+let RATINGS_BREAKDOWN_CANVAS_HEIGHT =
+  parseInt($("#boardgame-tooltip").css("height")) * (checkIfMobile() ? 0.84 : 0.33);
+
 let BOARDGAME_INFO_VAR = $("#boardgame-info");
 let SPIDER_CHARTS = {};
 
 // HTML Fixes
-  $(".link-automated-insights").css(
-    "line-height",
-    parseInt($(".link-automated-insights").css("height")) -
-      parseInt($(".link-automated-insights").css("padding-top")) -
-      parseInt($(".link-automated-insights").css("padding-bottom")) +
-      "px"
-  );
+$(".link-automated-insights").css(
+  "line-height",
+  parseInt($(".link-automated-insights").css("height")) -
+    parseInt($(".link-automated-insights").css("padding-top")) -
+    parseInt($(".link-automated-insights").css("padding-bottom")) +
+    "px"
+);
 if (!checkIfMobile()) {
   $(".link-free-exploration").css(
     "line-height",
@@ -36,8 +39,6 @@ if (!checkIfMobile()) {
   );
 }
 
-
-
 // Change Categories Buttons Background Color
 $("#btnCategory").css("background-color", CATEGORY_COLOR_MAP["category"]);
 $("#btnMechanic").css("background-color", CATEGORY_COLOR_MAP["mechanic"]);
@@ -52,6 +53,5 @@ if (checkIfMobile()) {
   $(".btn-group-sm .btn").css("margin-right", "2px");
   $("#global-stats-method-button").addClass("btn-sm");
   $("#ignored-boardgames-button").addClass("btn-sm");
-  $(".modal-footer .btn").addClass("btn-sm")
-  $("#bgg-page-btn").addClass("btn-sm")
+  $(".modal-footer .btn").addClass("btn-sm");
 }

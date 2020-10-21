@@ -787,17 +787,17 @@ const genAvgPlaysInsightCard = (insight, communityStats) => {
   cardData.title = "Average Plays";
   cardData.image = "avg-plays-canvas";
   cardData.rawStat = rawStat;
-  cardData.mainStat = rawStat.toFixed(0) + " Plays";
+  cardData.mainStat = Math.round(rawStat) + " Plays";
   cardData.description = `On average, you have played each boardgame in your collection ${genStatHtml(
-    rawStat.toFixed(0),
+    Math.round(rawStat),
     "badge-pill badge-dark py-1"
   )} times, which is ${compareUserVsCommunityStat(
-    rawStat,
-    rawCommunityStat,
+    Math.round(rawStat),
+    Math.round(rawCommunityStat),
     0.05,
     0.4
   )} the community average - ${genStatHtml(
-    rawCommunityStat.toFixed(0),
+    Math.round(rawCommunityStat),
     "badge-pill badge-info py-1"
   )}.`;
 
@@ -810,7 +810,7 @@ const genAvgTimePlayedInsightCard = (insight, communityStats) => {
   const rawCommunityStat = communityStats.avgTimePlayed;
   const communityStat =
     rawCommunityStat > 2
-      ? rawCommunityStat.toFixed(0)
+      ? Math.round(rawCommunityStat)
       : Math.round(rawCommunityStat * 60);
   let cardData = {};
   cardData.id = "avg-time-played-card";
@@ -819,7 +819,7 @@ const genAvgTimePlayedInsightCard = (insight, communityStats) => {
   cardData.rawStat = rawStat;
   cardData.mainStat =
     rawStat > 2
-      ? rawStat.toFixed(0) + " Hours"
+      ? Math.round(rawStat) + " Hours"
       : Math.round(rawStat * 60) + " Minutes";
   cardData.description = `On average, you have spent approximately ${genStatHtml(
     stat,
@@ -1066,7 +1066,7 @@ const genAvgRatingInsightCard = (insight, communityStats) => {
     rawStat,
     rawCommunityStat,
     0.05,
-    0.4
+    0.1
   )} the community average - ${genStatHtml(
     rawCommunityStat.toFixed(1),
     "badge-pill badge-info py-1"
@@ -1086,7 +1086,7 @@ const genHighestBggRatingInsightCard = (insight) => {
     "badge-pill badge-secondary py-1"
   )} ${
     insight.items.length == 1 ? "is" : "are"
-  } the boardgame with highest <em>Geek Rating</em> - ${genStatHtml(
+  } the boardgame with the highest <em>Geek Rating</em> - ${genStatHtml(
     insight.highestBggRating.toFixed(1),
     "badge-pill badge-dark py-1"
   )} - in your collection.`;
@@ -1105,7 +1105,7 @@ const genLowestBggRatingInsightCard = (insight) => {
     "badge-pill badge-secondary py-1"
   )} ${
     insight.items.length == 1 ? "is" : "are"
-  } the boardgame with lowest <em>Geek Rating</em> - ${genStatHtml(
+  } the boardgame with the lowest <em>Geek Rating</em> - ${genStatHtml(
     insight.lowestBggRating.toFixed(1),
     "badge-pill badge-dark py-1"
   )} - in your collection.`;
@@ -1116,20 +1116,21 @@ const genLowestBggRatingInsightCard = (insight) => {
 const genAvgBggRatingInsightCard = (insight, communityStats) => {
   const rawStat = insight.avgBggRating;
   const rawCommunityStat = communityStats.avgBggRating;
+
   let cardData = {};
   cardData.id = "avg-bgg-rating-card";
   cardData.title = "Average Geek Rating";
   cardData.image = "avg-bgg-rating-canvas";
   cardData.rawStat = rawStat;
   cardData.mainStat = rawStat.toFixed(1);
-  cardData.description = `Your boardgames have an average <em>Geek Rating</em> of ${genStatHtml(
+  cardData.description = `Your collection has an average <em>Geek Rating</em> of ${genStatHtml(
     rawStat.toFixed(1),
     "badge-pill badge-dark py-1"
   )}, which is ${compareUserVsCommunityStat(
     rawStat,
     rawCommunityStat,
     0.05,
-    0.4
+    0.1
   )} the community average - ${genStatHtml(
     rawCommunityStat.toFixed(1),
     "badge-pill badge-info py-1"
@@ -1149,7 +1150,7 @@ const genHighestAvgRatingInsightCard = (insight) => {
     "badge-pill badge-secondary py-1"
   )} ${
     insight.items.length == 1 ? "is" : "are"
-  } the boardgame with highest <em>Community Average Rating</em> - ${genStatHtml(
+  } the boardgame with highest <em>Community Rating</em> - ${genStatHtml(
     insight.highestAvgRating.toFixed(1),
     "badge-pill badge-dark py-1"
   )} - in your collection.`;
@@ -1168,7 +1169,7 @@ const genLowestAvgRatingInsightCard = (insight) => {
     "badge-pill badge-secondary py-1"
   )} ${
     insight.items.length == 1 ? "is" : "are"
-  } the boardgame with lowest <em>Community Average Rating</em> - ${genStatHtml(
+  } the boardgame with lowest <em>Community Rating</em> - ${genStatHtml(
     insight.lowestAvgRating.toFixed(1),
     "badge-pill badge-dark py-1"
   )} - in your collection.`;
@@ -1185,14 +1186,14 @@ const genAvgAvgRatingInsightCard = (insight, communityStats) => {
   cardData.image = "avg-avg-rating-canvas";
   cardData.rawStat = rawStat;
   cardData.mainStat = rawStat.toFixed(1);
-  cardData.description = `Your boardgames have an average <em>Community Average Rating</em> of ${genStatHtml(
+  cardData.description = `Your collection has an average <em>Community Rating</em> of ${genStatHtml(
     rawStat.toFixed(1),
     "badge-pill badge-dark py-1"
   )}, which is ${compareUserVsCommunityStat(
     rawStat,
     rawCommunityStat,
     0.05,
-    0.4
+    0.1
   )} the community average - ${genStatHtml(
     rawCommunityStat.toFixed(1),
     "badge-pill badge-info py-1"
@@ -1248,7 +1249,7 @@ const genAvgRatingDiffInsightCard = (insight) => {
     "badge-pill badge-dark py-1"
   )} points ${
     insight.avgRatingDiff >= 0 ? "higher" : "lower"
-  } than the <em>BGG</em> community.`;
+  } than the community.`;
 
   return cardData;
 };
@@ -1283,27 +1284,31 @@ const genMostCommonYearsInsightCard = (insight, communityStats) => {
   const rawCommunityStat = communityStats.mostCommonYear;
   let cardData = {};
   cardData.id = "most-common-years-card";
-  cardData.title =
-    rawStat.length == 1
-      ? "Most Common Release Year"
-      : "Most Common Release Years";
+  cardData.title = "Most Common Release Year";
   cardData.image = "most-common-years-canvas";
   cardData.rawStat = rawStat[0];
-  cardData.mainStat = rawStat[0] + (rawStat.length == 1 ? "" : "...");
+  cardData.mainStat = rawStat[0];
   cardData.description = `${genStatHtml(
     insight.mostCommonYears,
     "badge-pill badge-dark py-1"
-  )} ${rawStat.length == 1 ? "is" : "are"} is the ${
+  )} ${rawStat.length == 1 ? "is" : "are"} the ${
     rawStat.length == 1 ? "year" : "years"
-  } when the largest number of your boardgames were released, which is ${compareUserVsCommunityStat(
-    Math.round(rawStat),
-    Math.round(rawCommunityStat),
-    1,
-    5
-  )} the community - ${genStatHtml(
-    Math.round(rawCommunityStat),
-    "badge-pill badge-info py-1"
-  )}.`;
+  } in which the largest number of your boardgames were released - ${genStatHtml(
+    rawStat.length == 1
+      ? insight.items.length
+      : parseInt(insight.items.length / rawStat.length),
+    "badge-pill badge-dark py-1"
+  )}${rawStat.length == 1 ? "" : " boardgames each"}.`;
+  // , which is ${compareUserVsCommunityStat(
+  //   Math.round(rawStat),
+  //   Math.round(rawCommunityStat),
+  //   1,
+  //   5
+  // )} the community - ${genStatHtml(
+  //   Math.round(rawCommunityStat),
+  //   "badge-pill badge-info py-1"
+  // )}.`;
+
   cardData.showMoreButtonTitle = "Show Boardgames";
   cardData.showMoreButtonText = genBoardgameNamesHtml(
     insight.items,
@@ -1348,7 +1353,7 @@ const genAvgMaxPlayersInsightCard = (insight, communityStats) => {
   cardData.rawStat = rawStat;
   cardData.mainStat = Math.round(rawStat);
   cardData.description = `On average, your boardgames have a player limit of ${genStatHtml(
-    rawStat.toFixed(0),
+    Math.round(rawStat),
     "badge-pill badge-dark py-1"
   )} players, which is ${compareUserVsCommunityStat(
     Math.round(rawStat),
@@ -1374,7 +1379,7 @@ const genMedianMaxPlayersInsightCard = (insight, communityStats) => {
   cardData.mainStat = Math.round(rawStat);
 
   cardData.description = `The median player limit of your boardagames is ${genStatHtml(
-    rawStat.toFixed(0),
+    Math.round(rawStat),
     "badge-pill badge-dark py-1"
   )}, which is ${compareUserVsCommunityStat(
     Math.round(rawStat),
@@ -1401,7 +1406,7 @@ const genAvgMinPlayersInsightCard = (insight, communityStats) => {
   cardData.rawStat = rawStat;
   cardData.mainStat = Math.round(rawStat);
   cardData.description = `On average, your boardgames have a minimum player count of ${genStatHtml(
-    rawStat.toFixed(0),
+    Math.round(rawStat),
     "badge-pill badge-dark py-1"
   )} players, which is ${compareUserVsCommunityStat(
     Math.round(rawStat),
@@ -1484,9 +1489,9 @@ const genTop100InsightCard = (insight, communityStats) => {
   cardData.title = "On BGG's Top 100";
   cardData.image = "top100-canvas";
   cardData.rawStat = stat;
-  cardData.mainStat = stat.toFixed(0) + "%";
+  cardData.mainStat = Math.round(stat) + "%";
   cardData.description = `${genStatHtml(
-    stat.toFixed(0) + "%",
+    Math.round(stat) + "%",
     "badge-pill badge-dark py-1"
   )} of your boardgames are on BGG's Top 100, corresponding, in total, to ${genStatHtml(
     insight.nTop100,
@@ -1494,10 +1499,10 @@ const genTop100InsightCard = (insight, communityStats) => {
   )} boardgames. This value is ${compareUserVsCommunityStat(
     stat,
     communityStat,
-    3,
-    15
+    2,
+    10
   )} the community average - ${genStatHtml(
-    communityStat.toFixed(0) + "%",
+    Math.round(communityStat) + "%",
     "badge-pill badge-info py-1"
   )}.`;
   cardData.showMoreButtonTitle = "Show Boardgames";
@@ -1519,9 +1524,9 @@ const genKickstarterInsightCard = (insight, communityStats) => {
   cardData.title = "Published on Kickstarter";
   cardData.image = "kickstarter-canvas";
   cardData.rawStat = stat;
-  cardData.mainStat = stat.toFixed(0) + "%";
+  cardData.mainStat = Math.round(stat) + "%";
   cardData.description = `${genStatHtml(
-    stat.toFixed(0) + "%",
+    Math.round(stat) + "%",
     "badge-pill badge-dark py-1"
   )} of your boardgames were first published through Kickstarter, corresponding, in total, to ${genStatHtml(
     insight.nKickstarter,
@@ -1529,10 +1534,10 @@ const genKickstarterInsightCard = (insight, communityStats) => {
   )} boardgames. This value is ${compareUserVsCommunityStat(
     stat,
     communityStat,
-    3,
-    10
+    2,
+    8
   )} the community average - ${genStatHtml(
-    communityStat.toFixed(0) + "%",
+    Math.round(communityStat) + "%",
     "badge-pill badge-info py-1"
   )}.`;
   cardData.showMoreButtonTitle = "Show Boardgames";
@@ -1545,6 +1550,7 @@ const genKickstarterInsightCard = (insight, communityStats) => {
 };
 
 const genMostCommonCategoryInsightCard = (insight, communityStats) => {
+  const replacedEntries = replaceEntries(insight.mostCommonCategory, FIELD_LABEL_REPLACE_MAP['category'])
   const nCollectionItems =
     insight.nMostCommonCategory / insight.prctMostCommonCategory;
   const rawStat = dictValuesToPrct(insight.categoryHist, nCollectionItems);
@@ -1560,11 +1566,11 @@ const genMostCommonCategoryInsightCard = (insight, communityStats) => {
   cardData.title = "Most Common Category";
   cardData.image = "most-common-category-canvas";
   cardData.rawStat = rawStat;
-  cardData.mainStat = stat;
+  cardData.mainStat = replacedEntries[0];
   cardData.rawCommunityStat = rawCommunityStat;
   cardData.communityStat = communityStat;
   cardData.description = `${genStatHtml(
-    insight.mostCommonCategory,
+    replacedEntries,
     "badge-pill badge-secondary py-1"
   )} ${insight.mostCommonCategory.length == 1 ? "is" : "are"} the most common ${
     insight.mostCommonCategory.length == 1 ? "category" : "categories"
@@ -1581,13 +1587,13 @@ const genMostCommonCategoryInsightCard = (insight, communityStats) => {
     (communityStats.categoryHist[insight.mostCommonCategory[0]] /
       communityStats.nItems) *
       100,
-    3,
-    10
+    2,
+    8
   )} the community average - ${genStatHtml(
     Math.round(
       (communityStats.categoryHist[insight.mostCommonCategory[0]] /
         communityStats.nItems) *
-      100
+        100
     ) + "%",
     "badge-pill badge-info py-1"
   )}.`;
@@ -1602,6 +1608,7 @@ const genMostCommonCategoryInsightCard = (insight, communityStats) => {
 };
 
 const genMostCommonMechanicInsightCard = (insight, communityStats) => {
+  const replacedEntries = replaceEntries(insight.mostCommonMechanic, FIELD_LABEL_REPLACE_MAP['mechanic'])
   const nCollectionItems =
     insight.nMostCommonMechanic / insight.prctMostCommonMechanic;
   const rawStat = dictValuesToPrct(insight.mechanicHist, nCollectionItems);
@@ -1618,11 +1625,11 @@ const genMostCommonMechanicInsightCard = (insight, communityStats) => {
   cardData.title = "Most Common Mechanic";
   cardData.image = "most-common-mechanic-canvas";
   cardData.rawStat = rawStat;
-  cardData.mainStat = stat;
+  cardData.mainStat = replacedEntries[0];
   cardData.rawCommunityStat = rawCommunityStat;
   cardData.communityStat = communityStat;
   cardData.description = `${genStatHtml(
-    insight.mostCommonMechanic,
+    replacedEntries,
     "badge-pill badge-secondary py-1"
   )} ${insight.mostCommonMechanic.length == 1 ? "is" : "are"} the most common ${
     insight.mostCommonMechanic.length == 1 ? "mechanic" : "mechanics"
@@ -1639,13 +1646,13 @@ const genMostCommonMechanicInsightCard = (insight, communityStats) => {
     (communityStats.mechanicHist[insight.mostCommonMechanic[0]] /
       communityStats.nItems) *
       100,
-    3,
-    10
+    2,
+    8
   )} the community average - ${genStatHtml(
     Math.round(
       (communityStats.mechanicHist[insight.mostCommonMechanic[0]] /
         communityStats.nItems) *
-      100
+        100
     ) + "%",
     "badge-pill badge-info py-1"
   )}.`;
@@ -1660,6 +1667,7 @@ const genMostCommonMechanicInsightCard = (insight, communityStats) => {
 };
 
 const genMostCommonPublisherInsightCard = (insight, communityStats) => {
+  const replacedEntries = replaceEntries(insight.mostCommonPublisher, FIELD_LABEL_REPLACE_MAP['publisher'])
   const nCollectionItems =
     insight.nMostCommonPublisher / insight.prctMostCommonPublisher;
   const rawStat = dictValuesToPrct(insight.publisherHist, nCollectionItems);
@@ -1676,11 +1684,11 @@ const genMostCommonPublisherInsightCard = (insight, communityStats) => {
   cardData.title = "Most Common Publisher";
   cardData.image = "most-common-publisher-canvas";
   cardData.rawStat = rawStat;
-  cardData.mainStat = stat;
+  cardData.mainStat = replacedEntries[0];
   cardData.rawCommunityStat = rawCommunityStat;
   cardData.communityStat = communityStat;
   cardData.description = `${genStatHtml(
-    insight.mostCommonPublisher,
+    replacedEntries,
     "badge-pill badge-secondary py-1"
   )} ${
     insight.mostCommonPublisher.length == 1 ? "is" : "are"
@@ -1699,13 +1707,13 @@ const genMostCommonPublisherInsightCard = (insight, communityStats) => {
     (communityStats.publisherHist[insight.mostCommonPublisher[0]] /
       communityStats.nItems) *
       100,
-    3,
-    10
+    2,
+    8
   )} the community average - ${genStatHtml(
     Math.round(
       (communityStats.publisherHist[insight.mostCommonPublisher[0]] /
         communityStats.nItems) *
-      100
+        100
     ) + "%",
     "badge-pill badge-info py-1"
   )}.`;
@@ -1715,6 +1723,7 @@ const genMostCommonPublisherInsightCard = (insight, communityStats) => {
 };
 
 const genMostCommonDesignerInsightCard = (insight, communityStats) => {
+  const replacedEntries = replaceEntries(insight.mostCommonDesigner, FIELD_LABEL_REPLACE_MAP['designer'])
   const nCollectionItems =
     insight.nMostCommonDesigner / insight.prctMostCommonDesigner;
   const rawStat = dictValuesToPrct(insight.designerHist, nCollectionItems);
@@ -1731,7 +1740,7 @@ const genMostCommonDesignerInsightCard = (insight, communityStats) => {
   cardData.title = "Most Common Designer";
   cardData.image = "most-common-designer-canvas";
   cardData.rawStat = rawStat;
-  cardData.mainStat = stat;
+  cardData.mainStat = replacedEntries[0];
   cardData.rawCommunityStat = rawCommunityStat;
   cardData.communityStat = communityStat;
   cardData.description = `${genStatHtml(
@@ -1743,15 +1752,15 @@ const genMostCommonDesignerInsightCard = (insight, communityStats) => {
   )} of your collection - were designed by ${
     insight.mostCommonDesigner.length == 1 ? "" : "one of"
   } ${genStatHtml(
-    insight.mostCommonDesigner,
+    replacedEntries,
     "badge-pill badge-secondary py-1"
   )}. This value is ${compareUserVsCommunityStat(
     insight.prctMostCommonDesigner * 100,
     (communityStats.designerHist[insight.mostCommonDesigner[0]] /
       communityStats.nItems) *
       100,
-    1,
-    10
+    2,
+    8
   )} the community average - ${genStatHtml(
     (
       (communityStats.designerHist[insight.mostCommonDesigner[0]] /
@@ -1771,6 +1780,7 @@ const genMostCommonDesignerInsightCard = (insight, communityStats) => {
 };
 
 const genMostCommonArtistInsightCard = (insight, communityStats) => {
+  const replacedEntries = replaceEntries(insight.mostCommonArtist, FIELD_LABEL_REPLACE_MAP['designer'])
   const nCollectionItems =
     insight.nMostCommonArtist / insight.prctMostCommonArtist;
   const rawStat = dictValuesToPrct(insight.artistHist, nCollectionItems);
@@ -1786,7 +1796,7 @@ const genMostCommonArtistInsightCard = (insight, communityStats) => {
   cardData.title = "Most Common Artist";
   cardData.image = "most-common-artist-canvas";
   cardData.rawStat = rawStat;
-  cardData.mainStat = stat;
+  cardData.mainStat = replacedEntries[0];
   cardData.rawCommunityStat = rawCommunityStat;
   cardData.communityStat = communityStat;
   cardData.description = `${genStatHtml(
@@ -1798,15 +1808,15 @@ const genMostCommonArtistInsightCard = (insight, communityStats) => {
   )} of your collection - were illustrated by ${
     insight.mostCommonArtist.length == 1 ? "" : "one of"
   } ${genStatHtml(
-    insight.mostCommonArtist,
+    replacedEntries,
     "badge-pill badge-secondary py-1"
   )}. This value is ${compareUserVsCommunityStat(
     insight.prctMostCommonArtist * 100,
     (communityStats.artistHist[insight.mostCommonArtist[0]] /
       communityStats.nItems) *
       100,
-    1,
-    10
+    2,
+    8
   )} the community average - ${genStatHtml(
     (
       (communityStats.artistHist[insight.mostCommonArtist[0]] /
@@ -2555,7 +2565,7 @@ const createInsightCard = (
   boardgameStats,
   gridId
 ) => {
-  const card = $(`<div id="${insightCardData.id}" class="card shadow"></div>`);
+  const card = $(`<div id="${insightCardData.id}" class="card"></div>`);
 
   card.append('<div class="card-body pt-2"></div>');
   card
@@ -2580,44 +2590,46 @@ const createInsightCard = (
     card
       .find(".card-body")
       .append(
-        `<a class="btn btn-primary mb-2 mx-5 d-flex justify-content-center ${
-          checkIfMobile() ? "btn-sm" : ""
-        }" data-toggle="collapse" href="#${
-          insightCardData.id
-        }-note" role="button"><span class="fas fa-exclamation-circle pr-1"></span>Note</a>`
+        `<a id=${insightCardData.id}-note-button class="btn btn-sm btn-dark d-flex justify-content-center show-note-btn mb-0 collapsed" data-toggle="collapse" href="#${insightCardData.id}-note" role="button"><span class="fas fa-exclamation-circle pr-1"></span>Note</a>`
       );
     card
       .find(".card-body")
       .append(
-        `<p class="collapse card-text text-muted p-2 show-note-btn" id="${insightCardData.id}-note">${insightCardData.note}</p>`
+        `<p class="collapse card-text text-muted p-2 show-note-text mt-2" id="${insightCardData.id}-note">${insightCardData.note}</p>`
       );
+
+      $(`#${insightCardData.id}-note-button`).on("click", function () {
+        if ($(this).attr("class").includes("collapsed")) {
+          $(this).removeClass('btn-dark')
+          $(this).addClass('btn-primary')
+        } else {
+          $(this).removeClass('btn-primary')
+          $(this).addClass('btn-dark')
+        }
+      });
   }
 
   if ("showMoreButtonTitle" in insightCardData) {
     card
       .find(".card-body")
       .append(
-        `<a id=${
-          insightCardData.id
-        }-show-more-button class="btn btn-primary d-flex justify-content-center mx-5 mb-2 collapsed show-more-btn ${
-          checkIfMobile() ? "btn-sm" : ""
-        }" data-toggle="collapse" href="#${
-          insightCardData.id
-        }-show-more-text" role="button">${
-          insightCardData.showMoreButtonTitle
-        }</a>`
+        `<a id=${insightCardData.id}-show-more-button class="btn btn-sm btn-dark d-flex justify-content-center mb-0 collapsed show-more-btn" data-toggle="collapse" href="#${insightCardData.id}-show-more-text" role="button">${insightCardData.showMoreButtonTitle}</a>`
       );
     card
       .find(".card-body")
       .append(
-        `<p class="collapse card-text show-more-text" style='font-size: 0.8rem; line-height: 1.7rem; text-align: center' id="${insightCardData.id}-show-more-text">${insightCardData.showMoreButtonText}</p>`
+        `<p class="collapse card-text show-more-text mt-2" style='font-size: 0.8rem; line-height: 1.7rem; text-align: center' id="${insightCardData.id}-show-more-text">${insightCardData.showMoreButtonText}</p>`
       );
 
     $(`#${insightCardData.id}-show-more-button`).on("click", function () {
       if ($(this).attr("class").includes("collapsed")) {
         $(this).html($(this).html().replace("Show", "Hide"));
+        $(this).removeClass('btn-dark')
+        $(this).addClass('btn-primary')
       } else {
         $(this).html($(this).html().replace("Hide", "Show"));
+        $(this).removeClass('btn-primary')
+        $(this).addClass('btn-dark')
       }
     });
   }
@@ -2646,9 +2658,9 @@ const createInsightCard = (
     const field = getStringBetween(insightCardData.id, "most-common-", "-card");
     let buttonGroup = `<div class="d-flex justify-content-center"><div id=${insightCardData.id}-data-selector class="data-selector btn-group btn-group-sm pb-2 text-center" role="group">`;
 
-    insightCardData.dataSelectionButtonTitles.forEach((t) => {
+    insightCardData.dataSelectionButtonTitles.forEach((t, i) => {
       buttonGroup = buttonGroup.concat(
-        ` <button type="button" class="btn btn-primary mx-1">${t}</button>`
+        ` <button type="button" class="btn ${i==0 ? "btn-primary" : "btn-dark"} mx-1">${t}</button>`
       );
     });
     buttonGroup.concat(`</div></div>`);
@@ -2658,6 +2670,10 @@ const createInsightCard = (
       .find(".btn")
       .eq(0)
       .on("click", function () {
+        $(this).removeClass('btn-dark')
+        $(this).addClass('btn-primary')
+        $(this).siblings().removeClass('btn-primary')
+        $(this).siblings().addClass('btn-dark')
         SPIDER_CHARTS[field].destroy();
         $(`#${insightCardData.image}`);
         SPIDER_CHARTS[field] = drawInsightsSpiderChart(
@@ -2677,6 +2693,10 @@ const createInsightCard = (
       .find(".btn")
       .eq(1)
       .on("click", function () {
+        $(this).removeClass('btn-dark')
+        $(this).addClass('btn-primary')
+        $(this).siblings().removeClass('btn-primary')
+        $(this).siblings().addClass('btn-dark')
         SPIDER_CHARTS[field].destroy();
         $(`#${insightCardData.image}`);
         SPIDER_CHARTS[field] = drawInsightsSpiderChart(
@@ -2699,7 +2719,7 @@ const createInsightCard = (
   }
 
   // Make images square if mobile
-  if(checkIfMobile()){
+  if (checkIfMobile()) {
     card.find("img").css("height", card.find("img").width());
   }
 
@@ -3130,7 +3150,7 @@ const createAllEntriesModal = (elementId) => {
               <div class="modal-body text-center">
               </div>
               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
               </div>
           </div>
       </div>
@@ -3271,8 +3291,11 @@ const removeUnusedInsightsTitles = (prefixList) => {
       $(`#${e}-insights-btn-group`).remove();
       $(`.${e}-insights-link`).css("opacity", 0.5);
       $(`.${e}-insights-link`).attr("data-toggle", "tooltip");
-      $(`.${e}-insights-link`).attr("title", `Insights could not be generated for this category due to
-      absent or insufficient data.`);
+      $(`.${e}-insights-link`).attr(
+        "title",
+        `Insights could not be generated for this category due to
+      absent or insufficient data.`
+      );
     }
   });
 };

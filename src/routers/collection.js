@@ -150,6 +150,7 @@ router.post("/collections/:username/enrich", async (req, res) => {
     if (filter.length == 0) {
       collectionObj = await enrichCollectionWithBoardgames(collectionObj);
       collectionObj = await enrichCollectionWithPlays(collectionObj);
+      
       collectionObj = await enrichCollectionWithInsights(collectionObj);
     }
     collectionObj = filter.includes("boardgames")
@@ -158,9 +159,17 @@ router.post("/collections/:username/enrich", async (req, res) => {
     collectionObj = filter.includes("plays")
       ? await enrichCollectionWithPlays(collectionObj)
       : collectionObj;
+
+//       fs = require('fs');
+// fs.writeFile('helloworld.json', collectionObj.insights, function (err) {
+//   if (err) return console.log(err);
+//   console.log('Hello World > helloworld.txt');
+// });
     
     collectionObj.lastUpdated = date.getTime()
 
+
+    
     // Save Insights to original collection
     await Collection.updateOne(
       { username },
@@ -171,6 +180,10 @@ router.post("/collections/:username/enrich", async (req, res) => {
         lastUpdated: date.getTime(),
       }
     );
+
+    
+
+    
 
     // Create enriched collection object
     const insights = collectionObj.insights;

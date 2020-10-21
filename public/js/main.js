@@ -1,5 +1,4 @@
 const run = async () => {
-
   // Get Collection from Local Storage
   const collection = JSON.parse(
     LZUTF8.decompress(window.localStorage.getItem("collection"), {
@@ -59,15 +58,16 @@ const run = async () => {
   );
 
   createMiscStats(collectionItems[0]);
-  checkIfMobile()? drawPlayerCountChartMobile(collectionItems[0]) : drawPlayerCountChart(getPlayerCountData(collectionItems[0]));
   drawPlayTimeChart(collectionItems[0]);
-  createWordCloud(getItemCategories(collectionItems[0]));
-  createWordCloud(getItemCategories(collectionItems[0]));
-  createPlaysChartIfAvailable(collectionItems[0].plays);
-  createPlaysChartIfAvailable(collectionItems[0].plays);
+  checkIfMobile()
+    ? drawPlayerCountChartMobile(collectionItems[0])
+    : drawPlayerCountChart(getPlayerCountData(collectionItems[0]));
+  
   RATINGS_BREAKDOWN = createRatingsBreakdownChartIfAvailable(
     collectionItems[0].ratingsBreakdown
   );
+  createWordCloud(getItemCategories(collectionItems[0]));
+  createPlaysChartIfAvailable(collectionItems[0].plays);
 
   // Draw Insights
   runInsights(collection);
@@ -79,9 +79,7 @@ const run = async () => {
   await addAllWaypoints(
     getWaypointList([
       "#insights-header",
-      "#global-stats-header",
-      "#insights-bg",
-      "#global-stats-bg",
+      "#global-stats-header"
     ])
   );
 
@@ -92,7 +90,6 @@ const run = async () => {
 
   // Turn on tooltips
   $('[data-toggle="tooltip"]').tooltip();
-
 };
 
 run();

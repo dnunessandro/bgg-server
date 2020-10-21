@@ -1005,7 +1005,7 @@ const getCollectionAvgValueHist = async () => {
     .filter((c) => c.insights.get("avgValue") != undefined)
     .map((c) => 1 / c.insights.get("avgValue").avgValue);
 
-  return getHistogram(avgValues, [0, 2, 4, 6, 8, 10, 20, 100]);
+  return getHistogram(avgValues, [0, 2, 4, 6, 8, 10, 20, 100, 1000]);
 };
 
 const getCollectionAvgWeightHist = async () => {
@@ -1031,7 +1031,7 @@ const getCollectionAvgRatingHist = async () => {
     .filter((c) => c.insights.get("avgRating") != undefined)
     .map((c) => c.insights.get("avgRating").avgUserRating);
 
-  return getHistogram(avgRatings, [0, 5, 6, 7, 8, 9, 10]);
+  return getHistogram(avgRatings, [0, 5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10]);
 };
 
 const getCollectionAvgAvgRatingHist = async () => {
@@ -1046,7 +1046,7 @@ const getCollectionAvgAvgRatingHist = async () => {
     .filter((c) => c.insights.get("avgAvgRating") != undefined)
     .map((c) => c.insights.get("avgAvgRating").avgAvgRating);
 
-  return getHistogram(avgAvgRatings, [0, 5, 6, 7, 8, 9, 10]);
+  return getHistogram(avgAvgRatings, [0, 5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10]);
 };
 
 const getCollectionAvgBggRatingHist = async () => {
@@ -1061,7 +1061,7 @@ const getCollectionAvgBggRatingHist = async () => {
     .filter((c) => c.insights.get("avgBggRating") != undefined)
     .map((c) => c.insights.get("avgBggRating").avgBggRating);
 
-  return getHistogram(avgBggRatings, [0, 5, 6, 7, 8, 9, 10]);
+  return getHistogram(avgBggRatings, [0, 5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 10]);
 };
 
 const getCollectionAvgRatingDiffHist = async () => {
@@ -1170,7 +1170,7 @@ const getCollectionMedianMaxPlayersHist = async () => {
     .filter((c) => c.insights.get("medianMaxPlayers") != undefined)
     .map((c) => c.insights.get("medianMaxPlayers").medianMaxPlayers);
 
-  return getHistogram(maxPlayers, [1, 2, 3, 4, 5, 6, 7, 20]);
+  return getHistogram(maxPlayers, [1, 2, 3, 4, 5, 6, 7, 10, 20]);
 };
 
 const getCollectionAvgMinPlayersHist = async () => {
@@ -1185,7 +1185,7 @@ const getCollectionAvgMinPlayersHist = async () => {
     .filter((c) => c.insights.get("avgMinPlayers") != undefined)
     .map((c) => c.insights.get("avgMinPlayers").avgMinPlayers);
 
-  return getHistogram(minPlayers, [1, 2, 3, 4, 5, 10]);
+  return getHistogram(minPlayers, [1, 2, 3, 4, 5]);
 };
 
 const getCollectionAvgPriceHist = async () => {
@@ -1255,6 +1255,7 @@ const getCollectionTotalPriceHist = async () => {
     100,
     500,
     1000,
+    2500,
     5000,
     10000,
     100000,

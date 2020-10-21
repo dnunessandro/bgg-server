@@ -12,7 +12,7 @@ function createWordCloud(itemCategories) {
   const svg = d3
     .select(svgId)
     .attr("width", "100%")
-    .attr("height", "100%")
+    .attr("height", $("#average-rating-wrapper").height()+8)
     .append("g")
     .attr(
       "transform",
@@ -25,15 +25,15 @@ function createWordCloud(itemCategories) {
   let words = [];
   itemCategories.forEach((e) => {
 
-    const size = 20 +
+    const size = 13 +
     Math.random() *
       getPyth(
         parseInt($(svgId).css("width")),
         parseInt($(svgId).css("height"))
       ) *
-      0.03
+      0.008
 
-    e["size"] = checkIfMobile() ? size / 1.5 : size
+    e["size"] = checkIfMobile() ? size / 1.2 : size
       ;
     e["text"] = e.value;
     words.push(e);
@@ -77,7 +77,7 @@ function createWordCloud(itemCategories) {
 
   d3.layout
     .cloud()
-    .size([parseInt($(svgId).css("width")), parseInt($(svgId).css("height"))])
+    .size([parseInt($(svgId).css("width"))*0.97, parseInt($(svgId).css("height"))*0.97])
     .words(words)
     .padding(5)
     .rotate(function () {

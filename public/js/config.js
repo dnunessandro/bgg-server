@@ -12,10 +12,13 @@ const NEUTRAL_COLOR = "#6d6875";
 const BACKGROUND_COLOR = "#eee";
 
 const GREEN_COLOR = "#81b29a";
-const YELLOW_COLOR = "#f2cc8f";
+const YELLOW_COLOR = "#ffbf69";
 const RED_COLOR = "#e07a5f";
 const GRAY_COLOR = "#c7ccdb";
 const DEFAULT_COLOR = "#118ab2";
+
+//f6bd60
+
 
 const COLLECTION_OVERVIEW_PALETTE = [
   "#9c89b8",
@@ -24,7 +27,7 @@ const COLLECTION_OVERVIEW_PALETTE = [
   "#b8bedd",
 ];
 
-const CONTAINER_FLUID_BREAKPOINT = 992;
+const CONTAINER_FLUID_BREAKPOINT = 1200;
 
 // LOGIN ///////////////
 const LOAD_TIME_MAP = {
@@ -35,12 +38,14 @@ const LOAD_TIME_MAP = {
 };
 
 // COLLECTION OVERVIEW ///////////////
+const CHART_HEIGHT = checkIfMobile() ? 220 : 350;
 const MIN_NODE_RADIUS_FACTOR = 0.03;
-const MAX_NODE_RADIUS_FACTOR = checkIfMobile() ? 0.07 : 0.1;
+const MAX_NODE_RADIUS_FACTOR = checkIfMobile() ? 0.15 : 0.1;
 const MAX_NODE_RADIUS_ABS = 50;
-const DEFAULT_NODE_RADIUS_FACTOR = 0.07;
-const MAX_NODE_LABEL_CHARACTERS = checkIfMobile() ? 20 : 30;
-const SVG_HEIGHT_MOBILE_FACTOR = 1.75;
+const DEFAULT_NODE_RADIUS_FACTOR = 0.04;
+const NON_LINEAR_NODE_RADIUS_FACTOR = 0.08;
+const MAX_NODE_LABEL_CHARACTERS = checkIfMobile() ? 15 : 20;
+const SVG_HEIGHT_MOBILE_FACTOR = 1.1;
 const LABEL_X_PAD_FACTOR = 0.05;
 
 const NODE_SIZE_DEFAULT_FIELD = "averageRating";
@@ -78,25 +83,25 @@ const NODE_SIZE_SCALE_DOMAIN_MAP = {
   numPlays: [0, 50],
   name: [0, 1],
   averageWeight: [1, 4],
-  averagePriceNew: [10, 70],
+  averagePriceNew: [10, 120],
 };
 
 const NUM_NODES_BREAKPOINT_MAP = {
-  0: 40,
-  576: 40,
-  768: 60,
-  992: 70,
-  1200: 80,
-  1600: 100,
-  2000: 180,
-  2400: 200,
-  3000: 250,
+  0: 50,
+  576: 70,
+  768: 100,
+  992: 120,
+  1200: 150,
+  1600: 200,
+  2000: 300,
+  2400: 400,
+  3000: 500,
 };
 
 const RATING_CLASSES_MAP = {
   [GRAY_COLOR]: [0, 0],
-  [RED_COLOR]: [0.1, 4.999],
-  [YELLOW_COLOR]: [5, 7.999],
+  [RED_COLOR]: [0.1, 5.999],
+  [YELLOW_COLOR]: [6, 7.999],
   [GREEN_COLOR]: [8.0, 10],
 };
 
@@ -161,7 +166,7 @@ window.odometerOptions = {
 };
 
 // GLOBAL STATS
-const BOARDGAME_SAMPLE_SIZE = 200;
+const BOARDGAME_SAMPLE_SIZE = 300;
 const BOARDGAME_SAMPLE_OWNED_THRESHOLD = 10000;
 const BOARDGAME_SAMPLE_YEARS_SPLITS = [
   1950,
@@ -354,9 +359,10 @@ const FIELD_LABEL_REPLACE_MAP = {
     "Land of Beautiful Mind (سرزمین ذهن زیبا)": "Land of Beautiful Mind",
     "Winning Moves International Ltd": "Winning Moves International",
     "CEFA (Celulosa Fabril S. A.)": "Celulosa Fabril",
+    "Kaissa Chess & Games": "Kaissa Chess"
   },
   designer: { "(Uncredited)": "Uncredited" },
-  artist: {},
+  artist: { "(Uncredited)": "Uncredited" },
 };
 
 const FIELD_TOOLTIP_SUFFIX_MAP = {

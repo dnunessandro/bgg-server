@@ -14,7 +14,7 @@ const createNodeGroupELs = () => {
     BOARDGAME_INFO_VAR.insertAfter("#collection-overview");
     BOARDGAME_INFO_VAR.slideDown("slow");
     $("#boardgame-info").removeClass("hide").addClass("show");
-    Waypoint.refreshAll()
+    Waypoint.refreshAll();
 
     // Populate Tooltip Elements
     populateTooltip(d.id, d.name, d.yearPublished, d.image, d.description);
@@ -24,13 +24,16 @@ const createNodeGroupELs = () => {
     populateRatings(d.userRating, d.averageRating, d.bayesAverageRating);
 
     // Populate Ratings Breakdown
+    RATINGS_BREAKDOWN_CANVAS_HEIGHT = RATINGS_BREAKDOWN != null ? $("#ratings-breakdown-canvas").attr("height") : RATINGS_BREAKDOWN_CANVAS_HEIGHT ;
     RATINGS_BREAKDOWN != null ? RATINGS_BREAKDOWN.destroy() : null;
     RATINGS_BREAKDOWN = createRatingsBreakdownChartIfAvailable(
       d.ratingsBreakdown
     );
 
     // Create Player Count Chart
-    checkIfMobile()? drawPlayerCountChartMobile(d) : drawPlayerCountChart(getPlayerCountData(d));
+    checkIfMobile()
+      ? drawPlayerCountChartMobile(d)
+      : drawPlayerCountChart(getPlayerCountData(d));
 
     // Create Misc Stats
     createMiscStats(d);
@@ -52,7 +55,7 @@ const populateTooltip = (id, name, yearPublished, image, description) => {
     .attr("src", image)
     .css("height", $("#boardgame-tooltip img").width());
   $("#boardgame-tooltip img").addClass("show").removeClass("hide");
-  $("#boardgame-tooltip h5").text(name);
+  $("#boardgame-tooltip a").text(name);
   $("#boardgame-tooltip h6").text(yearPublished);
   $("#boardgame-tooltip a").attr(
     "href",
@@ -82,6 +85,6 @@ const populateRatings = (userRating, averageRating, bayesAverageRating) => {
 
 const boardgameInfoFluidContainerToggle = (threshold) => {
   $("#collection-overview-chart").width() > threshold
-  ? $("#boardgame-info").removeClass("container-fluid").addClass("container")
-  : undefined;
-}
+    ? $("#boardgame-info").removeClass("container-fluid").addClass("container")
+    : undefined;
+};

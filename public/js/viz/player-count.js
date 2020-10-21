@@ -30,9 +30,8 @@ const drawPlayerCountChart = (playerCountData) => {
       .append("rect")
       .classed("player-count-bg", true)
       .attr("width", svg.attr("width"))
-      .attr("height", svgHeight)
-      .attr("rx", "15px")
-      .attr("ry", "20px");
+      .attr("height", svgHeight-2)
+      .attr('transform', "translate(1,1)")
   }
 
   // Get Circle Coords Scale =
@@ -127,7 +126,7 @@ const drawPlayerCountChartMobile = (collectionItem) => {
   const svgHeight = parseInt($("#weight-p").css("height"));
 
   // Create X Axis Scale
-  const xAxisScale = d3.scaleLinear().domain([0, 1]).range([0, svgWidth]);
+  const xAxisScale = d3.scaleLinear().domain([0, 1]).range([0, svgWidth-10]);
 
   // Get SVG Element
   const svg = d3.select(svgId).attr("height", svgHeight);
@@ -186,10 +185,10 @@ const drawPlayerCountChartMobile = (collectionItem) => {
     .attr("d", function (d) {
       return line([
         [
-          minMaxTimeFlag ? xAxisScale(0) + svgWidth / 4 : xAxisScale(1),
+          minMaxTimeFlag ? xAxisScale(0) + svgWidth / 5 : xAxisScale(1),
           svgHeight / 2,
         ],
-        [xAxisScale(1) - svgWidth / 4, svgHeight / 2],
+        [xAxisScale(1) - svgWidth / 5, svgHeight / 2],
       ]);
     })
     .style("opacity", (d) => (minMaxTimeFlag ? 0.8 : 0));
@@ -220,7 +219,7 @@ const drawPlayerCountChartMobile = (collectionItem) => {
   const yPad = parseInt($(".misc-stat-span").css("padding-top"));
   minPlayersGroup
     .select("rect")
-    .attr("width", minTextWidth + xPad * 2)
+    .attr("width", minTextWidth + xPad * 2 )
     .attr("height", svgHeight - 2)
     .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`)
     .attr("rx", "15px")

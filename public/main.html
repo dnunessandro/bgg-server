@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                <p id="user-profile-description" class="description my-4">
+                                <p id="user-profile-description" class="description mt-4 mb-2">
                                     If you are unsure where to begin, keep scrolling down to start exploring your collection! Alternatively, jump
                                     to the content you are most interested in:
                                 </p>
@@ -190,25 +190,31 @@
                 </div>
             </div>
             <div id="boardgame-info" class="container-fluid pb-2 my-0">
-                <div id="boardgame-info-row" class="row p-1 mb-3">
-                    <div id="boardgame-info-col-1" class="col-6 col-md-4 d-flex flex-column">
-                        <div class="row p-1">
-                            <div id="boardgame-tooltip" class="card shadow-sm px-2">
-                                <img id="boardgame-image" class="card-img-top mt-2">
-                                <div class="card-body px-2">
-                                    <h5 id="boardgame-name" class="card-title text-truncate "></h5>
-                                    <h6 class="card-subtitle text-muted"></h6>
+                <div id="boardgame-info-row" class="row mb-3">
+                    <div id="boardgame-info-col-1" class="boardgame-info-col col-5 col-xl-4 py-0 px-1 mb-2">
+                        <div id="boardgame-tooltip" class="card shadow-sm px-1">
+                            <div class="card-body row p-2 m-0">
+                                <img id="boardgame-image" class="d-none d-md-block col-md-6 pl-1 pr-2 my-auto">
+                                <div class="col-12 col-md-6 px-0">
+                                    <a
+                                        id="boardgame-name"
+                                        href="#"
+                                        class="card-title text-truncate mb-1 mb-md-2"
+                                        target="_blank"
+                                        class=""
+                                    ></a>
+                                    <h6 class="card-subtitle text-muted text-truncate pt-1"></h6>
                                     <div id="general-stats-container" class="container px-0 ">
-                                        <div id="general-stats-row" class="row mx-0 mt-2 mb-0">
-                                            <div class="col-12 col-md-6 px-1 mb-2">
+                                        <div id="general-stats-row" class="row mx-0 mt-2 mb-0 px-0">
+                                            <div class="col-12 col-md-7 px-1 mb-1">
                                                 <p id="play-time-p" class="d-flex card-text align-items-center justify-content-between">
-                                                    <span id="play-time-icon" class="fas fa-stopwatch pr-3"></span>
+                                                    <span id="play-time-icon" class="fas fa-stopwatch pr-2 pr-md-1"></span>
                                                     <svg id="boardgame-play-time-svg" class="d-flex flex-grow-1"></svg>
                                                 </p>
                                             </div>
-                                            <div class="col-12 col-md-6 px-1 mb-2">
+                                            <div class="col-12 col-md-5 px-1 mb-1">
                                                 <span id="price-p" class="d-flex align-items-center justify-content-start justify-content-md-end">
-                                                    <span class="fas fa-money-bill-wave pr-2"></span>
+                                                    <span class="fas fa-money-bill-wave pr-1 pr-md-1"></span>
                                                     <span
                                                         class="misc-stat-span"
                                                         data-toggle="tooltip"
@@ -217,9 +223,9 @@
                                                     ></span>
                                                 </span>
                                             </div>
-                                            <div class="col-12 col-md-6 px-1 mb-2">
+                                            <div class="col-12 col-md-7 px-1 mb-1">
                                                 <p id="weight-p" class="d-flex card-text align-items-center justify-content-start">
-                                                    <span class="fas fa-weight-hanging pr-2"></span>
+                                                    <span class="fas fa-weight-hanging pr-2 pr-md-1"></span>
                                                     <span
                                                         class="misc-stat-span"
                                                         data-toggle="tooltip"
@@ -228,9 +234,9 @@
                                                     ></span>
                                                 </p>
                                             </div>
-                                            <div class="col-12 col-md-6 px-1 mb-2">
+                                            <div class="col-12 col-md-5 px-1 mb-1">
                                                 <p id="owners-p" class="d-flex card-text align-items-center justify-content-start justify-content-md-end">
-                                                    <span class="fas fa-users pr-2"></span>
+                                                    <span class="fas fa-globe-americas pr-2 pr-md-1"></span>
                                                     <span
                                                         class="misc-stat-span"
                                                         data-toggle="tooltip"
@@ -240,11 +246,11 @@
                                                 </p>
                                             </div>
                                         </div>
-                                        <div id="player-count-row" class="row mx-0 mt-0 mb-2">
+                                        <div id="player-count-row" class="row mx-0 mt-0 mb-1">
                                             <div class="col-12 px-1">
                                                 <p id="player-count-p" class="d-flex card-text align-items-center justify-content-start">
                                                     <span
-                                                        class="fas fa-users pr-2"
+                                                        class="fas fa-users pr-1 pr-md-1"
                                                         data-toggle="tooltip"
                                                         data-placement="left"
                                                         title="Player Count"
@@ -254,39 +260,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <p id="tooltip-description" class="card-text font-weight-light text-justify d-none"></p>
-                                    <div class="mx-3">
-                                        <a id="bgg-page-btn" href="#" class="btn btn-dark btn-block mt-3" target="_blank">BGG Page</a>
-                                    </div>
+                                    <p id="tooltip-description" class="card-text font-weight-light text-justify mt-2 pr-1"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="boardgame-info-col-2" class="col-6 col-md-3 d-flex flex-column">
-                        <div id="boardgame-ratings-row" class="row p-1">
-                            <div id="boardgame-ratings" class="card shadow-sm flex-fill">
-                                <div class="card-body">
-                                    <h5 class="card-title mb-3">Ratings</h5>
-                                    <button class="btn btn-light btn-block d-flex justify-content-between">
-                                        User
-                                        <span id="user-rating-odometer" class="rating-odometer badge badge-light odometer">0</span>
-                                    </button>
-                                    <button class="btn btn-light btn-block d-flex justify-content-between">
+                    <div id="boardgame-info-col-2" class="boardgame-info-col col-7 col-xl-2 py-0 px-1 mb-2">
+                        <div id="boardgame-ratings" class="card shadow-sm" style="height: 100%">
+                            <div class="card-body p-2">
+                                <h5 class="card-title mb-1">Ratings</h5>
+                                <div id="average-rating-wrapper" class="mb-2">
+                                    <button id="average-rating-btn" class="btn btn-light btn-block d-flex justify-content-between px-1">
                                         Community
                                         <span id="average-rating-odometer" class="rating-odometer badge badge-light odometer">0</span>
                                     </button>
-                                    <button class="btn btn-light btn-block d-flex justify-content-between">
-                                        Geek
-                                        <span id="bgg-rating-odometer" class="rating-odometer badge badge-light odometer">0</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row p-1 flex-grow-1">
-                            <div id="boardgame-ratings-breakdown" class="card shadow-sm flex-fill">
-                                <div id="ratings-breakdown-card-body" class="card-body pl-1 pr-3 pb-1 d-flex flex-column ">
-                                    <h5 id="ratings-breakdown-title" class="card-title pl-3 ">Ratings Breakdown</h5>
-                                    <div id="ratings-breakdown-wrapper" class="d-flex flex-grow-1">
+                                    <div id="ratings-breakdown-wrapper" class="px-1">
                                         <canvas id="ratings-breakdown-canvas"></canvas>
                                     </div>
                                     <div
@@ -304,38 +292,46 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-5 d-flex flex-column">
-                        <div class="row p-1 flex-grow-1">
-                            <div id="boardgame-categories" class="card shadow-sm flex-fill">
-                                <div class="card-body d-flex flex-column px-0">
-                                    <h5 class="card-title px-3">Categories & Mechanics</h5>
-                                    <div class="d-flex flex-grow-1">
-                                        <svg id="boardgame-categories-svg" class="flex-grow-1"></svg>
+                                <div class="row">
+                                    <div class="col-6 pr-1">
+                                        <button class="btn btn-light btn-block d-flex justify-content-between px-1">
+                                            Geek
+                                            <span id="bgg-rating-odometer" class="rating-odometer badge badge-light odometer">0</span>
+                                        </button>
                                     </div>
-                                    <div class="text-center">
-                                        <div class="btn-group-sm btn-group-nav" role="group">
-                                            <button id="btnCategory" data-category="category" class="btn btnCategory mx-1">Category</button>
-                                            <button id="btnMechanic" data-category="mechanic" class="btn btnCategory mx-1">Mechanic</button>
-                                            <button id="btnFamily" data-category="family" class="btn btnCategory mx-1">Family</button>
-                                        </div>
+                                    <div class="col-6 pl-1">
+                                        <button class="btn btn-light btn-block d-flex justify-content-between px-1">
+                                            User
+                                            <span id="user-rating-odometer" class="rating-odometer badge badge-light odometer">0</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-1 flex-grow-1">
-                            <div id="boardgame-plays" class="card shadow-sm flex-fill">
-                                <div class="card-body px-0 d-flex flex-column">
-                                    <h5 class="card-title px-3">Play History</h5>
-                                    <div class="d-flex flex-grow-1">
-                                        <svg id="boardgame-plays-svg" class="flex-grow-1"></svg>
-                                        <div id="plays-not-available" class="info-not-available">
-                                            <i class="fas fa-exclamation-circle"></i>
-                                            <span>  No recorded plays.</span>
-                                        </div>
+                    </div>
+                    <div id="boardgame-info-col-3" class="boardgame-info-col col-12 col-xl-3 px-1 mb-2">
+                        <div id="boardgame-categories" class="card shadow-sm">
+                            <div class="card-body p-2">
+                                <h5 class="card-title mb-1">Categories & Mechanics</h5>
+                                <svg id="boardgame-categories-svg" class="px-1 mb-2"></svg>
+                                <div class="text-center">
+                                    <div class="btn-group-sm btn-group-nav" role="group">
+                                        <button id="btnCategory" data-category="category" class="btn btnCategory mx-1">Category</button>
+                                        <button id="btnMechanic" data-category="mechanic" class="btn btnCategory mx-1">Mechanic</button>
+                                        <button id="btnFamily" data-category="family" class="btn btnCategory mx-1">Family</button>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="boardgame-info-col-4" class="boardgame-info-col col-12 col-xl-3 px-1 mb-2">
+                        <div id="boardgame-plays" class="card shadow-sm">
+                            <div class="card-body p-2">
+                                <h5 class="card-title mb-1">Play History</h5>
+                                <svg id="boardgame-plays-svg"></svg>
+                                <div id="plays-not-available" class="info-not-available">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <span>  No recorded plays.</span>
                                 </div>
                             </div>
                         </div>
@@ -345,7 +341,7 @@
         </div>
         <div id="insights-bg" class="py-2">
             <div id="insights" class="container-fluid px-2 mb-5">
-                <div id="insights-header" class="container text-center header">
+                <div id="insights-header" class="container text-center header mb-5">
                     <h1 class="mb-3 mt-8">Insights</h1>
                     <div id="insights-btn-group" class="btn-group btn-group btn-group-nav mb-5" role="group">
                         <a href="#bgg-explorer-bg" class="btn btn-dark mx-1 link-free-exploration">Free Exploration</a>
@@ -457,17 +453,21 @@
         <!-- Footer Elements -->
         <!-- Copyright -->
         <div class="text-center">
-            <style>.bmc-button img{height: 34px !important;width: 35px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{padding: 7px 15px 7px 10px !important;line-height: 35px !important;height:51px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;border-radius: 5px !important;border: 1px solid transparent !important;padding: 7px 15px 7px 10px !important;font-size: 22px !important;letter-spacing: 0.6px !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style>
+            <style>.bmc-button img{height: 34px !important;width: 35px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{padding: 7px 15px 7px 10px !important;line-height: 35px !important;height:51px !important;text-decoration: none !important;display:inline-flex !important;color:#ffffff !important;border-radius: 5px !important;border: 1px solid transparent !important;padding: 7px 15px 7px 10px !important;font-size: 18px !important;letter-spacing: 0.6px !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#ffffff !important;}</style>
             <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
             <a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/dnunessandro">
                 <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy me a Beer">
                 <span style="margin-left:5px;font-size:28px !important;">Buy me a Beer</span>
             </a>
         </div>
-        <div class="footer-copyright text-center pt-3 pb-1">
-            © 2020 Copyright:<br><p>dnunessandro.com</p>
+        <div class="footer-contact text-center pt-3 pb-2">Did you notice any bug or have any suggestion/feedback? Please hit me at
+            <span>contact@nunessandro.com</span>!
         </div>
-        
+        <div class="footer-copyright text-center pt-0 pb-2">
+            © 2020 Copyright
+            <br>
+            <span>dnunessandro.com</span>
+        </div>
         <!-- Copyright -->
     </footer>
 </body>

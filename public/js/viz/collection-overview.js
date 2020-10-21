@@ -1,9 +1,15 @@
 const drawCollectionOverview = (collectionItems) => {
   // Change Chart Dimensions
-  $("#collection-overview-chart").height(
-    (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2 ? 800 : 400) /
-      (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)
-  );
+  if(NODE_LINEAR_BOOL){
+    $("#collection-overview-chart").height(
+      collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2
+        ? CHART_HEIGHT * 2 * (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)
+        : CHART_HEIGHT
+    );
+  } else {
+    $("#collection-overview-chart").height(CHART_HEIGHT);
+  }
+  
 
   // Get Chart Dimensions
   const chartWidth = $("#collection-overview-chart").width();
@@ -20,8 +26,8 @@ const drawCollectionOverview = (collectionItems) => {
   const radiusScale = createRadiusScale(
     NODE_SIZE_SCALE_DOMAIN_MAP[ACTIVE_NODE_SIZE_FIELD],
     [
-      MIN_NODE_RADIUS_FACTOR * chartHeight,
-      Math.min(MAX_NODE_RADIUS_FACTOR * chartHeight, MAX_NODE_RADIUS_ABS),
+      MIN_NODE_RADIUS_FACTOR * CHART_HEIGHT,
+      Math.min(MAX_NODE_RADIUS_FACTOR * CHART_HEIGHT, MAX_NODE_RADIUS_ABS),
     ]
   );
   const nodeXAxisScale = createNodeAxisScale(
@@ -111,11 +117,13 @@ const drawCollectionOverview = (collectionItems) => {
     )
     .ease(d3.easePoly)
     .attr("r", (d) =>
-      getNodeRadius(
-        d[ACTIVE_NODE_SIZE_FIELD],
-        radiusScale,
-        radiusScale(NODE_SIZE_SCALE_DOMAIN_MAP[ACTIVE_NODE_SIZE_FIELD][0])
-      )
+      NODE_LINEAR_BOOL
+        ? getNodeRadius(
+            d[ACTIVE_NODE_SIZE_FIELD],
+            radiusScale,
+            radiusScale(NODE_SIZE_SCALE_DOMAIN_MAP[ACTIVE_NODE_SIZE_FIELD][0])
+          )
+        : NON_LINEAR_NODE_RADIUS_FACTOR * chartHeight
     );
 
   nodeGroups
@@ -138,10 +146,15 @@ const drawCollectionOverview = (collectionItems) => {
     .attr("transform", function (d, i) {
       // Adjust labels going outside bounds because of label size
       // Get node position
-      const nodeX =
-        i < collectionItems.length / 2
-          ? nodeXAxisScale(i)
-          : nodeXAxisScale(i - collectionItems.length / 2);
+      let nodeX = 0;
+      if (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2) {
+        nodeX =
+          i < collectionItems.length / 2
+            ? nodeXAxisScale(i)
+            : nodeXAxisScale(i - collectionItems.length / 2);
+      } else {
+        nodeX = nodeXAxisScale(i);
+      }
 
       // Get translation values
       let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
@@ -174,10 +187,16 @@ const drawCollectionOverview = (collectionItems) => {
 
     // Adjust labels going outside bounds because of label size
     // Get node position
-    const nodeX =
-      i < collectionItems.length / 2
-        ? nodeXAxisScale(i)
-        : nodeXAxisScale(i - collectionItems.length / 2);
+
+    let nodeX = 0;
+    if (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2) {
+      nodeX =
+        i < collectionItems.length / 2
+          ? nodeXAxisScale(i)
+          : nodeXAxisScale(i - collectionItems.length / 2);
+    } else {
+      nodeX = nodeXAxisScale(i);
+    }
 
     // Get translation values
     let leftEdgeLabelTranslation = NODE_LINEAR_BOOL
