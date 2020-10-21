@@ -275,6 +275,9 @@ const getMarketplaceData = async (response) => {
       minPriceUsed: null,
       stdPriceNew: null,
       stdPriceUsed: null,
+      averagePrice: null,
+      medianPrice: null,
+      stdPrice: null,
     };
 
   marketplaceData.listings = await Promise.all(
