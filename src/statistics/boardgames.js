@@ -16,7 +16,7 @@ const updateBoardgameStatistics = async (statistics) => {
     playTime: [10, 300],
     maxPlayers: [1, 7],
     minPlayers: [1, 7],
-    medianPriceNew: [10, 300],
+    medianPrice: [10, 300],
     yearPublished: [1900, 2020],
     owned: [500, 100000],
     averageRating: [3, 9],
@@ -88,15 +88,15 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get User Rating and Price Corr
-  statsArrayX = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayX = await Boardgame.find({}).select("medianPrice -_id");
   statsArrayY = await Boardgame.find({}).select("averageRating -_id");
   statistics.stats.set(
     "userRatingPriceCorr",
     await getBoardgameStatPairwiseFit(
-      statsArrayX.map((e) => e.medianPriceNew),
+      statsArrayX.map((e) => e.medianPrice),
       statsArrayY.map((e) => e.averageRating),
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][1]
+      FIELD_FIT_LIMITS_MAP["medianPrice"][0],
+      FIELD_FIT_LIMITS_MAP["medianPrice"][1]
     )
   );
 
@@ -195,15 +195,15 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get Weight and Price Corr
-  statsArrayX = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayX = await Boardgame.find({}).select("medianPrice -_id");
   statsArrayY = await Boardgame.find({}).select("averageWeight -_id");
   statistics.stats.set(
     "weightPriceCorr",
     await getBoardgameStatPairwiseFit(
-      statsArrayX.map((e) => e.medianPriceNew),
+      statsArrayX.map((e) => e.medianPrice),
       statsArrayY.map((e) => e.averageWeight),
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][1]
+      FIELD_FIT_LIMITS_MAP["medianPrice"][0],
+      FIELD_FIT_LIMITS_MAP["medianPrice"][1]
     )
   );
 
@@ -303,15 +303,15 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get Max Players and Price Corr
-  statsArrayX = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayX = await Boardgame.find({}).select("medianPrice -_id");
   statsArrayY = await Boardgame.find({}).select("maxPlayers -_id");
   statistics.stats.set(
     "maxPlayersPriceCorr",
     await getBoardgameStatPairwiseFit(
-      statsArrayX.map((e) => e.medianPriceNew),
+      statsArrayX.map((e) => e.medianPrice),
       statsArrayY.map((e) => e.maxPlayers),
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][1]
+      FIELD_FIT_LIMITS_MAP["medianPrice"][0],
+      FIELD_FIT_LIMITS_MAP["medianPrice"][1]
     )
   );
 
@@ -412,15 +412,15 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get Play Time and Price Corr
-  statsArrayX = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayX = await Boardgame.find({}).select("medianPrice -_id");
   statsArrayY = await Boardgame.find({}).select("playTime -_id");
   statistics.stats.set(
     "playTimePriceCorr",
     await getBoardgameStatPairwiseFit(
-      statsArrayX.map((e) => e.medianPriceNew),
+      statsArrayX.map((e) => e.medianPrice),
       statsArrayY.map((e) => e.playTime),
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][1]
+      FIELD_FIT_LIMITS_MAP["medianPrice"][0],
+      FIELD_FIT_LIMITS_MAP["medianPrice"][1]
     )
   );
 
@@ -454,12 +454,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and User Rating Corr
   statsArrayX = await Boardgame.find({}).select("averageRating -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceUserRatingCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.averageRating),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["averageRating"][0],
       FIELD_FIT_LIMITS_MAP["averageRating"][1]
       // (1, 1, 1, 0, 0)
@@ -468,12 +468,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Weight Corr
   statsArrayX = await Boardgame.find({}).select("averageWeight -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceWeightCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.averageWeight),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["averageWeight"][0],
       FIELD_FIT_LIMITS_MAP["averageWeight"][1]
       // (1, 1, 1, 0, 0)
@@ -482,12 +482,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Recommended Players Corr
   statsArrayX = await Boardgame.find({}).select("recommendedPlayers -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceRecommendedPlayersCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.recommendedPlayers),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["recommendedPlayers"][0],
       FIELD_FIT_LIMITS_MAP["recommendedPlayers"][1]
       // (1, 1, 1, 0, 0)
@@ -496,12 +496,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Play Time Corr
   statsArrayX = await Boardgame.find({}).select("playTime -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "pricePlayTimeCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.playTime),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["playTime"][0],
       FIELD_FIT_LIMITS_MAP["playTime"][1]
     )
@@ -509,12 +509,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Max Players Corr
   statsArrayX = await Boardgame.find({}).select("maxPlayers -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceMaxPlayersCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.maxPlayers),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["maxPlayers"][0],
       FIELD_FIT_LIMITS_MAP["maxPlayers"][1]
       // (1, 1, 1, 0, 0)
@@ -523,12 +523,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Min Players Corr
   statsArrayX = await Boardgame.find({}).select("minPlayers -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceMinPlayersCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.minPlayers),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["minPlayers"][0],
       FIELD_FIT_LIMITS_MAP["minPlayers"][1]
     )
@@ -536,12 +536,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Year Published Corr
   statsArrayX = await Boardgame.find({}).select("yearPublished -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceYearCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.yearPublished),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["yearPublished"][0],
       FIELD_FIT_LIMITS_MAP["yearPublished"][1]
     )
@@ -549,12 +549,12 @@ const updateBoardgameStatistics = async (statistics) => {
 
   // Get Price and Owners Corr
   statsArrayX = await Boardgame.find({}).select("owned -_id");
-  statsArrayY = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayY = await Boardgame.find({}).select("medianPrice -_id");
   statistics.stats.set(
     "priceOwnersCorr",
     await getBoardgameStatPairwiseFit(
       statsArrayX.map((e) => e.owned),
-      statsArrayY.map((e) => e.medianPriceNew),
+      statsArrayY.map((e) => e.medianPrice),
       FIELD_FIT_LIMITS_MAP["owned"][0],
       FIELD_FIT_LIMITS_MAP["owned"][1]
     )
@@ -632,15 +632,15 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get Year Published and Price Corr
-  statsArrayX = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayX = await Boardgame.find({}).select("medianPrice -_id");
   statsArrayY = await Boardgame.find({}).select("yearPublished -_id");
   statistics.stats.set(
     "yearPriceCorr",
     await getBoardgameStatPairwiseFit(
-      statsArrayX.map((e) => e.medianPriceNew),
+      statsArrayX.map((e) => e.medianPrice),
       statsArrayY.map((e) => e.yearPublished),
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][1]
+      FIELD_FIT_LIMITS_MAP["medianPrice"][0],
+      FIELD_FIT_LIMITS_MAP["medianPrice"][1]
       // (1, 1, 1, 0, 0)
     )
   );
@@ -742,15 +742,15 @@ const updateBoardgameStatistics = async (statistics) => {
   );
 
   // Get Owners and Price Corr
-  statsArrayX = await Boardgame.find({}).select("medianPriceNew -_id");
+  statsArrayX = await Boardgame.find({}).select("medianPrice -_id");
   statsArrayY = await Boardgame.find({}).select("owned -_id");
   statistics.stats.set(
     "ownersPriceCorr",
     await getBoardgameStatPairwiseFit(
-      statsArrayX.map((e) => e.medianPriceNew),
+      statsArrayX.map((e) => e.medianPrice),
       statsArrayY.map((e) => e.owned),
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][0],
-      FIELD_FIT_LIMITS_MAP["medianPriceNew"][1]
+      FIELD_FIT_LIMITS_MAP["medianPrice"][0],
+      FIELD_FIT_LIMITS_MAP["medianPrice"][1]
     )
   );
 

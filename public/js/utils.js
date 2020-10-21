@@ -299,7 +299,7 @@ const populateUserCard = (collection) => {
     collection.lastUpdated ? collection.lastUpdated.split("T")[0] : "N/A"
   );
   $(updatedId).append(
-    `<span id="updated-icon" class="fas fa-sync-alt p-2 ml-2"></span>`
+    `<span id="updated-icon" class="fas fa-sync-alt p-1 ml-2"></span>`
   );
 
   createUpdateBtnEL(collection);

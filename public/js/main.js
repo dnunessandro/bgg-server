@@ -90,6 +90,10 @@ const run = async () => {
 
   // Turn on tooltips
   $('[data-toggle="tooltip"]').tooltip();
+
+  // HTML Fixes
+  $(".row-wrapper").last().removeClass("my-4").addClass("mt-4").addClass("mb-10")
+  $("#insights .card-columns").last().addClass("mb-10")
 };
 
 run();

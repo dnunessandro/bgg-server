@@ -143,6 +143,9 @@ const enrichedCollectionSchema = mongoose.Schema({
       minPriceUsed: Number,
       stdPriceNew: Number,
       stdPriceUsed: Number,
+      averagePrice: Number,
+      medianPrice: Number,
+      stdPrice: Number,
       lastUpdated: Date,
       plays: [{
         id: String,

@@ -19,7 +19,6 @@ const DEFAULT_COLOR = "#118ab2";
 
 //f6bd60
 
-
 const COLLECTION_OVERVIEW_PALETTE = [
   "#9c89b8",
   "#f0a6ca",
@@ -65,7 +64,7 @@ const OVERVIEW_SP_BTN_TO_FIELD_MAP = {
   btnPlayTimeMax: "maxPlayTime",
   btnPlays: "numPlays",
   btnWeight: "averageWeight",
-  btnPrice: "averagePriceNew",
+  btnPrice: "averagePrice",
 };
 
 const NODE_SIZE_SCALE_DOMAIN_MAP = {
@@ -83,7 +82,7 @@ const NODE_SIZE_SCALE_DOMAIN_MAP = {
   numPlays: [0, 50],
   name: [0, 1],
   averageWeight: [1, 4],
-  averagePriceNew: [10, 120],
+  averagePrice: [10, 120],
 };
 
 const NUM_NODES_BREAKPOINT_MAP = {
@@ -187,7 +186,7 @@ const FIELD_LABEL_MAP = {
   minPlayers: "Minimum Player Count",
   maxPlayers: "Player Limit",
   playTime: "Play Time",
-  medianPriceNew: "Price (USD)",
+  medianPrice: "Price (USD)",
   yearPublished: "Release Year",
   owned: "Owners",
   weight: "Weight",
@@ -359,10 +358,13 @@ const FIELD_LABEL_REPLACE_MAP = {
     "Land of Beautiful Mind (سرزمین ذهن زیبا)": "Land of Beautiful Mind",
     "Winning Moves International Ltd": "Winning Moves International",
     "CEFA (Celulosa Fabril S. A.)": "Celulosa Fabril",
-    "Kaissa Chess & Games": "Kaissa Chess"
+    "Kaissa Chess & Games": "Kaissa Chess",
   },
   designer: { "(Uncredited)": "Uncredited" },
-  artist: { "(Uncredited)": "Uncredited" },
+  artist: {
+    "(Uncredited)": "Uncredited",
+    "Lee Brimmicombe-Wood": "Lee B. Wood",
+  },
 };
 
 const FIELD_TOOLTIP_SUFFIX_MAP = {

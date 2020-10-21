@@ -12,7 +12,7 @@ function createWordCloud(itemCategories) {
   const svg = d3
     .select(svgId)
     .attr("width", "100%")
-    .attr("height", $("#average-rating-wrapper").height()+8)
+    .attr("height", $("#boardgame-tooltip").height()*0.651)
     .append("g")
     .attr(
       "transform",
@@ -33,7 +33,7 @@ function createWordCloud(itemCategories) {
       ) *
       0.008
 
-    e["size"] = checkIfMobile() ? size / 1.2 : size
+    e["size"] = checkIfMobile() ? size / 1.1 : size
       ;
     e["text"] = e.value;
     words.push(e);

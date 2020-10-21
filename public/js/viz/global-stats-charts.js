@@ -567,7 +567,7 @@ const createModalButton = (buttonId, modalBodyId) => {
     .after(`<div class="row"><div class="col d-flex justify-content-center"><button
   id="${buttonId}"
   type="button"
-  class="btn btn-sm btn-dark"
+  class="btn btn-sm btn-dark mb-3 mb-md-5"
   data-toggle="modal"
   data-target="#global-stats-method-modal"
 >

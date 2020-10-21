@@ -116,6 +116,9 @@ const boardgameSchema = new mongoose.Schema({
   minPriceUsed: Number,
   stdPriceNew: Number,
   stdPriceUsed: Number,
+  averagePrice: Number,
+  medianPrice: Number,
+  stdPrice: Number,
   lastUpdated: { type: Date, expires: process.env.BOARDGAME_TTL + "d", default: Date.now },
 });
 

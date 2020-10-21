@@ -791,7 +791,7 @@ const genAvgPlaysInsightCard = (insight, communityStats) => {
   cardData.description = `On average, you have played each boardgame in your collection ${genStatHtml(
     Math.round(rawStat),
     "badge-pill badge-dark py-1"
-  )} times, which is ${compareUserVsCommunityStat(
+  )} time${Math.round(rawStat) == 1 ? "" : "s"}, which is ${compareUserVsCommunityStat(
     Math.round(rawStat),
     Math.round(rawCommunityStat),
     0.05,
@@ -826,8 +826,8 @@ const genAvgTimePlayedInsightCard = (insight, communityStats) => {
     "badge-pill badge-dark py-1",
     rawStat > 2 ? "hours" : "minutes"
   )} playing each boardgame in your collection, which is ${compareUserVsCommunityStat(
-    stat,
-    communityStat,
+    rawStat,
+    rawCommunityStat,
     0.05,
     0.4
   )} the community average - ${genStatHtml(

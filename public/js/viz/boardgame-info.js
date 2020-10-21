@@ -9,6 +9,12 @@ const createNodeGroupELs = () => {
     d3.select(this).select(".node-circle").classed("clicked", true);
     d3.select(this).select(".node-rect").classed("clicked", true);
     d3.select(this).select(".node-line").classed("clicked", true);
+    $(".btnCategory").each(function (_, e) {
+      $(e).css(
+        "background-color",
+        CATEGORY_COLOR_MAP[$(e).data()["category"]]
+      );
+    });
 
     // Show Tooltip
     BOARDGAME_INFO_VAR.insertAfter("#collection-overview");
@@ -24,7 +30,6 @@ const createNodeGroupELs = () => {
     populateRatings(d.userRating, d.averageRating, d.bayesAverageRating);
 
     // Populate Ratings Breakdown
-    RATINGS_BREAKDOWN_CANVAS_HEIGHT = RATINGS_BREAKDOWN != null ? $("#ratings-breakdown-canvas").attr("height") : RATINGS_BREAKDOWN_CANVAS_HEIGHT ;
     RATINGS_BREAKDOWN != null ? RATINGS_BREAKDOWN.destroy() : null;
     RATINGS_BREAKDOWN = createRatingsBreakdownChartIfAvailable(
       d.ratingsBreakdown

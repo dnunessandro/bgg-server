@@ -9,7 +9,7 @@ let NODE_LABEL_FORCE = null;
 let NODE_CLICKED_BOOL = false;
 let RATINGS_BREAKDOWN = null;
 let RATINGS_BREAKDOWN_CANVAS_HEIGHT =
-  parseInt($("#boardgame-tooltip").css("height")) * (checkIfMobile() ? 0.84 : 0.33);
+  parseInt($("#boardgame-tooltip").css("height")) * (checkIfMobile() ? 0.295 : 0.306);
 
 let BOARDGAME_INFO_VAR = $("#boardgame-info");
 let SPIDER_CHARTS = {};

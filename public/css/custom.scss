@@ -1,6 +1,6 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
-$bootstrap-class-change-breakpoint: 768px;
+$bootstrap-class-change-breakpoint: 1200px;
 
 $base-color: #e5989b;
 $secondary-color: #ffb4a2;
@@ -66,8 +66,8 @@ a {
 
 .description {
   font-size: 1.1rem;
-  font-weight: 500;
-  line-height: 1.8rem;
+  font-weight: 400;
+  line-height: 1.4rem;
   @media (max-width: $bootstrap-class-change-breakpoint) {
     font-size: 1rem;
   }
@@ -111,7 +111,7 @@ a {
 }
 
 .description {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.4;
 }
@@ -291,6 +291,9 @@ a {
 #tools {
   h3 {
     color: $text-color;
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 2rem !important;
+    }
   }
   .subtitle {
     color: white !important;
@@ -300,8 +303,8 @@ a {
     font-size: 1rem;
     text-align: justify;
   }
-  img {
-    border: 5px solid #6d6875;
+  video, img {
+    border: 5px solid $dark-color;
     margin: 10px 0;
   }
 }
@@ -459,6 +462,9 @@ a {
 #boardgame-info {
   background-color: $background-color-pink;
   min-height: 400px;
+  @media (max-width: $bootstrap-class-change-breakpoint) {
+    max-width: 375px;
+  }
   @media (min-width: $bootstrap-class-change-breakpoint) {
     min-width: 1400px;
   }
@@ -752,7 +758,7 @@ a {
 .d3-tip {
   max-width: 300px;
   line-height: 1;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   padding: 12px;
   background: rgba(0, 0, 0, 0.8);
@@ -980,6 +986,16 @@ a {
 // USER PROFILE
 #user-profile-bg {
   background-color: $background-color-light-pink;
+
+  p{
+    font-size: 0.9rem;
+  }
+  #user-profile-description{
+    font-size: 1.1rem;
+    @media (max-width: $bootstrap-class-change-breakpoint) {
+      font-size: 1rem;
+    }
+  }
   .padding {
     padding: 1rem !important;
   }
@@ -993,7 +1009,7 @@ a {
   }
 
   h6 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
 
     @media (max-width: $bootstrap-class-change-breakpoint) {

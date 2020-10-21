@@ -109,14 +109,10 @@ const getBoardgameStats = (response) => {
   );
   boardgameStats.averageRating = parseFloat(
     response.items.item[0].statistics[0].ratings[0].average[0].$.value
-  ).toFixed(
-    2
-  );
+  ).toFixed(2);
   boardgameStats.bayesAverageRating = parseFloat(
     response.items.item[0].statistics[0].ratings[0].bayesaverage[0].$.value
-  ).toFixed(
-    2
-  );
+  ).toFixed(2);
   boardgameStats.subtypeRatings = getBoardgameRanks(
     response.items.item[0].statistics[0].ratings[0].ranks[0].rank,
     "subtype"
@@ -154,10 +150,9 @@ const getBoardgameStats = (response) => {
     response.items.item[0].statistics[0].ratings[0].averageweight[0].$.value !=
     0
       ? parseFloat(
-          response.items.item[0].statistics[0].ratings[0].averageweight[0].$.value
-        ).toFixed(
-          2
-        )
+          response.items.item[0].statistics[0].ratings[0].averageweight[0].$
+            .value
+        ).toFixed(2)
       : null;
 
   return boardgameStats;
@@ -281,7 +276,7 @@ const getMarketplaceData = async (response) => {
       stdPriceNew: null,
       stdPriceUsed: null,
     };
-    
+
   marketplaceData.listings = await Promise.all(
     response.items.item[0].marketplacelistings[0].listing.map((e) =>
       getMarketplaceListingData(e)
@@ -298,19 +293,23 @@ const getMarketplaceData = async (response) => {
 
   marketplaceData.averagePriceNew =
     marketplaceData.numListingsNew > 0
-      ? parseFloat(average(
-          marketplaceData.listings
-            .filter((e) => e.condition == "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          average(
+            marketplaceData.listings
+              .filter((e) => e.condition == "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.medianPriceNew =
     marketplaceData.numListingsNew > 0
-      ? parseFloat(median(
-          marketplaceData.listings
-            .filter((e) => e.condition == "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          median(
+            marketplaceData.listings
+              .filter((e) => e.condition == "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.maxPriceNew =
     marketplaceData.numListingsNew > 0
@@ -322,11 +321,13 @@ const getMarketplaceData = async (response) => {
       : null;
   marketplaceData.minPriceNew =
     marketplaceData.numListingsNew > 0
-      ? parseFloat(Math.min(
-          ...marketplaceData.listings
-            .filter((e) => e.condition == "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          Math.min(
+            ...marketplaceData.listings
+              .filter((e) => e.condition == "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.averagePriceUsed =
     marketplaceData.numListingsUsed > 0
@@ -338,43 +339,71 @@ const getMarketplaceData = async (response) => {
       : null;
   marketplaceData.medianPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? parseFloat(median(
-          marketplaceData.listings
-            .filter((e) => e.condition != "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          median(
+            marketplaceData.listings
+              .filter((e) => e.condition != "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.maxPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? parseFloat(Math.max(
-          ...marketplaceData.listings
-            .filter((e) => e.condition != "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          Math.max(
+            ...marketplaceData.listings
+              .filter((e) => e.condition != "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.minPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? parseFloat(Math.min(
-          ...marketplaceData.listings
-            .filter((e) => e.condition != "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          Math.min(
+            ...marketplaceData.listings
+              .filter((e) => e.condition != "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.stdPriceNew =
     marketplaceData.numListingsNew > 0
-      ? parseFloat(standardDeviation(
-          marketplaceData.listings
-            .filter((e) => e.condition == "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          standardDeviation(
+            marketplaceData.listings
+              .filter((e) => e.condition == "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
   marketplaceData.stdPriceUsed =
     marketplaceData.numListingsUsed > 0
-      ? parseFloat(standardDeviation(
-          marketplaceData.listings
-            .filter((e) => e.condition != "new")
-            .map((e) => e.priceUsd)
-        ).toFixed(2))
+      ? parseFloat(
+          standardDeviation(
+            marketplaceData.listings
+              .filter((e) => e.condition != "new")
+              .map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
+      : null;
+  marketplaceData.averagePrice =
+    marketplaceData.numListings > 0
+      ? average(marketplaceData.listings.map((e) => e.priceUsd))
+      : null;
+  marketplaceData.medianPrice =
+    marketplaceData.numListings > 0
+      ? parseFloat(
+          median(marketplaceData.listings.map((e) => e.priceUsd)).toFixed(2)
+        )
+      : null;
+  marketplaceData.stdPrice =
+    marketplaceData.numListings > 0
+      ? parseFloat(
+          standardDeviation(
+            marketplaceData.listings.map((e) => e.priceUsd)
+          ).toFixed(2)
+        )
       : null;
 
   return marketplaceData;

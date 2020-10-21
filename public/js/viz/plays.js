@@ -34,7 +34,7 @@ const drawPlaysChart = (plays) => {
   const svg = d3
     .select(svgId)
     .attr("width", "100%")
-    .attr("height", parseInt($("#boardgame-categories").css("height"))*0.83)
+    .attr("height", parseInt($("#boardgame-categories").css("height"))*0.821)
     .style("opacity", 1);
   const svgWidth = parseInt($(svgId).css("width"));
   const svgHeight = parseInt($(svgId).css("height"));

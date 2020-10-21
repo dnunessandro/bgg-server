@@ -160,15 +160,7 @@ router.post("/collections/:username/enrich", async (req, res) => {
       ? await enrichCollectionWithPlays(collectionObj)
       : collectionObj;
 
-//       fs = require('fs');
-// fs.writeFile('helloworld.json', collectionObj.insights, function (err) {
-//   if (err) return console.log(err);
-//   console.log('Hello World > helloworld.txt');
-// });
-    
     collectionObj.lastUpdated = date.getTime()
-
-
     
     // Save Insights to original collection
     await Collection.updateOne(

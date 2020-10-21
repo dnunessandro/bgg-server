@@ -340,10 +340,17 @@ const createOverviewSvgEL = () => {
   $("#collection-overview-svg").on("click", function (e) {
     if (e.target == this) {
       NODE_CLICKED_BOOL = false;
+      
       d3.selectAll(".node-circle").classed("clicked", false);
       d3.selectAll(".node-rect").classed("clicked", false);
       d3.selectAll(".node-line").classed("clicked", false);
       $("#boardgame-info").removeClass("show").addClass("hide");
+      $(".btnCategory").each(function (_, e) {
+        $(e).css(
+          "background-color",
+          CATEGORY_COLOR_MAP[$(e).data()["category"]]
+        );
+      });
       BOARDGAME_INFO_VAR =
         $("#boardgame-info").length == 0
           ? BOARDGAME_INFO_VAR
@@ -361,7 +368,7 @@ const createIncompleteCollectionWarning = (nItems) => {
   if (nItems > nodesLimit) {
     $("#bgg-explorer-btn-group")
       .after(`<div id="huge-collection-warning-wrapper"><div id="huge-collection-warning" class="slide-top alert alert-warning 
-      alert-dismissible fade show mx-auto mt-3 mb-5" style="border: 2px solid ${DARK_COLOR}" role="alert">
+      alert-dismissible fade show mx-auto mt-3 mb-2 mb-md-5" style="border: 2px solid ${DARK_COLOR}" role="alert">
         <h5 class="text-center my-3"><i class="fas fa-exclamation-circle"></i> <strong>Limited Screen Size</strong></h5><p class="text-justify">
          Due to the limited screen size, only the <strong>${nodesLimit}</strong> games you rated the highest are shown in the <em>Free
           Exploration</em> view. ${

@@ -223,11 +223,11 @@ const runGlobalStats = async () => {
     new Date().getFullYear()
   );
 
-  const coopGamesRatio = parseFloat(
+  const coopGamesRatio = Math.round(
     (
       statsSeries[new Date().getFullYear()]["Cooperative Game"] /
       statsSeries[STAT_REF_YEAR]["Cooperative Game"]
-    ).toFixed(1)
+    )
   );
   const tileGamesRatio = parseFloat(
     (

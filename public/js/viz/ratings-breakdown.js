@@ -2,8 +2,15 @@ const drawRatingsBreakdown = (ratingsBreakdown) => {
   const canvas = $("#ratings-breakdown-canvas").get(0);
 
   const resto = parseInt($("#boardgame-ratings").css("height")) - canvas.height;
-  canvas.height =
-    (parseInt($("#boardgame-tooltip").css("height")) - resto) * 1.58;
+  if (canvas.height == 150){
+    canvas.height =
+    (parseInt($("#boardgame-tooltip").css("height")) - resto) * ( checkIfMobile() ? 1.68 : 1.56 );
+  }else {
+    canvas.height =
+    (parseInt($("#boardgame-tooltip").css("height")) - resto) * ( checkIfMobile() ? 1.73 : 1.62 );
+    // (parseInt($("#boardgame-tooltip").css("height")) - resto * 0.275)
+  }
+  
 
   const ctx = canvas.getContext("2d");
 
@@ -109,7 +116,7 @@ const createRatingsBreakdownChartIfAvailable = (ratingsBreakdown) => {
   } else {
     $("#ratings-breakdown-canvas").attr(
       "height",
-      RATINGS_BREAKDOWN_CANVAS_HEIGHT * (checkIfMobile() ? 0.35 : 0.96)
+      RATINGS_BREAKDOWN_CANVAS_HEIGHT
     );
 
     d3.select("#ratings-breakdown-canvas")
