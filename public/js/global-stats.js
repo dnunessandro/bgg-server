@@ -28,13 +28,13 @@ const runGlobalStats = async () => {
     STAT_REF_YEAR
   );
   const newBoardgames = allBoardgames - oldBoardgames;
-  const proportion = Math.round(newBoardgames / oldBoardgames * 100) ;
+  const proportion = Math.round((newBoardgames / oldBoardgames) * 100);
   let rowId = "release-year-hist";
   let title = "Rise in Popularity";
   let p = `Looking at the release year of the boardgames owned by the <em>BGG Dicector</em> users, 
   it's easy to see how much the hobby has grown in the last few decades. The growth has been exponential and 
   it shows no signs of slowing down as the number of boardgames released each year is still on the rise.<br><br>
-  In fact, in the last 10 years alone, the number of released boardgames is <span class="badge-pill badge-primary py-1">${proportion}%</span> times 
+  In fact, in the last 10 years alone, the number of released boardgames is <span class="badge-pill badge-primary py-1">${proportion}%</span> 
   larger than in the entire period before that!`;
   createGlobalStatsRow(rowId, title, p);
   // drawGlobalStatsHistChart(
@@ -194,7 +194,8 @@ const runGlobalStats = async () => {
       statsSeries[STAT_REF_YEAR]["Wargame"]
     ).toFixed(1)
   );
-  const numExpansionsRef = statsSeries[STAT_REF_YEAR]["Expansion for Base-game"];
+  const numExpansionsRef =
+    statsSeries[STAT_REF_YEAR]["Expansion for Base-game"];
   const numExpansionsCurrent =
     statsSeries[new Date().getFullYear()]["Expansion for Base-game"];
   rowId = "category-spider";
@@ -224,10 +225,8 @@ const runGlobalStats = async () => {
   );
 
   const coopGamesRatio = Math.round(
-    (
-      statsSeries[new Date().getFullYear()]["Cooperative Game"] /
+    statsSeries[new Date().getFullYear()]["Cooperative Game"] /
       statsSeries[STAT_REF_YEAR]["Cooperative Game"]
-    )
   );
   const tileGamesRatio = parseFloat(
     (
@@ -257,7 +256,7 @@ const runGlobalStats = async () => {
   <span class="badge-pill badge-primary py-1">${setGamesRatio}x</span> respectively, a significantly more modest increase.`;
   createGlobalStatsRow(rowId, title, p);
   drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {
-    replaceLabels: FIELD_LABEL_REPLACE_MAP["mechanic"], 
+    replaceLabels: FIELD_LABEL_REPLACE_MAP["mechanic"],
   });
 
   // // Add User Trends Subtitle

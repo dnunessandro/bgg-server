@@ -144,7 +144,7 @@ const runInsights = async (collection) => {
       maxWeightInsightCardData,
       communityStats,
       undefined,
-      "#weight-insights-grid"
+      "#features-insights-grid"
     );
   }
 

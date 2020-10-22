@@ -277,7 +277,7 @@ const populateUserCard = (collection) => {
   $(helloId).html(
     `Hey ${
       collection.firstName
-        ? jsUcfirst(collection.firstName)
+        ? (collection.firstName.length < 3 ? collection.firstName + " " + collection.lastName : jsUcfirst(collection.firstName))
         : jsUcfirst(collection.username)
     }`
   );
