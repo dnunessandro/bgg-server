@@ -1,6 +1,9 @@
 const API_URL =
   (window.location.hostname == "localhost" ? "http://" : "https://") +
-  window.location.host;
+    window.location.hostname ==
+  "localhost"
+    ? window.location.host
+    : "sn-bgg-server.herokuapp.com";
 
 // COLORS ///////////////////////////
 const BASE_COLOR = "#e5989b";
