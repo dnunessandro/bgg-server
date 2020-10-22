@@ -62,7 +62,7 @@ const run = async () => {
   checkIfMobile()
     ? drawPlayerCountChartMobile(collectionItems[0])
     : drawPlayerCountChart(getPlayerCountData(collectionItems[0]));
-  
+
   RATINGS_BREAKDOWN = createRatingsBreakdownChartIfAvailable(
     collectionItems[0].ratingsBreakdown
   );
@@ -77,10 +77,7 @@ const run = async () => {
 
   // Create Waypoints
   await addAllWaypoints(
-    getWaypointList([
-      "#insights-header",
-      "#global-stats-header"
-    ])
+    getWaypointList(["#insights-header", "#global-stats-header"])
   );
 
   // Create Scroll Animations
@@ -92,8 +89,12 @@ const run = async () => {
   $('[data-toggle="tooltip"]').tooltip();
 
   // HTML Fixes
-  $(".row-wrapper").last().removeClass("my-4").addClass("mt-4").addClass("mb-10")
-  $("#insights .card-columns").last().addClass("mb-10")
+  $(".row-wrapper")
+    .last()
+    .removeClass("my-4")
+    .addClass("mt-4")
+    .addClass("mb-10");
+  $("#insights .card-columns").last().addClass("mb-10");
 };
 
 run();

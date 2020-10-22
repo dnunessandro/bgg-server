@@ -14,7 +14,7 @@ const drawPlayTimeChart = (collectionItem) => {
   const svgHeight = parseInt($("#weight-p").css("height"));
 
   // Create X Axis Scale
-  const xAxisScale = d3.scaleLinear().domain([0, 1]).range([0, svgWidth-5]);
+  const xAxisScale = d3.scaleLinear().domain([0, 1]).range([0, svgWidth - (checkIfMobile()? 0 : 10 )]);
 
   // Get SVG Element
   const svg = d3.select(svgId).attr("height", svgHeight);

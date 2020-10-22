@@ -4,7 +4,7 @@ const drawPlayerCountChart = (playerCountData) => {
   nCircles = 8;
   svgId = "#boardgame-player-count-svg";
   // Get SVG Dimensions
-  const svgWidth = $(svgId).width() - 4;
+  const svgWidth = $(svgId).width();
 
   const svgXPad = 8;
   const svgTopYPad = 7;
@@ -20,7 +20,7 @@ const drawPlayerCountChart = (playerCountData) => {
   // Get SVG Element
   const svg = d3
     .select(svgId)
-    .attr("width", svgWidth)
+    .attr("width", "99%")
     .attr("height", svgHeight);
 
   // Create Background
@@ -30,8 +30,8 @@ const drawPlayerCountChart = (playerCountData) => {
       .append("rect")
       .classed("player-count-bg", true)
       .attr("width", svg.attr("width"))
-      .attr("height", svgHeight-2)
-      .attr('transform', "translate(1,1)")
+      .attr("height", svgHeight - 2)
+      .attr("transform", "translate(1,1)");
   }
 
   // Get Circle Coords Scale =
@@ -92,17 +92,6 @@ const drawPlayerCountChart = (playerCountData) => {
       ")"
   );
 
-  // Create Tooltips
-  const tip = d3;
-  //   .tip()
-  //   .attr("class", "d3-tip")
-  //   .offset([-10, 0])
-  //   .html(function (d) {
-  //     return "<span>" + d.recommendation + "</span>";
-  //   });
-
-  // svg.call(tip);
-  // playerCountGroups.on("mouseover", tip.show).on("mouseout", tip.hide);
 
   d3.selectAll(".player-count-group")
     .attr("data-toggle", "tooltip")
@@ -126,7 +115,10 @@ const drawPlayerCountChartMobile = (collectionItem) => {
   const svgHeight = parseInt($("#weight-p").css("height"));
 
   // Create X Axis Scale
-  const xAxisScale = d3.scaleLinear().domain([0, 1]).range([0, svgWidth-10]);
+  const xAxisScale = d3
+    .scaleLinear()
+    .domain([0, 1])
+    .range([0, svgWidth - 10]);
 
   // Get SVG Element
   const svg = d3.select(svgId).attr("height", svgHeight);
@@ -219,7 +211,7 @@ const drawPlayerCountChartMobile = (collectionItem) => {
   const yPad = parseInt($(".misc-stat-span").css("padding-top"));
   minPlayersGroup
     .select("rect")
-    .attr("width", minTextWidth + xPad * 2 )
+    .attr("width", minTextWidth + xPad * 2)
     .attr("height", svgHeight - 2)
     .attr("transform", `translate(${-xPad + 1},${-(svgHeight - 2) / 2})`)
     .attr("rx", "15px")

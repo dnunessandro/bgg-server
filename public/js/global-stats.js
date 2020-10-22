@@ -31,7 +31,7 @@ const runGlobalStats = async () => {
   const proportion = Math.round(newBoardgames / oldBoardgames * 100) ;
   let rowId = "release-year-hist";
   let title = "Rise in Popularity";
-  let p = `Looking at the release year of the boardgames owned by the <em>BGG Explorer</em> users, 
+  let p = `Looking at the release year of the boardgames owned by the <em>BGG Dicector</em> users, 
   it's easy to see how much the hobby has grown in the last few decades. The growth has been exponential and 
   it shows no signs of slowing down as the number of boardgames released each year is still on the rise.<br><br>
   In fact, in the last 10 years alone, the number of released boardgames is <span class="badge-pill badge-primary py-1">${proportion}%</span> times 
@@ -101,7 +101,7 @@ const runGlobalStats = async () => {
   title = "New Players";
   p = `More and more boardgamers have been joining the community as suggested by the registration year of the 
   <em>BoardGameGeek</em> users: while a good chunk of the community is made of old guard boardgamers, a signficant fraction 
-  of new boardgamers is now also part of it (<span class="badge-pill badge-primary py-1">${newBoardgamersPrct}%</span> of the <em>BGG Explorer</em> 
+  of new boardgamers is now also part of it (<span class="badge-pill badge-primary py-1">${newBoardgamersPrct}%</span> of the <em>BGG Dicector</em> 
   users registered their account on <em>BoardGameGeek</em> after ${STAT_REF_YEAR}).
   `;
   createGlobalStatsRow(rowId, title, p);
@@ -205,7 +205,7 @@ const runGlobalStats = async () => {
   steady rate (<span class="badge-pill badge-primary py-1">${wargamesRatio}x</span>) in comparison.<br><br>It is also interesting to see that 
   <em>Expansions</em> make up for a huge part of the total releases (currently, 
     <span class="badge-pill badge-primary py-1">${numExpansionsCurrent}</span> games tagged as <em>Expansions</em> can be found in the 
-  <em>BGG Explorer</em> database), a tendency that was not as accentuated 10 years ago 
+  <em>BGG Dicector</em> database), a tendency that was not as accentuated 10 years ago 
   (<span class="badge-pill badge-primary py-1">${numExpansionsRef}</span> games). `;
   createGlobalStatsRow(rowId, title, p);
   drawGlobalStatsSpiderChart(rowId + "-canvas", statsSeries, {

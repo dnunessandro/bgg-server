@@ -217,6 +217,7 @@ a {
 #showcase {
   background: url("../img/bg-background-pink.jpg") bottom center / cover
     no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
   @media (max-width: $bootstrap-class-change-breakpoint) {
     background: url("../img/bg-background-pink.jpg") bottom right / cover
       no-repeat;
@@ -232,18 +233,22 @@ a {
     color: $text-color;
   }
 
-  #wait-alert, .alert-warning{
-    max-width: 800px;
+  #wait-alert,
+  .alert-warning {
+    max-width: 800px !important;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .spinner-border{
+  .spinner-border {
     margin-bottom: 2px;
   }
 
   h1 {
-    color: white;
+    color: $background-color-pink;
+    span {
+      color: $base-color;
+    }
   }
 
   .form-control {
@@ -254,7 +259,7 @@ a {
   .form-control:active {
     outline: none !important;
     box-shadow: none !important;
-    border: 2px solid $base-color !important;
+    border: 2px solid $light-color !important;
   }
 
   .invalid-feedback {
@@ -267,6 +272,7 @@ a {
 
   .lead {
     color: white;
+    font-weight: 500;
   }
 
   #header {
@@ -274,7 +280,7 @@ a {
   }
 
   #overlay {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -303,7 +309,8 @@ a {
     font-size: 1rem;
     text-align: justify;
   }
-  video, img {
+  video,
+  img {
     border: 5px solid $dark-color;
     margin: 10px 0;
   }
@@ -866,15 +873,16 @@ a {
     .show-more-text {
       font-size: 0.9rem;
     }
-    .show-more-btn, .show-note-btn{
+    .show-more-btn,
+    .show-note-btn {
       margin-left: auto;
       margin-right: auto;
       max-width: 150px;
     }
-    .show-note-btn{
+    .show-note-btn {
       max-width: 100px;
-      .fa-exclamation-circle{
-        margin-top: 2px
+      .fa-exclamation-circle {
+        margin-top: 2px;
       }
     }
     .show-note-text {
@@ -987,10 +995,10 @@ a {
 #user-profile-bg {
   background-color: $background-color-light-pink;
 
-  p{
+  p {
     font-size: 0.9rem;
   }
-  #user-profile-description{
+  #user-profile-description {
     font-size: 1.1rem;
     @media (max-width: $bootstrap-class-change-breakpoint) {
       font-size: 1rem;
@@ -1023,6 +1031,9 @@ a {
 
   #welcome-title {
     font-size: 2rem;
+    span {
+      color: $dark-color;
+    }
   }
 
   #user-profile-username {

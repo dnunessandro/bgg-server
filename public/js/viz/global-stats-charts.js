@@ -603,9 +603,9 @@ role="dialog"
 </div>`
   );
   $(`#${modalBodyId}`).html(`<ol>
-    <li class="text-justify">The numbers shown on these charts are based on the <em>BGG Explorer</em> users only, thus 
+    <li class="text-justify">The numbers shown on these charts are based on the <em>BGG Dicector</em> users only, thus 
 they do not reflect the entire reality of the boardgame community or even that of the BoardGameGeek community.</li>
-<li class="text-justify">If a boardgame is not owned by any <em>BGG Explorer</em> user, it will not 
+<li class="text-justify">If a boardgame is not owned by any <em>BGG Dicector</em> user, it will not 
 be accounted for in these statistics.</li>
 <li class="text-justify">A sample of boardgames is presented in <em>Quality, Not Just Quantity</em> chart 
 to serve as an example of the trend depicted, however the trend line presented is still computed using the 
