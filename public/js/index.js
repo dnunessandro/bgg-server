@@ -8,7 +8,7 @@ $("#submit-form").on("click", async (e) => {
     Retrieving User Info...`);
 
   // Check if user exists
-  const getCollectionUrl = `${API_URL}/collections/${username}`;
+  const getCollectionUrl = `${(API_URL)}/collections/${username}`;
   let data = await axios.get(getCollectionUrl, { validateStatus: false });
   let status = data.status;
 
@@ -74,7 +74,9 @@ $("#submit-form").on("click", async (e) => {
         window.localStorage.setItem("collection", compressedCollection);
 
         await setTimeout((_) => {
-          window.open(`${API_URL}/main`, "_self");
+          window.open(`${(window.location.hostname == "localhost"
+          ? API_URL
+          : "http://dicector.nunessandro.com/")}/main`, "_self");
         }, 500);
       }
     }, 10000);
