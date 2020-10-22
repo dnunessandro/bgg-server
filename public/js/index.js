@@ -76,7 +76,7 @@ $("#submit-form").on("click", async (e) => {
         await setTimeout((_) => {
           window.open(`${(window.location.hostname == "localhost"
           ? API_URL
-          : "http://dicector.nunessandro.com/")}/main`, "_self");
+          : "http://dicector.nunessandro.com")}/main`, "_self");
         }, 500);
       }
     }, 10000);
