@@ -1076,7 +1076,7 @@ const getCollectionAvgRatingDiffHist = async () => {
     .filter((c) => c.insights.get("avgRatingDiff") != undefined)
     .map((c) => c.insights.get("avgRatingDiff").avgRatingDiff);
 
-  return getHistogram(avgRatingsDiffs, [-5, -2, -1, 0, 1, 2, 5]);
+  return getHistogram(avgRatingsDiffs, [-5, -2, -1, -0.5, 0, 0.5, 1, 2, 5]);
 };
 
 const getCollectionAvgYearHist = async () => {

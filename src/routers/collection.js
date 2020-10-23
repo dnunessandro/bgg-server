@@ -124,7 +124,7 @@ router.get("/collections/:username", async (req, res) => {
 // Enriches Collection
 router.post("/collections/:username/enrich", async (req, res) => {
   try {
-    const date = new Date()
+    const date = new Date();
     const username = req.params.username.toLowerCase();
     const collection = await Collection.findOne({
       username,
@@ -150,7 +150,7 @@ router.post("/collections/:username/enrich", async (req, res) => {
     if (filter.length == 0) {
       collectionObj = await enrichCollectionWithBoardgames(collectionObj);
       collectionObj = await enrichCollectionWithPlays(collectionObj);
-      
+
       collectionObj = await enrichCollectionWithInsights(collectionObj);
     }
     collectionObj = filter.includes("boardgames")
@@ -160,8 +160,8 @@ router.post("/collections/:username/enrich", async (req, res) => {
       ? await enrichCollectionWithPlays(collectionObj)
       : collectionObj;
 
-    collectionObj.lastUpdated = date.getTime()
-    
+    collectionObj.lastUpdated = date.getTime();
+
     // Save Insights to original collection
     await Collection.updateOne(
       { username },
@@ -172,10 +172,6 @@ router.post("/collections/:username/enrich", async (req, res) => {
         lastUpdated: date.getTime(),
       }
     );
-
-    
-
-    
 
     // Create enriched collection object
     const insights = collectionObj.insights;
@@ -189,33 +185,6 @@ router.post("/collections/:username/enrich", async (req, res) => {
   } catch (error) {
     // res.status(500).send(error);
     console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
-    console.log(error);
-  }
-});
-
-// Retrieves Enriched Collection
-router.get("/collections/:username/enrich", async (req, res) => {
-  try {
-    const username = req.params.username.toLowerCase();
-
-    let collection = await EnrichedCollection.findOne({
-      username,
-    });
-
-    // If not in DB send 102
-    if (collection == null) {
-      console.log(
-        chalk.red.bgWhite("102") +
-          chalk.magenta(" Collection ") +
-          chalk.yellow(username) +
-          chalk.magenta(" still processing.")
-      );
-      return res.status(202).send();
-    }
-    return res.status(200).send(collection);
-  } catch (error) {
-    console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
-    return res.status(500).send(error);
   }
 });
 

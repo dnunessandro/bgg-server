@@ -35,7 +35,10 @@ const enrichCollectionWithPlays = async (collection) => {
 const enrichCollectionWithInsights = async (collection) => {
   const insightType = "all";
   const queryUrl = `${process.env.INSIGHTS_API_ROOT_URL}/insights/${insightType}`;
-  const response = await axios.post(queryUrl, collection);
+  const response = await axios.post(queryUrl, collection, {
+    maxContentLength: Infinity,
+    maxBodyLength: Infinity,
+  });
   collection.insights = response.data;
   return collection;
 };

@@ -8,7 +8,7 @@ $("#submit-form").on("click", async (e) => {
     Retrieving User Info...`);
 
   // Check if user exists
-  const getCollectionUrl = `${(API_URL)}/collections/${username}`;
+  const getCollectionUrl = `${API_URL}/collections/${username}`;
   let data = await axios.get(getCollectionUrl, { validateStatus: false });
   let status = data.status;
 
@@ -37,7 +37,9 @@ $("#submit-form").on("click", async (e) => {
     Processing Collection...`);
 
     // Enrich collection
-    let response = await axios.get(`${API_URL}/collections/${username}/enrich`);
+    let response = await axios.get(
+      `${API_URL}/enriched-collections/${username}/check`
+    );
     if (response.status != 200) {
       await axios.post(`${API_URL}/collections/${username}/enrich`);
       const loadTimes = getLoadTimes(data.data.totalItems);
@@ -54,29 +56,34 @@ $("#submit-form").on("click", async (e) => {
 
     // Periodically check if collection was enriched
     const intervalID = setInterval(async function () {
-      response = await axios.get(`${API_URL}/collections/${username}/enrich`);
+      response = await axios.get(`${API_URL}/enriched-collections/${username}/check`);
 
-      if (response.status == 200 && "insights" in response.data) {
+      if (response.status == 200) {
         await clearInterval(intervalID);
-        const collection = response.data;
-        const compressedCollection = LZUTF8.compress(
-          JSON.stringify(collection),
-          {
-            outputEncoding: "StorageBinaryString",
-          }
-        );
+        // const collection = response.data;
+        // const compressedCollection = LZUTF8.compress(
+        //   JSON.stringify(collection),
+        //   {
+        //     outputEncoding: "StorageBinaryString",
+        //   }
+        // );
 
         $(".spinner-border").remove();
         $("#submit-form")
           .text("All Done!")
           .css("background-color", SECONDARY_COLOR);
-        window.localStorage.clear();
-        window.localStorage.setItem("collection", compressedCollection);
+        // window.localStorage.clear();
+        // window.localStorage.setItem("collection", compressedCollection);
 
         await setTimeout((_) => {
-          window.open(`${(window.location.hostname == "localhost"
-          ? API_URL
-          : "http://dicector.nunessandro.com")}/main`, "_self");
+          window.open(
+            `${
+              window.location.hostname == "localhost"
+                ? API_URL
+                : "http://dicector.nunessandro.com"
+            }/main?username=${username}`,
+            "_self"
+          );
         }, 500);
       }
     }, 10000);

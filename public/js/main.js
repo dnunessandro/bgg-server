@@ -1,10 +1,23 @@
 const run = async () => {
   // Get Collection from Local Storage
-  const collection = JSON.parse(
-    LZUTF8.decompress(window.localStorage.getItem("collection"), {
-      inputEncoding: "StorageBinaryString",
-    })
-  );
+  // const collection = JSON.parse(
+  //   LZUTF8.decompress(window.localStorage.getItem("collection"), {
+  //     inputEncoding: "StorageBinaryString",
+  //   })
+  // );
+  const urlParams = new URLSearchParams(window.location.search);
+  const username = urlParams.get("username");
+
+  let collection = {};
+  try {
+    response = await axios.get(`${API_URL}/enriched-collections/${username}`, {
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity,
+    });
+    collection = response.data;
+  } catch (error) {
+    window.open(window.location.host, "_self");
+  }
 
   // Show Excluded Boardgames Modal
   collection.ignoredItems.length != 0
