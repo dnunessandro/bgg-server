@@ -27,28 +27,34 @@ const run = async () => {
   // Populate User Card
   populateUserCard(collection);
 
+  // Remove Expansions
+  FILTERED_COLLECTION_ITEMS = removeExpansions(collection.items);
+
   // Filter Collection Items
-  let collectionItems = filterCollectionItems(
-    collection.items,
+  FILTERED_COLLECTION_ITEMS = filterCollectionItems(
+    FILTERED_COLLECTION_ITEMS,
     COLLECTION_OVERVIEW_NUM_NODES
   );
-  collectionItems = sortCollectionItems(
-    collectionItems,
+
+  // Sort Collection Items
+  FILTERED_COLLECTION_ITEMS = sortCollectionItems(
+    FILTERED_COLLECTION_ITEMS,
     NODE_SORT_DEFAULT_FIELD
   );
 
   // Draw Collection Overview
-  const nodeGroups = drawCollectionOverview(collectionItems);
+  const nodeGroups = drawCollectionOverview(FILTERED_COLLECTION_ITEMS);
 
   // Create "Collection Too Large" Warning
   createIncompleteCollectionWarning(collection.items.length);
 
   // Create Forces
-  NODE_FORCE = createNodesForce(collectionItems, nodeGroups);
+  NODE_FORCE = createNodesForce(FILTERED_COLLECTION_ITEMS, nodeGroups);
 
   // createWindowResizeEL(collectionItems);
-  createSidepanelELs(collectionItems);
-  createSortSidepanelBtnEL(collectionItems);
+  createSidepanelELs();
+  createSortSidepanelBtnEL();
+  createExpansionsSidepanelBtnEl(collection.items);
   createNodeGroupELs();
   createOverviewSvgEL();
   createCategoryBtnELs();
@@ -57,30 +63,30 @@ const run = async () => {
   boardgameInfoFluidContainerToggle(CONTAINER_FLUID_BREAKPOINT);
 
   populateTooltip(
-    collectionItems[0].id,
-    collectionItems[0].name,
-    collectionItems[0].yearPublished,
-    collectionItems[0].image,
-    collectionItems[0].description
+    FILTERED_COLLECTION_ITEMS[0].id,
+    FILTERED_COLLECTION_ITEMS[0].name,
+    FILTERED_COLLECTION_ITEMS[0].yearPublished,
+    FILTERED_COLLECTION_ITEMS[0].image,
+    FILTERED_COLLECTION_ITEMS[0].description
   );
 
   populateRatings(
-    collectionItems[0].userRating,
-    collectionItems[0].averageRating,
-    collectionItems[0].bayesAverageRating
+    FILTERED_COLLECTION_ITEMS[0].userRating,
+    FILTERED_COLLECTION_ITEMS[0].averageRating,
+    FILTERED_COLLECTION_ITEMS[0].bayesAverageRating
   );
 
-  createMiscStats(collectionItems[0]);
-  drawPlayTimeChart(collectionItems[0]);
+  createMiscStats(FILTERED_COLLECTION_ITEMS[0]);
+  drawPlayTimeChart(FILTERED_COLLECTION_ITEMS[0]);
   checkIfMobile()
-    ? drawPlayerCountChartMobile(collectionItems[0])
-    : drawPlayerCountChart(getPlayerCountData(collectionItems[0]));
+    ? drawPlayerCountChartMobile(FILTERED_COLLECTION_ITEMS[0])
+    : drawPlayerCountChart(getPlayerCountData(FILTERED_COLLECTION_ITEMS[0]));
 
   RATINGS_BREAKDOWN = createRatingsBreakdownChartIfAvailable(
-    collectionItems[0].ratingsBreakdown
+    FILTERED_COLLECTION_ITEMS[0].ratingsBreakdown
   );
-  createWordCloud(getItemCategories(collectionItems[0]));
-  createPlaysChartIfAvailable(collectionItems[0].plays);
+  createWordCloud(getItemCategories(FILTERED_COLLECTION_ITEMS[0]));
+  createPlaysChartIfAvailable(FILTERED_COLLECTION_ITEMS[0].plays);
 
   // Draw Insights
   runInsights(collection);

@@ -9,7 +9,7 @@ $light-color-02: #ffcdb233;
 $dark-color: #b5838d;
 $neutral-color: #6d6875;
 $background-color: #f7f1f0;
-// $background-color-pink: #fcd5ce;
+$expansion-color: #b8bedd;
 $background-color-pink: #f8edeb;
 $background-color-pink-2: #ffd5c2;
 $background-color-light-pink: #fadde1;
@@ -21,7 +21,7 @@ $theme-colors: (
   "secondary": $secondary-color,
   "info": $neutral-color,
   "dark": $dark-color,
-  "light": $light-color,
+  "light": $expansion-color,
 );
 
 // GENERAL
@@ -209,8 +209,8 @@ a {
   border-color: $dark-color !important;
 }
 .btn-light:focus {
-  background-color: $light-color !important;
-  border-color: $light-color !important;
+  background-color: $expansion-color !important;
+  border-color: $expansion-color !important;
 }
 
 // LOGIN PAGE
@@ -426,11 +426,13 @@ a {
       }
     }
   }
+
   #collection-overview-sidepanel {
     .btn {
       font-weight: 600 !important;
     }
-    #btnSort {
+    #btnSort,
+    #btnExpansions {
       border-radius: 4px;
     }
     #btnPrice {
@@ -695,6 +697,7 @@ a {
       color: $base-color !important;
       background-color: $background-color;
       font-size: 0.8rem !important;
+      border-color: $light-color;
     }
     #average-rating-wrapper {
       background-color: $background-color;

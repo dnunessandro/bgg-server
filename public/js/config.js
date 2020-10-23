@@ -12,6 +12,7 @@ const LIGHT_COLOR_02 = "#ffcdb233";
 const DARK_COLOR = "#b5838d";
 const NEUTRAL_COLOR = "#6d6875";
 const BACKGROUND_COLOR = "#eee";
+const EXPANSION_COLOR = "#b8bedd"
 
 const GREEN_COLOR = "#81b29a";
 const YELLOW_COLOR = "#ffbf69";
@@ -22,11 +23,15 @@ const DEFAULT_COLOR = "#118ab2";
 //f6bd60
 
 const COLLECTION_OVERVIEW_PALETTE = [
-  "#9c89b8",
+  // "#9c89b8",
+  "#ff97b7",
   "#f0a6ca",
   "#efc3e6",
-  "#b8bedd",
+  "#ffa6c1",
+  "#f4acb7"
 ];
+
+
 
 const CONTAINER_FLUID_BREAKPOINT = 1200;
 

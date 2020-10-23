@@ -277,7 +277,9 @@ const populateUserCard = (collection) => {
   $(helloId).html(
     `Hey ${
       collection.firstName
-        ? (collection.firstName.length < 3 ? collection.firstName + " " + collection.lastName : jsUcfirst(collection.firstName))
+        ? collection.firstName.length < 3
+          ? collection.firstName + " " + collection.lastName
+          : jsUcfirst(collection.firstName)
         : jsUcfirst(collection.username)
     }`
   );
@@ -504,6 +506,14 @@ const genBoardgameNamesHtml = (items, classes) => {
 
   return namesHtml;
 };
+
+const checkIfExpansion = (boardgame) => {
+  return boardgame.categories.map(c=>c.id).includes("1042") ? true : false;
+};
+
+const removeExpansions = (items) => {
+  return items.filter(b=>!checkIfExpansion(b))
+}
 
 const showIgnoredBoardgamesModal = (ignoredItems) => {
   const newHtml = `<p class="text-justify">In order to avoid extensive computation times and 

@@ -7,12 +7,14 @@ let NODE_LINEAR_BOOL = false;
 let NODE_FORCE = null;
 let NODE_LABEL_FORCE = null;
 let NODE_CLICKED_BOOL = false;
+let HIDE_EXPANSIONS_BOOL = true;
 let RATINGS_BREAKDOWN = null;
 let RATINGS_BREAKDOWN_CANVAS_HEIGHT =
   parseInt($("#boardgame-tooltip").css("height")) * (checkIfMobile() ? 0.295 : 0.306);
 
 let BOARDGAME_INFO_VAR = $("#boardgame-info");
 let SPIDER_CHARTS = {};
+let FILTERED_COLLECTION_ITEMS = []
 
 // HTML Fixes
 $(".link-automated-insights").css(

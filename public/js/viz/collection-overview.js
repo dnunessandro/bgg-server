@@ -1,6 +1,6 @@
 const drawCollectionOverview = (collectionItems) => {
   // Change Chart Dimensions
-  if(NODE_LINEAR_BOOL){
+  if (NODE_LINEAR_BOOL) {
     $("#collection-overview-chart").height(
       collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES / 2
         ? CHART_HEIGHT * 2 * (checkIfMobile() ? SVG_HEIGHT_MOBILE_FACTOR : 1)
@@ -9,7 +9,6 @@ const drawCollectionOverview = (collectionItems) => {
   } else {
     $("#collection-overview-chart").height(CHART_HEIGHT);
   }
-  
 
   // Get Chart Dimensions
   const chartWidth = $("#collection-overview-chart").width();
@@ -104,7 +103,9 @@ const drawCollectionOverview = (collectionItems) => {
         [0, yPos],
       ]);
     })
-    .style("stroke", (_, i) => colorsArray[i]);
+    .style("stroke", (d, i) => {
+      return checkIfExpansion(d) ? EXPANSION_COLOR : colorsArray[i];
+    });
 
   nodeGroups
     .select("circle")
@@ -113,7 +114,9 @@ const drawCollectionOverview = (collectionItems) => {
     .style(
       "fill",
       // (d) => d3.schemeTableau10.slice(0, 9)[Math.floor(Math.random() * 7) + 1]
-      (_, i) => colorsArray[i]
+      (d, i) => {
+        return checkIfExpansion(d) ? EXPANSION_COLOR : colorsArray[i];
+      }
     )
     .ease(d3.easePoly)
     .attr("r", (d) =>
@@ -180,7 +183,9 @@ const drawCollectionOverview = (collectionItems) => {
         ")"
       );
     })
-    .style("fill", (_, i) => colorsArray[i]);
+    .style("fill", (d, i) => {
+      return checkIfExpansion(d) ? EXPANSION_COLOR : colorsArray[i];
+    });
 
   nodeGroups.select("text").attr("transform", function (d, i) {
     const rect = d3.select(this.parentNode).select("rect").nodes()[0];
@@ -219,18 +224,13 @@ const drawCollectionOverview = (collectionItems) => {
   return nodeGroups;
 };
 
-const createSidepanelELs = (collectionItems) => {
+const createSidepanelELs = () => {
   Object.keys(OVERVIEW_SP_BTN_TO_FIELD_MAP).forEach((k) => {
-    createSidepanelBtnEL(
-      k,
-      collectionItems,
-      OVERVIEW_SP_BTN_TO_FIELD_MAP[k],
-      NODE_FORCE
-    );
+    createSidepanelBtnEL(k, OVERVIEW_SP_BTN_TO_FIELD_MAP[k], NODE_FORCE);
   });
 };
 
-const createSidepanelBtnEL = (btnId, collectionItems, nodeField) => {
+const createSidepanelBtnEL = (btnId, nodeField) => {
   $("#" + btnId).on("click", (_) => {
     // Set Active Node Size Field
     ACTIVE_NODE_SIZE_FIELD = nodeField;
@@ -238,23 +238,17 @@ const createSidepanelBtnEL = (btnId, collectionItems, nodeField) => {
     // Change Linear Configuration Bool
     NODE_LINEAR_BOOL = $("#" + btnId).hasClass("btn-primary") ? false : true;
 
-    // Filter Collection Items
-    let filtererdCollectionItems = sortCollectionItems(
-      collectionItems,
-      NODE_SORT_BOOL ? ACTIVE_NODE_SIZE_FIELD : "name"
-    );
-
     if (NODE_SORT_BOOL) {
       d3.selectAll(".node-group").remove();
-      const nodeGroups = drawCollectionOverview(filtererdCollectionItems);
+      const nodeGroups = drawCollectionOverview(FILTERED_COLLECTION_ITEMS);
       createNodeGroupELs();
-      NODE_FORCE = createNodesForce(filtererdCollectionItems, nodeGroups);
+      NODE_FORCE = createNodesForce(FILTERED_COLLECTION_ITEMS, nodeGroups);
       NODE_FORCE.alpha(1);
     } else {
-      drawCollectionOverview(filtererdCollectionItems);
+      drawCollectionOverview(FILTERED_COLLECTION_ITEMS);
     }
 
-    updateNodesForce(filtererdCollectionItems);
+    updateNodesForce(FILTERED_COLLECTION_ITEMS);
     enableDisableSidepanelButtons(btnId);
   });
 };
@@ -270,7 +264,8 @@ const enableDisableSidepanelButtons = (btnId) => {
   ) {
     $("#collection-overview-sidepanel " + ":button")
       .not("#" + btnId)
-      .not("#" + "btnSort")
+      .not("#btnSort")
+      .not("#btnExpansions")
       .removeClass("btn-primary")
       .addClass("btn-dark");
 
@@ -287,7 +282,8 @@ const enableDisableSidepanelButtons = (btnId) => {
 
     $("#collection-overview-sidepanel " + ":button")
       .not("#" + btnId)
-      .not("#" + "btnSort")
+      .not("#btnSort")
+      .not("#btnExpansions")
       .removeClass("btn-primary")
       .addClass("btn-dark");
 
@@ -307,24 +303,68 @@ const enableDisableSidepanelButtons = (btnId) => {
   }
 };
 
-const createSortSidepanelBtnEL = (collectionItems) => {
+const createSortSidepanelBtnEL = () => {
   $("#btnSort").on("click", (_) => {
     // Change Sort Bool
     NODE_SORT_BOOL = !NODE_SORT_BOOL;
 
-    // Filter Collection Items
-    let filtererdCollectionItems = sortCollectionItems(
-      collectionItems,
+    // Sort Collection Items
+    FILTERED_COLLECTION_ITEMS = sortCollectionItems(
+      FILTERED_COLLECTION_ITEMS,
       NODE_SORT_BOOL ? ACTIVE_NODE_SIZE_FIELD : "name"
     );
     $("#btnSort").toggleClass("btn-dark").toggleClass("btn-primary");
 
     d3.selectAll(".node-group").remove();
-    const nodeGroups = drawCollectionOverview(filtererdCollectionItems);
-    NODE_FORCE = createNodesForce(filtererdCollectionItems, nodeGroups);
-    updateNodesForce(filtererdCollectionItems);
+    const nodeGroups = drawCollectionOverview(FILTERED_COLLECTION_ITEMS);
+    NODE_FORCE = createNodesForce(FILTERED_COLLECTION_ITEMS, nodeGroups);
+    updateNodesForce(FILTERED_COLLECTION_ITEMS);
     createNodeGroupELs();
   });
+};
+
+const createExpansionsSidepanelBtnEl = (collectionItems) => {
+  if (collectionItems.length > COLLECTION_OVERVIEW_NUM_NODES) {
+    $("#btnExpansions").css("opacity", 0.5);
+    $("#btnExpansions").attr("data-toggle", "tooltip");
+    $("#btnExpansions").attr("data-placement", "top");
+    $("#btnExpansions").attr(
+      "title",
+      "Unfourtunately, your collection is too large to allow for expansions to be be displayed on this view."
+    );
+  } else {
+    $("#btnExpansions").on("click", (_) => {
+      HIDE_EXPANSIONS_BOOL = !HIDE_EXPANSIONS_BOOL;
+
+      $("#btnExpansions").text(
+        HIDE_EXPANSIONS_BOOL ? "Hiding Expansions" : "Showing Expansions"
+      );
+      $("#btnExpansions").toggleClass("btn-dark").toggleClass("btn-light");
+
+      // Remove Expansions
+      FILTERED_COLLECTION_ITEMS = HIDE_EXPANSIONS_BOOL
+        ? removeExpansions(collectionItems)
+        : collectionItems;
+
+      // Filter Collection Items
+      FILTERED_COLLECTION_ITEMS = filterCollectionItems(
+        FILTERED_COLLECTION_ITEMS,
+        COLLECTION_OVERVIEW_NUM_NODES
+      );
+
+      // Sort Collection Items
+      FILTERED_COLLECTION_ITEMS = sortCollectionItems(
+        FILTERED_COLLECTION_ITEMS,
+        NODE_SORT_BOOL ? ACTIVE_NODE_SIZE_FIELD : NODE_SORT_DEFAULT_FIELD
+      );
+
+      d3.selectAll(".node-group").remove();
+      const nodeGroups = drawCollectionOverview(FILTERED_COLLECTION_ITEMS);
+      createNodeGroupELs();
+      NODE_FORCE = createNodesForce(FILTERED_COLLECTION_ITEMS, nodeGroups);
+      updateNodesForce(FILTERED_COLLECTION_ITEMS);
+    });
+  }
 };
 
 // const createWindowResizeEL = (collectionItems) => {
@@ -340,7 +380,7 @@ const createOverviewSvgEL = () => {
   $("#collection-overview-svg").on("click", function (e) {
     if (e.target == this) {
       NODE_CLICKED_BOOL = false;
-      
+
       d3.selectAll(".node-circle").classed("clicked", false);
       d3.selectAll(".node-rect").classed("clicked", false);
       d3.selectAll(".node-line").classed("clicked", false);
