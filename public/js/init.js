@@ -10,20 +10,24 @@ let NODE_CLICKED_BOOL = false;
 let HIDE_EXPANSIONS_BOOL = true;
 let RATINGS_BREAKDOWN = null;
 let RATINGS_BREAKDOWN_CANVAS_HEIGHT =
-  parseInt($("#boardgame-tooltip").css("height")) * (checkIfMobile() ? 0.295 : 0.306);
+  parseInt($("#boardgame-tooltip").css("height")) *
+  (checkIfMobile() ? 0.295 : 0.306);
 
 let BOARDGAME_INFO_VAR = $("#boardgame-info");
 let SPIDER_CHARTS = {};
-let FILTERED_COLLECTION_ITEMS = []
+let FILTERED_COLLECTION_ITEMS = [];
 
 // HTML Fixes
-$(".link-automated-insights").css(
-  "line-height",
-  parseInt($(".link-automated-insights").css("height")) -
-    parseInt($(".link-automated-insights").css("padding-top")) -
-    parseInt($(".link-automated-insights").css("padding-bottom")) +
-    "px"
-);
+if (window.innerWidth < 400) {
+  $(".link-automated-insights").css(
+    "line-height",
+    parseInt($(".link-automated-insights").css("height")) -
+      parseInt($(".link-automated-insights").css("padding-top")) -
+      parseInt($(".link-automated-insights").css("padding-bottom")) +
+      "px"
+  );
+}
+
 if (!checkIfMobile()) {
   $(".link-free-exploration").css(
     "line-height",
