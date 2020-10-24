@@ -592,7 +592,7 @@ const createUpdateBtnEL = (collection) => {
     $("#updated-icon").on("click", async function () {
       $(
         "#user-profile-updated"
-      ).html(`<div><span class="spinner-border spinner-border" role="status" aria-hidden="true"></span>
+      ).html(`<div><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       Updating</div>`);
       $("#user-profile-updated").attr("data-toggle", "tooltip");
       $("#user-profile-updated").attr(
@@ -605,8 +605,11 @@ const createUpdateBtnEL = (collection) => {
       // Periodically check if collection was enriched
       const intervalID = setInterval(async function () {
         response = await axios.get(
-          `${API_URL}/collections/${collection.username}/enrich`
+          `${API_URL}/enriched-collections/${collection.username}`
         );
+
+        console.log(response.status)
+        console.log(getDateDiffInHours(response.data.lastUpdated))
 
         if (
           response.status == 200 &&
@@ -614,16 +617,16 @@ const createUpdateBtnEL = (collection) => {
             COLLECTION_MANUAL_UPDATE_TRESH
         ) {
           await clearInterval(intervalID);
-          const collection = response.data;
-          const compressedCollection = LZUTF8.compress(
-            JSON.stringify(collection),
-            {
-              outputEncoding: "StorageBinaryString",
-            }
-          );
+          // const collection = response.data;
+          // const compressedCollection = LZUTF8.compress(
+          //   JSON.stringify(collection),
+          //   {
+          //     outputEncoding: "StorageBinaryString",
+          //   }
+          // );
 
-          window.localStorage.clear();
-          window.localStorage.setItem("collection", compressedCollection);
+          // window.localStorage.clear();
+          // window.localStorage.setItem("collection", compressedCollection);
 
           location.reload();
         }
