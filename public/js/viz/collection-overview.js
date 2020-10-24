@@ -238,6 +238,12 @@ const createSidepanelBtnEL = (btnId, nodeField) => {
     // Change Linear Configuration Bool
     NODE_LINEAR_BOOL = $("#" + btnId).hasClass("btn-primary") ? false : true;
 
+    // Sort Collection Items
+    FILTERED_COLLECTION_ITEMS = sortCollectionItems(
+      FILTERED_COLLECTION_ITEMS,
+      NODE_SORT_BOOL ? ACTIVE_NODE_SIZE_FIELD : "name"
+    );
+
     if (NODE_SORT_BOOL) {
       d3.selectAll(".node-group").remove();
       const nodeGroups = drawCollectionOverview(FILTERED_COLLECTION_ITEMS);
