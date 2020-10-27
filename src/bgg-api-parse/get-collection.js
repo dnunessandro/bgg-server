@@ -2,6 +2,12 @@ const { getBoardgameRanks } = require("./get-thing");
 
 const getCollection = (response, options) => {
   let collection = {};
+  const ownersThreshold =
+    response.items.$.totalitems > process.env.LARGE_COLLECTION_THRESH
+      ? process.env.NUM_OWNED_LARGE_COLLECTION_THRESH
+      : process.env.NUM_OWNED_THRESH;
+
+  
 
   if (!Object.keys(response.items).includes("item")) return { error: "empty" };
 
@@ -9,13 +15,13 @@ const getCollection = (response, options) => {
   collection.pubDate = response.items.$.pubdate;
   collection.items = response.items.item
     .map((e) => getCollectionItemFields(e, options))
-    .filter((e) => e.numOwned >= process.env.NUM_OWNED_THRESH);
-    
+    .filter((e) => e.numOwned >= ownersThreshold);
+
   if (collection.items.length == 0) return { error: "empty" };
 
   collection.ignoredItems = response.items.item
     .map((e) => getCollectionItemFields(e, options))
-    .filter((e) => e.numOwned < process.env.NUM_OWNED_THRESH);
+    .filter((e) => e.numOwned < ownersThreshold);
 
   return collection;
 };

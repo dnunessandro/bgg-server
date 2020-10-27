@@ -20,8 +20,6 @@ const RED_COLOR = "#e07a5f";
 const GRAY_COLOR = "#c7ccdb";
 const DEFAULT_COLOR = "#118ab2";
 
-//f6bd60
-
 const COLLECTION_OVERVIEW_PALETTE = [
   // "#9c89b8",
   "#ff97b7",
@@ -30,7 +28,6 @@ const COLLECTION_OVERVIEW_PALETTE = [
   "#ffa6c1",
   "#f4acb7"
 ];
-
 
 
 const CONTAINER_FLUID_BREAKPOINT = 1200;
