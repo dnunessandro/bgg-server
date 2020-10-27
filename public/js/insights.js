@@ -1378,7 +1378,7 @@ const genMedianMaxPlayersInsightCard = (insight, communityStats) => {
   cardData.rawStat = rawStat;
   cardData.mainStat = Math.round(rawStat);
 
-  cardData.description = `The median player limit of your boardagames is ${genStatHtml(
+  cardData.description = `The median player limit of your boardgames is ${genStatHtml(
     Math.round(rawStat),
     "badge-pill badge-dark py-1"
   )}, which is ${compareUserVsCommunityStat(
