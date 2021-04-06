@@ -201,7 +201,7 @@ const runGlobalStats = async () => {
   rowId = "category-spider";
   title = "An Assymetrical Growth";
   p = `This growth has, however, not been homogenous across the different boardgames genres. Comparing the most 
-  common categories up until 2010 and 2020, we've seen a massive increase (<span class="badge-pill badge-primary py-1">${cardGamesRatio}x</span>)
+  common categories up until 2010 and 2021, we've seen a massive increase (<span class="badge-pill badge-primary py-1">${cardGamesRatio}x</span>)
   in the number of <em>Card Games</em> released, while, for example, <em>Wargames</em> have growth at a much more 
   steady rate (<span class="badge-pill badge-primary py-1">${wargamesRatio}x</span>) in comparison.<br><br>It is also interesting to see that 
   <em>Expansions</em> make up for a huge part of the total releases (currently, 

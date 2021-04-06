@@ -454,7 +454,7 @@ const drawGlobalStatsSpiderChart = (canvasId, statsSeries, options) => {
   const stats = Object.keys(statsSeries[years[0]]);
 
   // stats.forEach((e) => {
-  //   console.log(e, statsSeries[2020][e] / statsSeries[2010][e]);
+  //   console.log(e, statsSeries[2021][e] / statsSeries[2010][e]);
   // });
 
   // Create Canvas

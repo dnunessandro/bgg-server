@@ -1098,7 +1098,7 @@ const getCollectionAvgYearHist = async () => {
     2014,
     2016,
     2018,
-    2020,
+    2021,
     new Date().getFullYear() + 1
   ]);
 };
@@ -1124,7 +1124,7 @@ const getCollectionMostCommonYearHist = async () => {
     2014,
     2016,
     2018,
-    2020,
+    2021,
   ]);
 };
 

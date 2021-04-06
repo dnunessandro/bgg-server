@@ -17,7 +17,7 @@ const updateBoardgameStatistics = async (statistics) => {
     maxPlayers: [1, 7],
     minPlayers: [1, 7],
     medianPrice: [10, 300],
-    yearPublished: [1900, 2020],
+    yearPublished: [1900, 2021],
     owned: [500, 100000],
     averageRating: [3, 9],
   };
