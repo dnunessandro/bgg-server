@@ -186,8 +186,6 @@ const convertCurrency = async (price, srcCurrency, dstCurrency) => {
     // const priceUsd = price * exchangeRate;
 
     const priceUsd = price / USD_CONVERSION_RATES[srcCurrency]
-    console.log(priceUsd);
-    console.log(srcCurrency);
 
     return parseFloat(priceUsd.toFixed(2)) != NaN
       ? parseFloat(priceUsd.toFixed(2))
