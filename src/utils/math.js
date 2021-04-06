@@ -1,6 +1,42 @@
 const axios = require("axios");
-
 d3 = require("d3-array");
+
+const USD_CONVERSION_RATES =  {
+  "EUR": 1.1812,
+  "USD": 1,
+  "JPY": 110.2861497,
+  "BGN": 1.655773789,
+  "CZK": 22.05469015,
+  "DKK": 6.296901456,
+  "GBP": 0.7226379953,
+  "HUF": 305.0372503,
+  "PLN": 3.887064003,
+  "RON": 4.16313918,
+  "SEK": 8.686928547,
+  "CHF": 0.9371825262,
+  "ISK": 126.5662039,
+  "NOK": 8.530985439,
+  "HRK": 6.408736878,
+  "RUB": 76.62326448,
+  "TRY": 8.151117508,
+  "AUD": 1.310700982,
+  "BRL": 5.642058923,
+  "CAD": 1.256349475,
+  "CNY": 6.551811717,
+  "HKD": 7.776837115,
+  "IDR": 14505.00339,
+  "ILS": 3.302150356,
+  "INR": 73.39993227,
+  "KRW": 1120.182865,
+  "MXN": 20.26710125,
+  "MYR": 4.131476465,
+  "NZD": 1.42346766,
+  "PHP": 48.61496783,
+  "SGD": 1.341009143,
+  "THB": 31.36979343,
+  "ZAR": 14.51058246
+}
+
 function getPearsonCorrelation(x, y) {
   var shortestArrayLength = 0;
 
@@ -138,17 +174,20 @@ function mode(array) {
 }
 
 const convertCurrency = async (price, srcCurrency, dstCurrency) => {
+
   try {
     await setTimeout((_) => _, 20);
     srcCurrency = srcCurrency.trim().toUpperCase();
     dstCurrency = dstCurrency.trim().toUpperCase();
-    const response = await axios(
-      `https://api.exchangeratesapi.io/latest?base=${dstCurrency}&symbols=${srcCurrency}`
-    );
+    // const response = await axios(
+      // `http://api.exchangeratesapi.io/latest?access_key=${process.env.CURRENCY_CONVERSION_API_KEY}&base=${dstCurrency}&symbols=${srcCurrency}`
+    // );
+    // const exchangeRate = response.data[`${srcCurrency}_${dstCurrency}`];
+    // const priceUsd = price * exchangeRate;
 
-    const exchangeRate = response.data.rates[srcCurrency];
-
-    const priceUsd = price / exchangeRate;
+    const priceUsd = price / USD_CONVERSION_RATES[srcCurrency]
+    console.log(priceUsd);
+    console.log(srcCurrency);
 
     return parseFloat(priceUsd.toFixed(2)) != NaN
       ? parseFloat(priceUsd.toFixed(2))
