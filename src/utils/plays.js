@@ -1,4 +1,4 @@
-const { getQueryUrl, getResponse } = require("../bgg-api-parse/get-item");
+const { getQueryUrl, getResponse } = require('../bgg-api-parse/get-item');
 
 const getAllPlaysPages = async (username) => {
   let plays = {};
@@ -6,7 +6,7 @@ const getAllPlaysPages = async (username) => {
 
   let page = 1;
   while (true) {
-    const queryUrl = getQueryUrl(username, "plays", { page });
+    const queryUrl = getQueryUrl(username, 'plays', { page });
     await setTimeout((_) => _, 200);
     const rawPlays = await getResponse(queryUrl);
     if (rawPlays == undefined) return undefined;

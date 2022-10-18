@@ -6,7 +6,6 @@ const getCollection = (response, options) => {
     response.items.$.totalitems > process.env.LARGE_COLLECTION_THRESH
       ? process.env.NUM_OWNED_LARGE_COLLECTION_THRESH
       : process.env.NUM_OWNED_THRESH;
-
   
 
   if (!Object.keys(response.items).includes("item")) return { error: "empty" };

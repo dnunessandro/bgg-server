@@ -1,11 +1,11 @@
-const express = require("express");
-const chalk = require("chalk");
-const Plays = require("../models/plays");
-const { getAllPlaysPages } = require("../utils/plays.js");
+const express = require('express');
+const chalk = require('chalk');
+const Plays = require('../models/plays');
+const { getAllPlaysPages } = require('../utils/plays.js');
 
 const router = new express.Router();
 
-router.get("/plays/:username", async (req, res) => {
+router.get('/plays/:username', async (req, res) => {
   try {
     const date = new Date();
     const today = date.getTime();
@@ -18,12 +18,12 @@ router.get("/plays/:username", async (req, res) => {
 
       if (rawPlays.totalItems == 0) {
         console.log(
-          chalk.red.bgWhite("404") +
-            " " +
+          chalk.red.bgWhite('404') +
+            ' ' +
             chalk.magenta(
-              "User " +
+              'User ' +
                 chalk.yellow(req.params.username) +
-                chalk.magenta(" has no plays recorded.")
+                chalk.magenta(' has no plays recorded.')
             )
         );
         return res.status(404).send();
@@ -38,27 +38,27 @@ router.get("/plays/:username", async (req, res) => {
       await plays.save();
       res.status(201).send(plays);
       console.log(
-        chalk.green.bgWhite("201") +
-          chalk.green(" Plays for user ") +
+        chalk.green.bgWhite('201') +
+          chalk.green(' Plays for user ') +
           chalk.yellow(plays.username) +
-          chalk.green(" with ID ") +
+          chalk.green(' with ID ') +
           chalk.yellow(plays.userId) +
-          chalk.green(" created.")
+          chalk.green(' created.')
       );
       return;
     }
     res.send(plays);
     console.log(
-      chalk.green.bgWhite("200") +
-        chalk.green(" Plays for user ") +
+      chalk.green.bgWhite('200') +
+        chalk.green(' Plays for user ') +
         chalk.yellow(plays.username) +
-        chalk.green(" with ID ") +
+        chalk.green(' with ID ') +
         chalk.yellow(plays.userId) +
-        chalk.green(" retrieved.")
+        chalk.green(' retrieved.')
     );
   } catch (error) {
     res.status(500).send(error);
-    console.log(chalk.red.bgWhite("500") + " " + chalk.red(error));
+    console.log(chalk.red.bgWhite('500') + ' ' + chalk.red(error));
   }
 });
 

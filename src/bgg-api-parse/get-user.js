@@ -1,6 +1,8 @@
 const getUser = (response, options) => {
   let user = {};
 
+  console.log(response);
+
   user.id = response.user.$.id;
   user.name = response.user.$.name;
   user.firstName = response.user.firstname[0].$.value;
@@ -12,7 +14,8 @@ const getUser = (response, options) => {
   user.country = response.user.country[0].$.value;
   user.webAddress = response.user.webaddress[0].$.value;
   user.tradeRating = parseFloat(response.user.traderating[0].$.value);
-  user.marketRating = parseFloat(response.user.marketrating[0].$.value);
+  user.marketRating = response.user.marketrating ? parseFloat(response.user.marketrating[0].$.value) : -1;
+
 
   // Get Hot List
   user = Object.assign(

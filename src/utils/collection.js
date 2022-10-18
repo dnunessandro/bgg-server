@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require('axios');
 const enrichCollection = async (collection) => {
   let enrichedCollection = {};
 
@@ -33,7 +33,7 @@ const enrichCollectionWithPlays = async (collection) => {
 };
 
 const enrichCollectionWithInsights = async (collection) => {
-  const insightType = "all";
+  const insightType = 'all';
   const queryUrl = `${process.env.INSIGHTS_API_ROOT_URL}/insights/${insightType}`;
   const response = await axios.post(queryUrl, collection, {
     maxContentLength: Infinity,
